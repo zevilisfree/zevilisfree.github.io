@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Z-Dashboard</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158972391-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-158972391-1');
+  </script>
+
+
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon ">
+          <i class="fas fa-chess-knight"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Z</div>
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item active">
+        <a class="nav-link" href="index.html">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>景氣循環</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="index1.html">
+          <i class="fas fa-thermometer-quarter"></i>
+          <span>復甦期指標</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="index2.html">
+          <i class="fas fa-thermometer-half"></i>
+          <span>成長期指標</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="index3.html">
+          <i class="fas fa-thermometer-full"></i>
+          <span>榮景期指標</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="index4.html">
+          <i class="fas fa-thermometer-empty"></i>
+          <span>衰退期指標</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="index4.html">
+          <i class="fas fa-thermometer-empty"></i>
+          <span>2020關鍵指標</span></a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+    
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-right bg-white topbar mb-4 static-top shadow">
+          
+ <!-- Sidebar Toggle (Topbar) -->
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+
+
+          <!-- Topbar Navbar -->
+          <ul class="navbar-nav ml-md-3">
+            <h1 class="h3 mb-0 text-gray-800">2020-關鍵指標</h1>
+          </ul>
+
+        </nav>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+          <div class="row">
+            <!-- Area Chart -->
+            <div class="col-lg-12">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">美國投資人情緒指數(AAII Sentiment Survey)</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <p>AAII指標依然很神，每次只要打到-20%作多、+20%離場都有不錯回報</p>
+                  <p>link:<a href="https://www.aaii.com/sentimentsurvey/sent_results"> AAII 原始數據</a></p>  
+                  <p>link:<a href="https://www.quandl.com/data/AAII/AAII_SENTIMENT-AAII-Investor-Sentiment-Data">quandl-AAII變動曲線</a></p>
+                  <p>link:<a href="https://www.macromicro.me/charts/17508/AAII">MM-AAII變動曲線</a></p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <!-- Area Chart -->
+            <div class="col-lg-12">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">CNN - Fear & Greed Index</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <p>檢視美國的市場悲觀及樂觀狀態</p>
+                  <p>link:<a href="https://money.cnn.com/data/fear-and-greed/">CNN - Fear & Greed Index</a></p>  
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <!-- Area Chart -->
+            <div class="col-lg-12">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">內需動能決定經濟增長趨勢</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <p>內需動能決定增長趨勢，美國較不易受外部環境因素影響</p>
+                  <p>指標:實質GDP、實質個人支出年增率、Wilshire5000 美股總市場指數</p>
+                  <iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=qegs&width=100%&height=475" scrolling="no" frameborder="0"style="overflow:hidden; width:100%; height:525px;" allowTransparency="true" loading="lazy"></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <!-- Area Chart -->
+            <div class="col-lg-12">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">2020-民間消費動能，未轉折內需動能將持續擴張</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <p>指標:初領失業金人數、實質零售銷售年增率、實質個人消費支出年增率、實質個人收入年增率</p>
+                  <iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=qegC&width=100%&height=475" scrolling="no" frameborder="0"style="overflow:hidden; width:100%; height:525px;" allowTransparency="true" loading="lazy"></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <!-- Area Chart -->
+            <div class="col-lg-12">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">2020-就業增長逐步進入尾聲，但仍有增長空間</h6>
+                  </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                      <p>美國經濟增長動能在內需，而內需增長動能在就業。抓住就業指標，實際上就抓住美國景氣擴張的趨勢，但長久以來關注的「非農新增就業人數」和「失業率」雖然重要，但作為判斷轉折的角度來看，卻不是那麼好用</p>
+                      <p><b>非農新增就業人數</b>:谷底反轉，恐為假信號，過去半世紀，景氣擴張的中後段，當非農就業人數出現陡降時，雖正確指出5次景氣衰退期，但卻有8次是錯誤判讀，這8次出現陡降和跌落負增長的時間點，事後都證明僅為假信號，就業市場在短期疲弱後就恢復穩健擴張，景氣循環並未告終。</p>
+                      <p><b>失業率</b>:失業率同樣不是太好的轉折預測指標，因為失業初始轉向變動的幅度相當小，預測不及</p>
+                      <p><b>初領失業救濟金人數</b>:U型結構確立，可預測衰退期將至:每當景氣進入榮景期，初領失業救濟金人數跌至谷底並確立U型結構，離景氣衰退也不遠了
+                            <ul>
+                              <li>初領失業金人數續創新低，榮景期會自動延伸3個季度以上</li>
+                              <li>初領失業金人數如未創新低，則觀察右端是否翹起現象</li>
+                              <li>數據可配合3個月移動平均來比對，便可忽視特殊原因陡升或陡降</li>
+                            </ul>
+                      </p>
+                      <p><b style="color: red">注意美國初領失業救濟金人數關鍵25萬人警示</b></p>
+                      <p>指標:美國初領失業救濟金人數與新開職缺數</p>
+                      <iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=oP3o&width=100%&height=475" scrolling="no" frameborder="0" style="overflow:hidden; width:100%; height:525px;" allowTransparency="true" loading="lazy"></iframe>
+                      <p>指標:實薪年增率、ADP新增就業、非農年增</p>
+                      <iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=qegH&width=100%&height=475" scrolling="no" frameborder="0" style="overflow:hidden; width:100%; height:525px;" allowTransparency="true" loading="lazy"></iframe>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <div class="row">
+            <!-- Area Chart -->
+            <div class="col-lg-12">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">2020-民間投資，耐久財訂單暗示固定資本支出將轉強</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <p>指標:耐久財訂單、電腦與電子產品訂單、電腦與電子產品零組件訂單</p>
+                  <iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=qegL&width=100%&height=475" scrolling="no" frameborder="0"style="overflow:hidden; width:100%; height:525px;" allowTransparency="true" loading="lazy"></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <!-- Area Chart -->
+            <div class="col-lg-12">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">2020-武漢肺炎影響</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <p>美國庫存處於相對高檔，對中國進口依賴降幅大</p>
+                  <p>指標:美國庫存銷售比、美國自中國進口年增率</p>
+                  <iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=qezu&width=100%&height=475" scrolling="no" frameborder="0"style="overflow:hidden; width:100%; height:525px;" allowTransparency="true" loading="lazy"></iframe>
+                  <p>武漢肺炎不全然是壞事，低油價有助於挹注內需動能，但通膨最終仍會捲土重來</p>
+                  <p>指標:美國油價與實質零售消收年增率</p>
+                  <iframe src="https://fred.stlouisfed.org/graph/graph-landing.php?g=oUaT&width=100%&height=475" scrolling="no" frameborder="0"style="overflow:hidden; width:100%; height:525px;" allowTransparency="true" loading="lazy"></iframe>
+                </div>
+              </div>
+            </div>
+          </div>          
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Z 2020</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery.min.js"></script>
+  <script src="vendor/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="vendor/Chart.min.js"></script>
+
+
+</body>
+
+</html>
