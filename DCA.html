@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>定期定額風險與獲利評估</title>
+  
+  <!-- 載入 Tailwind CSS (用於排版與樣式) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- 載入 React 與 ReactDOM (指定穩定版本) -->
+  <script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+  
+  <!-- 載入 Recharts 依賴與本體 (指定穩定版本以解決 ForwardRef 與 LineChart undefined 的問題) -->
+  <script src="https://unpkg.com/prop-types@15.8.1/prop-types.min.js"></script>
+  <script src="https://unpkg.com/recharts@2.1.12/umd/Recharts.js"></script>
+  
+  <!-- 載入 Babel (用於在瀏覽器解析 JSX 語法) -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useMemo } = React;
+    const { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } = window.Recharts;
+
+    // === 替換原本的 Lucide 圖示 (轉換成原生 SVG 以利單檔離線使用) ===
+    const CalculatorIcon = ({ className }) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>);
+    const TrendingUpIcon = ({ className }) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>);
+    const PiggyBankIcon = ({ className }) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.5-1 2-1.5L20 8.5c0-2.3-1.2-3.5-1-3.5z"/><path d="M2 9v1c0 1.1.9 2 2 2h1"/><path d="M16 11h.01"/></svg>);
+    const AlertTriangleIcon = ({ className }) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>);
+    const InfoIcon = ({ className }) => (<svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="16" y2="12"/><line x1="12" x2="12.01" y1="8" y2="8"/></svg>);
+
+    function App() {
+      // === 狀態管理 ===
+      const [initialAmount, setInitialAmount] = useState(500000); // 新增：初始投入金額
+      const [monthlyAmount, setMonthlyAmount] = useState(10000);
+      const [annualReturn, setAnnualReturn] = useState(15.0);
+      const [annualVolatility, setAnnualVolatility] = useState(15.0);
+      const [investmentYears, setInvestmentYears] = useState(15);
+
+      // === 格式化工具 ===
+      const formatCurrency = (value) => {
+        return new Intl.NumberFormat('zh-TW', {
+          style: 'currency',
+          currency: 'TWD',
+          maximumFractionDigits: 0,
+        }).format(value);
+      };
+
+      // === 核心數學計算邏輯 ===
+      const chartData = useMemo(() => {
+        const data = [];
+        const INITIAL = initialAmount;
+        const PMT = monthlyAmount;
+        const mu = annualReturn / 100;
+        const sigma = annualVolatility / 100;
+        const years = investmentYears;
+
+        const mu_m = Math.pow(1 + mu, 1 / 12) - 1;
+
+        for (let y = 0; y <= years; y++) {
+          if (y === 0) {
+            data.push({ 
+              year: 0, 
+              principal: INITIAL, 
+              expected: INITIAL, 
+              sd1Up: INITIAL, 
+              sd1Down: INITIAL, 
+              sd2Up: INITIAL, 
+              sd2Down: INITIAL 
+            });
+            continue;
+          }
+
+          const totalMonths = y * 12;
+          let expectedTotal = 0;
+          let varianceTotal = 0;
+          let principalTotal = INITIAL + (totalMonths * PMT);
+
+          // 計算「初始投入資金」的未來價值與變異數
+          if (INITIAL > 0) {
+            const expectedValue_initial = INITIAL * Math.pow(1 + mu_m, totalMonths);
+            const variance_initial = Math.pow(expectedValue_initial, 2) * (Math.exp(Math.pow(sigma, 2) * y) - 1);
+            expectedTotal += expectedValue_initial;
+            varianceTotal += variance_initial;
+          }
+
+          // 計算「定期定額」每一筆投入資金的未來價值與變異數
+          for (let i = 1; i <= totalMonths; i++) {
+            const monthsInvested = totalMonths - i + 1;
+            const yearsInvested = monthsInvested / 12;
+
+            const expectedValue_i = PMT * Math.pow(1 + mu_m, monthsInvested);
+            const variance_i = Math.pow(expectedValue_i, 2) * (Math.exp(Math.pow(sigma, 2) * yearsInvested) - 1);
+
+            expectedTotal += expectedValue_i;
+            varianceTotal += variance_i;
+          }
+
+          const sdTotal = Math.sqrt(varianceTotal);
+
+          data.push({
+            year: y,
+            principal: Math.round(principalTotal),
+            expected: Math.round(expectedTotal),
+            sd1Up: Math.round(expectedTotal + sdTotal),
+            sd1Down: Math.round(Math.max(0, expectedTotal - sdTotal)),
+            sd2Up: Math.round(expectedTotal + 2 * sdTotal),
+            sd2Down: Math.round(Math.max(0, expectedTotal - 2 * sdTotal)),
+          });
+        }
+        return data;
+      }, [initialAmount, monthlyAmount, annualReturn, annualVolatility, investmentYears]);
+
+      const finalData = chartData[chartData.length - 1];
+
+      // === 自訂 Tooltip 組件 ===
+      const CustomTooltip = ({ active, payload, label }) => {
+        if (active && payload && payload.length) {
+          return (
+            <div className="bg-white p-4 rounded-lg shadow-xl border border-slate-100">
+              <p className="font-bold text-slate-800 mb-2 border-b pb-2">第 {label} 年</p>
+              {payload.map((entry, index) => (
+                <div key={index} className="flex justify-between items-center gap-6 py-1">
+                  <span style={{ color: entry.color }} className="font-medium text-sm">
+                    {entry.name}
+                  </span>
+                  <span className="font-bold text-slate-700">
+                    {formatCurrency(entry.value)}
+                  </span>
+                </div>
+              ))}
+            </div>
+          );
+        }
+        return null;
+      };
+
+      return (
+        <div className="min-h-screen bg-slate-50 p-4 md:p-8 font-sans text-slate-800">
+          <div className="max-w-6xl mx-auto space-y-6">
+            
+            <div className="flex items-center gap-3 mb-8">
+              <div className="p-3 bg-blue-600 rounded-lg shadow-sm">
+                <CalculatorIcon className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold text-slate-900">定期定額風險與獲利評估</h1>
+                <p className="text-slate-500 text-sm mt-1">模擬市場波動下的長期投資資產曲線 (支援單筆初始投入與標準差分析)</p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              
+              <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 space-y-6">
+                <h2 className="text-lg font-bold text-slate-800 flex items-center gap-2 border-b pb-3">
+                  <TrendingUpIcon className="w-5 h-5 text-blue-600" />
+                  設定參數
+                </h2>
+
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <label className="text-sm font-medium text-slate-700">單筆初始投入金額</label>
+                    <span className="text-indigo-600 font-bold bg-indigo-50 px-2 py-1 rounded-md text-sm">
+                      {formatCurrency(initialAmount)}
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="5000000"
+                    step="100000"
+                    value={initialAmount}
+                    onChange={(e) => setInitialAmount(Number(e.target.value))}
+                    className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+                  />
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <label className="text-sm font-medium text-slate-700">每月投入金額</label>
+                    <span className="text-blue-600 font-bold bg-blue-50 px-2 py-1 rounded-md text-sm">
+                      {formatCurrency(monthlyAmount)}
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100000"
+                    step="1000"
+                    value={monthlyAmount}
+                    onChange={(e) => setMonthlyAmount(Number(e.target.value))}
+                    className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                  />
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <label className="text-sm font-medium text-slate-700">預期年化報酬率</label>
+                    <span className="text-green-600 font-bold bg-green-50 px-2 py-1 rounded-md text-sm">
+                      {annualReturn.toFixed(1)}%
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="30" 
+                    step="0.5"
+                    value={annualReturn}
+                    onChange={(e) => setAnnualReturn(Number(e.target.value))}
+                    className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-green-600"
+                  />
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <label className="text-sm font-medium text-slate-700">預期年化標準差 (波動率)</label>
+                    <span className="text-orange-600 font-bold bg-orange-50 px-2 py-1 rounded-md text-sm">
+                      {annualVolatility.toFixed(1)}%
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="50"
+                    step="1"
+                    value={annualVolatility}
+                    onChange={(e) => setAnnualVolatility(Number(e.target.value))}
+                    className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-orange-500"
+                  />
+                  <p className="text-xs text-slate-400">代表市場風險。股票通常在 15%~20% 之間。</p>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <label className="text-sm font-medium text-slate-700">持續投入年份</label>
+                    <span className="text-purple-600 font-bold bg-purple-50 px-2 py-1 rounded-md text-sm">
+                      {investmentYears} 年
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    min="1"
+                    max="40"
+                    step="1"
+                    value={investmentYears}
+                    onChange={(e) => setInvestmentYears(Number(e.target.value))}
+                    className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-purple-600"
+                  />
+                </div>
+              </div>
+
+              <div className="lg:col-span-2 space-y-6">
+                
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                    <div className="text-slate-500 text-xs font-medium mb-1 flex items-center gap-1">
+                      <PiggyBankIcon className="w-3 h-3" /> 總投入本金
+                    </div>
+                    <div className="text-lg font-bold text-slate-700">
+                      {formatCurrency(finalData?.principal || 0)}
+                    </div>
+                  </div>
+                  
+                  <div className="bg-blue-50 p-4 rounded-xl border border-blue-100 shadow-sm">
+                    <div className="text-blue-600 text-xs font-medium mb-1 flex items-center gap-1">
+                      <TrendingUpIcon className="w-3 h-3" /> 預期最終價值
+                    </div>
+                    <div className="text-lg font-bold text-blue-700">
+                      {formatCurrency(finalData?.expected || 0)}
+                    </div>
+                  </div>
+
+                  <div className="bg-emerald-50 p-4 rounded-xl border border-emerald-100 shadow-sm">
+                    <div className="text-emerald-700 text-xs font-medium mb-1 flex items-center gap-1">
+                      極度樂觀 (+2SD)
+                    </div>
+                    <div className="text-lg font-bold text-emerald-800">
+                      {formatCurrency(finalData?.sd2Up || 0)}
+                    </div>
+                  </div>
+
+                  <div className="bg-red-50 p-4 rounded-xl border border-red-100 shadow-sm">
+                    <div className="text-red-700 text-xs font-medium mb-1 flex items-center gap-1">
+                      <AlertTriangleIcon className="w-3 h-3" /> 極度悲觀 (-2SD)
+                    </div>
+                    <div className="text-lg font-bold text-red-800">
+                      {formatCurrency(finalData?.sd2Down || 0)}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                  <h3 className="text-sm font-bold text-slate-700 mb-6 flex justify-between items-center">
+                    <span>資產成長預測區間</span>
+                    <span className="text-xs font-normal text-slate-400">
+                      X軸: 年份 / Y軸: 金額(TWD)
+                    </span>
+                  </h3>
+                  
+                  <div className="h-[400px] w-full">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart
+                        data={chartData}
+                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                      >
+                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
+                        <XAxis 
+                          dataKey="year" 
+                          tick={{ fill: '#64748b', fontSize: 12 }}
+                          tickLine={false}
+                          axisLine={{ stroke: '#cbd5e1' }}
+                        />
+                        <YAxis 
+                          tickFormatter={(value) => `$${(value / 10000).toFixed(0)}w`}
+                          tick={{ fill: '#64748b', fontSize: 12 }}
+                          tickLine={false}
+                          axisLine={{ stroke: '#cbd5e1' }}
+                          width={80}
+                        />
+                        <Tooltip content={<CustomTooltip />} />
+                        <Legend 
+                          wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }}
+                          iconType="circle"
+                        />
+                        
+                        <Line type="monotone" dataKey="sd2Up" name="極樂觀 (+2SD, 前2.5%)" stroke="#10b981" strokeWidth={1} strokeDasharray="3 3" dot={false} />
+                        <Line type="monotone" dataKey="sd1Up" name="偏樂觀 (+1SD, 前16%)" stroke="#34d399" strokeWidth={1.5} dot={false} />
+                        <Line type="monotone" dataKey="expected" name="預期價值 (Expected)" stroke="#2563eb" strokeWidth={3} dot={false} activeDot={{ r: 6 }} />
+                        <Line type="monotone" dataKey="sd1Down" name="偏悲觀 (-1SD, 後16%)" stroke="#fbbf24" strokeWidth={1.5} dot={false} />
+                        <Line type="monotone" dataKey="sd2Down" name="極悲觀 (-2SD, 後2.5%)" stroke="#ef4444" strokeWidth={1} strokeDasharray="3 3" dot={false} />
+                        <Line type="monotone" dataKey="principal" name="累積本金" stroke="#94a3b8" strokeWidth={2} strokeDasharray="5 5" dot={false} />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
+                
+                <div className="bg-blue-50/50 p-4 rounded-xl border border-blue-100 flex gap-3 text-sm text-slate-600">
+                  <InfoIcon className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
+                  <div className="space-y-2">
+                    <p><strong>關於標準差 (Standard Deviation)：</strong></p>
+                    <ul className="list-disc pl-4 space-y-1">
+                      <li><strong>±1 個標準差：</strong> 在常態分佈假設下，最終資產約有 <strong>68%</strong> 機率落在這個區間。</li>
+                      <li><strong>±2 個標準差：</strong> 約有 <strong>95%</strong> 機率落在最外層的虛線區間內。</li>
+                      <li>計算考量了定期定額「分批進場」的特性。因為後期的資金投入市場時間較短，其貢獻的風險與複利效應都會小於早期的資金。</li>
+                    </ul>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // 渲染應用程式
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
