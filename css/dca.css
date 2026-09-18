@@ -1,0 +1,81 @@
+.layout {
+  max-width: var(--content);
+  margin: 0 auto;
+  padding: 22px max(22px, 4vw) 56px;
+}
+.page-header { max-width: 760px; margin-bottom: 14px; }
+.page-header p:last-child { margin: 6px 0 0; color: var(--muted); font-size: .88rem; line-height: 1.6; }
+.columns { display: grid; grid-template-columns: minmax(270px, 330px) minmax(0, 1fr); gap: 20px; align-items: start; }
+.settings { position: sticky; top: 74px; display: grid; gap: 16px; padding: 22px; }
+.panel h2, .panel h3 { margin: 0 0 16px; color: var(--ink); font-size: 1.12rem; font-weight: 820; }
+.control { display: grid; gap: 7px; }
+.control-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px 10px; }
+.control-head > label, .control > label { flex: 1 1 100%; color: var(--ink); font-size: .84rem; font-weight: 780; line-height: 1.4; }
+.number-field { display: flex; align-items: center; gap: 5px; margin-left: auto; color: var(--teal-dark); font-size: .84rem; font-weight: 800; }
+.control .number-field input {
+  width: 125px;
+  max-width: 100%;
+  min-height: 36px;
+  margin: 0;
+  padding: 6px 8px;
+  border: 1px solid var(--line-strong);
+  border-radius: 9px;
+  background: var(--surface);
+  color: var(--ink);
+  text-align: right;
+  font-size: .86rem;
+  font-variant-numeric: tabular-nums;
+}
+.control input[type="range"] { width: 100%; margin: 2px 0 0; accent-color: var(--teal); cursor: pointer; }
+.control small { display: block; color: var(--muted); font-size: .72rem; line-height: 1.45; }
+.results { min-width: 0; display: grid; gap: 16px; }
+.results[hidden], .error[hidden] { display: none; }
+.summary { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.metric { display: grid; gap: 4px; padding: 14px 16px; box-shadow: none; }
+.metric span { color: var(--muted); font-size: .74rem; line-height: 1.4; }
+.metric strong { color: var(--ink); font-size: 1.15rem; letter-spacing: -.02em; overflow-wrap: anywhere; }
+.metric.expected { background: var(--surface-teal); }
+.metric.expected strong { color: var(--teal-dark); }
+.metric.upper { background: #edf3e8; }
+.metric.upper strong { color: #3f6b44; }
+.metric.lower { background: var(--surface-warm); }
+.metric.lower strong { color: var(--danger); }
+.chart-panel { padding: 20px 22px; }
+.chart-panel h3 { margin-bottom: 6px; }
+.chart-caption { margin: 0 0 12px; color: var(--muted); font-size: .76rem; }
+.chart-scroll { width: 100%; overflow-x: auto; }
+.chart-scroll svg { display: block; width: 100%; min-width: 560px; height: auto; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 14px 0 0; padding: 0; color: var(--ink-soft); font-size: .75rem; list-style: none; }
+.legend li { display: flex; align-items: center; gap: 5px; }
+.swatch { width: 18px; border-top: 3px solid; }
+.swatch.p975 { border-color: #4c9967; }
+.swatch.p84 { border-color: #80b58c; }
+.swatch.expected-line { border-color: var(--teal); }
+.swatch.p16 { border-color: #d39d45; }
+.swatch.p025 { border-color: var(--danger); }
+.swatch.principal { border-color: #859497; }
+.data-panel { padding: 0; overflow: hidden; }
+.data-panel summary { padding: 14px 18px; color: var(--ink); cursor: pointer; font-size: .86rem; font-weight: 800; }
+.table-scroll { margin: 0; padding: 0 18px 16px; overflow-x: auto; }
+.data-panel table { min-width: 650px; font-size: .8rem; }
+.data-panel th, .data-panel td { padding: 8px 9px; }
+.method { margin-top: 20px; padding: 20px 24px; font-size: .84rem; line-height: 1.75; }
+.method h2 { margin: 0 0 6px; font-size: 1rem; }
+.method p { margin: 6px 0; }
+.error { margin: 0; font-size: .8rem; font-weight: 760; line-height: 1.55; }
+@media (max-width: 1100px) {
+  .layout { padding-top: 24px; }
+  .columns { grid-template-columns: 1fr; }
+  .settings { position: static; }
+}
+@media (max-width: 520px) {
+  .layout { padding: 18px 16px 48px; }
+  .summary { grid-template-columns: 1fr; }
+  .control-head { align-items: flex-start; flex-direction: column; flex-wrap: nowrap; }
+  .control-head > label { flex: none; }
+  .number-field { width: 100%; justify-content: flex-end; }
+  .control .number-field input { width: 150px; }
+  .panel { border-radius: 14px; }
+  .settings, .chart-panel { padding: 18px; }
+  .method { padding: 18px; }
+}

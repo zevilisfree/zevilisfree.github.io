@@ -1,0 +1,71 @@
+.daytrade-page { max-width: var(--content); margin: 0 auto; padding: 22px max(22px, 4vw) 56px; }
+.daytrade-heading { max-width: 760px; margin-bottom: 14px; }
+.daytrade-heading > p:last-child { margin: 6px 0 0; color: var(--muted); font-size: .88rem; line-height: 1.6; }
+.daytrade-layout { display: grid; grid-template-columns: minmax(275px, 350px) minmax(0, 1fr); gap: 20px; align-items: start; }
+.daytrade-card, .daytrade-results { padding: 22px; }
+.daytrade-card { position: sticky; top: 74px; }
+.daytrade-card h2, .daytrade-results h2, .trade-method h2 { margin: 0 0 16px; color: var(--ink); font-size: 1.15rem; font-weight: 820; letter-spacing: -.02em; }
+.trade-fields { display: grid; gap: 12px; }
+.trade-fields label { display: block; color: var(--ink); font-size: .84rem; font-weight: 780; line-height: 1.4; }
+.trade-fields label span { float: right; color: var(--muted); font-size: .72rem; font-weight: 500; }
+.trade-fields input, .trade-fields select { display: block; width: 100%; height: 40px; margin-top: 5px; padding: 7px 11px; border: 1px solid var(--line-strong); border-radius: 9px; background: var(--surface); color: var(--ink); font-size: .88rem; }
+.trade-fields input:focus, .trade-fields select:focus { border-color: var(--teal); }
+.trade-check { display: block; margin: 14px 0 0; color: var(--ink-soft); font-size: .8rem; font-weight: 760; line-height: 1.45; }
+.trade-check input { accent-color: var(--teal); margin-right: 6px; }
+.trade-check small { display: block; margin: 3px 0 0 21px; color: var(--muted); font-size: .72rem; font-weight: 500; }
+.trade-error { margin: 12px 0 0; font-size: .8rem; font-weight: 760; line-height: 1.5; }
+.results-heading { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+.results-heading .section-kicker { margin-bottom: 4px; }
+.results-heading h2 { margin: 0; }
+.results-heading > p { margin: 0; color: var(--muted); font-size: .78rem; text-align: right; }
+.trade-table-scroll { max-width: 100%; overflow-x: auto; }
+.daytrade-results table { min-width: 580px; }
+.daytrade-results caption { caption-side: bottom; padding: 9px 0 0; color: var(--muted); font-size: .74rem; }
+.daytrade-results th, .daytrade-results td { padding: 8px 9px; font-size: .8rem; }
+.daytrade-results thead th { color: var(--muted); font-weight: 760; }
+.daytrade-results tbody th { color: var(--ink); font-weight: 800; }
+.daytrade-results .is-entry { background: var(--surface-teal); }
+.daytrade-results .is-nearest { box-shadow: inset 3px 0 var(--teal); }
+.daytrade-results .is-loss { color: var(--danger); font-weight: 820; }
+.daytrade-results .is-gain { color: var(--teal-dark); font-weight: 820; }
+.trade-table-actions { margin-top: 12px; text-align: center; }
+.trade-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 7px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--teal-dark);
+  cursor: pointer;
+  font-size: .82rem;
+  font-weight: 800;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+.trade-toggle-btn:hover {
+  background: var(--surface-teal);
+  border-color: var(--teal);
+  color: var(--teal-dark);
+}
+.trade-toggle-btn[hidden] { display: none; }
+.trade-table-note { margin: 10px 0 0; color: var(--muted); font-size: .74rem; line-height: 1.6; }
+.trade-method { margin-top: 20px; padding: 20px 24px; }
+.trade-method h2 { margin-bottom: 8px; }
+.trade-method p { margin: 0 0 9px; color: var(--ink-soft); font-size: .84rem; line-height: 1.8; }
+.trade-method p:last-child { margin-bottom: 0; }
+@media (max-width: 1100px) {
+  .daytrade-page { padding-top: 24px; }
+  .daytrade-layout { grid-template-columns: 1fr; }
+  .daytrade-card { position: static; }
+  .trade-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .daytrade-page { padding: 18px 16px 48px; }
+  .trade-fields { grid-template-columns: 1fr; }
+  .daytrade-card, .daytrade-results { padding: 18px; }
+  .results-heading { display: block; }
+  .results-heading > p { margin-top: 6px; text-align: left; }
+  .trade-method { padding: 18px; }
+}
