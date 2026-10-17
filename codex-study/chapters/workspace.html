@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <script>
+    try {
+      document.querySelector('meta[name="color-scheme"]').content = localStorage.getItem("color-scheme") ?? "light dark";
+    } catch (e) {}
+  </script>
+  <title>安裝、登入與建立第一個專案｜Codex 實戰手冊</title>
+  <meta name="description" content="從 Windows 檔案總管建立資料夾，登入 Codex、認識主畫面並調整外觀；開發工具可按需要安裝。" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body data-page-type="chapter">
+  <div id="site-root" class="site">
+    <header class="topbar">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark">C</span>
+        <span>CODEX 實戰手冊</span>
+      </a>
+      <div class="top-actions">
+        <button id="search-open-btn" class="search-button" type="button">搜尋章節內容...</button>
+        <button id="theme-toggle-btn" class="theme-toggle" type="button" aria-label="切換深淺色主題" title="切換深淺色主題"><span class="theme-toggle-label">主題</span></button>
+        <button id="recording-toggle-btn" class="recording-toggle" type="button" aria-pressed="false">
+          <span class="toggle-light"></span>
+          <span id="recording-toggle-text">進入閱讀模式</span>
+        </button>
+        <button id="mobile-nav-btn" class="mobile-nav-button" type="button" aria-expanded="false">目錄</button>
+      </div>
+    </header>
+
+    <div class="docs-shell">
+      <aside id="chapter-sidebar" class="chapter-sidebar" aria-label="課程章節">
+        <p class="eyebrow">閱讀目錄 · 共 10 章</p>
+        <nav>
+          <a class="chapter-link" data-chapter-slug="introduction" href="introduction.html"><span>01</span>認識 Codex 與使用入口</a>
+          <a class="chapter-link active" data-chapter-slug="workspace" href="workspace.html"><span>02</span>安裝、登入與建立第一個專案</a>
+          <a class="chapter-link" data-chapter-slug="permissions-and-control" href="permissions-and-control.html"><span>03</span>權限、核准與資訊安全</a>
+          <a class="chapter-link" data-chapter-slug="models-and-context" href="models-and-context.html"><span>04</span>選擇模型、查看用量與管理上下文</a>
+          <a class="chapter-link" data-chapter-slug="parallel-and-fork" href="parallel-and-fork.html"><span>05</span>聊天分支（Fork）與工作樹（Worktree）隔離</a>
+          <a class="chapter-link" data-chapter-slug="visual-feedback" href="visual-feedback.html"><span>06</span>圖片、視窗快照（Appshots）與網頁回饋</a>
+          <a class="chapter-link" data-chapter-slug="skills-and-tools" href="skills-and-tools.html"><span>07</span>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</a>
+          <a class="chapter-link" data-chapter-slug="instructions-and-editor" href="instructions-and-editor.html"><span>08</span>Codex 指示、AGENTS.md 與常用命令</a>
+          <a class="chapter-link" data-chapter-slug="plan-goal-schedule" href="plan-goal-schedule.html"><span>09</span>規劃（Plan）、目標（Goal）與排程任務</a>
+          <a class="chapter-link" data-chapter-slug="remote" href="remote.html"><span>10</span>手機遠端連線（Remote）與雲端任務（Cloud）</a>
+        </nav>
+        <div class="course-progress">
+          <span>目前進度</span>
+          <strong>02 / 10</strong>
+          <i><b style="width: 20%"></b></i>
+        </div>
+      </aside>
+
+      <main class="article" id="lesson">
+        <div class="breadcrumb"><a href="../index.html">Codex Windows 教學</a> <span>/</span> 第 02 章</div>
+        <section class="hero-card">
+          <div>
+            <p class="chapter-kicker">CHAPTER 02 · 約 4 分鐘</p>
+            <h1>安裝、登入與建立第一個專案</h1>
+            <p class="hero-copy">從 Windows 檔案總管建立資料夾，登入 Codex、認識主畫面並調整外觀；開發工具可按需要安裝。</p>
+          </div>
+          <div class="hero-orbit" aria-hidden="true"><span>02</span></div>
+        </section>
+        <div class="lesson-meta">
+          <span>Windows 桌面版與跨端點</span>
+          <span>依 2026-10-16 文件查核</span>
+          <span>點擊截圖可放大</span>
+        </div>
+        <article class="mdx-content">
+<div id="install"></div>
+<h2>Codex 安裝與建議工具鏈</h2>
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/主畫面1.png" data-screenshot-title="Codex 初始介面" aria-label="Codex 初始介面，放大檢視">
+    <img src="../images/tutorial/pick/主畫面1.png" alt="Codex 初始介面" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>Codex 初始介面</strong></figcaption>
+</figure>
+<p>官網介紹：<a href="https://openai.com/codex/" target="_blank" rel="noopener noreferrer">openai.com/codex</a> ｜ Microsoft Store（微軟商店）：<a href="https://apps.microsoft.com/detail/9plm9xgg6vks?hl=zh-TW&amp;gl=TW" target="_blank" rel="noopener noreferrer">下載 Windows 版</a></p>
+<p>新手先從上方 Microsoft Store 安裝桌面版，登入後即可繼續到「建立工作空間」。熟悉終端機、確實需要命令列工具時，再使用以下選用指令：</p>
+<details class="source-list"><summary>選用：winget、Codex CLI 與開發工具</summary>
+<div class="command-block">
+  <div class="command-title"><span></span>終端機快速安裝指令<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
+  <pre><code># 使用 winget 安裝 ChatGPT / Codex Windows 桌面版
+winget install --id 9PLM9XGG6VKS -s msstore
+
+# （選用）安裝 Codex CLI 終端機版並登入同一個 ChatGPT 帳號
+npm install -g @openai/codex
+codex login</code></pre>
+</div>
+<p>若任務需要版本管理、程式執行或建置，再選擇安裝下列工具；初次使用桌面版不必先全部裝好：</p>
+<ul>
+  <li><strong>Git</strong>（<code>winget install --id Git.Git</code>）：提供右側差異檢視（Review）面板、版本還原與 Git Worktree 隔離功能。</li>
+  <li><strong>Node.js 與 Python</strong>（<code>OpenJS.NodeJS.LTS</code> / <code>Python.Python.3.14</code>）：讓代理能快速執行資料清理、自動化腳本與前端預覽伺服器。</li>
+  <li><strong>.NET SDK 與 GitHub CLI</strong>（<code>Microsoft.DotNet.SDK.10</code> / <code>GitHub.cli</code>）：建置原生 Windows 應用，並透過 <code>gh auth login</code> 啟用內建 GitHub PR 與 Issue 整合。</li>
+</ul>
+</details>
+<aside class="inline-note"><strong>遇到 PowerShell 無法載入腳本（Execution Policy）錯誤？</strong><div><p>若在 Windows 首次使用 Node.js / npm 或執行 Codex 產生的 <code>.ps1</code> 腳本時出現 <code>running scripts is disabled on this system</code>，先確認要執行的腳本及來源；若只是使用 npm，可在 PowerShell 嘗試 <code>npm.cmd</code>，或改用命令提示字元。若組織政策限制腳本，請依管理員規範處理，不要為了安裝教學直接放寬整台電腦的執行原則。</p></div></aside>
+
+<div id="login"></div>
+<h2>Codex 基本使用</h2>
+<p>首次啟動請使用 ChatGPT 帳號登入，免費帳號（Free）的額度即可體驗本機資料夾讀寫與基礎功能；雲端與遠端能力依帳號、工作區與推出進度而異，請以目前介面及官方方案頁核對。</p>
+<figure class="interface-figure" style="max-width:560px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/登入 ChatGPT.png" data-screenshot-title="登入 ChatGPT" aria-label="登入 ChatGPT，放大檢視">
+    <img src="../images/tutorial/pick/登入 ChatGPT.png" alt="登入 ChatGPT" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>登入 ChatGPT</strong></figcaption>
+</figure>
+
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/主畫面2.png" data-screenshot-title="聊天與右側分頁" aria-label="聊天與右側分頁，放大檢視">
+    <img src="../images/tutorial/pick/主畫面2.png" alt="聊天與右側分頁" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>聊天與右側分頁</strong>任務中的聊天在中央，開啟的檔案或預覽在右側分頁；先檢查實際產物，再決定是否繼續修改。</figcaption>
+</figure>
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/分頁檢視.png" data-screenshot-title="右側分頁檢視" aria-label="右側分頁檢視，放大檢視">
+    <img src="../images/tutorial/pick/分頁檢視.png" alt="右側分頁檢視" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>右側分頁檢視</strong>右側分頁可放文件、網頁或其他預覽；畫面顯示隱藏分頁的快捷鍵，實際快捷鍵以當前版本提示為準。</figcaption>
+</figure>
+<div id="appearance"></div>
+<h2>調整外觀與閱讀偏好</h2>
+<p>從主選單開啟「設定 → 外觀」，依需求調整主題與顯示方式。不同版本的選項可能不同，先看預覽，再選擇適合自己螢幕的設定。</p>
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/外觀.png" data-screenshot-title="外觀設定" aria-label="外觀設定，放大檢視">
+    <img src="../images/tutorial/pick/外觀.png" alt="外觀設定" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>外觀設定</strong>在外觀頁調整主題、色彩與字型。這些是閱讀偏好，不會改變代理的檔案權限。</figcaption>
+</figure>
+<div id="workspace"></div>
+<h2>建立工作空間</h2>
+<p>本機專案對應電腦裡的資料夾。資料夾用來儲存實際檔案，專案底下的聊天則負責處理不同任務。</p>
+<ol class="operation-steps">
+  <li><div class="step-copy"><h3>先建立一個資料夾</h3><p>在檔案總管中選擇有足夠空間的位置，新增專門的工作資料夾。可以放在 D 槽，不必全部放在 C 槽。既有的資料夾也可以直接使用。</p></div></li>
+  <li><div class="step-copy"><h3>把資料夾加入為專案</h3><p>在 Codex 左側「專案」旁點擊新增入口，選擇資料夾；也可以直接把資料夾拖曳到專案區。核對路徑後，填寫好辨識的專案名稱。</p></div></li>
+  <li><div class="step-copy"><h3>在專案裡開始聊天</h3><p>點進剛建立的專案，再點擊新增聊天。發送前先看輸入框上方的專案與環境資訊，確認是剛才選定的資料夾與本機環境。</p></div></li>
+</ol>
+<p>可以先做一次唯讀檢查：</p>
+<div class="command-block">
+  <div class="command-title"><span></span>可以這樣說<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
+  <pre><code>告訴我目前的工作目錄，以及目錄裡有哪些檔案。先不要建立、移動或修改檔案。</code></pre>
+</div>
+<p>回答中的路徑應與檔案總管裡一致。如果路徑不對，請先重新選擇目錄。</p>
+<div id="first-task"></div>
+<h3>第一個小任務：建立並檢查練習檔</h3>
+<p>確認目錄正確後，在同一個聊天請 Codex 建立一個純文字檔。這個練習不需要 Git、Node.js 或 Python。</p>
+<p>下方訊息包含目標（Goal：建立檔案）、背景（Context：目前練習資料夾）、限制（Constraints：只做這件事）與完成判準（Done when：回報路徑與內容）。較複雜的工作也能依這四項組織要求；完整寫法見<a href="instructions-and-editor.html#prompting">第 8 章任務提示詞</a>。</p>
+<div class="command-block">
+  <div class="command-title"><span></span>可以這樣說<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
+  <pre><code>只在目前的練習資料夾建立 welcome.md，寫下三行：標題「我的第一個 Codex 任務」、今天想學的功能、下一步要檢查的結果。完成後告訴我檔案的完整路徑與實際內容。</code></pre>
+</div>
+<p>到 Windows 檔案總管開啟剛才的資料夾，確認 <code>welcome.md</code> 存在、內容符合要求，且沒有多出不需要的檔案。若要改一行文字，可在同一聊天明確指出要改哪一行；改完再開啟檔案核對。若專案已啟用 Git，右側差異檢視（Review）還能顯示變更，讓你逐項確認；沒有 Git 時直接看檔案即可。<a href="https://learn.chatgpt.com/docs/code-review" target="_blank" rel="noopener noreferrer">官方程式碼審查說明</a>也提醒，差異檢視會反映整個 Git 專案的變更，未必全由 Codex 產生。</p>
+<aside class="inline-note"><strong>提示沒有權限建立目錄？</strong><div><p>如果目標的上層資料夾不存在，請先在檔案總管裡手動建立，再將它加入專案中。不要為了建立一個資料夾，就開放整個磁碟的存取權限。</p></div></aside>
+
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/選擇專案.png" data-screenshot-title="選擇專案" aria-label="選擇專案，放大檢視">
+    <img src="../images/tutorial/pick/選擇專案.png" alt="選擇專案" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>選擇專案</strong>在輸入區的專案選單選取既有專案或建立新專案；送出任務前確認資料夾位置。</figcaption>
+</figure>
+<div id="multifolder"></div>
+<h2>單一專案連結多個資料夾與 WSL2 支援</h2>
+<p>當你的工作分散在不同位置（例如「前端網站資料夾」與「後端 API 資料夾」，或「主程式」與「共同規範文件庫」）時，不需要拆成兩個專案（此為桌面版內建功能，Free 與 Plus 皆可使用）：</p>
+<ol>
+  <li>開啟專案選單並選擇「<strong>編輯專案（Edit project）</strong>」，點擊「<strong>新增資料夾（Add folder）</strong>」即可在同一個專案掛載多個資料夾。</li>
+  <li>將滑鼠移到最常使用的資料夾上，選擇「<strong>設為主要（Make primary）</strong>」。新聊天預設在主要資料夾啟動；Codex 從這裡自動尋找 <code>AGENTS.md</code>、技能（Skill）與 <code>config.toml</code>。次要資料夾可供搜尋與讀寫，但不會自動從其中發現這些設定檔。</li>
+  <li>若你的專案放在 <strong>WSL2（Windows Subsystem for Linux 2）</strong> 中，選取資料夾路徑時輸入 <code>\\wsl$\</code> 即可選取 Linux 發行版中的目錄；也可在「設定」中將代理執行環境與內建終端機（PowerShell / Command Prompt / Git Bash / WSL）切換為 WSL2。</li>
+</ol>
+
+<div id="organize"></div>
+<h2>專案歸屬、釘選與活動中心</h2>
+<p>一個專案可以有多則聊天對話。討論同一批檔案的任務請放在同一個專案裡；無關的工作則另外建立專案，之後會更好找。</p>
+<p>如果既有的聊天放錯位置，對著聊天按右鍵，找到「專案」，選擇目標專案。移動之後，記得再次核對工作目錄；變更聊天分類不等於把檔案也一起搬過去。</p>
+<ul>
+  <li><strong>釘選（Pin）：</strong>對常用專案或核心聊天點擊右鍵選單的「釘選」（或輸入 <code>/pin</code>）固定至側邊欄頂部。釘選僅固定顯示位置，不會自動把該聊天的內容注入其他對話。</li>
+  <li><strong>封存（Archive）：</strong>任務完成後點擊選單中的「封存」（或輸入 <code>/archive</code>）封存聊天，保持側邊欄清爽；日後可隨時從「設定 → 已封存的聊天」還原。</li>
+  <li><strong>活動中心（Activity View）：</strong>點擊側邊欄的「鈴鐺」圖示，可集中檢視所有未讀、背景執行中或正等待你核准的聊天，也能一鍵清除所有未讀標記。</li>
+</ul>
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/活動檢視.png" data-screenshot-title="活動檢視" aria-label="活動檢視，放大檢視">
+    <img src="../images/tutorial/pick/活動檢視.png" alt="活動檢視" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>活動檢視</strong>鈴鐺入口彙整需要注意的聊天。可按時間與優先順序查看，再打開個別任務。</figcaption>
+</figure>
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/執行摘要.png" data-screenshot-title="聊天執行摘要" aria-label="聊天執行摘要，放大檢視">
+    <img src="../images/tutorial/pick/執行摘要.png" alt="聊天執行摘要" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>聊天執行摘要</strong>聊天右側的摘要集中列出方案、輸出、子代理與來源等資訊；仍應開啟檔案核對結果。</figcaption>
+</figure>
+<details class="source-list">
+  <summary>官方文件與延伸閱讀</summary>
+  <ul>
+    <li><a href="https://learn.chatgpt.com/docs/windows/windows-app" target="_blank" rel="noopener noreferrer">Windows 桌面版安裝與設定</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/projects" target="_blank" rel="noopener noreferrer">專案與聊天管理</a></li>
+  </ul>
+</details>
+        </article>
+        <nav class="chapter-pagination" aria-label="前後章節">
+          <a data-chapter-slug="introduction" href="introduction.html">← <span>上一章<small>認識 Codex 與使用入口</small></span></a>
+          <a class="next" data-chapter-slug="permissions-and-control" href="permissions-and-control.html"><span>下一章<small>權限、核准與資訊安全</small></span> →</a>
+        </nav>
+      </main>
+
+      <aside class="page-toc" aria-label="本頁目錄">
+        <p class="eyebrow">本章內容</p>
+        <nav class="toc-links">
+          <a href="#install">Codex 安裝與工具鏈</a>
+          <a href="#login">登入與基本使用</a>
+          <a href="#appearance">外觀與閱讀偏好</a>
+          <a href="#workspace">建立工作空間</a>
+          <a href="#multifolder">多資料夾與 WSL2 支援</a>
+          <a href="#organize">專案歸屬、釘選與活動中心</a>
+        </nav>
+        <div class="toc-note">
+          <span>專注閱讀</span>
+          <p>開啟閱讀模式，可放大內文並收起兩側導覽列。</p>
+        </div>
+      </aside>
+    </div>
+
+    <!-- 搜尋對話框 -->
+    <div id="search-backdrop" class="search-backdrop" role="presentation" hidden>
+      <section id="search-dialog" class="search-dialog" role="dialog" aria-modal="true" aria-label="搜尋教學">
+        <div class="search-input-wrap">
+          <span>⌕</span>
+          <input id="search-modal-input" type="search" aria-label="搜尋章節、摘要或內文" placeholder="搜尋功能：規劃 Plan、目標 Goal、工作樹 Worktree…" autocomplete="off" />
+          <button id="search-close-btn" type="button" aria-label="關閉搜尋">關閉 ×</button>
+        </div>
+        <div id="search-modal-results" class="search-results"></div>
+      </section>
+    </div>
+
+    <!-- 圖片放大檢視器 -->
+    <div id="image-viewer-backdrop" class="image-viewer-backdrop" hidden>
+      <div id="image-viewer" class="image-viewer" role="dialog" aria-modal="true" aria-label="圖片檢視器">
+        <header>
+          <strong id="image-viewer-title"></strong>
+          <div>
+            <button id="image-size-btn" type="button">原始尺寸檢視</button>
+            <button id="image-close-btn" type="button" aria-label="關閉圖片">關閉 ×</button>
+          </div>
+        </header>
+        <div id="image-viewer-stage" class="image-viewer-stage">
+          <img id="image-viewer-img" src="" alt="" />
+        </div>
+        <p id="image-viewer-hint">保留完整介面；需要看清楚小字時，請點擊「原始尺寸檢視」。</p>
+      </div>
+    </div>
+  </div>
+  <script src="../assets/app.js"></script>
+</body>
+</html>

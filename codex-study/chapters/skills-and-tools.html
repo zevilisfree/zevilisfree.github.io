@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <script>
+    try {
+      document.querySelector('meta[name="color-scheme"]').content = localStorage.getItem("color-scheme") ?? "light dark";
+    } catch (e) {}
+  </script>
+  <title>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）｜Codex 實戰手冊</title>
+  <meta name="description" content="認識技能（Skill）、外掛（Plugin）、模型上下文協定（MCP）與電腦操控（Computer use）。" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body data-page-type="chapter">
+  <div id="site-root" class="site">
+    <header class="topbar">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark">C</span>
+        <span>CODEX 實戰手冊</span>
+      </a>
+      <div class="top-actions">
+        <button id="search-open-btn" class="search-button" type="button">搜尋章節內容...</button>
+        <button id="theme-toggle-btn" class="theme-toggle" type="button" aria-label="切換深淺色主題" title="切換深淺色主題"><span class="theme-toggle-label">主題</span></button>
+        <button id="recording-toggle-btn" class="recording-toggle" type="button" aria-pressed="false">
+          <span class="toggle-light"></span>
+          <span id="recording-toggle-text">進入閱讀模式</span>
+        </button>
+        <button id="mobile-nav-btn" class="mobile-nav-button" type="button" aria-expanded="false">目錄</button>
+      </div>
+    </header>
+
+    <div class="docs-shell">
+      <aside id="chapter-sidebar" class="chapter-sidebar" aria-label="課程章節">
+        <p class="eyebrow">閱讀目錄 · 共 10 章</p>
+        <nav>
+          <a class="chapter-link" data-chapter-slug="introduction" href="introduction.html"><span>01</span>認識 Codex 與使用入口</a>
+          <a class="chapter-link" data-chapter-slug="workspace" href="workspace.html"><span>02</span>安裝、登入與建立第一個專案</a>
+          <a class="chapter-link" data-chapter-slug="permissions-and-control" href="permissions-and-control.html"><span>03</span>權限、核准與資訊安全</a>
+          <a class="chapter-link" data-chapter-slug="models-and-context" href="models-and-context.html"><span>04</span>選擇模型、查看用量與管理上下文</a>
+          <a class="chapter-link" data-chapter-slug="parallel-and-fork" href="parallel-and-fork.html"><span>05</span>聊天分支（Fork）與工作樹（Worktree）隔離</a>
+          <a class="chapter-link" data-chapter-slug="visual-feedback" href="visual-feedback.html"><span>06</span>圖片、視窗快照（Appshots）與網頁回饋</a>
+          <a class="chapter-link active" data-chapter-slug="skills-and-tools" href="skills-and-tools.html"><span>07</span>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</a>
+          <a class="chapter-link" data-chapter-slug="instructions-and-editor" href="instructions-and-editor.html"><span>08</span>Codex 指示、AGENTS.md 與常用命令</a>
+          <a class="chapter-link" data-chapter-slug="plan-goal-schedule" href="plan-goal-schedule.html"><span>09</span>規劃（Plan）、目標（Goal）與排程任務</a>
+          <a class="chapter-link" data-chapter-slug="remote" href="remote.html"><span>10</span>手機遠端連線（Remote）與雲端任務（Cloud）</a>
+        </nav>
+        <div class="course-progress">
+          <span>目前進度</span>
+          <strong>07 / 10</strong>
+          <i><b style="width: 70%"></b></i>
+        </div>
+      </aside>
+
+      <main class="article" id="lesson">
+        <div class="breadcrumb"><a href="../index.html">Codex Windows 教學</a> <span>/</span> 第 07 章</div>
+        <section class="hero-card">
+          <div>
+            <p class="chapter-kicker">CHAPTER 07 · 約 5 分鐘</p>
+            <h1>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</h1>
+            <p class="hero-copy">認識技能（Skill）、外掛（Plugin）、模型上下文協定（MCP）與電腦操控（Computer use）。</p>
+          </div>
+          <div class="hero-orbit" aria-hidden="true"><span>07</span></div>
+        </section>
+        <div class="lesson-meta">
+          <span>Windows 桌面版與跨端點</span>
+          <span>依 2026-10-16 文件查核</span>
+          <span>點擊截圖可放大</span>
+        </div>
+        <article class="mdx-content">
+<div id="difference"></div>
+<h2>技能（Skill）、外掛（Plugin）、模型上下文協定（MCP）與事件掛鉤（Hooks）</h2>
+<p>先分清楚這四個擴充概念各自負責什麼：</p>
+<div class="table-scroll" tabindex="0">
+  <table>
+    <thead><tr><th>名稱</th><th>主要作用</th></tr></thead>
+    <tbody>
+      <tr><td><strong>技能（Skill）</strong></td><td>把一項工作的步驟、要求、範本與檢查方法整理成可重複使用的標準流程（透過 <code>$技能名稱</code> 呼叫）。</td></tr>
+      <tr><td><strong>外掛（Plugin）</strong></td><td>打包安裝一組完整能力，裡面可以包含技能（Skills）、MCP 連線、瀏覽器擴充功能與事件掛鉤（Hooks）。</td></tr>
+      <tr><td><strong>模型上下文協定（Model Context Protocol，MCP）</strong></td><td>讓 Codex 存取已授權的外部工具、資料庫與服務的連接協定（可輸入 <code>/mcp</code> 管理狀態）。</td></tr>
+      <tr><td><strong>事件掛鉤（Hooks）</strong></td><td>在 Codex 執行生命週期的特定時間點（例如任務開始前或完成後）自動觸發的本機腳本或檢查指令。</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>不必為了入門就先學會手動設定 MCP。只要既有外掛能完成任務，就先使用外掛提供的入口。</p>
+
+<div id="install"></div>
+<h2>安裝、呼叫與使用 ChatGPT 登入（Sign in with ChatGPT）</h2>
+<p>開啟左側「外掛」，在外掛與技能分頁中檢視既有能力（如內建的 Documents、PDF、Spreadsheets、Presentations、Template Creator 與 Codex Security）。需要新增時，搜尋名稱、確認所需權限後再安裝。</p>
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/外掛程式.png" data-screenshot-title="外掛目錄" aria-label="外掛目錄，放大檢視">
+    <img src="../images/tutorial/pick/外掛程式.png" alt="外掛目錄" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>外掛目錄</strong>先依實際需求挑選一項即可，不需要一次全部裝滿。</figcaption>
+</figure>
+<p>安裝之後，有些外掛（Plugin）還需要登入外部帳號（<strong>安裝成功不等於帳號已連線</strong>）。若服務提供「使用 ChatGPT 登入（Sign in with ChatGPT）」，可依畫面完成連結。呼叫時，可在輸入框用 <code>@外掛名稱</code> 或 <code>$技能名稱</code> 明確指定：</p>
+<aside class="inline-note"><strong>安裝與連線前看權限</strong><div><p>外掛（Plugin）、Apps／連接器與模型上下文協定（MCP）工具有各自的存取範圍；本機命令的沙盒與網路限制不會自動套到所有外部工具。安裝前檢查提供者、會讀取的資料、能執行的動作與外部服務；陌生專案的安裝／建置腳本也要先看入口。<a href="https://learn.chatgpt.com/docs/permissions" target="_blank" rel="noopener noreferrer">官方權限說明</a></p></div></aside>
+<div class="command-block">
+  <div class="command-title"><span></span>可以這樣說<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
+  <pre><code>使用已安裝的文件技能，整理我附上的內容。保留原意，不要自行補充未經確認的資訊。</code></pre>
+</div>
+<p>如果系統提示工具無法使用，請依序檢查：是否已安裝並啟用、外部帳號是否已連結、網路能否連線至該項服務。</p>
+<aside class="tier-note"><div class="tier-note-header"><span class="tier-badge pro">工作區政策</span><strong>可安裝項目依帳號與管理設定而異</strong></div><div><p>個人帳號可從目前介面查看可用的外掛與技能；Business、Enterprise 與 Edu 工作區還可能由管理員限制第三方外掛和 MCP 伺服器，並提供內部目錄。不要只依方案名稱推定一定能安裝某項工具，應以目前帳號與工作區畫面為準。</p></div></aside>
+
+<div id="create"></div>
+<h2>把流程做成技能（Skill）</h2>
+<p>建議先手動完成一遍，確認輸入內容、處理步驟與產出結果都沒問題，再把這個流程整理成技能。不要把一次碰巧成功的操作，直接當成穩定的標準流程。</p>
+<div class="command-block">
+  <div class="command-title"><span></span>建立可重複使用的技能（Skill）<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
+  <pre><code>使用 $skill-creator，把我們剛才確認過的流程整理成一個可重複使用的技能。
+寫清楚需要哪些輸入、依什麼步驟處理、輸出格式與檢查方法。
+不要包含帳號、金鑰、個人路徑；遇到缺少資料或需要對外發送時，先停下來向我確認。</code></pre>
+</div>
+<p>產生後，開啟技能說明，重點檢查三件事：有沒有遺漏步驟、有沒有把只適用於這一次的細節寫死、有沒有超出你允許的操作範圍。接著再用一份新的輸入測試一次。</p>
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/技能Skill.png" data-screenshot-title="技能列表" aria-label="技能列表，放大檢視">
+    <img src="../images/tutorial/pick/技能Skill.png" alt="技能列表" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>技能列表</strong>在這裡檢視已安裝的技能，後續可依 $名稱 呼叫。</figcaption>
+</figure>
+<p>個人技能可供多個專案共用；專案專用技能則應放在對應的專案中。儲存在哪個範圍，決定了它能在哪裡被讀取到。</p>
+
+<div id="computer-use"></div>
+<div id="browser"></div>
+<h2>電腦操控（Computer use）</h2>
+<p>當任務需要操作你電腦中的軟體或瀏覽器時，先確認帳號所在地區支援，並依提示安裝電腦操控（Computer use）外掛，再到<strong>「設定 → Computer use」</strong>檢查允許的應用程式與瀏覽器。應用程式核准與檔案／命令沙盒是不同權限：</p>
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/Computer use.png" data-screenshot-title="Computer use 中的應用程式與瀏覽器開關" aria-label="Computer use 中的應用程式與瀏覽器開關，放大檢視">
+    <img src="../images/tutorial/pick/Computer use.png" alt="Computer use 中的應用程式與瀏覽器開關" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>電腦操控（Computer use）的應用程式與瀏覽器開關</strong>位置：設定 → Computer use。可分別開啟允許存取的瀏覽器與桌面應用程式。</figcaption>
+</figure>
+
+<h3>1. 連接瀏覽器</h3>
+<p>本次截圖顯示 Chrome 與 Edge 的設定入口；官方擴充功能另列 Brave、Opera、Vivaldi。依目前介面安裝對應擴充功能並核對網站權限。內建瀏覽器（@Browser）與你自己的瀏覽器是不同入口，登入狀態與存取權限也可能不同；請先確認指定的是哪一個分頁。</p>
+<p>連接後，可在聊天中指定已開啟的瀏覽器分頁做讀取或操作。每次都先確認分頁網址、登入狀態與預計操作的範圍。</p>
+<div class="command-block">
+  <div class="command-title"><span></span>可以這樣說<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
+  <pre><code>使用 @Edge 中我指定的這個分頁，讀取頁面並整理摘要。只做讀取，不要送出表單，也不要修改網頁裡的資料。</code></pre>
+</div>
+<aside class="inline-note"><strong>上傳前檢查</strong><div><p>如果網站要求上傳本機檔案，先核對檔案內容、目標網站及擴充功能權限，再決定是否允許。</p></div></aside>
+
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/瀏覽器.png" data-screenshot-title="內建瀏覽器設定" aria-label="內建瀏覽器設定，放大檢視">
+    <img src="../images/tutorial/pick/瀏覽器.png" alt="內建瀏覽器設定" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>內建瀏覽器設定</strong>瀏覽器設定用於管理網站存取與相關權限；內建瀏覽器和個人瀏覽器可能使用不同的登入狀態。</figcaption>
+</figure>
+<div id="computer"></div>
+<h3>2. Windows 桌面應用程式操控與安全白名單</h3>
+<p>電腦操控功能可以看見並操作你允許的應用程式介面。你可以在對話框輸入 <code>@Computer</code> 或 <code>@應用程式名稱</code> 指定目標軟體。在 Windows 上，原生軟體操控會使用目前的桌面並移動滑鼠游標；執行時請保持目標軟體可見，不要同時搶著操作滑鼠。</p>
+<p>首次存取應用程式時，依畫面檢查核准要求；「一律允許」會保留後續存取權限，僅在確有持續需要時使用。</p>
+<aside class="inline-note"><strong>先給最小權限範圍</strong><div><p>只開啟本次需要的應用程式或網站。處理敏感操作時請在旁確認；任務結束後，可隨時在設定裡撤銷不再需要的授權。</p></div></aside>
+
+<div id="voice-and-pets"></div>
+<h2>語音對話（Voice）與桌面寵物（Pets）</h2>
+<p>聽寫會把口述內容轉成輸入框文字，讓你檢查後再送出；語音對話則是開啟通話與任務互動。兩者入口與可用性不同，既有 Codex 任務中的語音功能仍可能按帳號逐步推出。</p>
+<ul>
+  <li><strong>ChatGPT Voice 語音模式：</strong>在既有 Codex 任務中點擊語音圖示開啟語音對話，即可直接用口語討論進度、隨時打斷或即時引導，甚至用說的跨任務調度（例如：「幫我切換到正在跑測試的那個任務」）。</li>
+  <li><strong>桌面寵物（Pets，在對話框輸入 <code>/pet</code>）：</strong>讓虛擬寵物（如 Codey）或極簡控制列（Mini）懸浮在桌面最上層。即使主視窗收在背景，也能從寵物狀態（<code>Running</code> 執行中、<code>Needs input</code> 等待核准、<code>Ready</code> 已完成未讀、<code>Blocked</code> 發生錯誤）一眼掌握背景任務，並隨時點擊麥克風或輸入框快速發話。</li>
+</ul>
+<aside class="tier-note"><div class="tier-note-header"><span class="tier-badge pro">外接硬體選購說明</span><strong>Codex Micro 實體硬體鍵盤（非軟體訂閱內附功能）</strong></div><div><p>官方文件提到的 <strong>Codex Micro</strong> 為 Work Louder 推出的獨立實體外接控制器（具備 6 顆多色發光 Agent Keys 與旋鈕，可一鍵切換 6 個平行對話），屬於需要額外購買的硬體配件，一般 Free / Plus 使用者直接使用軟體內建的桌面寵物功能（輸入 <code>/pet</code>）即可獲得完整懸浮監看體驗。</p></div></aside>
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/聲音及聽寫1.png" data-screenshot-title="聲音及聽寫設定" aria-label="聲音及聽寫設定，放大檢視">
+    <img src="../images/tutorial/pick/聲音及聽寫1.png" alt="聲音及聽寫設定" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>聲音及聽寫設定</strong>可在設定頁查看語音與聽寫選項，以及近期錄音相關資訊；分享畫面前請先檢查逐字稿。</figcaption>
+</figure>
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/聽寫.png" data-screenshot-title="輸入框聽寫" aria-label="輸入框聽寫，放大檢視">
+    <img src="../images/tutorial/pick/聽寫.png" alt="輸入框聽寫" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>輸入框聽寫</strong>在輸入框選擇聽寫後先檢查辨識文字，尤其是路徑、檔名與專有名詞，再送出任務。</figcaption>
+</figure>
+<details class="source-list">
+  <summary>官方文件與延伸閱讀</summary>
+  <ul>
+    <li><a href="https://learn.chatgpt.com/docs/skills-and-plugins" target="_blank" rel="noopener noreferrer">Skills 與 Plugins 架構</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/plugins" target="_blank" rel="noopener noreferrer">外掛（Plugins）與 Sign in with ChatGPT</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/computer-use" target="_blank" rel="noopener noreferrer">Computer use 官方指南</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/chrome-extension" target="_blank" rel="noopener noreferrer">瀏覽器擴充功能（支援 5 大瀏覽器）</a></li>
+  </ul>
+</details>
+        </article>
+        <nav class="chapter-pagination" aria-label="前後章節">
+          <a data-chapter-slug="visual-feedback" href="visual-feedback.html">← <span>上一章<small>圖片、視窗快照（Appshots）與網頁回饋</small></span></a>
+          <a class="next" data-chapter-slug="instructions-and-editor" href="instructions-and-editor.html"><span>下一章<small>Codex 指示、AGENTS.md 與常用命令</small></span> →</a>
+        </nav>
+      </main>
+
+      <aside class="page-toc" aria-label="本頁目錄">
+        <p class="eyebrow">本章內容</p>
+        <nav class="toc-links">
+          <a href="#difference">技能（Skill）、外掛（Plugin）與 MCP</a>
+          <a href="#install">安裝、呼叫與一鍵授權</a>
+          <a href="#create">製作技能（Skill）</a>
+          <a href="#computer-use">電腦操控（Computer use）</a>
+          <a href="#voice-and-pets">語音對話與桌面寵物（Pets）</a>
+        </nav>
+        <div class="toc-note">
+          <span>專注閱讀</span>
+          <p>開啟閱讀模式，可放大內文並收起兩側導覽列。</p>
+        </div>
+      </aside>
+    </div>
+
+    <!-- 搜尋對話框 -->
+    <div id="search-backdrop" class="search-backdrop" role="presentation" hidden>
+      <section id="search-dialog" class="search-dialog" role="dialog" aria-modal="true" aria-label="搜尋教學">
+        <div class="search-input-wrap">
+          <span>⌕</span>
+          <input id="search-modal-input" type="search" aria-label="搜尋章節、摘要或內文" placeholder="搜尋功能：規劃 Plan、目標 Goal、工作樹 Worktree…" autocomplete="off" />
+          <button id="search-close-btn" type="button" aria-label="關閉搜尋">關閉 ×</button>
+        </div>
+        <div id="search-modal-results" class="search-results"></div>
+      </section>
+    </div>
+
+    <!-- 圖片放大檢視器 -->
+    <div id="image-viewer-backdrop" class="image-viewer-backdrop" hidden>
+      <div id="image-viewer" class="image-viewer" role="dialog" aria-modal="true" aria-label="圖片檢視器">
+        <header>
+          <strong id="image-viewer-title"></strong>
+          <div>
+            <button id="image-size-btn" type="button">原始尺寸檢視</button>
+            <button id="image-close-btn" type="button" aria-label="關閉圖片">關閉 ×</button>
+          </div>
+        </header>
+        <div id="image-viewer-stage" class="image-viewer-stage">
+          <img id="image-viewer-img" src="" alt="" />
+        </div>
+        <p id="image-viewer-hint">保留完整介面；需要看清楚小字時，請點擊「原始尺寸檢視」。</p>
+      </div>
+    </div>
+  </div>
+  <script src="../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <script>
+    try {
+      document.querySelector('meta[name="color-scheme"]').content = localStorage.getItem("color-scheme") ?? "light dark";
+    } catch (e) {}
+  </script>
+  <title>認識 Codex 與使用入口｜Codex 實戰手冊</title>
+  <meta name="description" content="認識 Chat、Work 與 Codex 的入口，並比較三家編碼代理的模型、方案與價格（2026-10-17 查核）。" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body data-page-type="chapter">
+  <div id="site-root" class="site">
+    <header class="topbar">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark">C</span>
+        <span>CODEX 實戰手冊</span>
+      </a>
+      <div class="top-actions">
+        <button id="search-open-btn" class="search-button" type="button">搜尋章節內容...</button>
+        <button id="theme-toggle-btn" class="theme-toggle" type="button" aria-label="切換深淺色主題" title="切換深淺色主題"><span class="theme-toggle-label">主題</span></button>
+        <button id="recording-toggle-btn" class="recording-toggle" type="button" aria-pressed="false">
+          <span class="toggle-light"></span>
+          <span id="recording-toggle-text">進入閱讀模式</span>
+        </button>
+        <button id="mobile-nav-btn" class="mobile-nav-button" type="button" aria-expanded="false">目錄</button>
+      </div>
+    </header>
+
+    <div class="docs-shell">
+      <aside id="chapter-sidebar" class="chapter-sidebar" aria-label="課程章節">
+        <p class="eyebrow">閱讀目錄 · 共 10 章</p>
+        <nav>
+          <a class="chapter-link active" data-chapter-slug="introduction" href="introduction.html"><span>01</span>認識 Codex 與使用入口</a>
+          <a class="chapter-link" data-chapter-slug="workspace" href="workspace.html"><span>02</span>安裝、登入與建立第一個專案</a>
+          <a class="chapter-link" data-chapter-slug="permissions-and-control" href="permissions-and-control.html"><span>03</span>權限、核准與資訊安全</a>
+          <a class="chapter-link" data-chapter-slug="models-and-context" href="models-and-context.html"><span>04</span>選擇模型、查看用量與管理上下文</a>
+          <a class="chapter-link" data-chapter-slug="parallel-and-fork" href="parallel-and-fork.html"><span>05</span>聊天分支（Fork）與工作樹（Worktree）隔離</a>
+          <a class="chapter-link" data-chapter-slug="visual-feedback" href="visual-feedback.html"><span>06</span>圖片、視窗快照（Appshots）與網頁回饋</a>
+          <a class="chapter-link" data-chapter-slug="skills-and-tools" href="skills-and-tools.html"><span>07</span>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</a>
+          <a class="chapter-link" data-chapter-slug="instructions-and-editor" href="instructions-and-editor.html"><span>08</span>Codex 指示、AGENTS.md 與常用命令</a>
+          <a class="chapter-link" data-chapter-slug="plan-goal-schedule" href="plan-goal-schedule.html"><span>09</span>規劃（Plan）、目標（Goal）與排程任務</a>
+          <a class="chapter-link" data-chapter-slug="remote" href="remote.html"><span>10</span>手機遠端連線（Remote）與雲端任務（Cloud）</a>
+        </nav>
+        <div class="course-progress">
+          <span>目前進度</span>
+          <strong>01 / 10</strong>
+          <i><b style="width: 10%"></b></i>
+        </div>
+      </aside>
+
+      <main class="article" id="lesson">
+        <div class="breadcrumb"><a href="../index.html">Codex Windows 教學</a> <span>/</span> 第 01 章</div>
+        <section class="hero-card">
+          <div>
+            <p class="chapter-kicker">CHAPTER 01 · 約 3 分鐘</p>
+            <h1>認識 Codex 與使用入口</h1>
+            <p class="hero-copy">認識 Chat、Work 與 Codex 的入口，並比較三家編碼代理的模型、方案與價格（2026-10-17 查核）。</p>
+          </div>
+          <div class="hero-orbit" aria-hidden="true"><span>01</span></div>
+        </section>
+        <div class="lesson-meta">
+          <span>Windows 桌面版與跨端點</span>
+          <span>依 2026-10-17 文件查核</span>
+          <span>點擊截圖可放大</span>
+        </div>
+        <article class="mdx-content">
+<div id="what"></div>
+<h2>Codex 是什麼</h2>
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/codex介紹.png" data-screenshot-title="Codex 軟體工程與自動化代理" aria-label="Codex 軟體工程與自動化代理，放大檢視">
+    <img src="../images/tutorial/pick/codex介紹.png" alt="Codex 軟體工程與自動化代理" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>Codex 軟體工程與自動化代理</strong></figcaption>
+</figure>
+<p>Codex 是 OpenAI 推出的程式設計與深度自動化 AI 代理（Agent）。它不僅能讀寫本機程式碼、執行終端機指令與測試，還能操控瀏覽器與桌面軟體、生圖修圖，並直接整合在你的 ChatGPT 帳號中。</p>
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/codex的多種使用方式.png" data-screenshot-title="Codex 的多種使用方式" aria-label="Codex 的多種使用方式，放大檢視">
+    <img src="../images/tutorial/pick/codex的多種使用方式.png" alt="Codex 的多種使用方式" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>Codex 的多種使用方式</strong></figcaption>
+</figure>
+<p>Codex 可透過桌面版、CLI、IDE 與雲端入口使用。可選模型依帳號、產品與版本而不同；第 4 章會用本次截圖介紹模型選單，實際清單請以你自己的畫面為準。</p>
+<figure class="interface-figure" style="max-width:900px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/在應用程式中切換到codex.png" data-screenshot-title="在應用程式中切換到 Codex" aria-label="在應用程式中切換到 Codex，放大檢視">
+    <img src="../images/tutorial/pick/在應用程式中切換到codex.png" alt="在應用程式中切換到 Codex" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>在應用程式中切換到 Codex</strong></figcaption>
+</figure>
+
+<div id="modes"></div>
+<h2>Chat、Work 與 Codex：先會選，再看詳細差異</h2>
+<p>這組截圖的應用程式左上方可切換 <strong>ChatGPT</strong> 與 <strong>Codex</strong>；進入 ChatGPT 後可選擇對話或 Work 工作方式。不同版本的入口位置可能調整，請依目前畫面確認。</p>
+<p>快速選擇：一般問答用 Chat；要交付文件、試算表或研究成果可選 Work；要看程式差異、處理 Git 專案可選 Codex。Work 與 Codex 的能力有重疊，主要差異是入口、介面與工作呈現；實際權限取決於執行環境與設定。下表供需要進一步比較的人選讀，詳見 <a href="https://learn.chatgpt.com/docs/use-chatgpt" target="_blank" rel="noopener noreferrer">OpenAI 官方說明</a>。</p>
+
+<h3>1. 核心本質與任務範式解析</h3>
+<ul>
+  <li><strong>ChatGPT Chat（日常即時對話）：</strong>
+    <p>以一般提問、搜尋、潤飾與討論為主。可用工具仍會隨所選模式、外掛與帳號設定變動；若任務要直接修改專案檔案，先確認工作環境與授權。</p>
+  </li>
+  <li><strong>ChatGPT Work（多步驟知識與商業交付助手）：</strong>
+    <p>適合多步驟的文件、試算表、簡報與研究工作。工作可在本機或雲端的核准環境執行；可存取哪些檔案與工具，取決於目前執行位置、帳號及工作區政策。</p>
+  </li>
+  <li><strong>Codex（軟體工程與本機深度自動化代理）：</strong>
+    <p>以程式碼專案為核心，可在已授權的工作環境讀寫檔案、執行指令與測試，並搭配工作樹（Worktree）、程式碼審查與 <code>AGENTS.md</code>。實際權限受沙盒、核准政策與執行環境限制。</p>
+  </li>
+</ul>
+
+<h3>2. 選讀：八個角度比較使用方式</h3>
+<p>需要選擇工作介面時再看下表；功能與權限仍以目前帳號、環境及官方說明為準：</p>
+<div class="table-scroll" tabindex="0">
+  <table>
+    <thead><tr><th>對比維度</th><th>ChatGPT Chat</th><th>ChatGPT Work</th><th>Codex</th></tr></thead>
+    <tbody>
+      <tr><td><strong>核心定位</strong></td><td>日常對話、快速諮詢、靈感發想。</td><td>商務文件產出、數據分析、簡報與報告交付。</td><td>軟體工程研發、程式庫重構、系統自動化運維。</td></tr>
+      <tr><td><strong>本機檔案操作</strong></td><td>一般對話可使用已授權的附件與工具。</td><td>本機或雲端環境各有其核准的檔案範圍。</td><td>由所選工作區、沙盒與核准設定決定。</td></tr>
+      <tr><td><strong>終端機指令執行</strong></td><td>依已啟用工具而定。</td><td>依本機或雲端執行環境的政策而定。</td><td>可在授權範圍內執行開發指令與測試。</td></tr>
+      <tr><td><strong>主要交付成果物</strong></td><td>文字回覆、Markdown 表格、DALL-E 圖片。</td><td>Word/Docs 文件、Excel 試算表、PPT 簡報、Sites 網站、Space 協作頁。</td><td>功能完整的程式碼、Git 提交（Commits）、Pull Requests、單元測試報告。</td></tr>
+      <tr><td><strong>執行機制與時長</strong></td><td>依問題與所用工具而定。</td><td>可進行多步驟工作。</td><td>可用目標（Goal）追蹤可驗證的結果；遇到阻礙、預算限制或需要決策時會停止。</td></tr>
+      <tr><td><strong>多任務平行機制</strong></td><td>開啟不同聊天對話。</td><td>專案內多聊天平行推進。</td><td>Git 工作樹（Worktree）可隔離工作目錄；整合變更時仍須檢查衝突。</td></tr>
+      <tr><td><strong>介面與工具</strong></td><td>依帳號可用工具而定。</td><td>著重成果預覽與知識工作。</td><td>突出差異檢視、程式碼審查與 Git 操作；視窗快照（Appshots）及自動審查（Auto-review）不能視為 Codex 獨有。</td></tr>
+      <tr><td><strong>支援使用端點</strong></td><td>桌面版、網頁與手機 App。</td><td>依方案與推出進度，可在桌面、網頁或手機使用。</td><td>桌面版、Codex 命令列工具（CLI）、整合開發環境（IDE）、網頁與符合資格的手機遠端連線（Remote）。</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>3. 選讀：三種入口如何配合</h3>
+<p>以下是一種較大型專案可能採用的流程；一般小任務可以直接在 Codex 專案裡開始，不必逐一切換模式：</p>
+<ol class="operation-steps">
+  <li>
+    <strong>第一步：在 Chat 模式進行架構發想與技術選型</strong>
+    <p class="step-copy">當你剛接獲一個新需求時，不需要一開始就開專案寫程式。先在 Chat 模式快速詢問：「<em>我想為既有的電商系統加入自動退款風控審核機制，業界常見的架構設計模式與狀態機有哪些？</em>」快速收斂思路並取得架構靈感。</p>
+  </li>
+  <li>
+    <strong>第二步：在 Work 模式產出規格書（PRD）與驗收清單</strong>
+    <p class="step-copy">思路清晰後，切換到 Work 模式，掛載產品需求資料夾：「<em>請根據剛才討論的退款風控架構，整合現有 API 規範，產出一份包含 UML 狀態圖、異常邊界處理與資安防禦要求的完整規格書（PRD），並輸出一份驗收測試案例試算表。</em>」由 Work 模式在背景自主交付結構化規格文件。</p>
+  </li>
+  <li>
+    <strong>第三步：在 Codex 模式掛載程式碼進行編碼、測試與部署</strong>
+    <p class="step-copy">規格底定後，切換到 Codex 並核對後端專案資料夾：「<em>請讀取已確認的 PRD，在獨立的 Git 工作樹（Worktree）中實作退款風控模組，撰寫測試並回報實際結果；提交或部署前先讓我審閱。</em>」完成後查看差異、測試與產物，再決定下一步。</p>
+  </li>
+</ol>
+<aside class="inline-note"><strong>實用技巧：快速聊天（Quick Chat）與置頂獨立視窗</strong><div><p>在 Codex 工作中如果只想臨時問個小問題，可以點擊左上角「新增聊天」旁的「快速聊天」圖示，就能開啟不混入 Codex 專案側邊欄的一般對話。此外，也可以將進行中的聊天彈出為獨立小視窗（Pop out chat）並開啟「最上層顯示（Always on top）」，方便邊看編輯器邊對照。</p></div></aside>
+
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/chatgpt對話.png" data-screenshot-title="ChatGPT 對話畫面" aria-label="ChatGPT 對話畫面，放大檢視">
+    <img src="../images/tutorial/pick/chatgpt對話.png" alt="ChatGPT 對話畫面" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>ChatGPT 對話畫面</strong>對話入口適合一般提問。畫面與 Codex 專案工作區不同，切換前先確認要處理的是問題還是專案檔案。</figcaption>
+</figure>
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/chatgpt工作.png" data-screenshot-title="ChatGPT Work 畫面" aria-label="ChatGPT Work 畫面，放大檢視">
+    <img src="../images/tutorial/pick/chatgpt工作.png" alt="ChatGPT Work 畫面" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>ChatGPT Work 畫面</strong>Work 畫面提供工作任務入口；可用工具會依帳號、外掛與工作環境而異。</figcaption>
+</figure>
+<div id="surfaces"></div>
+<h2>六大跨平台使用環境</h2>
+<p>只需登入同一個 ChatGPT 帳號，即可在以下環境切換並共用方案額度：</p>
+<ul>
+  <li><strong>桌面版應用程式（Windows / macOS）：</strong>提供圖形化專案資料夾管理、右側內建瀏覽器與檔案預覽器（Artifacts Viewer）、圖片與網頁標註、Skills 外掛市集與電腦操控。</li>
+  <li><strong>Codex 命令列工具（CLI）：</strong>以 Rust 打造的終端機代理（<code>npm install -g @openai/codex</code>），可在終端機目錄內修改程式碼、跑測試與管理工作樹（Worktree）。</li>
+  <li><strong>IDE 擴充功能：</strong>支援 VS Code、Cursor、Windsurf、Xcode 與 JetBrains 系列 IDE，在編輯器側邊欄直接呼叫 Codex 並進行行內 Diff 審查。</li>
+  <li><strong>Codex 網頁版與雲端任務（Web / Cloud）：</strong>符合使用資格並連結儲存庫後，可在雲端環境執行任務；實際可用性依帳號、工作區與推出進度而定。</li>
+  <li><strong>GitHub 整合：</strong>符合使用資格時，可在 Pull Request 使用 Codex 審查功能；先確認儲存庫與授權範圍。</li>
+  <li><strong>iOS / Android 手機 App：</strong>若帳號已開通遠端連線（Remote），可連線至保持上線的桌面主機；可用性依帳號與推出進度而定。</li>
+</ul>
+
+<div id="plans"></div>
+<h2>Free / Plus 與進階訂閱方案功能差異</h2>
+<p>不同方案、工作區與推出進度會影響可用功能及額度。以下只列入門時需要核對的方向；價格與詳細權益請以 <a href="https://learn.chatgpt.com/docs/pricing" target="_blank" rel="noopener noreferrer">OpenAI 官方價格與用量頁</a>及自己帳號的「使用量與帳單」為準。截圖中的金額是拍攝當時的帳號畫面。</p>
+<div class="table-scroll" tabindex="0">
+  <table>
+    <thead><tr><th>訂閱方案</th><th>可用功能範圍（Free 與 Plus 對照）</th><th>額度與限制說明</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Free / Go</strong></td><td>可先從帳號目前開放的桌面、CLI 或 IDE 入口開始；模型與工具以選單實際顯示為準。</td><td>留意目前額度與功能是否標示為漸進推出。</td></tr>
+      <tr><td><strong>Plus</strong></td><td>可用模型與 Codex 功能較多；仍須按所在產品、工作區與版本核對。</td><td>在帳號選單查看 5 小時及每週使用量、恢復時間與可用點數。</td></tr>
+      <tr><td><strong>Pro</strong></td><td>提供較高用量級距；目前官方頁面有多種 Pro 級距，並非固定只有一種月費。</td><td>購買前查看當前價格、模型與功能權益。</td></tr>
+    </tbody>
+  </table>
+</div>
+<aside class="tier-note"><div class="tier-note-header"><span class="tier-badge pro">進階方案</span><strong>想做更多，可以從升級方案開始</strong></div><div><p>Plus 適合每週有幾次專案任務的人；Pro 提供更高的使用額度及不同級距。團隊方案則另有管理與協作功能。想知道自己目前能用哪些模型、雲端功能及剩餘額度，可開啟帳號的「使用量與帳單」；考慮升級時，再查看<a href="https://learn.chatgpt.com/docs/pricing" target="_blank" rel="noopener noreferrer">官方價格與方案頁</a>的最新權益。</p></div></aside>
+
+<div id="compare"></div>
+<h2>Codex、Claude Code 與 Antigravity 怎麼選</h2>
+<p>以下依三家公司的一手文件整理，查核日期為 <strong>2026 年 10 月 17 日</strong>。它們都有編碼代理能力，但支援入口、訂閱方式與模型清單會隨地區、方案和推出進度改變。先看你要在哪個環境工作，再查看當前帳號可用項目。</p>
+<div class="table-scroll" tabindex="0"><table>
+  <thead><tr><th>比較項目</th><th>OpenAI Codex</th><th>Anthropic Claude Code</th><th>Google Antigravity</th></tr></thead>
+  <tbody>
+    <tr><td>主要入口</td><td>桌面 App、CLI、IDE 擴充與 Web；遠端功能依帳號開放。</td><td>CLI、支援的 IDE，以及 Claude Desktop 的 Code 分頁。</td><td>桌面 App、CLI、IDE 擴充與獨立 IDE；功能因入口不同。</td></tr>
+    <tr><td>可選模型例子</td><td>GPT-6.1 Sol、GPT-6 Astra、GPT-6 Sol / Luna；依當前模型選單。</td><td>Claude Opus、Sonnet、Haiku 5.5；依登入方式與模型選單。</td><td>Gemini 4 Argon、Gemini 3.8 Flash；Argon 的 Pro 權益需非試用訂閱，獨立 IDE 不支援，仍以當前模型選單為準。</td></tr>
+    <tr><td>個人方案與價格</td><td>Free：US$0／月；Plus：US$20／月；Pro：US$100、200 或 500／月。</td><td>Claude 免費方案：US$0，但不含 Claude Code；Pro：US$20／月含 Claude Code；Max：US$100 或 200／月。API 用量另依計費方式計算。</td><td>Free：US$0／月；目前 Pro／Ultra 價格以所在地結帳頁為準。Google 2026 年 5 月公告曾列 AI Pro US$20／月、AI Ultra US$100 或 200／月，僅供歷史比較。</td></tr>
+    <tr><td>上下文</td><td>取決於所選模型與使用入口，沒有所有 Codex 任務共用的單一數值。</td><td>Claude 5.5 模型的 API 文件列出 1M 上下文；實際 Claude Code 工作方式與可用額度仍依入口。</td><td>依所選模型的官方規格與入口；大上下文規格不表示工具會一次載入整個程式庫。</td></tr>
+  </tbody></table></div>
+<p>OpenAI 與 Anthropic 的美元數字為 2026-10-17 官方案頁標示；Google Pro／Ultra 的美元數字來自 2026 年 5 月公告，當前方案頁未列相同美元價格。表內均未計入稅金、地區差異、促銷及額外用量。模型規格是「模型」的能力，不等於每個產品入口都開放相同容量。</p>
+<ul>
+  <li>OpenAI：<a href="https://learn.chatgpt.com/docs/pricing" target="_blank" rel="noopener noreferrer">Codex 價格與方案</a>、<a href="https://learn.chatgpt.com/docs/models" target="_blank" rel="noopener noreferrer">模型</a>。</li>
+  <li>Anthropic：<a href="https://code.claude.com/docs/en/desktop" target="_blank" rel="noopener noreferrer">Claude Desktop 的 Code 分頁</a>、<a href="https://claude.com/pricing" target="_blank" rel="noopener noreferrer">個人方案價格與 Claude Code 權益</a>、<a href="https://support.claude.com/en/articles/11145838-use-claude-code-with-your-pro-or-max-plan" target="_blank" rel="noopener noreferrer">Pro / Max 使用 Claude Code</a>、<a href="https://platform.claude.com/docs/en/build-with-claude/context-windows" target="_blank" rel="noopener noreferrer">上下文規格</a>。</li>
+  <li>Google：<a href="https://www.antigravity.google/docs/overview" target="_blank" rel="noopener noreferrer">Antigravity 入口</a>、<a href="https://www.antigravity.google/docs/models/" target="_blank" rel="noopener noreferrer">模型清單</a>、<a href="https://antigravity.google/blog/changes-to-antigravity-plans/" target="_blank" rel="noopener noreferrer">2026 年 5 月價格公告</a>、<a href="https://www.antigravity.google/pricing" target="_blank" rel="noopener noreferrer">目前方案頁</a>。</li>
+</ul>
+<details class="source-list">
+  <summary>官方文件與延伸閱讀</summary>
+  <ul>
+    <li><a href="https://help.openai.com/zh-hant/articles/11369540-using-codex-with-your-chatgpt-plan" target="_blank" rel="noopener noreferrer">在 ChatGPT 方案中使用 Codex（官方說明中心）</a></li>
+    <li><a href="https://learn.chatgpt.com/docs" target="_blank" rel="noopener noreferrer">ChatGPT 官方學習文件首頁</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/features" target="_blank" rel="noopener noreferrer">功能總覽（Features）</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/app" target="_blank" rel="noopener noreferrer">ChatGPT 桌面版應用程式</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/pricing" target="_blank" rel="noopener noreferrer">模型與用量計費</a></li>
+  </ul>
+</details>
+        </article>
+        <nav class="chapter-pagination" aria-label="前後章節">
+          <span></span>
+          <a class="next" data-chapter-slug="workspace" href="workspace.html"><span>下一章<small>安裝、登入與建立第一個專案</small></span> →</a>
+        </nav>
+      </main>
+
+      <aside class="page-toc" aria-label="本頁目錄">
+        <p class="eyebrow">本章內容</p>
+        <nav class="toc-links">
+          <a href="#what">Codex 是什麼</a>
+          <a href="#modes">Chat、Work 與 Codex 三模式深度差異</a>
+          <a href="#surfaces">六大跨平台使用環境</a>
+          <a href="#plans">Free / Plus 與進階方案差異</a>
+          <a href="#compare">使用體驗對照</a>
+        </nav>
+        <div class="toc-note">
+          <span>專注閱讀</span>
+          <p>開啟閱讀模式，可放大內文並收起兩側導覽列。</p>
+        </div>
+      </aside>
+    </div>
+
+    <!-- 搜尋對話框 -->
+    <div id="search-backdrop" class="search-backdrop" role="presentation" hidden>
+      <section id="search-dialog" class="search-dialog" role="dialog" aria-modal="true" aria-label="搜尋教學">
+        <div class="search-input-wrap">
+          <span>⌕</span>
+          <input id="search-modal-input" type="search" aria-label="搜尋章節、摘要或內文" placeholder="搜尋功能：規劃 Plan、目標 Goal、工作樹 Worktree…" autocomplete="off" />
+          <button id="search-close-btn" type="button" aria-label="關閉搜尋">關閉 ×</button>
+        </div>
+        <div id="search-modal-results" class="search-results"></div>
+      </section>
+    </div>
+
+    <!-- 圖片放大檢視器 -->
+    <div id="image-viewer-backdrop" class="image-viewer-backdrop" hidden>
+      <div id="image-viewer" class="image-viewer" role="dialog" aria-modal="true" aria-label="圖片檢視器">
+        <header>
+          <strong id="image-viewer-title"></strong>
+          <div>
+            <button id="image-size-btn" type="button">原始尺寸檢視</button>
+            <button id="image-close-btn" type="button" aria-label="關閉圖片">關閉 ×</button>
+          </div>
+        </header>
+        <div id="image-viewer-stage" class="image-viewer-stage">
+          <img id="image-viewer-img" src="" alt="" />
+        </div>
+        <p id="image-viewer-hint">保留完整介面；需要看清楚小字時，請點擊「原始尺寸檢視」。</p>
+      </div>
+    </div>
+  </div>
+  <script src="../assets/app.js"></script>
+</body>
+</html>

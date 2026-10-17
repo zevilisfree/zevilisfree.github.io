@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <script>
+    try {
+      document.querySelector('meta[name="color-scheme"]').content = localStorage.getItem("color-scheme") ?? "light dark";
+    } catch (e) {}
+  </script>
+  <title>Codex 實戰手冊｜Windows 圖文教學</title>
+  <meta name="description" content="Windows Codex 完整圖文手冊：安裝、提示詞與個人化、沙盒與資訊安全、模型用量、Worktree、Appshots、排程及手機遠端；易變資訊附官方來源。" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body data-page-type="home">
+  <div class="home-site">
+    <header class="topbar home-topbar">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">C</span>
+        <span>CODEX 實戰手冊</span>
+      </a>
+      <div class="top-actions">
+        <a class="official-link" href="https://learn.chatgpt.com/docs" target="_blank" rel="noreferrer">OpenAI 官方文件 ↗</a>
+        <a class="official-link" href="https://help.openai.com/zh-hant/articles/11369540-using-codex-with-your-chatgpt-plan" target="_blank" rel="noreferrer">方案與額度說明 ↗</a>
+        <button id="theme-toggle-btn" class="theme-toggle" type="button" aria-label="切換深淺色主題" title="切換深淺色主題"><span class="theme-toggle-label">主題</span></button>
+        <a class="start-button" href="chapters/introduction.html">開始學習</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="home-hero">
+        <div class="home-hero-copy">
+          <p class="home-kicker">WINDOWS · 10 分鐘入門路線 · 十章完整手冊</p>
+          <h1>Codex<br /><em>從這裡開始</em></h1>
+          <p>先用 10 分鐘完成第一個任務，再依十章深入查閱提示詞、個人化、沙盒（Sandbox）、資訊安全、工作樹（Worktree）、模型用量與手機遠端連線（Remote）。每項操作都有步驟、限制與官方來源。</p>
+          <div class="home-actions">
+            <a class="primary-action" href="#quick-start">先完成第一個任務 <span>→</span></a>
+            <a class="secondary-action" href="#curriculum">檢視 10 大章節</a>
+          </div>
+          <div class="version-note">
+            <span>依官方文件查核</span>
+            <strong>2026.10 版</strong>
+            <small>涵蓋桌面版、CLI、IDE、Web 與行動端；易變資訊標明查核日期</small>
+          </div>
+        </div>
+
+        <div class="home-visual" aria-label="學習路線">
+          <div class="route-card route-1">
+            <span>01—04</span>
+            <strong>先上手與懂額度</strong>
+            <p>模式切換 · 專案工作空間 · 核准權限 · 模型選單</p>
+          </div>
+          <div class="route-line"></div>
+          <div class="route-card route-2">
+            <span>05—07</span>
+            <strong>把任務做順做快</strong>
+            <p>工作樹（Worktree）移交 · 視窗快照（Appshots） · 互動視覺化（@Visualize） · 電腦操控（Computer use）</p>
+          </div>
+          <div class="route-line"></div>
+          <div class="route-card route-3">
+            <span>08—10</span>
+            <strong>打造自動化工作流</strong>
+            <p>AGENTS.md 階層規則 · 規劃（Plan）與目標（Goal） · 排程 · 雲端任務（Cloud）</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="course-principles" id="quick-start">
+        <div>
+          <p class="eyebrow">10 分鐘先上手</p>
+          <h2>先做完一個小任務，再按需要查章節</h2>
+        </div>
+        <ul>
+          <li><a href="chapters/workspace.html#install">安裝並登入</a>桌面版；第一次使用不必先裝齊開發工具。</li>
+          <li><a href="chapters/workspace.html#workspace">選擇練習資料夾</a>，核對專案與工作目錄。</li>
+          <li><a href="chapters/workspace.html#first-task">請 Codex 建立練習檔</a>，再到檔案總管檢查結果。</li>
+          <li>修改重要檔案前，先讀<a href="chapters/permissions-and-control.html#sandbox">沙盒（Sandbox）、核准（Approval）與資料風險</a>；需要寫清任務時看<a href="chapters/instructions-and-editor.html#prompting">提示詞四要素</a>，使用 Git 時再學<a href="chapters/instructions-and-editor.html#review">差異檢視（Review）</a>。</li>
+        </ul>
+      </section>
+
+      <section class="course-search-section">
+        <div>
+          <p class="eyebrow">快速尋找</p>
+          <h2>找到你要用的功能與指令</h2>
+        </div>
+        <div class="home-search">
+          <span>⌕</span>
+          <input id="home-search-input" type="search" aria-label="搜尋教學" placeholder="搜尋：規劃 Plan、目標 Goal、工作樹 Worktree…" autocomplete="off" />
+        </div>
+        <div id="home-search-results" class="home-search-results" aria-live="polite" hidden></div>
+      </section>
+
+      <section class="curriculum" id="curriculum">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">閱讀目錄</p>
+            <h2>10 個操作章節，依需求閱讀</h2>
+          </div>
+          <p>第一次使用，可以順著讀下去。如果已經裝好 Codex，可以直接從工作空間、斜線指令速查表或你關心的功能開始。</p>
+        </div>
+        <div class="chapter-grid">
+          <a href="chapters/introduction.html" class="chapter-card">
+            <div><span>01</span><small>約 3 分鐘</small></div>
+            <h3>認識 Codex 與使用入口</h3>
+            <p>認識 Chat、Work 與 Codex 的入口，並比較三家編碼代理的模型、方案與價格（2026-10-17 查核）。</p>
+            <b>進入本章 →</b>
+          </a>
+          <a href="chapters/workspace.html" class="chapter-card">
+            <div><span>02</span><small>約 4 分鐘</small></div>
+            <h3>安裝、登入與建立第一個專案</h3>
+            <p>從 Windows 檔案總管建立資料夾，登入 Codex、認識主畫面並調整外觀；開發工具可按需要安裝。</p>
+            <b>進入本章 →</b>
+          </a>
+          <a href="chapters/permissions-and-control.html" class="chapter-card">
+            <div><span>03</span><small>約 12 分鐘</small></div>
+            <h3>權限、核准與資訊安全</h3>
+            <p>理解沙盒（Sandbox）與核准（Approval）、保護秘密、辨識提示注入（Prompt injection），並掌握執行中訊息。</p>
+            <b>進入本章 →</b>
+          </a>
+          <a href="chapters/models-and-context.html" class="chapter-card">
+            <div><span>04</span><small>約 4 分鐘</small></div>
+            <h3>選擇模型、查看用量與管理上下文</h3>
+            <p>選擇模型與推理強度，查看剩餘用量、帳單與上下文（Context），建立節省用量的習慣。</p>
+            <b>進入本章 →</b>
+          </a>
+          <a href="chapters/parallel-and-fork.html" class="chapter-card">
+            <div><span>05</span><small>約 3 分鐘</small></div>
+            <h3>聊天分支（Fork）與工作樹（Worktree）隔離</h3>
+            <p>區分新聊天、聊天分支（Fork）與工作樹（Worktree）隔離，再了解移交（Hand off）的時機。</p>
+            <b>進入本章 →</b>
+          </a>
+          <a href="chapters/visual-feedback.html" class="chapter-card">
+            <div><span>06</span><small>約 4 分鐘</small></div>
+            <h3>圖片、視窗快照（Appshots）與網頁回饋</h3>
+            <p>用圖片、視窗快照（Appshots）、局部標註（Annotations）與網頁回饋說清楚修改位置。</p>
+            <b>進入本章 →</b>
+          </a>
+          <a href="chapters/skills-and-tools.html" class="chapter-card">
+            <div><span>07</span><small>約 5 分鐘</small></div>
+            <h3>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</h3>
+            <p>認識技能（Skill）、外掛（Plugin）、模型上下文協定（MCP）與電腦操控（Computer use）。</p>
+            <b>進入本章 →</b>
+          </a>
+          <a href="chapters/instructions-and-editor.html" class="chapter-card">
+            <div><span>08</span><small>約 10 分鐘</small></div>
+            <h3>Codex 指示、AGENTS.md 與常用命令</h3>
+            <p>用 Git 差異檢視（Review）驗收；學會任務提示詞、個人化指示、專案 AGENTS.md 與常用命令。</p>
+            <b>進入本章 →</b>
+          </a>
+          <a href="chapters/plan-goal-schedule.html" class="chapter-card">
+            <div><span>09</span><small>約 4 分鐘</small></div>
+            <h3>規劃（Plan）、目標（Goal）與排程任務</h3>
+            <p>用規劃（Plan）討論做法、目標（Goal）追蹤結果，並確認排程任務的執行條件。</p>
+            <b>進入本章 →</b>
+          </a>
+          <a href="chapters/remote.html" class="chapter-card">
+            <div><span>10</span><small>約 3 分鐘</small></div>
+            <h3>手機遠端連線（Remote）與雲端任務（Cloud）</h3>
+            <p>從手機連接保持上線的電腦，區分遠端連線（Remote）、雲端任務（Cloud）與 SSH 主機。</p>
+            <b>進入本章 →</b>
+          </a>
+        </div>
+      </section>
+
+      <section class="course-principles">
+        <div>
+          <p class="eyebrow">兩種瀏覽方式與深淺色主題</p>
+          <h2>方便自學，也適合專注閱讀</h2>
+        </div>
+        <ul>
+          <li>一般模式：三欄式清晰導覽，隨時切換章節、檢視頁內捲動目錄（Scrollspy）並展開官方文件連結。</li>
+          <li>閱讀模式：一鍵放大內文、收起兩側導覽列，提供沉浸式無干擾的閱讀體驗。</li>
+          <li>智慧深淺色主題與離線互動：支援系統色系自動適應與頂部手動切換；所有圖片皆可點擊放大檢視原始尺寸，程式碼區塊皆可一鍵複製。</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="home-footer">
+      <span>Codex 實戰手冊 · Windows 圖文教學（純地端離線版）</span>
+    </footer>
+  </div>
+  <script src="assets/app.js"></script>
+</body>
+</html>

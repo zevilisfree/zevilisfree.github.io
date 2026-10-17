@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <script>
+    try {
+      document.querySelector('meta[name="color-scheme"]').content = localStorage.getItem("color-scheme") ?? "light dark";
+    } catch (e) {}
+  </script>
+  <title>選擇模型、查看用量與管理上下文｜Codex 實戰手冊</title>
+  <meta name="description" content="選擇模型與推理強度，查看剩餘用量、帳單與上下文（Context），建立節省用量的習慣。" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body data-page-type="chapter">
+  <div id="site-root" class="site">
+    <header class="topbar">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark">C</span>
+        <span>CODEX 實戰手冊</span>
+      </a>
+      <div class="top-actions">
+        <button id="search-open-btn" class="search-button" type="button">搜尋章節內容...</button>
+        <button id="theme-toggle-btn" class="theme-toggle" type="button" aria-label="切換深淺色主題" title="切換深淺色主題"><span class="theme-toggle-label">主題</span></button>
+        <button id="recording-toggle-btn" class="recording-toggle" type="button" aria-pressed="false">
+          <span class="toggle-light"></span>
+          <span id="recording-toggle-text">進入閱讀模式</span>
+        </button>
+        <button id="mobile-nav-btn" class="mobile-nav-button" type="button" aria-expanded="false">目錄</button>
+      </div>
+    </header>
+
+    <div class="docs-shell">
+      <aside id="chapter-sidebar" class="chapter-sidebar" aria-label="課程章節">
+        <p class="eyebrow">閱讀目錄 · 共 10 章</p>
+        <nav>
+          <a class="chapter-link" data-chapter-slug="introduction" href="introduction.html"><span>01</span>認識 Codex 與使用入口</a>
+          <a class="chapter-link" data-chapter-slug="workspace" href="workspace.html"><span>02</span>安裝、登入與建立第一個專案</a>
+          <a class="chapter-link" data-chapter-slug="permissions-and-control" href="permissions-and-control.html"><span>03</span>權限、核准與資訊安全</a>
+          <a class="chapter-link active" data-chapter-slug="models-and-context" href="models-and-context.html"><span>04</span>選擇模型、查看用量與管理上下文</a>
+          <a class="chapter-link" data-chapter-slug="parallel-and-fork" href="parallel-and-fork.html"><span>05</span>聊天分支（Fork）與工作樹（Worktree）隔離</a>
+          <a class="chapter-link" data-chapter-slug="visual-feedback" href="visual-feedback.html"><span>06</span>圖片、視窗快照（Appshots）與網頁回饋</a>
+          <a class="chapter-link" data-chapter-slug="skills-and-tools" href="skills-and-tools.html"><span>07</span>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</a>
+          <a class="chapter-link" data-chapter-slug="instructions-and-editor" href="instructions-and-editor.html"><span>08</span>Codex 指示、AGENTS.md 與常用命令</a>
+          <a class="chapter-link" data-chapter-slug="plan-goal-schedule" href="plan-goal-schedule.html"><span>09</span>規劃（Plan）、目標（Goal）與排程任務</a>
+          <a class="chapter-link" data-chapter-slug="remote" href="remote.html"><span>10</span>手機遠端連線（Remote）與雲端任務（Cloud）</a>
+        </nav>
+        <div class="course-progress">
+          <span>目前進度</span>
+          <strong>04 / 10</strong>
+          <i><b style="width: 40%"></b></i>
+        </div>
+      </aside>
+
+      <main class="article" id="lesson">
+        <div class="breadcrumb"><a href="../index.html">Codex Windows 教學</a> <span>/</span> 第 04 章</div>
+        <section class="hero-card">
+          <div>
+            <p class="chapter-kicker">CHAPTER 04 · 約 4 分鐘</p>
+            <h1>選擇模型、查看用量與管理上下文</h1>
+            <p class="hero-copy">選擇模型與推理強度，查看剩餘用量、帳單與上下文（Context），建立節省用量的習慣。</p>
+          </div>
+          <div class="hero-orbit" aria-hidden="true"><span>04</span></div>
+        </section>
+        <div class="lesson-meta">
+          <span>Windows 桌面版與跨端點</span>
+          <span>依 2026-10-16 文件查核</span>
+          <span>點擊截圖可放大</span>
+        </div>
+        <article class="mdx-content">
+<div id="models"></div>
+<h2>選擇模型與選單結構解析</h2>
+<p>點擊輸入框右下方的模型名稱（或輸入 <code>/model</code>）。你可以直接選擇官方的「<strong>預設（推薦的模型組合）</strong>」、手動切換具體的模型世代，或是展開「<strong>進階（Advanced）</strong>」分別自訂模型、Power 滑桿、推理強度與速度。</p>
+<p>下圖是本次帳號拍攝時的「選取模型」選單，包含智慧推薦與多款模型；它不是所有帳號或日後版本的完整清單。模型供應與方案會變動，選擇前請以當前選單及<a href="https://learn.chatgpt.com/docs/models" target="_blank" rel="noopener noreferrer">官方模型頁</a>核對：</p>
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/模型選取.png" data-screenshot-title="官方選取模型下拉選單真實介面" aria-label="官方選取模型下拉選單真實介面，放大檢視">
+    <img src="../images/tutorial/pick/模型選取.png" alt="官方選取模型下拉選單真實介面" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>模型選取選單</strong>此圖記錄拍攝時帳號可見的模型；目前可用清單以自己的選單為準。</figcaption>
+</figure>
+<p>截圖中的選單列出拍攝當時該帳號可用的模型。官方的<a href="https://learn.chatgpt.com/docs/model-selection" target="_blank" rel="noopener noreferrer">模型選擇說明</a>將 Astra 用於高複雜度工作、Sol 用於一般與複雜工程、Luna 用於明確的小任務；實際可用項目、推理強度及額度依產品、版本和方案而定。不要把此圖當成所有帳號固定有八種選擇。</p>
+<div class="table-scroll" tabindex="0"><table><thead><tr><th>畫面中的模型</th><th>入門選法</th></tr></thead><tbody>
+<tr><td>預設</td><td>不確定時先保留預設，再用結果與實際用量決定是否切換。</td></tr>
+<tr><td>Sol 系列</td><td>一般程式設計、多檔案修改與較複雜的工程任務。</td></tr>
+<tr><td>Astra</td><td>需要較深入分析或複雜視覺理解的任務；先確認帳號是否提供。</td></tr>
+<tr><td>Luna 系列</td><td>範圍清楚、較小的例行工作。</td></tr>
+</tbody></table></div>
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/推理強度.png" data-screenshot-title="模型選取位置與 Power 滑桿" aria-label="模型選取位置與 Power 滑桿，放大檢視">
+    <img src="../images/tutorial/pick/推理強度.png" alt="模型選取位置與 Power 滑桿" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>模型選取位置與推理強度</strong>展開目前模型的進階選項後，依任務複雜度調整；可用檔位以畫面為準。</figcaption>
+</figure>
+<p><strong>初學者建議：</strong>先使用「預設」。只有在任務需要、選單確實提供時才改選具體模型，並查看目前帳號的剩餘用量。</p>
+
+<div id="effort"></div>
+<h2>推理強度與速度</h2>
+<p>推理強度與速度是兩個不同設定；可用檔位依目前模型與帳號而定。</p>
+<ul>
+  <li><strong>基礎推理強度（Light / Medium / High / Extra High）：</strong>決定模型在回答前投入多少思考步驟。複雜任務可以調高，但通常回應較慢、消耗額度也較多。</li>
+  <li><strong>速度選項：</strong>控制服務速度，不等於切換到更聰明的模型。開啟前先看選單顯示的用量提示。</li>
+</ul>
+<aside class="tier-note"><div class="tier-note-header"><span class="tier-badge pro">進階選項</span><strong>推理強度與速度依目前模型和方案而定</strong></div><div><p>截圖中的滑桿代表目前帳號提供的選項。調高推理強度通常增加等待時間與用量；快速服務設定則影響回應速度。各檔位、消耗倍率與可用性請以當前介面及<a href="https://learn.chatgpt.com/docs/pricing" target="_blank" rel="noopener noreferrer">官方用量頁</a>為準。</p></div></aside>
+
+<div id="usage"></div>
+<h2>檢視剩餘用量與超額擴充機制</h2>
+<p>點擊左下角帳號選單，展開「剩餘用量」（或輸入 <code>/usage</code>、<code>/status</code>），即可看到目前可用的額度視窗；也可以到「設定 → 使用情況與計費」檢視詳細紀錄。</p>
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/剩餘用量2.png" data-screenshot-title="剩餘用量中的兩個額度區間" aria-label="剩餘用量中的兩個額度區間，放大檢視">
+    <img src="../images/tutorial/pick/剩餘用量2.png" alt="剩餘用量中的兩個額度區間" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>剩餘用量中的兩個額度區間</strong>位置：左下角帳號選單 → 剩餘用量。百分比與恢復時間請以自己的帳號顯示為準。</figcaption>
+</figure>
+<ul>
+  <li><strong>依方案查看額度：</strong>Plus 與標準 Business 的本機訊息估算以五小時區間呈現，週限制也可能適用；官方定價頁目前指出 Pro 沒有五小時限制。各帳號的實際上限與重設時間，請查看自己的使用量畫面，不要由本頁截圖推算。</li>
+  <li><strong>跨端點共用額度池：</strong>同一個帳號在桌面版、Web Cloud、CLI、IDE 擴充功能與手機端的消耗全部合併計算，並與 ChatGPT Work 共用代理配額池。</li>
+  <li><strong>Plus 與 Pro 方案超額延續方式：</strong>符合目前點數購買資格的用戶若在趕專案時耗盡視窗額度，可按需購買個人 <strong>ChatGPT Credits（隨用隨付點數）</strong> 繼續工作，或於 CLI 切換綁定獨立的 OpenAI API Key 計費。</li>
+</ul>
+
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/剩餘用量1.png" data-screenshot-title="帳號選單中的剩餘用量" aria-label="帳號選單中的剩餘用量，放大檢視">
+    <img src="../images/tutorial/pick/剩餘用量1.png" alt="帳號選單中的剩餘用量" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>帳號選單中的剩餘用量</strong>從帳號選單進入剩餘用量；先看目前可用額度，再開始長時間任務。</figcaption>
+</figure>
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/使用量與帳單.png" data-screenshot-title="使用量與帳單概覽" aria-label="使用量與帳單概覽，放大檢視">
+    <img src="../images/tutorial/pick/使用量與帳單.png" alt="使用量與帳單概覽" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>使用量與帳單概覽</strong>設定頁的概覽呈現方案、額度與點數。金額及餘額是截圖當時的狀態，不代表目前價格。</figcaption>
+</figure>
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/使用量與帳單2.png" data-screenshot-title="使用量分析" aria-label="使用量分析，放大檢視">
+    <img src="../images/tutorial/pick/使用量與帳單2.png" alt="使用量分析" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>使用量分析</strong>入口：設定 → 使用量與帳單 → 分析。查看時間區間、用量趨勢與較常耗用額度的聊天，協助辨識耗用來源。</figcaption>
+</figure>
+<div id="tips"></div>
+<h2>5 個省用量的實用習慣</h2>
+<ol>
+  <li><strong>精簡提示詞與輸入素材：</strong>只附上與本次修改直接相關的檔案與時間範圍，避免把整份無關歷史紀錄塞入對話。</li>
+  <li><strong>明確定義交付規格：</strong>事先說清楚目標格式、修改範圍與驗收條件，並將「必要修改」與「加分優化」分開。</li>
+  <li><strong>階層化拆分 AGENTS.md：</strong>大型專案請將特定子模組的規則放進子資料夾的 <code>AGENTS.md</code>，避免根目錄說明檔過大導致每一輪對話都重複消耗大量上下文 Token。</li>
+  <li><strong>關閉暫時不用的 MCP 伺服器：</strong>每一個啟用的 MCP 伺服器都會在背景注入工具定義並佔用上下文空間，可輸入 <code>/mcp</code> 檢查並停用閒置連線。</li>
+  <li><strong>善用 Luna 處理常規任務：</strong>格式整理、提取摘要、簡單轉換等明確任務改選 <code>GPT-6 Luna</code>，實際用量依任務與方案而異。</li>
+</ol>
+
+<div id="context"></div>
+<h2>上下文（Context）壓縮（/compact）</h2>
+<p>當聊天對話越來越長時，Codex 會自動壓縮上下文，把前面的內容整理成摘要後繼續進行。你也可以隨時在輸入框輸入 <code>/compact</code> 主動觸發壓縮，或輸入 <code>/status</code> 查看目前的上下文使用率。</p>
+<p>壓縮的是目前的對話上下文，<strong>不是清空用量，也不是重置額度</strong>。壓縮過程中請等待它完成即可，不必反覆發送同一句話。需要長期遵守的要求，請寫進自訂指令或 <code>AGENTS.md</code>（第 8 章會詳細說明）。</p>
+<details class="source-list">
+  <summary>官方文件與延伸閱讀</summary>
+  <ul>
+    <li><a href="https://learn.chatgpt.com/docs/models" target="_blank" rel="noopener noreferrer">模型說明與 Power 預設集</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/pricing" target="_blank" rel="noopener noreferrer">用量、計費與省額度技巧</a></li>
+    <li><a href="https://help.openai.com/zh-hant/articles/11369540-using-codex-with-your-chatgpt-plan" target="_blank" rel="noopener noreferrer">在 ChatGPT 方案中使用 Codex</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/reference/commands" target="_blank" rel="noopener noreferrer">應用程式指令與功能參考</a></li>
+  </ul>
+</details>
+        </article>
+        <nav class="chapter-pagination" aria-label="前後章節">
+          <a data-chapter-slug="permissions-and-control" href="permissions-and-control.html">← <span>上一章<small>權限、核准與資訊安全</small></span></a>
+          <a class="next" data-chapter-slug="parallel-and-fork" href="parallel-and-fork.html"><span>下一章<small>聊天分支（Fork）與工作樹（Worktree）隔離</small></span> →</a>
+        </nav>
+      </main>
+
+      <aside class="page-toc" aria-label="本頁目錄">
+        <p class="eyebrow">本章內容</p>
+        <nav class="toc-links">
+          <a href="#models">選擇模型與 Power 滑桿</a>
+          <a href="#effort">推理強度與速度（含 Pro 專屬說明）</a>
+          <a href="#usage">檢視剩餘用量與擴充機制</a>
+          <a href="#tips">官方 5 大省額度實用習慣</a>
+          <a href="#context">上下文壓縮（/compact）</a>
+        </nav>
+        <div class="toc-note">
+          <span>專注閱讀</span>
+          <p>開啟閱讀模式，可放大內文並收起兩側導覽列。</p>
+        </div>
+      </aside>
+    </div>
+
+    <!-- 搜尋對話框 -->
+    <div id="search-backdrop" class="search-backdrop" role="presentation" hidden>
+      <section id="search-dialog" class="search-dialog" role="dialog" aria-modal="true" aria-label="搜尋教學">
+        <div class="search-input-wrap">
+          <span>⌕</span>
+          <input id="search-modal-input" type="search" aria-label="搜尋章節、摘要或內文" placeholder="搜尋功能：規劃 Plan、目標 Goal、工作樹 Worktree…" autocomplete="off" />
+          <button id="search-close-btn" type="button" aria-label="關閉搜尋">關閉 ×</button>
+        </div>
+        <div id="search-modal-results" class="search-results"></div>
+      </section>
+    </div>
+
+    <!-- 圖片放大檢視器 -->
+    <div id="image-viewer-backdrop" class="image-viewer-backdrop" hidden>
+      <div id="image-viewer" class="image-viewer" role="dialog" aria-modal="true" aria-label="圖片檢視器">
+        <header>
+          <strong id="image-viewer-title"></strong>
+          <div>
+            <button id="image-size-btn" type="button">原始尺寸檢視</button>
+            <button id="image-close-btn" type="button" aria-label="關閉圖片">關閉 ×</button>
+          </div>
+        </header>
+        <div id="image-viewer-stage" class="image-viewer-stage">
+          <img id="image-viewer-img" src="" alt="" />
+        </div>
+        <p id="image-viewer-hint">保留完整介面；需要看清楚小字時，請點擊「原始尺寸檢視」。</p>
+      </div>
+    </div>
+  </div>
+  <script src="../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <script>
+    try {
+      document.querySelector('meta[name="color-scheme"]').content = localStorage.getItem("color-scheme") ?? "light dark";
+    } catch (e) {}
+  </script>
+  <title>圖片、視窗快照（Appshots）與網頁回饋｜Codex 實戰手冊</title>
+  <meta name="description" content="用圖片、視窗快照（Appshots）、局部標註（Annotations）與網頁回饋說清楚修改位置。" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body data-page-type="chapter">
+  <div id="site-root" class="site">
+    <header class="topbar">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark">C</span>
+        <span>CODEX 實戰手冊</span>
+      </a>
+      <div class="top-actions">
+        <button id="search-open-btn" class="search-button" type="button">搜尋章節內容...</button>
+        <button id="theme-toggle-btn" class="theme-toggle" type="button" aria-label="切換深淺色主題" title="切換深淺色主題"><span class="theme-toggle-label">主題</span></button>
+        <button id="recording-toggle-btn" class="recording-toggle" type="button" aria-pressed="false">
+          <span class="toggle-light"></span>
+          <span id="recording-toggle-text">進入閱讀模式</span>
+        </button>
+        <button id="mobile-nav-btn" class="mobile-nav-button" type="button" aria-expanded="false">目錄</button>
+      </div>
+    </header>
+
+    <div class="docs-shell">
+      <aside id="chapter-sidebar" class="chapter-sidebar" aria-label="課程章節">
+        <p class="eyebrow">閱讀目錄 · 共 10 章</p>
+        <nav>
+          <a class="chapter-link" data-chapter-slug="introduction" href="introduction.html"><span>01</span>認識 Codex 與使用入口</a>
+          <a class="chapter-link" data-chapter-slug="workspace" href="workspace.html"><span>02</span>安裝、登入與建立第一個專案</a>
+          <a class="chapter-link" data-chapter-slug="permissions-and-control" href="permissions-and-control.html"><span>03</span>權限、核准與資訊安全</a>
+          <a class="chapter-link" data-chapter-slug="models-and-context" href="models-and-context.html"><span>04</span>選擇模型、查看用量與管理上下文</a>
+          <a class="chapter-link" data-chapter-slug="parallel-and-fork" href="parallel-and-fork.html"><span>05</span>聊天分支（Fork）與工作樹（Worktree）隔離</a>
+          <a class="chapter-link active" data-chapter-slug="visual-feedback" href="visual-feedback.html"><span>06</span>圖片、視窗快照（Appshots）與網頁回饋</a>
+          <a class="chapter-link" data-chapter-slug="skills-and-tools" href="skills-and-tools.html"><span>07</span>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</a>
+          <a class="chapter-link" data-chapter-slug="instructions-and-editor" href="instructions-and-editor.html"><span>08</span>Codex 指示、AGENTS.md 與常用命令</a>
+          <a class="chapter-link" data-chapter-slug="plan-goal-schedule" href="plan-goal-schedule.html"><span>09</span>規劃（Plan）、目標（Goal）與排程任務</a>
+          <a class="chapter-link" data-chapter-slug="remote" href="remote.html"><span>10</span>手機遠端連線（Remote）與雲端任務（Cloud）</a>
+        </nav>
+        <div class="course-progress">
+          <span>目前進度</span>
+          <strong>06 / 10</strong>
+          <i><b style="width: 60%"></b></i>
+        </div>
+      </aside>
+
+      <main class="article" id="lesson">
+        <div class="breadcrumb"><a href="../index.html">Codex Windows 教學</a> <span>/</span> 第 06 章</div>
+        <section class="hero-card">
+          <div>
+            <p class="chapter-kicker">CHAPTER 06 · 約 4 分鐘</p>
+            <h1>圖片、視窗快照（Appshots）與網頁回饋</h1>
+            <p class="hero-copy">用圖片、視窗快照（Appshots）、局部標註（Annotations）與網頁回饋說清楚修改位置。</p>
+          </div>
+          <div class="hero-orbit" aria-hidden="true"><span>06</span></div>
+        </section>
+        <div class="lesson-meta">
+          <span>Windows 桌面版與跨端點</span>
+          <span>依 2026-10-16 文件查核</span>
+          <span>點擊截圖可放大</span>
+        </div>
+        <article class="mdx-content">
+<div id="image"></div>
+<h2>生成圖片與加上標註</h2>
+<p>可以直接在聊天中描述想要什麼圖片，也可以先上傳參考圖。尺寸、用途、風格以及必須保留的內容，儘量一次說清楚。</p>
+<p>圖片輸入與圖片生成是不同功能：你可以提供圖片供分析；生成或編輯圖片則依方案可用性與用量而定。<a href="https://learn.chatgpt.com/docs/pricing" target="_blank" rel="noopener noreferrer">官方定價頁</a>目前指出 Free 方案不提供 Codex 圖片生成。</p>
+<ul>
+  <li><strong>附上圖片：</strong>在桌面版或 IDE 擴充功能中，拖曳圖片至輸入框時按住 <code>Shift</code>，或使用可見的附件入口，讓圖片成為聊天上下文；在 CLI 可使用 <code>codex -i screenshot.png</code>。<a href="https://learn.chatgpt.com/docs/image-inputs" target="_blank" rel="noopener noreferrer">官方圖片輸入說明</a>。</li>
+  <li><strong>多張參考圖編號法：</strong>同時上傳多張圖時，可在提示詞明確指定角色，例如：「圖 1 是要修改的產品圖，圖 2 是配色與光影參考，請保留圖 1 的主體構圖並套用圖 2 的風格」。</li>
+</ul>
+<p>圖片產生後，點擊圖片開啟檢視器。需要針對局部區域修改時：</p>
+<ol>
+  <li>進入畫布檢視模式，選擇要修改的圖片。</li>
+  <li>使用留言或標註工具，點擊需要修改的位置。</li>
+  <li>寫清楚「要改成什麼」以及「哪些部分不要動」。</li>
+  <li>檢查附上的圖片與標註內容，再依目前介面的提示送出修改要求。</li>
+</ol>
+<p>標註內容可以這樣寫：</p>
+<div class="command-block">
+  <div class="command-title"><span></span>可以這樣說<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
+  <pre><code>把這行標題放大一點，保留目前的配色。不要改動其他文字與圖片位置。</code></pre>
+</div>
+
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/繪圖1.png" data-screenshot-title="圖片生成中的聊天" aria-label="圖片生成中的聊天，放大檢視">
+    <img src="../images/tutorial/pick/繪圖1.png" alt="圖片生成中的聊天" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>圖片生成中的聊天</strong>提出圖片需求後，聊天會顯示生成進度；完成後再開啟成品檢查細節。</figcaption>
+</figure>
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/繪圖2.png" data-screenshot-title="圖片檢視與編輯工具列" aria-label="圖片檢視與編輯工具列，放大檢視">
+    <img src="../images/tutorial/pick/繪圖2.png" alt="圖片檢視與編輯工具列" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>圖片檢視與編輯工具列</strong>點開生成的圖片，可在檢視器查看工具列與後續編輯入口；提出修改時說清楚要改與要保留的部分。</figcaption>
+</figure>
+<div id="appshots"></div>
+<h2>視窗快照（Appshots）：擷取畫面與可取得的文字</h2>
+<p>當你想讓 Codex 查看另一個軟體的報錯視窗、設定面板、設計稿或文件時，不必手動截圖再存檔上傳！在桌面版介面中，可直接點擊輸入框旁邊的快照按鈕選取目標視窗，即可一鍵拍下 <strong>Appshot（應用程式視窗快照）</strong>：</p>
+<ul>
+  <li><strong>同時擷取畫面與捲動區外的文字：</strong>Appshot 會拍下目前視窗的可見畫面；若該應用程式提供可讀取的文字，也可能附上畫面外的文字。部分應用程式只能提供截圖，送出前先查看附件內容。</li>
+  <li><strong>選擇發送目標：</strong>依「設定 → Appshots」的目前選項，快照可加入目前聊天或新聊天。發送前先檢查目的地與附帶內容。</li>
+</ul>
+
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/Appshots.png" data-screenshot-title="Appshots 設定" aria-label="Appshots 設定，放大檢視">
+    <img src="../images/tutorial/pick/Appshots.png" alt="Appshots 設定" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>Appshots 設定</strong>設定頁可查看視窗快照的快捷鍵、送往目前或新聊天的選項與音效。使用前確認畫面沒有不打算分享的內容。</figcaption>
+</figure>
+<div id="web"></div>
+<h2>網頁註解與開發者工具通訊協定（CDP）</h2>
+<p>當網頁在右側內建瀏覽器中開啟後，可以直接在頁面上加上註解，不必用長篇文字解釋「左上角第二塊」。</p>
+<ol class="operation-steps">
+  <li><div class="step-copy"><h3>開啟頁面並進入註解模式</h3><p>點擊預覽連結；若目前介面提供網頁註解功能，依畫面提示進入註解模式。如果需要核對其他畫面狀態，請先把頁面切換到該狀態。</p></div></li>
+  <li><div class="step-copy"><h3>選取元素或區域</h3><p>點擊文字、按鈕等元素，或拖曳選取一塊區域。出現選取外框後，確認範圍沒有選得太大。</p></div></li>
+  <li><div class="step-copy"><h3>使用調整（Adjust）微調樣式並送出意見</h3><p>輸入具體的修改方式。需要更細部的樣式回饋時，可點開輸入框旁的「<strong>調整（Adjust）</strong>」選項，直接調整字型、間距、顏色等設定並即時預覽。儲存註解後，再要求 Codex 處理。</p></div></li>
+</ol>
+<p>例如：</p>
+<div class="command-block">
+  <div class="command-title"><span></span>可以這樣說<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
+  <pre><code>請處理剛才的兩則註解，只調整標出的字型與間距，其他區域保持不變。</code></pre>
+</div>
+<aside class="inline-note"><strong>進階除錯：開發者模式（Developer Mode）與 CDP</strong><div><p>若遇到複雜的前端錯誤或 API 請求問題，可至「設定 → 瀏覽器（Browser）」開啟 <strong>開發者模式（Developer mode / Enable full CDP access）</strong>。CDP 是 Chrome 開發者工具通訊協定（Chrome DevTools Protocol）；啟用後 Codex 可依權限讀取 Console 報錯、Network 請求、DOM 結構與效能資料。開啟前先確認網頁及登入資訊是否適合交由工具檢視。</p></div></aside>
+
+<div id="visualize"></div>
+<h2>互動視覺化（@Visualize）：把數據與概念變成圖表</h2>
+<p>當純文字或靜態圖片不足以表達複雜邏輯時，你可以在對話框輸入 <code>@Visualize</code>（從外掛選單選取 <strong>Visualize</strong>），請 Codex 直接在對話中生成<strong>可拖曳滑桿、可調整參數的互動式圖表、演算法模擬器或資料儀表板</strong>（若在團隊協作的 ChatGPT Space 頁面中，則可輸入 <code>/visualize</code> 直接嵌入頁面）。</p>
+
+<div id="preview"></div>
+<h2>檔案預覽與局部標註（Annotations）</h2>
+<p>產生文件、圖片或網頁後，點擊回答裡的檔案卡片或連結，即可在右側開啟預覽器（Artifacts Viewer）。右上角的面板按鈕可以切換分割檢視、全螢幕或收起側邊欄。</p>
+<p>除了檢視網頁與圖片外，現在右側預覽器還全面支援對 <strong>Word 文件（Documents）、PowerPoint 簡報（Presentations）、Excel 試算表（Spreadsheets）、PDF 與 Markdown 程式碼</strong> 直接進行<strong>局部圈選標註（Annotations）</strong>！選取文件中的特定段落、表格或投影片區塊並留下修改意見，Codex 就會只針對圈選處精準修正，保留其餘版面與數據。</p>
+<p>檢查結果時，請先確認三件事：</p>
+<ol>
+  <li>檔案確實已經儲存，且位置與檔名符合要求。</li>
+  <li>開啟後能正常顯示，而不只是看到「已完成」的文字回覆。</li>
+  <li>點擊右側差異檢視面板查看受影響的檔案 Diff，再決定是否接受。</li>
+</ol>
+<p>網頁只在本機執行時，預覽網址會是本機位址（如 <code>localhost</code> 或 <code>127.0.0.1</code>）。能在自己電腦上開啟，不代表已經公開上線。</p>
+
+<div id="check"></div>
+<h2>修改後再看一遍</h2>
+<p>樣式預覽不等於檔案已經修改完成。等 Codex 處理完畢後，請重新整理頁面，檢查標註位置與相鄰區域：</p>
+<ul>
+  <li><strong>圖片：</strong>檢查文字、數量、比例，確認有沒有連帶改動到原本已經滿意的部分。</li>
+  <li><strong>網頁：</strong>檢查修改後的一般狀態，再看看小螢幕響應式版面是否仍然完整。</li>
+  <li><strong>結果不符預期：</strong>保留原圖或上一版結果，指出具體差異，再繼續修改。</li>
+</ul>
+<details class="source-list">
+  <summary>官方文件與延伸閱讀</summary>
+  <ul>
+    <li><a href="https://learn.chatgpt.com/docs/image-generation" target="_blank" rel="noopener noreferrer">圖片生成、編輯與拖曳輸入</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/browser" target="_blank" rel="noopener noreferrer">內建瀏覽器、註解與 CDP 開發者模式</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/features" target="_blank" rel="noopener noreferrer">功能總覽（Appshots 與 @Visualize）</a></li>
+  </ul>
+</details>
+        </article>
+        <nav class="chapter-pagination" aria-label="前後章節">
+          <a data-chapter-slug="parallel-and-fork" href="parallel-and-fork.html">← <span>上一章<small>聊天分支（Fork）與工作樹（Worktree）隔離</small></span></a>
+          <a class="next" data-chapter-slug="skills-and-tools" href="skills-and-tools.html"><span>下一章<small>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</small></span> →</a>
+        </nav>
+      </main>
+
+      <aside class="page-toc" aria-label="本頁目錄">
+        <p class="eyebrow">本章內容</p>
+        <nav class="toc-links">
+          <a href="#image">生成圖片與加上標註</a>
+          <a href="#appshots">視窗快照（Appshots）</a>
+          <a href="#web">網頁註解與開發者工具（CDP）</a>
+          <a href="#visualize">@Visualize 互動式視覺化</a>
+          <a href="#preview">檔案預覽與局部標註</a>
+          <a href="#check">修改後再看一遍</a>
+        </nav>
+        <div class="toc-note">
+          <span>專注閱讀</span>
+          <p>開啟閱讀模式，可放大內文並收起兩側導覽列。</p>
+        </div>
+      </aside>
+    </div>
+
+    <!-- 搜尋對話框 -->
+    <div id="search-backdrop" class="search-backdrop" role="presentation" hidden>
+      <section id="search-dialog" class="search-dialog" role="dialog" aria-modal="true" aria-label="搜尋教學">
+        <div class="search-input-wrap">
+          <span>⌕</span>
+          <input id="search-modal-input" type="search" aria-label="搜尋章節、摘要或內文" placeholder="搜尋功能：規劃 Plan、目標 Goal、工作樹 Worktree…" autocomplete="off" />
+          <button id="search-close-btn" type="button" aria-label="關閉搜尋">關閉 ×</button>
+        </div>
+        <div id="search-modal-results" class="search-results"></div>
+      </section>
+    </div>
+
+    <!-- 圖片放大檢視器 -->
+    <div id="image-viewer-backdrop" class="image-viewer-backdrop" hidden>
+      <div id="image-viewer" class="image-viewer" role="dialog" aria-modal="true" aria-label="圖片檢視器">
+        <header>
+          <strong id="image-viewer-title"></strong>
+          <div>
+            <button id="image-size-btn" type="button">原始尺寸檢視</button>
+            <button id="image-close-btn" type="button" aria-label="關閉圖片">關閉 ×</button>
+          </div>
+        </header>
+        <div id="image-viewer-stage" class="image-viewer-stage">
+          <img id="image-viewer-img" src="" alt="" />
+        </div>
+        <p id="image-viewer-hint">保留完整介面；需要看清楚小字時，請點擊「原始尺寸檢視」。</p>
+      </div>
+    </div>
+  </div>
+  <script src="../assets/app.js"></script>
+</body>
+</html>

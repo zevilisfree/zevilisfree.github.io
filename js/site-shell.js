@@ -2,7 +2,7 @@
   'use strict';
 
   const macro = [
-    { href: 'macro.html', label: '景氣循環概覽' },
+    { href: 'index.html', label: '景氣循環概覽' },
     { href: 'index1.html', label: '復甦期' },
     { href: 'index2.html', label: '成長期' },
     { href: 'index3.html', label: '榮景期' },
@@ -10,16 +10,18 @@
     { href: 'index5.html', label: '關鍵指標' }
   ];
   const navItems = [
-    { href: 'daytrade.html', label: '台股當沖計算', section: 'tool' },
-    { href: 'DCA.html', label: '定期定額試算', section: 'tool' },
-    { href: 'macro.html', label: '總經資料', section: 'macro' }
+    { href: '../daytrade/', label: '台股當沖計算', module: 'daytrade', section: 'tool' },
+    { href: '../dca/', label: '定期定額試算', module: 'dca', section: 'tool' },
+    { href: '../macro/', label: '總經資料', module: 'macro', section: 'macro' }
   ];
   const slots = ['header-slot', 'footer-slot', 'scroll-top-slot'].map(id => document.getElementById(id));
   if (slots.some(slot => !slot)) throw new Error('共用版型缺少插入點');
 
-  const currentPage = window.location.pathname.split('/').pop() || 'daytrade.html';
+  const pathParts = window.location.pathname.split('/');
+  const currentPage = pathParts.at(-1) || 'index.html';
+  const currentModule = pathParts.at(-2);
   const pageDescriptions = {
-    'macro.html': '先掌握景氣全貌，再用多組資料交叉閱讀四個階段。',
+    'index.html': '先掌握景氣全貌，再用多組資料交叉閱讀四個階段。',
     'index1.html': '從活動止跌、裁員壓力與需求回溫，辨認復甦是否站穩。',
     'index2.html': '追蹤所得、消費、投資與生產力能否形成較廣的擴張。',
     'index3.html': '檢查需求、投資、通膨與信用條件是否出現不平衡。',
@@ -36,9 +38,9 @@
 
   const header = element('header', 'site-header');
   const brand = element('a', 'site-brand');
-  brand.href = 'daytrade.html';
+  brand.href = '../daytrade/';
   brand.setAttribute('aria-label', 'Z / INSIGHTS，前往台股當沖計算');
-  if (currentPage === 'daytrade.html') brand.setAttribute('aria-current', 'page');
+  if (currentModule === 'daytrade') brand.setAttribute('aria-current', 'page');
   brand.append(
     element('span', 'site-brand-mark', 'Z'),
     element('span', 'site-brand-name', 'Z / INSIGHTS')
@@ -58,8 +60,8 @@
   const macroPages = macro.map(item => item.href);
 
   for (const item of navItems) {
-    const isCurrentPage = item.href === currentPage;
-    const isCurrentSection = item.section === 'macro' && macroPages.includes(currentPage);
+    const isCurrentPage = item.module === currentModule && currentPage === 'index.html';
+    const isCurrentSection = item.section === 'macro' && currentModule === 'macro' && macroPages.includes(currentPage);
     const classes = ['site-nav-link'];
     if (isCurrentPage) {
       classes.push('is-current');
@@ -110,8 +112,8 @@
   }
 
   const sequence = macro.slice(0, 5);
-  const stage = sequence.findIndex(page => page.href === currentPage);
-  if (stage !== -1 || currentPage === 'index5.html') {
+  const stage = currentModule === 'macro' ? sequence.findIndex(page => page.href === currentPage) : -1;
+  if (stage !== -1 || (currentModule === 'macro' && currentPage === 'index5.html')) {
     const content = document.querySelector('.container-fluid');
     if (!content) throw new Error('景氣頁面缺少內容容器');
     if (stage === -1) {
@@ -121,7 +123,7 @@
         element('p', '', '這些指標可搭配各個景氣階段閱讀，不屬於單一階段。')
       );
       const back = element('a', '', '← 返回景氣循環閱讀路徑');
-      back.href = 'macro.html';
+      back.href = 'index.html';
       reference.append(back);
       content.prepend(reference);
     } else {

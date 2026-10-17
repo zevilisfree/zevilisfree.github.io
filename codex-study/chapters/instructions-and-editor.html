@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <script>
+    try {
+      document.querySelector('meta[name="color-scheme"]').content = localStorage.getItem("color-scheme") ?? "light dark";
+    } catch (e) {}
+  </script>
+  <title>Codex 指示、AGENTS.md 與常用命令｜Codex 實戰手冊</title>
+  <meta name="description" content="區分個人 Codex 指示與專案 AGENTS.md，搭配整合開發環境（IDE）和常用命令建立工作流程。" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body data-page-type="chapter">
+  <div id="site-root" class="site">
+    <header class="topbar">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark">C</span>
+        <span>CODEX 實戰手冊</span>
+      </a>
+      <div class="top-actions">
+        <button id="search-open-btn" class="search-button" type="button">搜尋章節內容...</button>
+        <button id="theme-toggle-btn" class="theme-toggle" type="button" aria-label="切換深淺色主題" title="切換深淺色主題"><span class="theme-toggle-label">主題</span></button>
+        <button id="recording-toggle-btn" class="recording-toggle" type="button" aria-pressed="false">
+          <span class="toggle-light"></span>
+          <span id="recording-toggle-text">進入閱讀模式</span>
+        </button>
+        <button id="mobile-nav-btn" class="mobile-nav-button" type="button" aria-expanded="false">目錄</button>
+      </div>
+    </header>
+
+    <div class="docs-shell">
+      <aside id="chapter-sidebar" class="chapter-sidebar" aria-label="課程章節">
+        <p class="eyebrow">閱讀目錄 · 共 10 章</p>
+        <nav>
+          <a class="chapter-link" data-chapter-slug="introduction" href="introduction.html"><span>01</span>認識 Codex 與使用入口</a>
+          <a class="chapter-link" data-chapter-slug="workspace" href="workspace.html"><span>02</span>安裝、登入與建立第一個專案</a>
+          <a class="chapter-link" data-chapter-slug="permissions-and-control" href="permissions-and-control.html"><span>03</span>權限、核准與資訊安全</a>
+          <a class="chapter-link" data-chapter-slug="models-and-context" href="models-and-context.html"><span>04</span>選擇模型、查看用量與管理上下文</a>
+          <a class="chapter-link" data-chapter-slug="parallel-and-fork" href="parallel-and-fork.html"><span>05</span>聊天分支（Fork）與工作樹（Worktree）隔離</a>
+          <a class="chapter-link" data-chapter-slug="visual-feedback" href="visual-feedback.html"><span>06</span>圖片、視窗快照（Appshots）與網頁回饋</a>
+          <a class="chapter-link" data-chapter-slug="skills-and-tools" href="skills-and-tools.html"><span>07</span>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</a>
+          <a class="chapter-link active" data-chapter-slug="instructions-and-editor" href="instructions-and-editor.html"><span>08</span>Codex 指示、AGENTS.md 與常用命令</a>
+          <a class="chapter-link" data-chapter-slug="plan-goal-schedule" href="plan-goal-schedule.html"><span>09</span>規劃（Plan）、目標（Goal）與排程任務</a>
+          <a class="chapter-link" data-chapter-slug="remote" href="remote.html"><span>10</span>手機遠端連線（Remote）與雲端任務（Cloud）</a>
+        </nav>
+        <div class="course-progress">
+          <span>目前進度</span>
+          <strong>08 / 10</strong>
+          <i><b style="width: 80%"></b></i>
+        </div>
+      </aside>
+
+      <main class="article" id="lesson">
+        <div class="breadcrumb"><a href="../index.html">Codex Windows 教學</a> <span>/</span> 第 08 章</div>
+        <section class="hero-card">
+          <div>
+            <p class="chapter-kicker">CHAPTER 08 · 約 10 分鐘</p>
+            <h1>Codex 指示、AGENTS.md 與常用命令</h1>
+            <p class="hero-copy">學會檢查差異、寫清任務提示詞，並把個人化指示與專案 AGENTS.md 放在正確的位置。</p>
+          </div>
+          <div class="hero-orbit" aria-hidden="true"><span>08</span></div>
+        </section>
+        <div class="lesson-meta">
+          <span>Windows 桌面版與跨端點</span>
+          <span>依 2026-10-17 文件查核</span>
+          <span>點擊截圖可放大</span>
+        </div>
+        <article class="mdx-content">
+<div id="editor"></div>
+<h2>安裝與連接整合開發環境（IDE）</h2>
+<p>如果只使用 Codex 桌面版，不需要先學會寫程式的編輯器。當你需要自己檢視、修改檔案，或逐行檢查程式碼時，再安裝編輯器即可。</p>
+<ul>
+  <li><strong>選擇整合開發環境（IDE）：</strong>VS Code、Cursor 與 Windsurf 使用 Codex 擴充功能；Xcode 與 JetBrains IDE 則使用各自的原生整合入口。若桌面版找不到剛裝好的編輯器，請重啟桌面版再檢查專案的開啟方式。</li>
+  <li><strong>使用擴充功能：</strong>在 VS Code、Cursor 或 Windsurf 安裝／啟用 Codex 後，開啟 Codex 側邊欄並登入。需要使用編輯器目前開啟檔案或選取範圍時，再於輸入框確認 IDE 上下文已啟用；詳細入口依<a href="https://learn.chatgpt.com/docs/codex/ide" target="_blank" rel="noopener noreferrer">官方 IDE 指南</a>核對。</li>
+  <li><strong>Git 版本控制：</strong>用來記錄版本歷史與比對修改差異；但光裝好 Git 並不會自動替普通資料夾建立歷史，需在專案中初始化 Git 儲存庫（<code>git init</code>）。</li>
+</ul>
+
+<div id="review"></div>
+<h2>Git 差異檢視（Review）：完成後逐檔核對</h2>
+<p>讓 Codex 改完檔案後，打開差異檢視（Review）面板，先確認「改了哪些檔案、每個檔案改了什麼」，再決定要不要繼續修改。這項功能需要專案位於 Git 儲存庫內；若目前只是一般資料夾，應用程式會提示建立儲存庫。Git 記錄的是檔案版本，光安裝 Git 還不會讓既有資料夾自動產生版本歷史。</p>
+<figure class="interface-figure">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/Git 差異檢視（Review）.png" data-screenshot-title="Git 差異檢視（Review）面板" aria-label="Git 差異檢視（Review）面板，放大檢視">
+    <img src="../images/tutorial/pick/Git 差異檢視（Review）.png" alt="Codex 聊天中的查看變更按鈕，以及右側顯示最新輪次逐行差異的 Review 面板" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>Git 差異檢視（Review）</strong>這張實拍圖左側可見「查看變更」，右側以「最新輪次」顯示檔案與增刪行。點圖放大可看清楚程式碼；畫面中的專案名稱與檔案內容只是本次示例。</figcaption>
+</figure>
+<ol>
+  <li><strong>開啟差異：</strong>在任務結果按「查看變更」，或開啟專案的差異檢視（Review）面板。先看檔案清單與增刪行數，再逐一展開檔案；不要只憑 Codex 的完成摘要判斷。</li>
+  <li><strong>選對範圍：</strong>想看 Codex 上一輪改了什麼，選「最新輪次（Last turn）」；想看儲存庫目前尚未暫存的改動，選「未暫存（Unstaged）」。面板也可切換「已暫存（Staged）」、「提交（Commit）」或「分支（Branch）」。面板預設顯示 Unstaged，而且儲存庫視圖可能含你自己或其他工具的改動，並非全由 Codex 產生。</li>
+  <li><strong>檢查與回饋：</strong>逐檔核對檔名、增刪內容與原本要求；有問題時把滑鼠移到對應變更行，按 <code>+</code> 留下行內意見，送出留言後再回聊天明確要求 Codex 處理。修正後重新查看差異與相關測試結果。</li>
+</ol>
+<p>面板中的「暫存（Stage）」可選擇要納入下一次提交的區塊或檔案；「復原（Revert）」會捨棄所選變更，操作前先確認範圍和是否需要保留副本。需要 Codex 主動找問題時，在聊天輸入 <code>/review</code>，選擇「檢查未提交變更」或「對照基準分支」；它會回報值得檢查的發現，不會自行修改工作樹。<strong>Review 面板是你看差異的地方，<code>/review</code> 是請 Codex 做程式碼審查。</strong>審查建議仍要對照實際差異及測試判斷。詳見<a href="https://learn.chatgpt.com/docs/code-review" target="_blank" rel="noopener noreferrer">OpenAI 官方程式碼審查說明</a>。</p>
+<h3>交付前用一則追問核對證據</h3>
+<div class="command-block"><div class="command-title"><span></span>可複製的核對提示<button type="button" class="copy-code-btn" aria-label="複製提示">複製</button></div><pre><code>請列出本次改動的檔案、每項要求的實際結果、執行過的測試與結果，以及尚未驗證的地方。再檢查差異與未追蹤檔案，指出任何不在我要求範圍內的修改、秘密或新增外部網址。</code></pre></div>
+<p>這段文字是教學建議，不是固定指令。Codex 的摘要只是查核線索；仍要親自查看 Review 面板、必要的畫面與測試結果。<a href="https://learn.chatgpt.com/docs/learn/best-practices" target="_blank" rel="noopener noreferrer">官方驗收建議</a></p>
+
+<div id="prompting"></div>
+<h2>一次性任務提示詞：四件事說清楚</h2>
+<p>重要任務可依序寫出<strong>目標（Goal）</strong>、<strong>背景（Context）</strong>、<strong>限制（Constraints）</strong>與<strong>完成判準（Done when）</strong>。不必拘泥格式，但要讓 Codex 知道從哪裡開始、什麼不能碰、什麼結果才算完成。<a href="https://learn.chatgpt.com/docs/learn/best-practices" target="_blank" rel="noopener noreferrer">OpenAI 官方最佳實務</a></p>
+<div class="command-block"><div class="command-title"><span></span>可複製的任務範例<button type="button" class="copy-code-btn" aria-label="複製提示">複製</button></div><pre><code>目標：修正設定頁按下「儲存」後，重新整理會還原的問題。
+背景：請先查看設定頁、儲存流程與相關錯誤；從目前專案尋找檔案。
+限制：保留現有 API 格式，只修改必要檔案，不處理無關畫面。
+完成判準：重現原問題、確認修正後不再發生、執行相關測試；最後列出改動與尚未驗證項目。</code></pre></div>
+<p>這是寫法示範，檔名、測試與限制要按自己的專案改。簡單工作可只用一兩句；需求模糊、範圍大時，先用規劃（Plan）討論再實作。<a href="https://learn.chatgpt.com/docs/prompting" target="_blank" rel="noopener noreferrer">官方提示詞指南</a></p>
+
+<div id="custom"></div>
+<h2>個人化指示（Personal instructions）與輸入框預測</h2>
+<p>跨專案通用的工作偏好可在「設定 → 個人化」編輯。官方說明指出，Codex 會把所選電腦的個人指示儲存在全域 <code>AGENTS.md</code>；它與專案根目錄的 <code>AGENTS.md</code> 是不同作用範圍。若已有個人指示，先閱讀再整合，不要直接覆寫。介面欄位名稱與位置以目前版本為準。<a href="https://learn.chatgpt.com/docs/reference/settings" target="_blank" rel="noopener noreferrer">官方設定說明</a></p>
+<div class="command-block">
+  <div class="command-title"><span></span>自訂指令範例<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
+  <pre><code>- 以臺灣繁體中文回答；指令、檔名與 API 名稱保留英文。
+- 完成修改時，列出變更檔案、實際執行的檢查與未驗證項目。
+- 涉及對外發送、發布或改動他人資料時，先提出可審閱的內容與影響範圍。</code></pre>
+</div>
+<p>這是教學建議的範例，請按自己的工作方式修改。通用偏好應簡短、具體且長期有效；專案目錄、測試方法放專案規則，這次要做的檔案與結果留在當次聊天。文字指示不能代替沙盒或核准設定。<a href="https://learn.chatgpt.com/docs/customization/overview" target="_blank" rel="noopener noreferrer">官方自訂方式</a></p>
+<h3>寫好個人指示後，怎麼確認有用</h3>
+<ol><li>先寫三到五條<strong>每個專案都適用</strong>的偏好，使用具體可檢查的動詞，例如「列出執行過的測試」，不要只寫「回答好一點」。</li><li>儲存後開一則新聊天，用小任務觀察回答語言、格式與驗收回報是否符合；若專案另有 <code>AGENTS.md</code>，也一併檢查是否互相矛盾。</li><li>遇到反覆出錯再補一條規則；內容失效或變得太長時刪減。不要放入密碼、Token 或只適用於單次任務的資料。</li></ol>
+<p>這是依官方「保持指示簡短、只寫長期慣例、用實際任務驗證」整理的教學步驟。<a href="https://learn.chatgpt.com/docs/learn/best-practices" target="_blank" rel="noopener noreferrer">官方最佳實務</a>、<a href="https://learn.chatgpt.com/docs/agent-configuration/agents-md" target="_blank" rel="noopener noreferrer">官方 AGENTS.md 指南</a></p>
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/codex指示.png" data-screenshot-title="個人化設定中的自訂指令" aria-label="個人化設定中的自訂指令，放大檢視">
+    <img src="../images/tutorial/pick/codex指示.png" alt="個人化設定中的自訂指令" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>個人化設定中的自訂指令</strong>通用偏好寫在這裡，專案專屬要求則寫在專案檔案 AGENTS.md 中。</figcaption>
+</figure>
+<aside class="inline-note"><strong>Composer Predictions：按 Tab 鍵一鍵帶入下一步預測</strong><div><p>當 Codex 完成一輪回覆後，輸入框會根據目前上下文自動淡色顯示預測你下一步想說的話（Composer Predictions）。如果預測符合你的想法，直接按 <code>Tab</code> 鍵即可轉為可編輯草稿，修改或直接送出（預測本身不會額外消耗你的方案額度）。</p></div></aside>
+
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/個人化.png" data-screenshot-title="個人化設定" aria-label="個人化設定，放大檢視">
+    <img src="../images/tutorial/pick/個人化.png" alt="個人化設定" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>個人化設定</strong>在個人化頁檢查記憶與 Codex 指示等選項；修改後用新的聊天確認效果。</figcaption>
+</figure>
+<p>整理時可用三個問題判斷：<strong>每個專案都適用嗎？</strong>放個人指示；<strong>只在這個專案反覆適用嗎？</strong>放專案 <code>AGENTS.md</code>；<strong>只做這一次嗎？</strong>寫在當次訊息。修改前確認想影響的範圍。</p>
+<div id="agents"></div>
+<h2>專案裡的 AGENTS.md 階層規則</h2>
+<p><code>AGENTS.md</code> 用來記錄持續適用的專案慣例，例如目錄用途、建置與測試方式、修改限制及驗收方法。Codex 會讀取適用的指示檔；實際支援入口依使用的介面而異。在支援 <code>/init</code> 的 CLI 可產生骨架，也可在聊天中請 Codex 先檢查現有檔案，再協助擬稿：</p>
+<div class="command-block">
+  <div class="command-title"><span></span>可以這樣說<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
+  <pre><code>根據目前的目錄結構與已經確認的要求，產生一份簡潔的 AGENTS.md。
+寫清楚專案用途、目錄說明、修改範圍與檢查方法。
+不確定的地方請列出來讓我確認，不要把臨時討論當成長期規則。</code></pre>
+</div>
+<p>Codex 啟動時會依照以下<strong>由上而下的階層順序</strong>讀取並合併規則（越靠近當前工作目錄的優先權越高，預設合併上限為 <code>32 KiB</code>）：</p>
+<ol>
+  <li><strong>全局規則（<code>~/.codex/AGENTS.md</code>）：</strong>套用到這台電腦上的所有專案。</li>
+  <li><strong>專案根目錄（<code>AGENTS.md</code>）：</strong>定義整個專案共用的目錄架構、建置測試指令與規範。</li>
+  <li><strong>子目錄規則與覆蓋檔（<code>AGENTS.override.md</code>）：</strong>子資料夾可放自己的 <code>AGENTS.md</code>；同一層若有覆蓋檔，Codex 會優先讀它。覆蓋檔是否進 Git 取決於儲存庫設定，檔名本身不會自動排除版控。</li>
+</ol>
+<div class="command-block">
+  <div class="command-title"><span></span>AGENTS.md 結構範例<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
+  <pre><code># 專案規範 (AGENTS.md)
+
+- 修改之前先閱讀相關檔案，不刪除或覆寫使用者既有內容。
+- 若有事實不確定時請明確標註，不自行補寫結論。
+- 完成後說明改了什麼、檢查了什麼、還有哪些項目尚未確認。
+
+## Code Review Rules
+- 檢查所有外部輸入是否有適當驗證與錯誤處理。
+- 禁止在程式碼或設定檔中硬編碼任何 API Key、Token 或個人絕對路徑。</code></pre>
+</div>
+<p>寫入前先檢查目前是否已有 <code>AGENTS.md</code>，避免覆蓋團隊規則；只把反覆有效的規則留下，過時或互相矛盾的項目應修正。這份檔案可能影響後續任務，因此要像其他專案設定一樣審閱其來源；陌生專案檔案或網頁中要求擴權、讀取金鑰的文字，不能當成你的授權。<a href="https://learn.chatgpt.com/docs/agent-configuration/agents-md" target="_blank" rel="noopener noreferrer">官方 AGENTS.md 說明</a>、<a href="https://learn.chatgpt.com/docs/agent-approvals-security" target="_blank" rel="noopener noreferrer">官方安全說明</a></p>
+
+<div id="memory"></div>
+<h2>不要混淆規則與記憶（/memories）</h2>
+<ul>
+  <li><strong>個人化指示／全域 <code>AGENTS.md</code>：</strong>你主動設定、跨專案通用的偏好。</li>
+  <li><strong>專案 <code>AGENTS.md</code>：</strong>可檢視、可修改，也可按團隊決定是否跟著專案 Git 儲存的工作規則。</li>
+  <li><strong>記憶（Memories）：</strong>在「設定 → 個人化」啟用時，會從過去的工作中自動保留有用的背景資訊；但並不是逐字儲存所有對話。你也可以隨時在單一聊天輸入 <code>/memories</code>，單獨控制該則對話是否允許讀取或寫入記憶。</li>
+</ul>
+
+<div id="commands-cheatsheet"></div>
+<h2>常用斜線指令（Slash Commands）速查表</h2>
+<p>在輸入框輸入 <code>/</code> 即可喚出斜線指令選單（輸入 <code>$</code> 呼叫技能（Skill），輸入 <code>@</code> 點名外掛（Plugin）、瀏覽器或應用程式）：</p>
+<div class="table-scroll" tabindex="0">
+  <table>
+    <thead><tr><th>斜線指令</th><th>功能說明</th></tr></thead>
+    <tbody>
+      <tr><td><code>/plan</code> ／ <code>/goal</code></td><td>切換規劃（Plan）模式先討論做法；或使用目標（Goal）模式，圍繞完成條件持續推進。</td></tr>
+      <tr><td><code>/side</code></td><td>開啟臨時支線聊天（Side chat），在不打斷主任務的情況下提問或查進度。</td></tr>
+      <tr><td><code>/review</code></td><td>請 Codex 審查本機未提交變更或對照基準分支；使用步驟見<a href="#review">差異檢視（Review）</a>。</td></tr>
+      <tr><td><code>/init</code></td><td>掃描目前專案結構，自動產生 <code>AGENTS.md</code> 專案說明檔骨架。</td></tr>
+      <tr><td><code>/compact</code> ／ <code>/status</code></td><td>主動壓縮目前對話的上下文；或檢視對話 ID、Token 使用率與速率限制。</td></tr>
+      <tr><td><code>/model</code> ／ <code>/reasoning</code> ／ <code>/fast</code></td><td>選擇模型、推理強度或 Fast 速度模式；Fast 的實際用量倍率依方案與官方定價頁核對。</td></tr>
+      <tr><td><code>/fork</code> ／ <code>/worktree</code> ／ <code>/local</code></td><td>建立聊天分支（Fork），可選擇新的 Git 工作樹（Worktree）或在本機（Local）繼續。</td></tr>
+      <tr><td><code>/approve</code></td><td>從近期自動審查（Auto-review）拒絕紀錄選取特定動作重試一次；重試仍可能被拒絕。</td></tr>
+      <tr><td><code>/memories</code> ／ <code>/mcp</code> ／ <code>/ide-context</code></td><td>設定此聊天是否讀寫記憶；檢視模型上下文協定（MCP）伺服器；開關整合開發環境（IDE）共享上下文。</td></tr>
+      <tr><td><code>/project</code> ／ <code>/usage</code></td><td>替新聊天選擇專案；或在 ChatGPT 登入可用時開啟使用量與計費。</td></tr>
+      <tr><td><code>/cloud</code> ／ <code>/cloud-environment</code></td><td>在帳號有雲端權限時切換雲端執行，或選擇已發布的雲端環境。</td></tr>
+      <tr><td><code>/pin</code> ／ <code>/rename</code> ／ <code>/archive</code> ／ <code>/pet</code></td><td>釘選、重新命名、封存目前聊天；或喚出／隱藏桌面寵物（Codey）。</td></tr>
+    </tbody>
+  </table>
+</div>
+<details class="source-list">
+  <summary>官方文件與延伸閱讀</summary>
+  <ul>
+    <li><a href="https://learn.chatgpt.com/docs/codex/ide" target="_blank" rel="noopener noreferrer">IDE 擴充功能與整合</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/reference/settings" target="_blank" rel="noopener noreferrer">設定與自訂指令</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/agent-configuration/agents-md" target="_blank" rel="noopener noreferrer">AGENTS.md 專案規範設定</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/learn/best-practices" target="_blank" rel="noopener noreferrer">任務提示詞與驗收最佳實務</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/prompting" target="_blank" rel="noopener noreferrer">官方提示詞指南</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/customization/memories" target="_blank" rel="noopener noreferrer">記憶功能（Memories）</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/reference/commands" target="_blank" rel="noopener noreferrer">斜線指令與常用功能參考</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/code-review" target="_blank" rel="noopener noreferrer">Git 差異檢視與程式碼審查</a></li>
+  </ul>
+</details>
+        </article>
+        <nav class="chapter-pagination" aria-label="前後章節">
+          <a data-chapter-slug="skills-and-tools" href="skills-and-tools.html">← <span>上一章<small>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</small></span></a>
+          <a class="next" data-chapter-slug="plan-goal-schedule" href="plan-goal-schedule.html"><span>下一章<small>規劃（Plan）、目標（Goal）與排程任務</small></span> →</a>
+        </nav>
+      </main>
+
+      <aside class="page-toc" aria-label="本頁目錄">
+        <p class="eyebrow">本章內容</p>
+        <nav class="toc-links">
+          <a href="#editor">連接整合開發環境（IDE）</a>
+          <a href="#review">Git 差異檢視（Review）</a>
+          <a href="#prompting">一次性任務提示詞</a>
+          <a href="#custom">自訂指令與輸入預測（Tab）</a>
+          <a href="#agents">AGENTS.md 階層規則</a>
+          <a href="#memory">不要混淆規則與記憶（/memories）</a>
+          <a href="#commands-cheatsheet">常用斜線指令速查表</a>
+        </nav>
+        <div class="toc-note">
+          <span>專注閱讀</span>
+          <p>開啟閱讀模式，可放大內文並收起兩側導覽列。</p>
+        </div>
+      </aside>
+    </div>
+
+    <!-- 搜尋對話框 -->
+    <div id="search-backdrop" class="search-backdrop" role="presentation" hidden>
+      <section id="search-dialog" class="search-dialog" role="dialog" aria-modal="true" aria-label="搜尋教學">
+        <div class="search-input-wrap">
+          <span>⌕</span>
+          <input id="search-modal-input" type="search" aria-label="搜尋章節、摘要或內文" placeholder="搜尋功能：規劃 Plan、目標 Goal、工作樹 Worktree…" autocomplete="off" />
+          <button id="search-close-btn" type="button" aria-label="關閉搜尋">關閉 ×</button>
+        </div>
+        <div id="search-modal-results" class="search-results"></div>
+      </section>
+    </div>
+
+    <!-- 圖片放大檢視器 -->
+    <div id="image-viewer-backdrop" class="image-viewer-backdrop" hidden>
+      <div id="image-viewer" class="image-viewer" role="dialog" aria-modal="true" aria-label="圖片檢視器">
+        <header>
+          <strong id="image-viewer-title"></strong>
+          <div>
+            <button id="image-size-btn" type="button">原始尺寸檢視</button>
+            <button id="image-close-btn" type="button" aria-label="關閉圖片">關閉 ×</button>
+          </div>
+        </header>
+        <div id="image-viewer-stage" class="image-viewer-stage">
+          <img id="image-viewer-img" src="" alt="" />
+        </div>
+        <p id="image-viewer-hint">保留完整介面；需要看清楚小字時，請點擊「原始尺寸檢視」。</p>
+      </div>
+    </div>
+  </div>
+  <script src="../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <script>
+    try {
+      document.querySelector('meta[name="color-scheme"]').content = localStorage.getItem("color-scheme") ?? "light dark";
+    } catch (e) {}
+  </script>
+  <title>手機遠端連線（Remote）與雲端任務（Cloud）｜Codex 實戰手冊</title>
+  <meta name="description" content="從手機連接保持上線的電腦，區分遠端連線（Remote）、雲端任務（Cloud）與 SSH 主機。" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body data-page-type="chapter">
+  <div id="site-root" class="site">
+    <header class="topbar">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark">C</span>
+        <span>CODEX 實戰手冊</span>
+      </a>
+      <div class="top-actions">
+        <button id="search-open-btn" class="search-button" type="button">搜尋章節內容...</button>
+        <button id="theme-toggle-btn" class="theme-toggle" type="button" aria-label="切換深淺色主題" title="切換深淺色主題"><span class="theme-toggle-label">主題</span></button>
+        <button id="recording-toggle-btn" class="recording-toggle" type="button" aria-pressed="false">
+          <span class="toggle-light"></span>
+          <span id="recording-toggle-text">進入閱讀模式</span>
+        </button>
+        <button id="mobile-nav-btn" class="mobile-nav-button" type="button" aria-expanded="false">目錄</button>
+      </div>
+    </header>
+
+    <div class="docs-shell">
+      <aside id="chapter-sidebar" class="chapter-sidebar" aria-label="課程章節">
+        <p class="eyebrow">閱讀目錄 · 共 10 章</p>
+        <nav>
+          <a class="chapter-link" data-chapter-slug="introduction" href="introduction.html"><span>01</span>認識 Codex 與使用入口</a>
+          <a class="chapter-link" data-chapter-slug="workspace" href="workspace.html"><span>02</span>安裝、登入與建立第一個專案</a>
+          <a class="chapter-link" data-chapter-slug="permissions-and-control" href="permissions-and-control.html"><span>03</span>權限、核准與資訊安全</a>
+          <a class="chapter-link" data-chapter-slug="models-and-context" href="models-and-context.html"><span>04</span>選擇模型、查看用量與管理上下文</a>
+          <a class="chapter-link" data-chapter-slug="parallel-and-fork" href="parallel-and-fork.html"><span>05</span>聊天分支（Fork）與工作樹（Worktree）隔離</a>
+          <a class="chapter-link" data-chapter-slug="visual-feedback" href="visual-feedback.html"><span>06</span>圖片、視窗快照（Appshots）與網頁回饋</a>
+          <a class="chapter-link" data-chapter-slug="skills-and-tools" href="skills-and-tools.html"><span>07</span>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</a>
+          <a class="chapter-link" data-chapter-slug="instructions-and-editor" href="instructions-and-editor.html"><span>08</span>Codex 指示、AGENTS.md 與常用命令</a>
+          <a class="chapter-link" data-chapter-slug="plan-goal-schedule" href="plan-goal-schedule.html"><span>09</span>規劃（Plan）、目標（Goal）與排程任務</a>
+          <a class="chapter-link active" data-chapter-slug="remote" href="remote.html"><span>10</span>手機遠端連線（Remote）與雲端任務（Cloud）</a>
+        </nav>
+        <div class="course-progress">
+          <span>目前進度</span>
+          <strong>10 / 10</strong>
+          <i><b style="width: 100%"></b></i>
+        </div>
+      </aside>
+
+      <main class="article" id="lesson">
+        <div class="breadcrumb"><a href="../index.html">Codex Windows 教學</a> <span>/</span> 第 10 章</div>
+        <section class="hero-card">
+          <div>
+            <p class="chapter-kicker">CHAPTER 10 · 約 3 分鐘</p>
+            <h1>手機遠端連線（Remote）與雲端任務（Cloud）</h1>
+            <p class="hero-copy">從手機連接保持上線的電腦，區分遠端連線（Remote）、雲端任務（Cloud）與 SSH 主機。</p>
+          </div>
+          <div class="hero-orbit" aria-hidden="true"><span>10</span></div>
+        </section>
+        <div class="lesson-meta">
+          <span>Windows 桌面版與跨端點</span>
+          <span>依 2026-10-16 文件查核</span>
+          <span>點擊截圖可放大</span>
+        </div>
+        <article class="mdx-content">
+<div id="connect"></div>
+<h2>配對連接自己的電腦</h2>
+<p>請在手機安裝最新版的 iOS 或 Android ChatGPT App，並在電腦開啟桌面版應用程式。兩端請登入同一個 ChatGPT 帳號與工作區。</p>
+<aside class="tier-note"><div class="tier-note-header"><span class="tier-badge plus">開通條件</span><strong>先確認遠端連線可用</strong></div><div><p>遠端連線的可用性依方案、工作區與推出進度而異。手機與桌面主機需登入相同帳號及工作區，桌面主機須保持上線；若畫面要求額外驗證，請依當前流程完成。詳見 <a href="https://learn.chatgpt.com/docs/remote-connections" target="_blank" rel="noopener noreferrer">OpenAI 官方遠端連線文件</a>。</p></div></aside>
+<ol class="operation-steps">
+  <li><div class="step-copy"><h3>在電腦端開啟遠端連線</h3><p>開啟「設定 → 連線（Connections）→ 控制此 Mac 或 PC（Control this Mac or PC）」，選擇設定（Set up）或新增（Add）。依提示允許遠端存取，並完成帳號或工作區要求的驗證。</p></div></li>
+  <li><div class="step-copy"><h3>掃描 QR Code 配對手機</h3><p>桌面版會顯示一次配對用 QR Code。用自己的手機掃描，讓 ChatGPT App 開啟連線流程；核對帳號與工作區，再完成所要求的驗證。每支手機與每台主機都要個別配對，不要分享 QR Code。</p></div></li>
+  <li><div class="step-copy"><h3>在手機上找到已配對的電腦</h3><p>開啟手機 ChatGPT App，依目前介面進入 Codex 或遠端連線功能，確認已配對的電腦出現在可選清單中。入口名稱與位置可能隨版本變動。</p></div></li>
+</ol>
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/遠端連線.png" data-screenshot-title="遠端連線設定" aria-label="遠端連線設定，放大檢視">
+    <img src="../images/tutorial/pick/遠端連線.png" alt="遠端連線設定" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>桌面版遠端連線設定</strong>位置：設定 → 連線。這張使用者提供的畫面顯示允許連線、已配對裝置與保持電腦喚醒等設定；手機上的入口請以手機目前畫面為準。</figcaption>
+</figure>
+<figure class="interface-figure" style="max-width:360px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/手機遠端控制.png" data-screenshot-title="手機選擇已連線電腦與專案" aria-label="手機選擇已連線電腦與專案，放大檢視">
+    <img src="../images/tutorial/pick/手機遠端控制.png" alt="手機 Codex 中的已連線電腦與專案列表" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>手機選擇已連線電腦與專案</strong>畫面中可切換「全部」、「雲端」及已連線的電腦，再選擇專案或既有聊天。這是使用者提供的 iOS 畫面；電腦名稱與專案名稱僅為該帳號示例。</figcaption>
+</figure>
+<div id="use"></div>
+<h2>從手機發起任務、審批權限與檢視程式碼差異（Code Diff）</h2>
+<p>選取目標電腦後，你可以繼續進行既有的對話，也可以選擇專案來新增任務。發送要求後，手機會即時同步執行進度與回覆內容；而真正的檔案讀寫與編譯測試仍然是在那台電腦上進行。</p>
+<ul>
+  <li><strong>遠端權限核准：</strong>手機可檢視等待處理的核准要求並作出決定；通知與按鈕文案依手機系統、App 版本及通知設定而異。先看清具體動作與影響範圍。</li>
+  <li><strong>手機端檢查結果：</strong>可從手機追蹤任務進度與回覆；若目前介面提供程式碼差異（Code Diff），再逐項檢查變更與測試結果。重要變更仍建議回到桌面或 Git 專案完整審閱。</li>
+  <li><strong>需要時使用「幫我核准（Approve for me）」：</strong>這個模式會使用自動審查（Auto-review）。長任務可依風險選擇第 3 章介紹的核准模式；遠端收到核准要求時，仍要檢查具體動作與影響範圍。</li>
+</ul>
+<figure class="interface-figure" style="max-width:440px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/手機控制.jpg" data-screenshot-title="手機控制中的回覆與變更摘要" aria-label="手機控制中的回覆與變更摘要，放大檢視">
+    <img src="../images/tutorial/pick/手機控制.jpg" alt="手機聊天顯示任務回覆、已變更三個檔案的摘要與底部輸入欄" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>手機控制中的回覆與變更摘要</strong>這張實拍圖可看到任務回覆、「已變更 3 個檔案」摘要及底部輸入欄。摘要不等於逐行差異；需要核對每一處修改時，請回到桌面版查看 Git 差異檢視（Review）。畫面中的專案與檔名只是這次任務的示例。</figcaption>
+</figure>
+
+<div id="modes"></div>
+<h2>手機上的遠端連線（Remote）、雲端任務（Cloud）與安全殼層（SSH）</h2>
+<p>若手機版顯示 <code>Codex</code> 分頁，可依帳號已開通的選項管理不同遠端環境。安全殼層（Secure Shell，SSH）是連線到另一台主機的方式，須先設定目標主機與存取權限：</p>
+<div class="table-scroll" tabindex="0">
+  <table>
+    <thead><tr><th>環境類型</th><th>運作方式</th><th>電腦是否需開機？</th></tr></thead>
+    <tbody>
+      <tr><td><strong>本機遠端連線（Remote）</strong></td><td>連接家中或辦公室已配對的 Windows / Mac 桌面版，能使用哪些本機資料夾與工具仍由主機權限及核准規則決定。</td><td><strong>是</strong>（電腦須保持開機喚醒且執行桌面版 App）。</td></tr>
+      <tr><td><strong>Codex 雲端任務（Cloud）</strong></td><td>針對已連結 GitHub 的儲存庫，在 OpenAI 託管的雲端隔離環境執行任務；能否發起 PR 依目前帳號、整合與權限而定。</td><td><strong>否</strong>（雲端任務不依賴你自己的桌面電腦保持開機）。</td></tr>
+      <tr><td><strong>SSH 主機或 Work 雲端任務（Work Cloud）</strong></td><td>若帳號及工作區提供這些入口，可選擇已設定的遠端主機或雲端工作環境；各自的檔案與權限需另外確認。</td><td>依所選主機或雲端環境而定；本機工作不會因電腦離線自動轉到雲端。</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div id="limits"></div>
+<h2>連線與安全最佳實踐</h2>
+<p>使用本機遠端連線（Remote）時，電腦必須保持開機連線、喚醒狀態，並持續執行桌面版應用程式。如果找不到入口或無法連線，請先將手機與電腦兩端更新至最新版本、核對帳號與工作區，並檢查電腦是否進入休眠。</p>
+<p>若遠端任務還要操作 Windows 桌面程式（電腦操控，Computer use），工作階段需保持解鎖、連接網路，且目標應用程式可見；單純保持電腦開機不足以完成桌面操作。詳見 <a href="https://learn.chatgpt.com/docs/computer-use" target="_blank" rel="noopener noreferrer">官方電腦操控文件</a>。</p>
+<p>請只連接自己信任的個人裝置。不再使用時，隨時可在電腦的「設定 → 連線」中撤銷配對；切勿將配對 QR Code、裝置資訊或核准畫面中的敏感內容公開分享。</p>
+<p>手機只是操作入口：從手機連回自己的電腦，不會自行擴大那台電腦可用的檔案或工具權限。雲端任務（Cloud）則在另一個環境執行，能使用哪些儲存庫、網路連線與憑證，須檢查該雲端環境的設定；不要以本機的核准選單推定雲端權限。<a href="https://learn.chatgpt.com/docs/environments/cloud-environments" target="_blank" rel="noopener noreferrer">官方雲端環境說明</a></p>
+<details class="source-list">
+  <summary>官方文件與延伸閱讀</summary>
+  <ul>
+    <li><a href="https://learn.chatgpt.com/docs/remote" target="_blank" rel="noopener noreferrer">Codex 行動端與 Remote 指南</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/remote-connections" target="_blank" rel="noopener noreferrer">遠端連線、Work Cloud 與 SSH 設定</a></li>
+    <li><a href="https://help.openai.com/zh-hant/articles/11369540-using-codex-with-your-chatgpt-plan" target="_blank" rel="noopener noreferrer">在 ChatGPT 方案中使用 Codex</a></li>
+  </ul>
+</details>
+        </article>
+        <nav class="chapter-pagination" aria-label="前後章節">
+          <a data-chapter-slug="plan-goal-schedule" href="plan-goal-schedule.html">← <span>上一章<small>規劃（Plan）、目標（Goal）與排程任務</small></span></a>
+          <a class="next" href="../index.html"><span>回到首頁<small>檢視完整學習路線</small></span> →</a>
+        </nav>
+      </main>
+
+      <aside class="page-toc" aria-label="本頁目錄">
+        <p class="eyebrow">本章內容</p>
+        <nav class="toc-links">
+          <a href="#connect">配對連接自己的電腦</a>
+          <a href="#use">從手機發起任務與檢視 Diff</a>
+          <a href="#modes">遠端連線（Remote）與雲端任務（Cloud）</a>
+          <a href="#limits">連線與安全最佳實踐</a>
+        </nav>
+        <div class="toc-note">
+          <span>專注閱讀</span>
+          <p>開啟閱讀模式，可放大內文並收起兩側導覽列。</p>
+        </div>
+      </aside>
+    </div>
+
+    <!-- 搜尋對話框 -->
+    <div id="search-backdrop" class="search-backdrop" role="presentation" hidden>
+      <section id="search-dialog" class="search-dialog" role="dialog" aria-modal="true" aria-label="搜尋教學">
+        <div class="search-input-wrap">
+          <span>⌕</span>
+          <input id="search-modal-input" type="search" aria-label="搜尋章節、摘要或內文" placeholder="搜尋功能：規劃 Plan、目標 Goal、工作樹 Worktree…" autocomplete="off" />
+          <button id="search-close-btn" type="button" aria-label="關閉搜尋">關閉 ×</button>
+        </div>
+        <div id="search-modal-results" class="search-results"></div>
+      </section>
+    </div>
+
+    <!-- 圖片放大檢視器 -->
+    <div id="image-viewer-backdrop" class="image-viewer-backdrop" hidden>
+      <div id="image-viewer" class="image-viewer" role="dialog" aria-modal="true" aria-label="圖片檢視器">
+        <header>
+          <strong id="image-viewer-title"></strong>
+          <div>
+            <button id="image-size-btn" type="button">原始尺寸檢視</button>
+            <button id="image-close-btn" type="button" aria-label="關閉圖片">關閉 ×</button>
+          </div>
+        </header>
+        <div id="image-viewer-stage" class="image-viewer-stage">
+          <img id="image-viewer-img" src="" alt="" />
+        </div>
+        <p id="image-viewer-hint">保留完整介面；需要看清楚小字時，請點擊「原始尺寸檢視」。</p>
+      </div>
+    </div>
+  </div>
+  <script src="../assets/app.js"></script>
+</body>
+</html>

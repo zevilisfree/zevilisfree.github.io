@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <script>
+    try {
+      document.querySelector('meta[name="color-scheme"]').content = localStorage.getItem("color-scheme") ?? "light dark";
+    } catch (e) {}
+  </script>
+  <title>規劃（Plan）、目標（Goal）與排程任務｜Codex 實戰手冊</title>
+  <meta name="description" content="用規劃（Plan）討論做法、目標（Goal）追蹤結果，並確認排程任務的執行條件。" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body data-page-type="chapter">
+  <div id="site-root" class="site">
+    <header class="topbar">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark">C</span>
+        <span>CODEX 實戰手冊</span>
+      </a>
+      <div class="top-actions">
+        <button id="search-open-btn" class="search-button" type="button">搜尋章節內容...</button>
+        <button id="theme-toggle-btn" class="theme-toggle" type="button" aria-label="切換深淺色主題" title="切換深淺色主題"><span class="theme-toggle-label">主題</span></button>
+        <button id="recording-toggle-btn" class="recording-toggle" type="button" aria-pressed="false">
+          <span class="toggle-light"></span>
+          <span id="recording-toggle-text">進入閱讀模式</span>
+        </button>
+        <button id="mobile-nav-btn" class="mobile-nav-button" type="button" aria-expanded="false">目錄</button>
+      </div>
+    </header>
+
+    <div class="docs-shell">
+      <aside id="chapter-sidebar" class="chapter-sidebar" aria-label="課程章節">
+        <p class="eyebrow">閱讀目錄 · 共 10 章</p>
+        <nav>
+          <a class="chapter-link" data-chapter-slug="introduction" href="introduction.html"><span>01</span>認識 Codex 與使用入口</a>
+          <a class="chapter-link" data-chapter-slug="workspace" href="workspace.html"><span>02</span>安裝、登入與建立第一個專案</a>
+          <a class="chapter-link" data-chapter-slug="permissions-and-control" href="permissions-and-control.html"><span>03</span>權限、核准與資訊安全</a>
+          <a class="chapter-link" data-chapter-slug="models-and-context" href="models-and-context.html"><span>04</span>選擇模型、查看用量與管理上下文</a>
+          <a class="chapter-link" data-chapter-slug="parallel-and-fork" href="parallel-and-fork.html"><span>05</span>聊天分支（Fork）與工作樹（Worktree）隔離</a>
+          <a class="chapter-link" data-chapter-slug="visual-feedback" href="visual-feedback.html"><span>06</span>圖片、視窗快照（Appshots）與網頁回饋</a>
+          <a class="chapter-link" data-chapter-slug="skills-and-tools" href="skills-and-tools.html"><span>07</span>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</a>
+          <a class="chapter-link" data-chapter-slug="instructions-and-editor" href="instructions-and-editor.html"><span>08</span>Codex 指示、AGENTS.md 與常用命令</a>
+          <a class="chapter-link active" data-chapter-slug="plan-goal-schedule" href="plan-goal-schedule.html"><span>09</span>規劃（Plan）、目標（Goal）與排程任務</a>
+          <a class="chapter-link" data-chapter-slug="remote" href="remote.html"><span>10</span>手機遠端連線（Remote）與雲端任務（Cloud）</a>
+        </nav>
+        <div class="course-progress">
+          <span>目前進度</span>
+          <strong>09 / 10</strong>
+          <i><b style="width: 90%"></b></i>
+        </div>
+      </aside>
+
+      <main class="article" id="lesson">
+        <div class="breadcrumb"><a href="../index.html">Codex Windows 教學</a> <span>/</span> 第 09 章</div>
+        <section class="hero-card">
+          <div>
+            <p class="chapter-kicker">CHAPTER 09 · 約 4 分鐘</p>
+            <h1>規劃（Plan）、目標（Goal）與排程任務</h1>
+            <p class="hero-copy">用規劃（Plan）討論做法、目標（Goal）追蹤結果，並確認排程任務的執行條件。</p>
+          </div>
+          <div class="hero-orbit" aria-hidden="true"><span>09</span></div>
+        </section>
+        <div class="lesson-meta">
+          <span>Windows 桌面版與跨端點</span>
+          <span>依 2026-10-16 文件查核</span>
+          <span>點擊截圖可放大</span>
+        </div>
+        <article class="mdx-content">
+<div id="plan"></div>
+<h2>規劃（Plan）：先討論做法（/plan）</h2>
+<p>需求模糊、步驟多或涉及多個檔案時，先使用規劃（Plan）模式討論做法；簡單且明確的任務可直接描述。若你的帳號提供此功能，可點擊輸入框左下角「＋」選擇「規劃模式」，或輸入 <code>/plan</code>。進入後，輸入區可能顯示「方案」標籤，表示這則聊天正在討論規劃。</p>
+<div class="command-block">
+  <div class="command-title"><span></span>可以這樣說<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
+  <pre><code>先不要執行。請先和我確認目標、範圍、輸入素材、交付格式與驗收標準。
+有需要我決定的地方請逐項問清楚，然後提出實作方案。</code></pre>
+</div>
+<p>Codex 可能會用互動選項卡片詢問你的偏好，也可能直接提出問題。如果推薦選項不合適，可以直接補充自己的答案，不必硬選。</p>
+<p>拿到規劃（Plan）方案後，請重點檢查：要做什麼、不做什麼、會改動哪些檔案、如何驗收。確認無誤後，再使用畫面提供的執行入口，或明確要求開始實作。</p>
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/Plan規劃模式_方案.png" data-screenshot-title="規劃（Plan）畫面的「方案」標籤" aria-label="規劃（Plan）畫面的「方案」標籤，放大檢視">
+    <img src="../images/tutorial/pick/Plan規劃模式_方案.png" alt="規劃（Plan）畫面的「方案」標籤" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>規劃（Plan）畫面的「方案」標籤</strong>截圖中的輸入區標示「方案」；這是規劃工作中的對話畫面。先討論做法，確認後再進入實作。</figcaption>
+</figure>
+<p>規劃（Plan）模式期間仍可能會讀取檔案、檢查現況；它並不是「完全不使用任何工具」。但請注意，不要把討論做法當成已經授權正式修改。</p>
+
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/目標及規劃模式.png" data-screenshot-title="目標（Goal）與規劃（Plan）入口" aria-label="目標（Goal）與規劃（Plan）入口，放大檢視">
+    <img src="../images/tutorial/pick/目標及規劃模式.png" alt="目標（Goal）與規劃（Plan）入口" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>目標（Goal）與規劃（Plan）入口</strong>從輸入框的加號選單選擇「規劃模式」或「目標」；前者用來討論做法，後者設定可驗證的結果。</figcaption>
+</figure>
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/Plan規劃模式_方案2.png" data-screenshot-title="規劃（Plan）模式的選項卡" aria-label="規劃（Plan）模式的選項卡，放大檢視">
+    <img src="../images/tutorial/pick/Plan規劃模式_方案2.png" alt="規劃（Plan）模式的選項卡" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>規劃（Plan）模式的選項卡</strong>Codex 可能以選項卡詢問關鍵偏好。若選項不符合需求，可補充自己的答案。</figcaption>
+</figure>
+<div id="goal"></div>
+<h2>目標（Goal）：圍繞結果推進（/goal）</h2>
+<p>點擊「＋」選擇「目標」，或輸入 <code>/goal</code>，即可使用目標（Goal）模式。請給出可以用來判斷是否完成的具體結果，而不只是說「幫我研究一下」。請寫清楚三個要素：</p>
+<ol>
+  <li><strong>結果：</strong>最終要交付什麼產出。</li>
+  <li><strong>範圍：</strong>允許處理哪些內容，哪些東西不能動。</li>
+  <li><strong>完成條件：</strong>如何證明已經全部做完（例如通過所有單元測試且無 Lint 錯誤）。</li>
+</ol>
+<p>任務啟動後，輸入框上方會出現目標狀態列，可以隨時暫停、繼續或調整目標，也可搭配第 3 章的 <code>/side</code> 支線聊天在不打斷任務的情況下詢問進度。</p>
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/Goal目標.png" data-screenshot-title="目標狀態與繼續執行入口" aria-label="目標狀態與繼續執行入口，放大檢視">
+    <img src="../images/tutorial/pick/Goal目標.png" alt="目標狀態與繼續執行入口" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>目標狀態與繼續執行入口</strong>位置：輸入框上方的目標狀態列。需要補充資訊時，先回答問題，再恢復任務。</figcaption>
+</figure>
+<p>目標（Goal）模式會持續尋找下一步，但這不代表它可以越權操作，也不保證任何目標都能自動達成。當缺少資料、需要你做決定、或是額度與環境受限時，它仍然會停下來等待。</p>
+
+<div id="schedule"></div>
+<h2>排程任務：固定時間與 App 事件觸發</h2>
+<p>當某項工作已經手動跑通並確認穩定後，才適合安排重複執行。排程是否可用依方案、工作區與目前版本而定；先查看左側是否顯示「已排程」。你可以直接在聊天中說明要做什麼、什麼時候做：</p>
+<div class="command-block">
+  <div class="command-title"><span></span>建立排程任務<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
+  <pre><code>每週五台北時間 18:00，依照已經確認的流程整理一份本機摘要。
+只讀取指定資料，結果儲存在目前的專案中。
+不要對外發送或發布；若缺少輸入資料時請說明缺少什麼。</code></pre>
+</div>
+<p>建立後，請到左側「已排程」中核對設定，並善用以下三項進階能力：</p>
+<ul>
+  <li><strong>選擇「本機（Local）」或「背景工作樹（Worktree）」隔離執行：</strong>在 Git 專案中，可設定讓排程任務跑在獨立的<strong>背景工作樹（Worktree）</strong>中，避免定時任務執行時干擾你正在本機修改到一半的檔案。</li>
+  <li><strong>獨立執行 vs. 同聊天續跑（支援自訂 <code>RRULE</code>）：</strong>可選擇每次建立獨立執行紀錄或延續同一則聊天；進階週期支援直接編輯 RFC 5545 <code>RRULE</code> 規則。</li>
+  <li><strong>App 事件觸發任務（Event-triggered tasks）：</strong>符合資格的網頁版與行動版帳號可依 Gmail 新郵件、Slack 指定頻道訊息或 GitHub Pull Request 活動觸發。須先連接並授權服務；同一任務可設多個事件觸發，但不能同時設定事件觸發與定時排程。桌面版目前以時間排程為主。</li>
+</ul>
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/排程任務.png" data-screenshot-title="已排程的任務" aria-label="已排程的任務，放大檢視">
+    <img src="../images/tutorial/pick/排程任務.png" alt="已排程的任務" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>已排程的任務</strong>位置：左側「已排程」。進入後可檢視任務、執行紀錄，並暫停不再需要的排程。</figcaption>
+</figure>
+<aside class="inline-note"><strong>本機任務需要電腦保持開機連線</strong><div><p>需要存取本機檔案的排程任務，必須保持電腦開機且應用程式持續執行（可在設定開啟 <code>Prevent sleep while running</code> 防止執行中休眠）。一旦電腦關機、休眠或網路中斷都會影響執行。</p></div></aside>
+
+<div id="dots-sites-space"></div>
+<h2>雲端執行與本機排程的差異</h2>
+<aside class="tier-note"><div class="tier-note-header"><span class="tier-badge pro">執行環境</span><strong>建立前確認任務會在哪裡執行</strong></div><div><p>存取本機檔案的排程須讓電腦與應用程式保持運作。若你的帳號提供雲端執行選項，雲端任務能在不同環境運行，但可讀取的檔案與工具會不同。依建立畫面的執行環境與權限說明選擇，不要因為訂閱名稱就假設任務會自動搬到雲端。</p></div></aside>
+
+<div id="difference"></div>
+<h2>規劃（Plan）、目標（Goal）與排程的差異</h2>
+<p><strong>規劃（Plan）用來先擬定做法；目標（Goal）用來圍繞完成條件持續推進；排程任務則依時間或事件再次執行。</strong></p>
+<p>開啟目標（Goal）不會自動建立每週排程，寫好技能（Skill）也不會自動開始定時執行。需要哪一項功能，就個別確認該功能已經設定完成。</p>
+<details class="source-list">
+  <summary>官方文件與延伸閱讀</summary>
+  <ul>
+    <li><a href="https://learn.chatgpt.com/docs/prompting" target="_blank" rel="noopener noreferrer">提示詞與規劃模式（Plan）</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/long-running-work" target="_blank" rel="noopener noreferrer">長時間任務與目標模式（Goal）</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/automations" target="_blank" rel="noopener noreferrer">排程與事件觸發自動化任務</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/features" target="_blank" rel="noopener noreferrer">功能總覽（Dots、Sites 與 Space）</a></li>
+  </ul>
+</details>
+        </article>
+        <nav class="chapter-pagination" aria-label="前後章節">
+          <a data-chapter-slug="instructions-and-editor" href="instructions-and-editor.html">← <span>上一章<small>Codex 指示、AGENTS.md 與常用命令</small></span></a>
+          <a class="next" data-chapter-slug="remote" href="remote.html"><span>下一章<small>手機遠端連線（Remote）與雲端任務（Cloud）</small></span> →</a>
+        </nav>
+      </main>
+
+      <aside class="page-toc" aria-label="本頁目錄">
+        <p class="eyebrow">本章內容</p>
+        <nav class="toc-links">
+          <a href="#plan">規劃（Plan）：先討論做法</a>
+          <a href="#goal">目標（Goal）：圍繞結果推進</a>
+          <a href="#schedule">排程任務與事件觸發</a>
+          <a href="#dots-sites-space">雲端執行與本機排程</a>
+          <a href="#difference">規劃（Plan）、目標（Goal）與排程</a>
+        </nav>
+        <div class="toc-note">
+          <span>專注閱讀</span>
+          <p>開啟閱讀模式，可放大內文並收起兩側導覽列。</p>
+        </div>
+      </aside>
+    </div>
+
+    <!-- 搜尋對話框 -->
+    <div id="search-backdrop" class="search-backdrop" role="presentation" hidden>
+      <section id="search-dialog" class="search-dialog" role="dialog" aria-modal="true" aria-label="搜尋教學">
+        <div class="search-input-wrap">
+          <span>⌕</span>
+          <input id="search-modal-input" type="search" aria-label="搜尋章節、摘要或內文" placeholder="搜尋功能：規劃 Plan、目標 Goal、工作樹 Worktree…" autocomplete="off" />
+          <button id="search-close-btn" type="button" aria-label="關閉搜尋">關閉 ×</button>
+        </div>
+        <div id="search-modal-results" class="search-results"></div>
+      </section>
+    </div>
+
+    <!-- 圖片放大檢視器 -->
+    <div id="image-viewer-backdrop" class="image-viewer-backdrop" hidden>
+      <div id="image-viewer" class="image-viewer" role="dialog" aria-modal="true" aria-label="圖片檢視器">
+        <header>
+          <strong id="image-viewer-title"></strong>
+          <div>
+            <button id="image-size-btn" type="button">原始尺寸檢視</button>
+            <button id="image-close-btn" type="button" aria-label="關閉圖片">關閉 ×</button>
+          </div>
+        </header>
+        <div id="image-viewer-stage" class="image-viewer-stage">
+          <img id="image-viewer-img" src="" alt="" />
+        </div>
+        <p id="image-viewer-hint">保留完整介面；需要看清楚小字時，請點擊「原始尺寸檢視」。</p>
+      </div>
+    </div>
+  </div>
+  <script src="../assets/app.js"></script>
+</body>
+</html>
