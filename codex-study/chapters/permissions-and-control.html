@@ -80,10 +80,11 @@
       <tr><td><strong>請求核准</strong><br><small>Ask for approval</small></td><td>允許工作區範圍內的操作直接執行；越過沙盒邊界或符合核准政策的動作會提出申請。</td><td>剛接觸 Codex，或正在處理重要檔案。</td></tr>
       <tr><td><strong>幫我核准</strong><br><small>Approve for me / Auto-review</small></td><td>保持沙盒邊界，把符合條件的核准請求交由獨立審查代理自動評估；仍可能拒絕，且不保證能攔住所有問題。</td><td>任務範圍明確，希望減少反覆手動確認。</td></tr>
       <tr><td><strong>自訂</strong><br><small>Custom</small></td><td>按工作區及工具類別設定核准規則；可用細項以目前介面與管理員政策為準。</td><td>需要針對特定操作設定限制時。</td></tr>
-      <tr><td><strong>完整存取權限</strong><br><small>Full access</small></td><td>移除本機命令的沙盒檔案系統與網路限制；能碰到的資料與服務顯著增加。</td><td>僅在明確了解任務與影響範圍，且較小授權不足時考慮。</td></tr>
+      <tr><td><strong>完整存取權限</strong><br><small>Full access</small></td><td>本機命令可跨出工作區讀寫檔案並連網；此介面模式也不會逐次要求核准。</td><td>可能波及其他專案、私人檔案與憑證。一般任務先選「請求核准」。</td></tr>
     </tbody>
   </table>
 </div>
+<p><strong>選用完整存取前，先看清風險：</strong>在目前登入帳號可存取的範圍內，Codex 執行的命令可能讀取、改寫或刪除工作區外的檔案，包括其他專案、私人文件與憑證，也可能透過網路傳送資料。指令寫錯、不可信套件腳本或文件中的惡意指示，都可能讓影響擴及整台電腦；原本因跨越工作區而出現的人工或自動核准，也不會逐次攔下這些動作。完整存取不會讓 Codex 取得作業系統管理員權限，組織政策仍可能另有限制。只需另一個資料夾或單次網路操作時，應先增加最小必要範圍或核准該次操作。<a href="https://learn.chatgpt.com/docs/sandboxing" target="_blank" rel="noopener noreferrer">OpenAI 官方沙盒與權限說明</a></p>
 <figure class="interface-figure" style="max-width:1100px">
   <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/完整存取權限2.png" data-screenshot-title="含完整存取權選項的權限選單" aria-label="含完整存取權選項的權限選單，放大檢視">
     <img src="../images/tutorial/pick/完整存取權限2.png" alt="輸入框下方的權限選單，包含完整存取權選項" loading="lazy" decoding="async" />
@@ -98,8 +99,9 @@
 <div class="table-scroll" tabindex="0"><table><thead><tr><th>本機模式</th><th>一般情況</th><th>新手要記住</th></tr></thead><tbody>
   <tr><td>唯讀（Read-only）</td><td>可檢視資料；寫入或沙盒外動作需另經允許。</td><td>適合先盤點陌生專案或只要求分析。</td></tr>
   <tr><td>工作區可寫（Workspace-write）</td><td>可在目前工作區編輯檔案並執行日常命令。</td><td><strong>區內修改通常不會每次跳出核准。</strong>開始前要看對資料夾。</td></tr>
-  <tr><td>完整存取（Full access）</td><td>本機命令不受一般沙盒檔案與網路邊界限制。</td><td>不要把它當成解決「找不到檔案」的第一步。</td></tr>
+  <tr><td>完整存取（Full access）</td><td>本機命令不受一般檔案與網路沙盒邊界限制。</td><td>可觸及工作區外資料並連網；不要為解決「找不到檔案」直接選用。</td></tr>
 </tbody></table></div>
+<p>這一列只描述沙盒設定 <code>danger-full-access</code>；上方權限選單的「完整存取權限」還會搭配 <code>approval_policy = "never"</code>，因此不會因跨越原本的沙盒邊界而停下來要求核准。兩者不是要分別開啟的兩道權限；瀏覽器、外掛與雲端任務則有各自的控制。<a href="https://learn.chatgpt.com/docs/sandboxing" target="_blank" rel="noopener noreferrer">查看官方設定對照</a></p>
 <p>自動審查（Auto-review）只接手<strong>原本就需要核准且符合條件</strong>的請求；沙盒內已允許的工作不會因此逐項送審。文字指示如「不要讀秘密」有幫助，但不能取代檔案權限與工具設定。遇到核准視窗，先看<strong>目標路徑或網站、預計動作、資料範圍、為何需要</strong>；不清楚時可要求 Codex 先解釋並縮小範圍。<a href="https://learn.chatgpt.com/docs/sandboxing" target="_blank" rel="noopener noreferrer">官方沙盒與核准模式</a></p>
 
 <div id="autoreview"></div>
