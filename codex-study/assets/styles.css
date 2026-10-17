@@ -1763,6 +1763,22 @@ th {
   font-size: 0.9375rem;
 }
 
+.search-results small,
+.home-search-results small {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--brand);
+  font-size: 0.8125rem;
+}
+
+.search-results mark,
+.home-search-results mark,
+.mdx-content mark {
+  background: #ffe58f;
+  color: #241b00;
+  border-radius: 0.15rem;
+}
+
 .search-results p,
 .home-search-results p {
   margin: 0.25rem 0 0;

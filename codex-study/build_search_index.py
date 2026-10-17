@@ -25,6 +25,10 @@ class ChapterText(HTMLParser):
         self.in_title = False
         self.article_depth = 0
         self.article_closed = False
+        self.sections = []
+        self.pending_anchor = ""
+        self.in_heading = False
+        self.heading_parts = []
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
@@ -35,11 +39,23 @@ class ChapterText(HTMLParser):
         elif tag == "article" and "mdx-content" in attrs.get("class", "").split():
             self.article_depth = 1
         elif self.article_depth and tag not in VOID_TAGS:
+            if self.article_depth == 1 and tag == "div" and attrs.get("id"):
+                self.pending_anchor = attrs["id"]
+            elif self.article_depth == 1 and tag == "h2":
+                if not self.pending_anchor:
+                    raise ValueError("文章小節缺少頁內錨點")
+                self.sections.append({"id": self.pending_anchor, "title": "", "text_parts": []})
+                self.pending_anchor = ""
+                self.in_heading = True
+                self.heading_parts = []
             self.article_depth += 1
 
     def handle_endtag(self, tag):
         if tag == "title":
             self.in_title = False
+        if tag == "h2" and self.in_heading:
+            self.sections[-1]["title"] = compact(self.heading_parts)
+            self.in_heading = False
         if self.article_depth and tag not in VOID_TAGS:
             self.article_depth -= 1
             if self.article_depth == 0:
@@ -56,6 +72,10 @@ class ChapterText(HTMLParser):
             self.title_parts.append(data)
         if self.article_depth:
             self.article_parts.append(data)
+            if self.sections:
+                self.sections[-1]["text_parts"].append(data)
+            if self.in_heading:
+                self.heading_parts.append(data)
 
 
 def compact(parts):
@@ -76,7 +96,10 @@ def generate():
         body = compact(parser.article_parts)
         if not title or not summary or not body or not parser.article_closed:
             raise ValueError(f"章節缺少標題、摘要或完整文章：{slug}")
-        chapters.append({"order": order, "slug": slug, "title": title, "summary": summary, "text": body})
+        sections = [{"id": part["id"], "title": part["title"], "text": compact(part["text_parts"])} for part in parser.sections]
+        if not sections or any(not part["title"] or not part["text"] for part in sections) or len({part["id"] for part in sections}) != len(sections):
+            raise ValueError(f"章節小節標題、錨點或文字不完整：{slug}")
+        chapters.append({"order": order, "slug": slug, "title": title, "summary": summary, "sections": sections})
     return "  var SEARCH_INDEX = " + json.dumps(chapters, ensure_ascii=False, indent=2) + ";"
 
 
