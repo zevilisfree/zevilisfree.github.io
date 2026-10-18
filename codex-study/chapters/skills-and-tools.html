@@ -88,7 +88,22 @@
 
 <div id="install"></div>
 <h2>安裝、呼叫與使用 ChatGPT 登入（Sign in with ChatGPT）</h2>
-<p>開啟左側「外掛」，在外掛與技能分頁中檢視既有能力（如內建的 Documents、PDF、Spreadsheets、Presentations、Template Creator 與 Codex Security）。需要新增時，搜尋名稱、確認所需權限後再安裝。</p>
+<p>開啟左側「外掛」，先看目前帳號的外掛與技能分頁。外掛可連接服務或加入工具；技能（Skill）提供完成特定工作的步驟。先挑一項眼前任務需要的能力，用小任務確認可用，再決定是否新增其他項目。</p>
+<h3>依工作挑選入門工具</h3>
+<p>以下推薦與安裝步驟依 2026-10-18 官方文件核對；實際可用項目仍以目前帳號和工作區畫面為準。</p>
+<div class="table-scroll" tabindex="0">
+  <table>
+    <thead><tr><th>想完成的工作</th><th>可搜尋的名稱與類型</th><th>第一個練習</th></tr></thead>
+    <tbody>
+      <tr><td>整理或製作本機檔案</td><td>Documents、PDF、Spreadsheets、Presentations（技能）</td><td>附上一份非敏感檔案，請 Codex 整理內容或產出檔案，再打開結果核對。</td></tr>
+      <tr><td>使用雲端文件</td><td>Google Drive（外掛）</td><td>連結帳號後，指定一份有權存取的文件，請 Codex 摘要並列出來源。</td></tr>
+      <tr><td>操作桌面軟體</td><td>Computer Use（外掛）</td><td>指定一個已開啟的視窗，先請 Codex 讀取畫面並描述目前狀態。</td></tr>
+      <tr><td>開發與程式碼檢查</td><td>GitHub、Codex Security（外掛，依需求選用）</td><td>指定一個已授權的儲存庫，查看 PR 或執行範圍明確的安全掃描。</td></tr>
+      <tr><td>重複自己的工作流程</td><td><code>$skill-creator</code>（建立技能）</td><td>把已經做過一次的每週摘要流程、輸入與檢查方式整理成技能。</td></tr>
+    </tbody>
+  </table>
+</div>
+<p>不必為了這份清單把所有項目裝齊。程式開發以外的讀者，可以先從檔案技能或 Google Drive 開始。</p>
 <figure class="interface-figure" style="max-width:1100px">
   <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/外掛程式.png" data-screenshot-title="外掛目錄" aria-label="外掛目錄，放大檢視">
     <img src="../images/tutorial/pick/外掛程式.png" alt="外掛目錄" loading="lazy" decoding="async" />
@@ -96,14 +111,33 @@
   </button>
   <figcaption><strong>外掛目錄</strong>先依實際需求挑選一項即可，不需要一次全部裝滿。</figcaption>
 </figure>
+<h3>桌面版安裝與驗證</h3>
+<ol>
+  <li>在左側開啟「外掛」，搜尋需要的名稱，點開詳細資料，確認提供者、會讀取的資料及能執行的動作。</li>
+  <li>按安裝按鈕；若畫面顯示「啟用」，也確認外掛及所需技能已啟用。</li>
+  <li>需要使用外部服務時，依畫面連結帳號，逐項檢查要求的權限與資料範圍。</li>
+  <li>開啟新聊天，執行上表的小練習；核對實際輸出，確認使用的是預期檔案、帳號或視窗。</li>
+</ol>
+<p>使用 Codex CLI 時，可輸入 <code>/plugins</code> 開啟外掛目錄，安裝後開始新工作階段。技能可在技能分頁檢視或啟用；若要建立自己的技能，依下節使用 <code>$skill-creator</code>，完成後用另一份輸入測試。<a href="https://learn.chatgpt.com/docs/plugins" target="_blank" rel="noopener noreferrer">官方外掛安裝步驟</a> · <a href="https://learn.chatgpt.com/docs/skills-and-plugins" target="_blank" rel="noopener noreferrer">官方技能建立說明</a></p>
 <p>安裝之後，有些外掛（Plugin）還需要登入外部帳號（<strong>安裝成功不等於帳號已連線</strong>）。若服務提供「使用 ChatGPT 登入（Sign in with ChatGPT）」，可依畫面完成連結。呼叫時，可在輸入框用 <code>@外掛名稱</code> 或 <code>$技能名稱</code> 明確指定：</p>
 <aside class="inline-note"><strong>安裝與連線前看權限</strong><div><p>外掛（Plugin）、Apps／連接器與模型上下文協定（MCP）工具有各自的存取範圍；本機命令的沙盒與網路限制不會自動套到所有外部工具。安裝前檢查提供者、會讀取的資料、能執行的動作與外部服務；陌生專案的安裝／建置腳本也要先看入口。<a href="https://learn.chatgpt.com/docs/permissions" target="_blank" rel="noopener noreferrer">官方權限說明</a></p></div></aside>
 <div class="command-block">
   <div class="command-title"><span></span>可以這樣說<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
   <pre><code>使用已安裝的文件技能，整理我附上的內容。保留原意，不要自行補充未經確認的資訊。</code></pre>
 </div>
-<p>如果系統提示工具無法使用，請依序檢查：是否已安裝並啟用、外部帳號是否已連結、網路能否連線至該項服務。</p>
+<p>如果系統提示工具無法使用，請依序檢查：目前帳號是否看得到該項目、是否已安裝並啟用、外部帳號是否已連結，以及是否已開始新聊天；需要連線的服務再檢查網路。</p>
 <aside class="tier-note"><div class="tier-note-header"><span class="tier-badge pro">工作區政策</span><strong>可安裝項目依帳號與管理設定而異</strong></div><div><p>個人帳號可從目前介面查看可用的外掛與技能；Business、Enterprise 與 Edu 工作區還可能由管理員限制第三方外掛和 MCP 伺服器，並提供內部目錄。不要只依方案名稱推定一定能安裝某項工具，應以目前帳號與工作區畫面為準。</p></div></aside>
+
+<div id="community-skills"></div>
+<h2>第三方技能：初學者先看哪幾個？</h2>
+<p>以下是依 2026-10-18 兩個作者的公開倉庫所做的選用建議，屬第三方內容。先讀單項技能說明，確認它適合自己的任務，再決定是否安裝。</p>
+<ul>
+  <li><strong>先釐清想法：</strong><a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md" target="_blank" rel="noopener noreferrer">Matt Pocock 的 <code>grill-me</code></a> 會透過連續提問，協助你把模糊的計畫或需求講清楚；不寫程式也能用。可先試：「我想做一個待辦清單，請先問我關鍵問題，確認功能與使用情境。」提問會比較密集，適合願意先花時間釐清方向的人。</li>
+  <li><strong>交接長任務：</strong><a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/handoff/SKILL.md" target="_blank" rel="noopener noreferrer">Matt Pocock 的 <code>handoff</code></a> 把目前對話整理成交接文件，讓下一次工作能接續。可試：「整理目前已確認的需求、完成事項與下一步，供新聊天接手。」此技能會將文件寫入作業系統的暫存目錄，使用前先確認儲存位置與內容。</li>
+  <li><strong>已有可重現的程式錯誤：</strong><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/diagnosing-bugs/SKILL.md" target="_blank" rel="noopener noreferrer"><code>diagnosing-bugs</code></a> 引導先建立能重現錯誤的檢查，再找原因與驗證修正。適合開始維護程式的讀者；尚無程式專案時可以先略過。</li>
+  <li><strong>開始寫程式、想避免不必要的複雜度：</strong><a href="https://github.com/DietrichGebert/ponytail/blob/main/skills/ponytail/SKILL.md" target="_blank" rel="noopener noreferrer">Ponytail</a> 會優先考慮既有程式、標準函式庫與最小可行修改。初學者可先用 <code>lite</code> 模式體驗；仍要檢查需求、測試、安全與可讀性，不能只看程式碼行數。</li>
+</ul>
+<p><strong>安裝前先看範圍：</strong><a href="https://github.com/mattpocock/skills#installation-30-second-setup" target="_blank" rel="noopener noreferrer">Matt Pocock 的 Codex 安裝方式</a>會加入整組技能，並提供每個專案的設定流程；<a href="https://github.com/DietrichGebert/ponytail#install" target="_blank" rel="noopener noreferrer">Ponytail 的完整外掛</a>除技能外還包含生命週期 hooks。若選擇完整外掛，先檢查安裝內容；Ponytail 的 hooks 應在 <code>/hooks</code> 檢視實際命令後，再決定是否信任。安裝完成後開新聊天，用非敏感的小任務確認行為。<a href="https://learn.chatgpt.com/docs/hooks" target="_blank" rel="noopener noreferrer">Codex 官方 hooks 說明</a></p>
 
 <div id="create"></div>
 <h2>把流程做成技能（Skill）</h2>
@@ -200,7 +234,8 @@
         <p class="eyebrow">本章內容</p>
         <nav class="toc-links">
           <a href="#difference">技能（Skill）、外掛（Plugin）與 MCP</a>
-          <a href="#install">安裝、呼叫與一鍵授權</a>
+          <a href="#install">推薦工具與安裝方式</a>
+          <a href="#community-skills">第三方技能選讀</a>
           <a href="#create">製作技能（Skill）</a>
           <a href="#computer-use">電腦操控（Computer use）</a>
           <a href="#voice-and-pets">語音對話與桌面寵物（Pets）</a>
