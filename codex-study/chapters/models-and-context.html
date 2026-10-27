@@ -10,7 +10,7 @@
     } catch (e) {}
   </script>
   <title>選擇模型、查看用量與管理上下文｜Codex 實戰手冊</title>
-  <meta name="description" content="選擇模型與推理強度，查看剩餘用量、帳單與上下文（Context），建立節省用量的習慣。" />
+  <meta name="description" content="解析 Power 滑桿、6 階推理強度（含 Max/Ultra）、Fast/Ultrafast 倍率、5 小時訊息估算、退役模型遷移與依任務搭配模型省額度心法。" />
   <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="../assets/styles.css" />
 </head>
@@ -34,153 +34,177 @@
 
     <div class="docs-shell">
       <aside id="chapter-sidebar" class="chapter-sidebar" aria-label="課程章節">
-        <p class="eyebrow">閱讀目錄 · 共 10 章</p>
+        <p class="eyebrow">閱讀目錄 · 共 12 章</p>
         <nav>
-          <a class="chapter-link" data-chapter-slug="introduction" href="introduction.html"><span>01</span>認識 Codex 與使用入口</a>
-          <a class="chapter-link" data-chapter-slug="workspace" href="workspace.html"><span>02</span>安裝、登入與建立第一個專案</a>
-          <a class="chapter-link" data-chapter-slug="permissions-and-control" href="permissions-and-control.html"><span>03</span>權限、核准與資訊安全</a>
-          <a class="chapter-link active" data-chapter-slug="models-and-context" href="models-and-context.html"><span>04</span>選擇模型、查看用量與管理上下文</a>
-          <a class="chapter-link" data-chapter-slug="parallel-and-fork" href="parallel-and-fork.html"><span>05</span>聊天分支（Fork）與工作樹（Worktree）隔離</a>
-          <a class="chapter-link" data-chapter-slug="visual-feedback" href="visual-feedback.html"><span>06</span>圖片、視窗快照（Appshots）與網頁回饋</a>
-          <a class="chapter-link" data-chapter-slug="skills-and-tools" href="skills-and-tools.html"><span>07</span>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</a>
-          <a class="chapter-link" data-chapter-slug="instructions-and-editor" href="instructions-and-editor.html"><span>08</span>Codex 指示、AGENTS.md 與常用命令</a>
-          <a class="chapter-link" data-chapter-slug="plan-goal-schedule" href="plan-goal-schedule.html"><span>09</span>規劃（Plan）、目標（Goal）與排程任務</a>
-          <a class="chapter-link" data-chapter-slug="remote" href="remote.html"><span>10</span>手機遠端連線（Remote）與雲端任務（Cloud）</a>
+          <a class="chapter-link" data-chapter-slug="chatgpt-basics" href="chatgpt-basics.html"><span>01</span>ChatGPT Chat：對話、搜尋與專案</a>
+          <a class="chapter-link" data-chapter-slug="work-basics" href="work-basics.html"><span>02</span>ChatGPT Work：委派、交付與驗收</a>
+          <a class="chapter-link" data-chapter-slug="introduction" href="introduction.html"><span>03</span>認識 Codex 與使用入口</a>
+          <a class="chapter-link" data-chapter-slug="workspace" href="workspace.html"><span>04</span>安裝、登入與建立第一個專案</a>
+          <a class="chapter-link" data-chapter-slug="permissions-and-control" href="permissions-and-control.html"><span>05</span>權限、核准與資訊安全</a>
+          <a class="chapter-link active" data-chapter-slug="models-and-context" href="models-and-context.html"><span>06</span>選擇模型、查看用量與管理上下文</a>
+          <a class="chapter-link" data-chapter-slug="visual-feedback" href="visual-feedback.html"><span>07</span>圖片、視窗快照（Appshots）與網頁回饋</a>
+          <a class="chapter-link" data-chapter-slug="parallel-and-fork" href="parallel-and-fork.html"><span>08</span>聊天分支（Fork）與工作樹（Worktree）隔離</a>
+          <a class="chapter-link" data-chapter-slug="skills-and-tools" href="skills-and-tools.html"><span>09</span>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</a>
+          <a class="chapter-link" data-chapter-slug="instructions-and-editor" href="instructions-and-editor.html"><span>10</span>Codex 指示、AGENTS.md 與常用命令</a>
+          <a class="chapter-link" data-chapter-slug="plan-goal-schedule" href="plan-goal-schedule.html"><span>11</span>規劃（Plan）、目標（Goal）與排程任務</a>
+          <a class="chapter-link" data-chapter-slug="remote" href="remote.html"><span>12</span>手機遠端連線（Remote）與雲端任務（Cloud）</a>
         </nav>
         <div class="course-progress">
           <span>目前進度</span>
-          <strong>04 / 10</strong>
-          <i><b style="width: 40%"></b></i>
+          <strong>06 / 12</strong>
+          <i><b style="width: 50%"></b></i>
         </div>
       </aside>
 
       <main class="article" id="lesson">
-        <div class="breadcrumb"><a href="../index.html">Codex Windows 教學</a> <span>/</span> 第 04 章</div>
+        <div class="breadcrumb"><a href="../index.html">Codex Windows 教學</a> <span>/</span> 第 6 章</div>
         <section class="hero-card">
           <div>
-            <p class="chapter-kicker">CHAPTER 04 · 約 4 分鐘</p>
+            <p class="chapter-kicker">CHAPTER 06 · 約 8 分鐘</p>
             <h1>選擇模型、查看用量與管理上下文</h1>
-            <p class="hero-copy">選擇模型與推理強度，查看剩餘用量、帳單與上下文（Context），建立節省用量的習慣。</p>
+            <p class="hero-copy">解析選取推理強度滑桿（Ctrl+Shift+M）、6 階推理強度（含 Max/Ultra）、Fast/Ultrafast 倍率、5 小時訊息估算、退役模型遷移與依任務搭配模型省額度心法。</p>
           </div>
-          <div class="hero-orbit" aria-hidden="true"><span>04</span></div>
+          <div class="hero-orbit" aria-hidden="true"><span>06</span></div>
         </section>
         <div class="lesson-meta">
           <span>Windows 桌面版與跨端點</span>
-          <span>依 2026-10-16 文件查核</span>
+          <span>依 2026-10-24 文件查核</span>
           <span>點擊截圖可放大</span>
+          <span class="glossary-hint-pill">💡 專有名詞懸停可看白話解釋</span>
         </div>
         <article class="mdx-content">
 <div id="models"></div>
-<h2>選擇模型與選單結構解析</h2>
-<p>點擊輸入框右下方的模型名稱（或輸入 <code>/model</code>）。你可以直接選擇官方的「<strong>預設（推薦的模型組合）</strong>」、手動切換具體的模型世代，或是展開「<strong>進階（Advanced）</strong>」分別自訂模型、Power 滑桿、推理強度與速度。</p>
-<p>下圖是本次帳號拍攝時的「選取模型」選單，包含智慧推薦與多款模型；它不是所有帳號或日後版本的完整清單。模型供應與方案會變動，選擇前請以當前選單及<a href="https://learn.chatgpt.com/docs/models" target="_blank" rel="noopener noreferrer">官方模型頁</a>核對：</p>
+<h2>選擇模型、選取推理強度滑桿與進階自訂</h2>
+<p>點擊輸入框右下方的模型與推理強度按鈕（如 <code>GPT-6 Sol 中 ⌄</code>，快捷鍵 <strong><code>Ctrl + Shift + M</code></strong>，懸停提示為「<strong>選取推理強度</strong>」，或在對話框輸入 <code>/model</code>）。在桌面版中，點擊該按鈕會先彈出<strong>橫向五段圓點滑桿面板</strong>（即官方文件所稱的 <strong>Power 預設滑桿 Presets slider</strong>，上方顯示目前推理強度與模型名稱，如「<code>中</code> ／ <code>GPT-6 Sol &gt;</code>」）；再點擊滑桿面板上方的模型名稱（如 <code>GPT-6 Sol &gt;</code>），即可展開「<strong>選取模型</strong>」清單，選擇「<strong>預設（推薦的模型組合）</strong>」或個別指定底層模型（官方文件亦將頂層預設概念分為平衡的 Power、偏向深度推理的 Smarter、偏向低延遲省額度的 Faster，以及拆開自訂的 Advanced）。</p>
+<p>下圖是本次帳號拍攝時的「選取模型」選單；模型供應與方案權益會隨版本演進，選擇前請以當前選單及<a href="https://learn.chatgpt.com/docs/models" target="_blank" rel="noopener noreferrer">官方模型頁</a>核對：</p>
 <figure class="interface-figure" style="max-width:1100px">
   <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/模型選取.png" data-screenshot-title="官方選取模型下拉選單真實介面" aria-label="官方選取模型下拉選單真實介面，放大檢視">
     <img src="../images/tutorial/pick/模型選取.png" alt="官方選取模型下拉選單真實介面" loading="lazy" decoding="async" />
     <span class="image-expand" aria-hidden="true">↗</span>
   </button>
-  <figcaption><strong>模型選取選單</strong>此圖記錄拍攝時帳號可見的模型；目前可用清單以自己的選單為準。</figcaption>
+  <figcaption><strong>「選取模型」清單</strong>頂部為「預設（推薦的模型組合）」，下方列出 <code>GPT-6.1 Sol</code>、<code>GPT-6 Astra</code>、<code>GPT-6 Sol</code>、<code>GPT-6 Luna</code> 與上一代 <code>GPT-5.6 Sol / Terra / Luna</code>；實際可用清單以自己的帳號畫面為準。</figcaption>
 </figure>
-<p>截圖中的選單列出拍攝當時該帳號可用的模型。官方的<a href="https://learn.chatgpt.com/docs/model-selection" target="_blank" rel="noopener noreferrer">模型選擇說明</a>將 Astra 用於高複雜度工作、Sol 用於一般與複雜工程、Luna 用於明確的小任務；實際可用項目、推理強度及額度依產品、版本和方案而定。不要把此圖當成所有帳號固定有八種選擇。</p>
-<div class="table-scroll" tabindex="0"><table><thead><tr><th>畫面中的模型</th><th>入門選法</th></tr></thead><tbody>
-<tr><td>預設</td><td>不確定時先保留預設，再用結果與實際用量決定是否切換。</td></tr>
-<tr><td>Sol 系列</td><td>一般程式設計、多檔案修改與較複雜的工程任務。</td></tr>
-<tr><td>Astra</td><td>需要較深入分析或複雜視覺理解的任務；先確認帳號是否提供。</td></tr>
-<tr><td>Luna 系列</td><td>範圍清楚、較小的例行工作。</td></tr>
+<aside class="inline-note"><strong>GPT-6.1 Terra 新模型（2026-10-27 查核）</strong><p>OpenAI 於 <a href="https://developers.openai.com/api/docs/changelog" target="_blank" rel="noopener noreferrer">2026-10-26 發布</a> <code>GPT-6.1 Terra</code>（模型 ID：<code>gpt-6.1-terra</code>），主打快速、高效率的視覺推理、精準電腦操作與自然文字撰寫。上方為舊版實拍截圖，尚未包含新模型；這項補充依據官方文件，尚未補拍新選單。</p><p>桌面版可從輸入框下方模型選單選取，Work 可在 Advanced 中選擇；實際可用性依帳號、工作區、版本與推出進度。CLI 需要 <strong>0.159.0 以上</strong>，啟動指令為 <code>codex -m gpt-6.1-terra</code>。若選單未出現，先確認版本與帳號權益。詳見<a href="https://learn.chatgpt.com/docs/models" target="_blank" rel="noopener noreferrer">官方模型與入口說明</a>。</p></aside>
+<p>根據官方的<a href="https://learn.chatgpt.com/docs/model-selection" target="_blank" rel="noopener noreferrer">模型選擇指南</a>與 2026 年 10 月最新模型家族分工，各模型定位與適用場景如下：</p>
+<div class="table-scroll" tabindex="0"><table><thead><tr><th>模型家族／選項</th><th>核心定位與強項</th><th>建議使用時機與額度特性</th></tr></thead><tbody>
+<tr><td><strong>預設（推薦的模型組合）</strong><br><small>Default / Power</small></td><td>系統依模式自動平衡速度、智慧程度與配額消耗（例如在 Work 中預設搭配 <code>GPT-6 Sol Light</code> 等平衡組合）。</td><td>不確定該選哪一個時先保留預設，再視結果決定是否切換。</td></tr>
+<tr><td><strong><code>GPT-6.1 Sol</code></strong></td><td><strong>最新一代主力軟體工程與代理模型。</strong>具備極強的跨檔案程式碼理解、工具呼叫與前端視覺修復能力。</td><td><strong>日常開發與重構首選！</strong>能力逼近旗艦 Astra，但配額消耗僅約 Astra 的 1/5 至 1/3。</td></tr>
+<tr><td><strong><code>GPT-6.1 Terra</code></strong></td><td>視覺推理、精準電腦操作與清楚自然的文字撰寫。</td><td>適合解讀圖表／畫面、依提供素材撰稿、目標明確的應用程式操作與小範圍程式修正；複雜長程工程可比較 Sol，需要更深入判斷時考慮 Astra。用量以帳號面板為準。</td></tr>
+<tr><td><strong><code>GPT-6 Sol</code></strong></td><td>成熟的標準軟體工程與多步驟知識工作模型。</td><td>一般程式設計、文件撰寫與多步驟任務。</td></tr>
+<tr><td><strong><code>GPT-6 Astra</code></strong></td><td><strong>旗艦級深度推理與高階視覺判斷模型。</strong>擅長極端複雜的跨系統架構設計、疑難雜症攻堅、電腦操控與複雜瀏覽器互動（亦為雲端常駐代理 Dots 的預設驅動模型）。</td><td>單次消耗額度較高；建議在卡關超過 2 次或需要深度架構決策時才切換使用。</td></tr>
+<tr><td><strong><code>GPT-6 Luna</code></strong></td><td><strong>高速、低延遲且極省額度的輕量模型。</strong>（亦在背景免費驅動 Auto-review 安全審查）。</td><td>範圍明確的小型修改、格式整理、提取摘要、日誌掃描與高頻率例行工作。</td></tr>
 </tbody></table></div>
 <figure class="interface-figure" style="max-width:1100px">
-  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/推理強度.png" data-screenshot-title="模型選取位置與 Power 滑桿" aria-label="模型選取位置與 Power 滑桿，放大檢視">
-    <img src="../images/tutorial/pick/推理強度.png" alt="模型選取位置與 Power 滑桿" loading="lazy" decoding="async" />
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/推理強度.png" data-screenshot-title="選取推理強度滑桿面板" aria-label="選取推理強度滑桿面板，放大檢視">
+    <img src="../images/tutorial/pick/推理強度.png" alt="選取推理強度滑桿面板" loading="lazy" decoding="async" />
     <span class="image-expand" aria-hidden="true">↗</span>
   </button>
-  <figcaption><strong>模型選取位置與推理強度</strong>展開目前模型的進階選項後，依任務複雜度調整；可用檔位以畫面為準。</figcaption>
+  <figcaption><strong>「選取推理強度」滑桿面板（快捷鍵 <code>Ctrl + Shift + M</code>）</strong>點擊輸入框右下角按鈕即可拉動橫向滑桿調整推理強度，點擊面板上方的模型名稱（如 <code>GPT-6 Sol &gt;</code>）則可切換模型，右上角 <code>↺</code> 可重置回預設值。</figcaption>
 </figure>
-<p><strong>初學者建議：</strong>先使用「預設」。只有在任務需要、選單確實提供時才改選具體模型，並查看目前帳號的剩餘用量。</p>
+<aside class="inline-note"><strong>⚠️ 已退役舊模型遷移提醒（2026.10 查核）</strong><div><p>根據 <a href="https://learn.chatgpt.com/docs/models" target="_blank" rel="noopener noreferrer">OpenAI 官方模型文件</a>，舊世代模型如 <strong><code>GPT-5.5</code>（已於 2026-10-14 正式退役）</strong>、<strong><code>GPT-5.4</code>、<code>GPT-5.4-mini</code> 與 <code>gpt-5.3-codex-spark</code></strong> 均已從 ChatGPT 登入的 Codex 中退役。若你在舊專案的 <code>config.toml</code>、CLI 腳本或自訂子代理設定檔中寫死了這些舊模型名稱，請立即更新遷移：將 <code>gpt-5.4</code> / <code>gpt-5.5</code> 改為 <strong><code>gpt-6.1-sol</code></strong>（或 <code>gpt-6-sol</code>），將 <code>gpt-5.4-mini</code> 改為 <strong><code>gpt-6-luna</code></strong>（註：Enterprise / Edu 工作區若需使用 Luna，管理員須先於工作區設定啟用）。遷移時須依目標模型檢查推理設定；不要將舊模型的限制套用到新模型。<code>GPT-6.1 Terra</code> 的 API 支援 <code>none</code>，但各產品介面可選值仍以目前選單為準。</p></div></aside>
 
 <div id="effort"></div>
-<h2>推理強度與速度</h2>
-<p>推理強度與速度是兩個不同設定；可用檔位依目前模型與帳號而定。</p>
+<h2>6 階推理強度（含 Max / Ultra）與速度倍率（含 Pro 專屬 Ultrafast）</h2>
+<p>在模型與推理選單（或透過 <code>/reasoning</code>、<code>/fast</code> 指令）中，<strong>推理強度（Reasoning effort）</strong>與<strong>服務速度（Speed）</strong>是兩個獨立控制的維度：</p>
 <ul>
-  <li><strong>基礎推理強度（Light / Medium / High / Extra High）：</strong>決定模型在回答前投入多少思考步驟。複雜任務可以調高，但通常回應較慢、消耗額度也較多。</li>
-  <li><strong>速度選項：</strong>控制服務速度，不等於切換到更聰明的模型。開啟前先看選單顯示的用量提示。</li>
+  <li><strong>基礎四階推理強度——介面顯示為「低 / 中 / 高 / 超高」（對應設定檔的 <code>Light (Low)</code> / <code>Medium</code> / <code>High</code> / <code>Extra High (xhigh)</code>）：</strong>決定模型在動手修改或回答前投入多少內部思考步驟。日常任務用「低（<code>Light</code>）」或「中（<code>Medium</code>）」即可；跨模組重構再調高至「高（<code>High</code>）」或「超高（<code>Extra High</code>）」。</li>
+  <li><strong>高階推理檔位 <code>Max</code> 與平行子代理 <code>Ultra</code>：</strong>在支援的模型與進階方案上，還提供 <strong><code>Max</code></strong>（針對單一極高難度問題投入最大深度思考時間）與 <strong><code>Ultra</code></strong>（自動啟動多個平行子代理 Subagents 同時拆解大型任務的不同部分再整合結果）。若桌面版滑桿未顯示 Ultra，可至「設定 → 組態（Configuration）」開啟 <strong><code>Ultra in model picker slider</code></strong>。</li>
+  <li><strong>三階速度模式與額度消耗倍率（Standard / Fast / Ultrafast）：</strong>速度選項只加速 Token 生成速率，不會換成更聰明或更笨的模型，但會直接乘算配額消耗速率：
+    <ul>
+      <li><strong>Standard（標準速度）：</strong>基準 <strong>1x</strong> 消耗速率。</li>
+      <li><strong>Fast（快速模式，可輸入 <code>/fast</code> 開關）：</strong>消耗速率約為標準模式的 <strong>2x 至 2.5x</strong>（依使用方案內含配額或加購點數而定）。</li>
+      <li><strong>Ultrafast（極速模式，Pro $500 專屬）：</strong>支援 <code>GPT-6 Astra Ultrafast</code> 與 <code>GPT-6.1 Sol Ultrafast</code>，<strong>僅限 Pro US$500／月 級距</strong>（及符合資格之企業方案）使用；消耗速率約為標準模式的 <strong>6x（使用加購點數 Credits）至 8x（使用方案內含額度）</strong>。</li>
+    </ul>
+  </li>
 </ul>
-<aside class="tier-note"><div class="tier-note-header"><span class="tier-badge pro">進階選項</span><strong>推理強度與速度依目前模型和方案而定</strong></div><div><p>截圖中的滑桿代表目前帳號提供的選項。調高推理強度通常增加等待時間與用量；快速服務設定則影響回應速度。各檔位、消耗倍率與可用性請以當前介面及<a href="https://learn.chatgpt.com/docs/pricing" target="_blank" rel="noopener noreferrer">官方用量頁</a>為準。</p></div></aside>
+<aside class="tier-note"><div class="tier-note-header"><span class="tier-badge pro">進階選項</span><strong>開啟 Fast / Ultrafast 或高階推理前先看倍率提示</strong></div><div><p>調高推理強度可能增加 Token 消耗；Fast 與 Ultrafast 的方案內含用量和加購點數倍率不同。Plus 與標準 Business 的五小時估算不適用於 Pro。先看目前模型、速度和使用量提示，再決定是否加速。<a href="https://learn.chatgpt.com/docs/pricing" target="_blank" rel="noopener noreferrer">官方用量與倍率說明</a></p></div></aside>
 
 <div id="usage"></div>
-<h2>檢視剩餘用量與超額擴充機制</h2>
-<p>點擊左下角帳號選單，展開「剩餘用量」（或輸入 <code>/usage</code>、<code>/status</code>），即可看到目前可用的額度視窗；也可以到「設定 → 使用情況與計費」檢視詳細紀錄。</p>
-<figure class="interface-figure" style="max-width:1100px">
-  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/剩餘用量2.png" data-screenshot-title="剩餘用量中的兩個額度區間" aria-label="剩餘用量中的兩個額度區間，放大檢視">
-    <img src="../images/tutorial/pick/剩餘用量2.png" alt="剩餘用量中的兩個額度區間" loading="lazy" decoding="async" />
-    <span class="image-expand" aria-hidden="true">↗</span>
-  </button>
-  <figcaption><strong>剩餘用量中的兩個額度區間</strong>位置：左下角帳號選單 → 剩餘用量。百分比與恢復時間請以自己的帳號顯示為準。</figcaption>
-</figure>
-<ul>
-  <li><strong>依方案查看額度：</strong>Plus 與標準 Business 的本機訊息估算以五小時區間呈現，週限制也可能適用；官方定價頁目前指出 Pro 沒有五小時限制。各帳號的實際上限與重設時間，請查看自己的使用量畫面，不要由本頁截圖推算。</li>
-  <li><strong>跨端點共用額度池：</strong>同一個帳號在桌面版、Web Cloud、CLI、IDE 擴充功能與手機端的消耗全部合併計算，並與 ChatGPT Work 共用代理配額池。</li>
-  <li><strong>Plus 與 Pro 方案超額延續方式：</strong>符合目前點數購買資格的用戶若在趕專案時耗盡視窗額度，可按需購買個人 <strong>ChatGPT Credits（隨用隨付點數）</strong> 繼續工作，或於 CLI 切換綁定獨立的 OpenAI API Key 計費。</li>
-</ul>
-
+<h2>檢視剩餘用量、5 小時訊息估算表與超額擴充機制</h2>
+<p>在帳號選單找「<strong>剩餘用量</strong>」，或到「<strong>設定 → 使用量與帳單</strong>」查看目前方案的限制、重置時間與可用選項。下方截圖展示的是特定版本的桌面介面；五小時視窗、每週視窗與重置次數的顯示方式會依方案及版本不同，Pro 目前沒有固定五小時訊息上限。CLI 可在支援的版本使用 <code>/status</code> 查詢狀態；請以實際畫面與<a href="https://learn.chatgpt.com/docs/pricing" target="_blank" rel="noopener noreferrer">官方用量說明</a>為準。</p>
 <figure class="interface-figure" style="max-width:1100px">
   <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/剩餘用量1.png" data-screenshot-title="帳號選單中的剩餘用量" aria-label="帳號選單中的剩餘用量，放大檢視">
     <img src="../images/tutorial/pick/剩餘用量1.png" alt="帳號選單中的剩餘用量" loading="lazy" decoding="async" />
     <span class="image-expand" aria-hidden="true">↗</span>
   </button>
-  <figcaption><strong>帳號選單中的剩餘用量</strong>從帳號選單進入剩餘用量；先看目前可用額度，再開始長時間任務。</figcaption>
+  <figcaption><strong>第一步：從左下角帳號選單點選「剩餘用量」</strong>帳號選單內亦可快速開啟「設定（<code>Ctrl+,</code>）」或「顯示寵物（<code>Alt+Win+P</code>）」。</figcaption>
 </figure>
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/剩餘用量2.png" data-screenshot-title="剩餘用量中的兩個額度區間" aria-label="剩餘用量中的兩個額度區間，放大檢視">
+    <img src="../images/tutorial/pick/剩餘用量2.png" alt="剩餘用量中的兩個額度區間" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>第二步：檢視「5 小時」與「1 週」剩餘百分比及「可用重置次數」</strong>展開後同時顯示 5 小時短期視窗、1 週視窗的剩餘百分比，以及底部可用的額度重置次數（如「可用重置 3 次」）。</figcaption>
+</figure>
+<p>為了讓你對不同模型的額度消耗有具體的數量級概念，下表整理了 <a href="https://learn.chatgpt.com/docs/pricing" target="_blank" rel="noopener noreferrer">OpenAI 官方定價頁</a>針對 <strong>Plus（$20/月）與標準 Business 方案在每 5 小時視窗內的本機訊息動態估算範圍</strong>（實際次數會隨提示詞長度、附加檔案大小、工具呼叫次數與推理強度而浮動）：</p>
+<div class="table-scroll" tabindex="0"><table><thead><tr><th>所選模型（Standard 速度）</th><th>Plus / 標準 Business 每 5 小時本機訊息估算</th><th>配額消耗特性說明</th></tr></thead><tbody>
+<tr><td><strong><code>GPT-6 Astra</code></strong></td><td>約 <strong>5 – 45 則</strong>／5 小時</td><td>單次成本最高；適合保留給架構攻堅、高難度視覺分析與關鍵決策。</td></tr>
+<tr><td><strong><code>GPT-6.1 Sol</code></strong></td><td>約 <strong>15 – 160 則</strong>／5 小時</td><td><strong>最佳性價比主力：</strong>可用次數約為 Astra 的 3 倍以上，且同工作階段快取（Context Caching）效率極高。</td></tr>
+<tr><td><strong><code>GPT-6 Sol</code></strong></td><td>約 <strong>15 – 150 則</strong>／5 小時</td><td>標準工程與商務交付主力。</td></tr>
+<tr><td><strong><code>GPT-6 Luna</code></strong></td><td>約 <strong>350 – 3,000 則</strong>／5 小時</td><td><strong>超高配額容量：</strong>可用次數為 Sol 的 20 倍以上！常規整理、日誌分析與簡單修改改用 Luna 幾乎不傷額度。</td></tr>
+</tbody></table></div>
+<ul>
+  <li><strong>方案限制分開看：</strong>官方目前提供 Plus 與標準 Business 的每五小時本機訊息估算，並說明每週限制也可能適用；<strong>Pro 目前沒有固定五小時訊息上限</strong>。模型、速度模式與工作區政策仍會影響可用量，請以實際使用量面板及<a href="https://learn.chatgpt.com/docs/pricing" target="_blank" rel="noopener noreferrer">官方定價頁</a>為準。</li>
+  <li><strong>跨端點用量：</strong>Codex 本機訊息與雲端任務共用方案用量；Work 等代理功能及 ChatGPT for Excel 的計費適用範圍，請依當前方案與<a href="https://learn.chatgpt.com/docs/pricing" target="_blank" rel="noopener noreferrer">官方用量頁</a>確認。雲端任務通常可能比本機訊息消耗更多；一般 Chat 對話的限制另看 ChatGPT 方案說明。</li>
+  <li><strong>可用重置次數（Resets）：</strong>若帳號顯示「可用重置次數」或「允許 Codex 使用重置次數」，請在使用量面板查核當前說明與剩餘數量。不要把某一版介面的觸發門檻視為所有方案都適用；不確定時關閉自動使用並手動檢查。</li>
+  <li><strong>額度用盡後的選項：</strong>Plus 與 Pro 用戶可依帳號可用功能購買額外點數；有彈性計價的 Business、Edu、Enterprise 工作區可購買工作區點數。也可使用 API Key 執行額外本機對話，並按 API 費率計費。購買與設定入口請以目前帳號介面為準。</li>
+</ul>
+
 <figure class="interface-figure" style="max-width:1100px">
   <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/使用量與帳單.png" data-screenshot-title="使用量與帳單概覽" aria-label="使用量與帳單概覽，放大檢視">
     <img src="../images/tutorial/pick/使用量與帳單.png" alt="使用量與帳單概覽" loading="lazy" decoding="async" />
     <span class="image-expand" aria-hidden="true">↗</span>
   </button>
-  <figcaption><strong>使用量與帳單概覽</strong>設定頁的概覽呈現方案、額度與點數。金額及餘額是截圖當時的狀態，不代表目前價格。</figcaption>
+  <figcaption><strong>使用量與帳單概覽</strong>位置：設定 → 使用量與帳單 → 概覽。呈現 5 小時與每週方案限制、「允許 Codex 使用重置次數」開關，以及隨用隨付「點數（加購點數／自動儲值）」。</figcaption>
 </figure>
 <figure class="interface-figure" style="max-width:1100px">
   <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/使用量與帳單2.png" data-screenshot-title="使用量分析" aria-label="使用量分析，放大檢視">
     <img src="../images/tutorial/pick/使用量與帳單2.png" alt="使用量分析" loading="lazy" decoding="async" />
     <span class="image-expand" aria-hidden="true">↗</span>
   </button>
-  <figcaption><strong>使用量分析</strong>入口：設定 → 使用量與帳單 → 分析。查看時間區間、用量趨勢與較常耗用額度的聊天，協助辨識耗用來源。</figcaption>
+  <figcaption><strong>使用量分析</strong>入口：設定 → 使用量與帳單 → 分析。上方「用量記錄」可切換 7 天／30 天並依「對話、子智慧體、記憶更新、對話標題」檢視消耗比例；下方「最高用量對話」則列出各對話佔 5 小時上限與每週上限的百分比。</figcaption>
 </figure>
 <div id="tips"></div>
-<h2>5 個省用量的實用習慣</h2>
+<h2>6 個省用量的進階實戰心法（含依任務搭配模型與 Context Caching）</h2>
 <ol>
-  <li><strong>精簡提示詞與輸入素材：</strong>只附上與本次修改直接相關的檔案與時間範圍，避免把整份無關歷史紀錄塞入對話。</li>
-  <li><strong>明確定義交付規格：</strong>事先說清楚目標格式、修改範圍與驗收條件，並將「必要修改」與「加分優化」分開。</li>
-  <li><strong>階層化拆分 AGENTS.md：</strong>大型專案請將特定子模組的規則放進子資料夾的 <code>AGENTS.md</code>，避免根目錄說明檔過大導致每一輪對話都重複消耗大量上下文 Token。</li>
-  <li><strong>關閉暫時不用的 MCP 伺服器：</strong>每一個啟用的 MCP 伺服器都會在背景注入工具定義並佔用上下文空間，可輸入 <code>/mcp</code> 檢查並停用閒置連線。</li>
-  <li><strong>善用 Luna 處理常規任務：</strong>格式整理、提取摘要、簡單轉換等明確任務改選 <code>GPT-6 Luna</code>，實際用量依任務與方案而異。</li>
+  <li><strong>依任務搭配 Sol、Terra、Astra 與 Luna：</strong>多檔案開發與長程工作可用 <code>GPT-6.1 Sol</code>；看圖、讀取畫面、文字改寫與範圍明確的操作可試 <code>GPT-6.1 Terra</code>；深入分析與困難決策考慮 <code>GPT-6 Astra</code>；規則清楚的整理與擷取可用 <code>GPT-6 Luna</code>。比較相同輸入下的品質、等待時間及實際用量，再決定是否切換；操作後核對已儲存結果，圖表中的數字也須回查原始素材。</li>
+  <li><strong>善用同工作階段快取（Context Caching），避免頻繁開空白對話重讀專案：</strong><code>GPT-6.1 Sol</code> 等模型對「同一對話工作階段（Session）中已讀過的上下文」享有極高的快取折抵效率。處理同一個功能模組時，請留在同一則對話中持續推進（中途若有不相干的小問題，用 <code>/side</code> 支線聊天提問，完成階段性任務後用 <code>/compact</code> 壓縮），比每改一個小地方就開全新對話重新掃描整個儲存庫省下大量額度。</li>
+  <li><strong>精簡提示詞與輸入素材：</strong>只附上與本次修改直接相關的檔案（可用 <code>@檔名</code> 精準點名）與錯誤區段，避免把整份數萬行的無關 Log 或整包歷史紀錄直接貼入對話。</li>
+  <li><strong>先用 /plan 明確定義交付規格，再動手修改：</strong>事先說清楚目標格式、修改範圍與驗收條件，並將「必要修改」與「加分優化」分開，避免代理因需求模糊改錯方向而浪費來回重做的額度。</li>
+  <li><strong>階層化瘦身 AGENTS.md（控制在 100 行內）：</strong>大型專案請將根目錄 <code>AGENTS.md</code> 精簡在 100 行以內（只放核心測試指令與全域邊界），將特定子模組規則放進子資料夾的 <code>AGENTS.md</code>，並將長篇標準作業流程改寫成按需載入的技能（<code>SKILL.md</code>），避免每一輪對話都重複消耗大量固定上下文 Token。</li>
+  <li><strong>關閉暫時不用的 MCP 伺服器與高倍率加速：</strong>每一個啟用的 MCP 伺服器都會在背景注入工具定義並佔用上下文空間，可隨時輸入 <code>/mcp</code> 檢查並停用閒置連線；同時確認沒有誤開 <code>Fast</code>（2x–2.5x）或 <code>Ultrafast</code>（6x–8x）速度模式。</li>
 </ol>
 
 <div id="context"></div>
-<h2>上下文（Context）壓縮（/compact）</h2>
-<p>當聊天對話越來越長時，Codex 會自動壓縮上下文，把前面的內容整理成摘要後繼續進行。你也可以隨時在輸入框輸入 <code>/compact</code> 主動觸發壓縮，或輸入 <code>/status</code> 查看目前的上下文使用率。</p>
-<p>壓縮的是目前的對話上下文，<strong>不是清空用量，也不是重置額度</strong>。壓縮過程中請等待它完成即可，不必反覆發送同一句話。需要長期遵守的要求，請寫進自訂指令或 <code>AGENTS.md</code>（第 8 章會詳細說明）。</p>
+<h2>上下文（Context）壓縮（/compact）與進度回顧（/recap）</h2>
+<p>當聊天對話越來越長時，Codex 會自動壓縮上下文，把前面的內容整理成結構化摘要後繼續進行。你也可以養成習慣，<strong>在每完成一個小功能並完成 Git Commit 的段落點，主動在輸入框輸入 <code>/compact</code> 觸發壓縮</strong>；若只想快速看目前對話完成了哪些事而不壓縮歷史，則可輸入 <strong><code>/recap</code></strong> 產生重點回顧，或輸入 <strong><code>/status</code></strong> 查看目前的上下文 Token 使用率與對話 ID。</p>
+<p>請記住：<code>/compact</code> 壓縮的是目前對話視窗佔用的上下文空間（讓後續推理更精準、每輪消耗更省），<strong>不是清空已消耗的帳單用量，也不是重置 5 小時配額視窗</strong>。壓縮過程中請等待它完成即可，不必反覆發送同一句話。需要跨越多次壓縮仍長期遵守的硬性要求，請寫進個人化指令或專案 <code>AGENTS.md</code>（第 10 章會詳細說明，也可搭配第 9 章的 <code>SessionStart</code> Hook 在壓縮後自動重新注入關鍵架構摘要）。</p>
 <details class="source-list">
   <summary>官方文件與延伸閱讀</summary>
   <ul>
-    <li><a href="https://learn.chatgpt.com/docs/models" target="_blank" rel="noopener noreferrer">模型說明與 Power 預設集</a></li>
-    <li><a href="https://learn.chatgpt.com/docs/pricing" target="_blank" rel="noopener noreferrer">用量、計費與省額度技巧</a></li>
+    <li><a href="https://developers.openai.com/api/docs/models/gpt-6.1-terra" target="_blank" rel="noopener noreferrer">GPT-6.1 Terra API 規格（與訂閱配額分開計算）</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/models" target="_blank" rel="noopener noreferrer">模型說明、Power 預設滑桿與已退役模型遷移指南</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/model-selection" target="_blank" rel="noopener noreferrer">如何依任務挑選 Astra、Sol、Terra 與 Luna 模型</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/pricing" target="_blank" rel="noopener noreferrer">5 小時訊息估算表、Fast/Ultrafast 倍率與省額度技巧</a></li>
     <li><a href="https://help.openai.com/zh-hant/articles/11369540-using-codex-with-your-chatgpt-plan" target="_blank" rel="noopener noreferrer">在 ChatGPT 方案中使用 Codex</a></li>
-    <li><a href="https://learn.chatgpt.com/docs/reference/commands" target="_blank" rel="noopener noreferrer">應用程式指令與功能參考</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/reference/commands" target="_blank" rel="noopener noreferrer">應用程式指令與功能參考（/compact、/recap、/status）</a></li>
   </ul>
 </details>
         </article>
-        <nav class="chapter-pagination" aria-label="前後章節">
-          <a data-chapter-slug="permissions-and-control" href="permissions-and-control.html">← <span>上一章<small>權限、核准與資訊安全</small></span></a>
-          <a class="next" data-chapter-slug="parallel-and-fork" href="parallel-and-fork.html"><span>下一章<small>聊天分支（Fork）與工作樹（Worktree）隔離</small></span> →</a>
+                <nav class="chapter-pagination" aria-label="前後章節">
+          <a class="prev" data-chapter-slug="permissions-and-control" href="permissions-and-control.html">← <span>上一章<small>權限、核准與資訊安全</small></span></a>
+          <a class="next" data-chapter-slug="visual-feedback" href="visual-feedback.html"><span>下一章<small>圖片、視窗快照（Appshots）與網頁回饋</small></span> →</a>
         </nav>
       </main>
 
       <aside class="page-toc" aria-label="本頁目錄">
         <p class="eyebrow">本章內容</p>
         <nav class="toc-links">
-          <a href="#models">選擇模型與 Power 滑桿</a>
-          <a href="#effort">推理強度與速度（含 Pro 專屬說明）</a>
-          <a href="#usage">檢視剩餘用量與擴充機制</a>
-          <a href="#tips">官方 5 大省額度實用習慣</a>
-          <a href="#context">上下文壓縮（/compact）</a>
+          <a href="#models">模型家族、推理滑桿與退役遷移</a>
+          <a href="#effort">6 階推理強度與 Fast/Ultrafast 倍率</a>
+          <a href="#usage">剩餘用量、5 小時估算與點數擴充</a>
+          <a href="#tips">6 大省額度實戰心法（依任務搭配模型）</a>
+          <a href="#context">上下文壓縮（/compact 與 /recap）</a>
         </nav>
         <div class="toc-note">
           <span>專注閱讀</span>
@@ -215,6 +239,19 @@
           <img id="image-viewer-img" src="" alt="" />
         </div>
         <p id="image-viewer-hint">保留完整介面；需要看清楚小字時，請點擊「原始尺寸檢視」。</p>
+      </div>
+    </div>
+
+    <!-- 專有名詞白話解釋懸停視窗 -->
+    <div popover="hint" id="term-tooltip">
+      <div class="term-tooltip-card">
+        <div class="term-tooltip-header">
+          <span class="term-tooltip-badge" id="term-tooltip-badge"></span>
+          <button type="button" class="term-tooltip-close" id="term-tooltip-close" aria-label="關閉名詞解釋">關閉 ×</button>
+        </div>
+        <strong class="term-tooltip-title" id="term-tooltip-title"></strong>
+        <div class="term-tooltip-analogy" id="term-tooltip-analogy"></div>
+        <p class="term-tooltip-usage" id="term-tooltip-usage"></p>
       </div>
     </div>
   </div>

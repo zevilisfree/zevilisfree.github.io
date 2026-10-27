@@ -10,7 +10,7 @@
     } catch (e) {}
   </script>
   <title>Codex 實戰手冊</title>
-  <meta name="description" content="Windows Codex 完整圖文手冊：安裝、提示詞與個人化、沙盒與資訊安全、模型用量、Worktree、Appshots、排程及手機遠端；易變資訊附官方來源。" />
+  <meta name="description" content="ChatGPT Chat、Work 與 Codex 自學手冊：依產品和程度選讀，包含實作步驟、檢查方式、限制與官方來源。" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
@@ -22,47 +22,47 @@
         <span>CODEX 實戰手冊</span>
       </a>
       <div class="top-actions">
-        <a class="official-link" href="https://learn.chatgpt.com/docs" target="_blank" rel="noreferrer">OpenAI 官方文件 ↗</a>
-        <a class="official-link" href="https://help.openai.com/zh-hant/articles/11369540-using-codex-with-your-chatgpt-plan" target="_blank" rel="noreferrer">方案與額度說明 ↗</a>
+        <a class="official-link" href="https://learn.chatgpt.com/docs" target="_blank" rel="noopener noreferrer">OpenAI 官方文件 ↗</a>
+        <a class="official-link" href="https://help.openai.com/zh-hant/articles/11369540-using-codex-with-your-chatgpt-plan" target="_blank" rel="noopener noreferrer">方案與額度說明 ↗</a>
         <button id="theme-toggle-btn" class="theme-toggle" type="button" aria-label="切換深淺色主題" title="切換深淺色主題"><span class="theme-toggle-label">主題</span></button>
-        <a class="start-button" href="chapters/introduction.html">開始學習</a>
+        <a class="start-button" href="chapters/chatgpt-basics.html">從第 01 章開始</a>
       </div>
     </header>
 
     <main>
       <section class="home-hero">
         <div class="home-hero-copy">
-          <p class="home-kicker">WINDOWS · 十章完整手冊</p>
-          <h1>Codex<br /><em>從這裡開始</em></h1>
-          <p>依十章查閱 Codex 使用入口、工作空間、提示詞、個人化、沙盒（Sandbox）、資訊安全、工作樹（Worktree）、模型用量與手機遠端連線（Remote）。每項操作都有步驟、限制與官方來源。</p>
+          <p class="home-kicker">WINDOWS · CHATGPT / WORK / CODEX</p>
+          <h1>從你的任務<br /><em>開始學 AI</em></h1>
+          <p>想問問題、完成文件，或修改程式？先選 Chat、Work 或 Codex，再依初階與進階路線閱讀。每篇說明操作步驟、可核對的結果與適用限制。</p>
           <div class="home-actions">
             <a class="primary-action" href="#curriculum">檢視章節目錄 <span>→</span></a>
-            <a class="secondary-action" href="chapters/introduction.html">從第一章開始</a>
+            <a class="secondary-action" href="#learning-paths">選擇學習路線</a>
           </div>
           <div class="version-note">
             <span>依官方文件查核</span>
             <strong>2026.10 版</strong>
-            <small>涵蓋桌面版、CLI、IDE、Web 與行動端；易變資訊標明查核日期</small>
+            <small>涵蓋 Chat、Work 與 Codex；方案、額度與介面以目前官方文件及帳號畫面為準</small>
           </div>
         </div>
 
         <div class="home-visual" aria-label="學習路線">
           <div class="route-card route-1">
             <span>01—04</span>
-            <strong>先上手與懂額度</strong>
-            <p>模式切換 · 專案工作空間 · 核准權限 · 模型選單</p>
+            <strong>先上手：Chat、Work 與 Codex</strong>
+            <p>按任務選 Chat、Work 或 Codex · 建立專案 · 核對第一次練習成果</p>
           </div>
           <div class="route-line"></div>
           <div class="route-card route-2">
             <span>05—07</span>
-            <strong>把任務做順做快</strong>
-            <p>工作樹（Worktree）移交 · 視窗快照（Appshots） · 互動視覺化（@Visualize） · 電腦操控（Computer use）</p>
+            <strong>掌握安全、用量與成果審閱</strong>
+            <p>權限與核准 · 模型與用量 · 圖片、檔案及網頁成果檢查</p>
           </div>
           <div class="route-line"></div>
           <div class="route-card route-3">
-            <span>08—10</span>
-            <strong>打造自動化工作流</strong>
-            <p>AGENTS.md 階層規則 · 規劃（Plan）與目標（Goal） · 排程 · 雲端任務（Cloud）</p>
+            <span>08—12</span>
+            <strong>依需求選讀進階工作流</strong>
+            <p>工作樹 · Skills、Plugins 與 Hooks · Code Review · 排程與遠端</p>
           </div>
         </div>
       </section>
@@ -74,78 +74,103 @@
         </div>
         <div class="home-search">
           <span>⌕</span>
-          <input id="home-search-input" type="search" aria-label="搜尋教學" placeholder="搜尋：規劃 Plan、目標 Goal、工作樹 Worktree…" autocomplete="off" />
+          <input id="home-search-input" type="search" aria-label="搜尋教學" placeholder="搜尋：ChatGPT Work、Dots、Sites、Space、config.toml、Worktree…" autocomplete="off" />
         </div>
         <div id="home-search-results" class="home-search-results" aria-live="polite" hidden></div>
+      </section>
+
+      <section class="curriculum" id="learning-paths" aria-labelledby="paths-title">
+        <div class="section-heading"><div><p class="eyebrow">先選工作，再選深度</p><h2 id="paths-title">三條入門路線</h2></div><p>不用先讀完工程設定；每條路線都從一個可檢查的小任務開始。</p></div>
+        <div class="learning-path-grid">
+          <div class="learning-path"><span>CHAT · 初階</span><h3>問清楚、查來源、整理想法</h3><p>從對話、附件與網頁搜尋開始，練習追問與查證。</p><a href="chapters/chatgpt-basics.html">開始學 Chat →</a></div>
+          <div class="learning-path"><span>WORK · 初階</span><h3>把資料變成可審閱成果</h3><p>設定成果與來源，產出文件或表格，再逐項檢查。</p><a href="chapters/work-basics.html">開始學 Work →</a></div>
+          <div class="learning-path"><span>CODEX · 初階</span><h3>在練習資料夾完成第一個任務</h3><p>認識環境、權限及實際檔案變更。</p><a href="chapters/introduction.html">開始學 Codex →</a></div>
+        </div>
+        <p class="learning-path-advanced"><strong>已經熟悉基本操作？</strong> 依需求閱讀 <a href="chapters/permissions-and-control.html">權限與安全</a>、<a href="chapters/models-and-context.html">模型與用量</a>、<a href="chapters/parallel-and-fork.html">工作樹</a>、<a href="chapters/skills-and-tools.html">擴充工具</a>或<a href="chapters/plan-goal-schedule.html">自動化</a>。</p>
       </section>
 
       <section class="curriculum" id="curriculum">
         <div class="section-heading">
           <div>
             <p class="eyebrow">閱讀目錄</p>
-            <h2>10 個操作章節，依需求閱讀</h2>
+            <h2>12 個操作章節，由淺入深</h2>
           </div>
-          <p>第一次使用，可以順著讀下去。如果已經裝好 Codex，可以直接從工作空間、斜線指令速查表或你關心的功能開始。</p>
+          <p>先練習 Chat，再用 Work 完成可審閱成果，接著進入 Codex；熟悉基本操作後再讀進階章節。</p>
         </div>
         <div class="chapter-grid">
+          <h3 class="chapter-group-heading">入門｜先完成小任務（01–04）</h3>
+          <a href="chapters/chatgpt-basics.html" class="chapter-card">
+            <div><span>01</span><small>Chat 入門</small></div>
+            <h3>ChatGPT Chat：對話、搜尋與專案</h3>
+            <p>從第一個提問到來源查核，認識附件、專案、記憶與分享邊界。</p>
+            <b>進入本章 →</b>
+          </a>
+          <a href="chapters/work-basics.html" class="chapter-card">
+            <div><span>02</span><small>Work 入門</small></div>
+            <h3>ChatGPT Work：委派、交付與驗收</h3>
+            <p>描述成果、指定來源、使用外掛、審閱檔案，並理解本機與雲端差異。</p>
+            <b>進入本章 →</b>
+          </a>
           <a href="chapters/introduction.html" class="chapter-card">
-            <div><span>01</span><small>約 3 分鐘</small></div>
+            <div><span>03</span><small>Codex 初階</small></div>
             <h3>認識 Codex 與使用入口</h3>
-            <p>認識 Chat、Work 與 Codex 的入口，並比較三家編碼代理的模型、方案與價格（2026-10-17 查核）。</p>
+            <p>掌握 ChatGPT Chat、Work 與 Codex 的協作分工、跨端點環境，並比較最新方案權益與三家編碼代理（2026-10-24 查核）。</p>
             <b>進入本章 →</b>
           </a>
           <a href="chapters/workspace.html" class="chapter-card">
-            <div><span>02</span><small>約 4 分鐘</small></div>
+            <div><span>04</span><small>Codex 初階</small></div>
             <h3>安裝、登入與建立第一個專案</h3>
-            <p>從 Windows 檔案總管建立資料夾，登入 Codex、認識主畫面並調整外觀；開發工具可按需要安裝。</p>
+            <p>安裝桌面版與 Codex CLI（含非互動管線指令），建立跨模式共用的專案、多資料夾掛載與專案隔離記憶。</p>
             <b>進入本章 →</b>
           </a>
+          <h3 class="chapter-group-heading">核心｜理解權限、用量與成果檢查（05–07）</h3>
           <a href="chapters/permissions-and-control.html" class="chapter-card">
-            <div><span>03</span><small>約 12 分鐘</small></div>
+            <div><span>05</span><small>安全核心</small></div>
             <h3>權限、核准與資訊安全</h3>
-            <p>理解沙盒（Sandbox）與核准（Approval）、保護秘密、辨識提示注入（Prompt injection），並掌握執行中訊息。</p>
+            <p>深入作業系統沙盒底層、免費 Auto-review、config.toml 與企業 requirements.toml 設定、Steer/Queue 與提示注入防護。</p>
             <b>進入本章 →</b>
           </a>
           <a href="chapters/models-and-context.html" class="chapter-card">
-            <div><span>04</span><small>約 4 分鐘</small></div>
+            <div><span>06</span><small>使用核心</small></div>
             <h3>選擇模型、查看用量與管理上下文</h3>
-            <p>選擇模型與推理強度，查看剩餘用量、帳單與上下文（Context），建立節省用量的習慣。</p>
-            <b>進入本章 →</b>
-          </a>
-          <a href="chapters/parallel-and-fork.html" class="chapter-card">
-            <div><span>05</span><small>約 3 分鐘</small></div>
-            <h3>聊天分支（Fork）與工作樹（Worktree）隔離</h3>
-            <p>區分新聊天、聊天分支（Fork）與工作樹（Worktree）隔離，再了解移交（Hand off）的時機。</p>
+            <p>解析選取推理強度滑桿（Ctrl+Shift+M）、6 階推理強度（含 Max/Ultra）、Fast/Ultrafast 倍率、5 小時訊息估算、GPT-6.1 Terra 等模型定位、退役模型遷移與依任務搭配模型的省額度心法。</p>
             <b>進入本章 →</b>
           </a>
           <a href="chapters/visual-feedback.html" class="chapter-card">
-            <div><span>06</span><small>約 4 分鐘</small></div>
+            <div><span>07</span><small>情境選讀</small></div>
             <h3>圖片、視窗快照（Appshots）與網頁回饋</h3>
-            <p>用圖片、視窗快照（Appshots）、局部標註（Annotations）與網頁回饋說清楚修改位置。</p>
+            <p>結合 Appshots、@Browser 樣式微調（Adjust）、CDP 除錯、WebMCP，以及 ChatGPT Work 母版套用與四大檔案局部標註。</p>
+            <b>進入本章 →</b>
+          </a>
+          <h3 class="chapter-group-heading">進階｜協作、擴充與自動化（08–12）</h3>
+          <a href="chapters/parallel-and-fork.html" class="chapter-card">
+            <div><span>08</span><small>Codex 進階</small></div>
+            <h3>聊天分支（Fork）與工作樹（Worktree）隔離</h3>
+            <p>掌握 Fork + Worktree A/B 雙軌實作、environment.toml 初始化腳本、.worktreeinclude 與 Hand off 三種衝突處理模式。</p>
             <b>進入本章 →</b>
           </a>
           <a href="chapters/skills-and-tools.html" class="chapter-card">
-            <div><span>07</span><small>約 5 分鐘</small></div>
+            <div><span>09</span><small>Codex 進階</small></div>
             <h3>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</h3>
-            <p>認識技能（Skill）、外掛（Plugin）、模型上下文協定（MCP）與電腦操控（Computer use）。</p>
+            <p>完整解析 Plugins 統一架構、SKILL.md 規範、Hooks 生命週期防線、MCP 設定、Subagents 子代理分工與電腦操控。</p>
             <b>進入本章 →</b>
           </a>
           <a href="chapters/instructions-and-editor.html" class="chapter-card">
-            <div><span>08</span><small>約 10 分鐘</small></div>
+            <div><span>10</span><small>進階參考</small></div>
             <h3>Codex 指示、AGENTS.md 與常用命令</h3>
-            <p>用 Git 差異檢視（Review）驗收；學會任務提示詞、個人化指示、專案 AGENTS.md 與常用命令。</p>
+            <p>學會 IDE 深度整合、Code Review 三大工作流（含 GitHub @codex）、AGENTS.md 瘦身法、三層記憶架構與完整斜線指令表。</p>
             <b>進入本章 →</b>
           </a>
           <a href="chapters/plan-goal-schedule.html" class="chapter-card">
-            <div><span>09</span><small>約 4 分鐘</small></div>
+            <div><span>11</span><small>Codex 進階</small></div>
             <h3>規劃（Plan）、目標（Goal）與排程任務</h3>
-            <p>用規劃（Plan）討論做法、目標（Goal）追蹤結果，並確認排程任務的執行條件。</p>
+            <p>掌握 /plan → /goal → /side 黃金節奏、定時與事件觸發排程，並完整認識 Dots 自主代理、Sites 網站建置與 Space 協作空間。</p>
             <b>進入本章 →</b>
           </a>
           <a href="chapters/remote.html" class="chapter-card">
-            <div><span>10</span><small>約 3 分鐘</small></div>
+            <div><span>12</span><small>情境選讀</small></div>
             <h3>手機遠端連線（Remote）與雲端任務（Cloud）</h3>
-            <p>從手機連接保持上線的電腦，區分遠端連線（Remote）、雲端任務（Cloud）與 SSH 主機。</p>
+            <p>從手機遠端操控本機專案，解析 Work Cloud 跨端協調與離線退回機制，以及 Codex Cloud 兩階段網路與 Network Secrets 架構。</p>
             <b>進入本章 →</b>
           </a>
         </div>
@@ -159,7 +184,7 @@
         <ul>
           <li>一般模式：三欄式清晰導覽，隨時切換章節、檢視頁內捲動目錄（Scrollspy）並展開官方文件連結。</li>
           <li>閱讀模式：一鍵放大內文、收起兩側導覽列，提供沉浸式無干擾的閱讀體驗。</li>
-          <li>智慧深淺色主題與離線互動：支援系統色系自動適應與頂部手動切換；所有圖片皆可點擊放大檢視原始尺寸，程式碼區塊皆可一鍵複製。</li>
+          <li>初學者白話名詞小幫手與離線互動：遇到底線標示的專有名詞（如沙盒、Worktree、MCP、CLI），滑鼠懸停或手機點按即可查看白話比喻與用途說明；支援系統深淺色主題、圖片原始尺寸放大與程式碼一鍵複製。</li>
         </ul>
       </section>
     </main>
@@ -167,6 +192,19 @@
     <footer class="home-footer">
       <span>Codex 實戰手冊</span>
     </footer>
+
+    <!-- 專有名詞白話解釋懸停視窗 -->
+    <div popover="hint" id="term-tooltip">
+      <div class="term-tooltip-card">
+        <div class="term-tooltip-header">
+          <span class="term-tooltip-badge" id="term-tooltip-badge"></span>
+          <button type="button" class="term-tooltip-close" id="term-tooltip-close" aria-label="關閉名詞解釋">關閉 ×</button>
+        </div>
+        <strong class="term-tooltip-title" id="term-tooltip-title"></strong>
+        <div class="term-tooltip-analogy" id="term-tooltip-analogy"></div>
+        <p class="term-tooltip-usage" id="term-tooltip-usage"></p>
+      </div>
+    </div>
   </div>
   <script src="assets/app.js"></script>
 </body>

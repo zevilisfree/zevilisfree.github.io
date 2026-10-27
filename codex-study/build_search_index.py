@@ -85,8 +85,8 @@ def compact(parts):
 def generate():
     home = INDEX.read_text(encoding="utf-8")
     slugs = CHAPTER_PATTERN.findall(home)
-    if len(slugs) != 10 or len(set(slugs)) != 10:
-        raise ValueError("首頁必須有十張不重複的章節卡片")
+    if len(slugs) != 12 or len(set(slugs)) != 12:
+        raise ValueError("首頁必須有十二張不重複的章節卡片")
     chapters = []
     for order, slug in enumerate(slugs, 1):
         parser = ChapterText()
@@ -116,7 +116,7 @@ def main():
         if updated != source:
             print("搜尋索引未同步；請執行 python build_search_index.py", file=sys.stderr)
             return 1
-        print("搜尋索引與十章內容一致")
+        print("搜尋索引與十二章內容一致")
         return 0
     if updated != source:
         SCRIPT.write_text(updated, encoding="utf-8", newline="\n")

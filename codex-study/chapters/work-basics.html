@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <title>ChatGPT Work：委派、交付與驗收｜Codex 實戰手冊</title>
+  <meta name="description" content="ChatGPT Work 入門：設定可審閱的成果、提供來源、使用外掛、審查檔案與了解本機和雲端執行差異。" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body data-page-type="chapter">
+  <div id="site-root" class="site">
+    <header class="topbar"><a class="brand" href="../index.html"><span class="brand-mark">C</span><span>CODEX 實戰手冊</span></a><div class="top-actions"><button id="search-open-btn" class="search-button" type="button">搜尋章節內容...</button><button id="theme-toggle-btn" class="theme-toggle" type="button" aria-label="切換深淺色主題" title="切換深淺色主題"><span class="theme-toggle-label">主題</span></button><button id="recording-toggle-btn" class="recording-toggle" type="button" aria-pressed="false"><span class="toggle-light"></span><span id="recording-toggle-text">進入閱讀模式</span></button><button id="mobile-nav-btn" class="mobile-nav-button" type="button" aria-expanded="false">目錄</button></div></header>
+    <div class="docs-shell">
+      <aside id="chapter-sidebar" class="chapter-sidebar" aria-label="課程章節"><p class="eyebrow">閱讀目錄 · 共 12 章</p><nav>
+                  <a class="chapter-link" data-chapter-slug="chatgpt-basics" href="chatgpt-basics.html"><span>01</span>ChatGPT Chat：對話、搜尋與專案</a>
+          <a class="chapter-link active" data-chapter-slug="work-basics" href="work-basics.html"><span>02</span>ChatGPT Work：委派、交付與驗收</a>
+          <a class="chapter-link" data-chapter-slug="introduction" href="introduction.html"><span>03</span>認識 Codex 與使用入口</a>
+          <a class="chapter-link" data-chapter-slug="workspace" href="workspace.html"><span>04</span>安裝、登入與建立第一個專案</a>
+          <a class="chapter-link" data-chapter-slug="permissions-and-control" href="permissions-and-control.html"><span>05</span>權限、核准與資訊安全</a>
+          <a class="chapter-link" data-chapter-slug="models-and-context" href="models-and-context.html"><span>06</span>選擇模型、查看用量與管理上下文</a>
+          <a class="chapter-link" data-chapter-slug="visual-feedback" href="visual-feedback.html"><span>07</span>圖片、視窗快照（Appshots）與網頁回饋</a>
+          <a class="chapter-link" data-chapter-slug="parallel-and-fork" href="parallel-and-fork.html"><span>08</span>聊天分支（Fork）與工作樹（Worktree）隔離</a>
+          <a class="chapter-link" data-chapter-slug="skills-and-tools" href="skills-and-tools.html"><span>09</span>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</a>
+          <a class="chapter-link" data-chapter-slug="instructions-and-editor" href="instructions-and-editor.html"><span>10</span>Codex 指示、AGENTS.md 與常用命令</a>
+          <a class="chapter-link" data-chapter-slug="plan-goal-schedule" href="plan-goal-schedule.html"><span>11</span>規劃（Plan）、目標（Goal）與排程任務</a>
+          <a class="chapter-link" data-chapter-slug="remote" href="remote.html"><span>12</span>手機遠端連線（Remote）與雲端任務（Cloud）</a>
+      </nav><div class="course-progress"><span>目前進度</span><strong>02 / 12</strong><i><b style="width: 17%"></b></i></div></aside>
+      <main class="article" id="lesson"><div class="breadcrumb"><a href="../index.html">自學手冊</a> <span>/</span> 第 02 章 · Work 入門</div><section class="hero-card"><div><p class="chapter-kicker">CHAPTER 02 · 初階（含進階選讀）</p><h1>ChatGPT Work：委派、交付與驗收</h1><p class="hero-copy">讓 ChatGPT 完成可審閱的文件、分析或重複工作，並清楚分辨資料來源與執行位置。</p></div><div class="hero-orbit" aria-hidden="true"><span>02</span></div></section><div class="lesson-meta"><span>Web／桌面版</span><span>依 2026-10-25 官方文件查核</span><span>本章流程尚無實拍截圖</span></div>
+        <article class="mdx-content">
+<div id="when"></div><h2>什麼時候改用 Work</h2>
+<p>Chat 適合一問一答；當任務需要多個來源、多步驟、完整文件或可定期更新的成果時，在 ChatGPT 中切換到 <strong>Work</strong>。Work 可以規劃、取材、製作檔案，再交回給你審查。它與 Codex 都能處理複雜任務，但 Codex 提供更多程式開發視圖，如 Git 差異與程式碼審查；選擇取決於成果與你要看的細節。<a href="https://learn.chatgpt.com/docs/get-started-with-work" target="_blank" rel="noopener noreferrer">官方：Get started with ChatGPT Work</a>、<a href="https://learn.chatgpt.com/docs/use-chatgpt" target="_blank" rel="noopener noreferrer">官方：模式選擇</a></p>
+<p><strong>模型選擇補充（2026-10-27）：</strong>依<a href="https://learn.chatgpt.com/docs/models" target="_blank" rel="noopener noreferrer">官方模型文件</a>，<code>GPT-6.1 Terra</code> 適合日常撰稿、解讀圖片與畫面，以及目標明確的應用程式操作。可在模型選單的 Advanced 中尋找；是否開放依帳號與版本而定。初次練習可請它「閱讀這張圖表，依標籤與數值整理重點；看不清楚的地方請標示不確定」，完成後逐項回查原圖。更完整的模型比較見<a href="models-and-context.html#models">第 6 章</a>。</p>
+<div id="request"></div><h2>第一次練習：把兩段非敏感資料做成比較報告</h2>
+<ol class="operation-steps">
+  <li><div class="step-copy"><h3>準備輸入與完成判準</h3><p>建立純練習資料：「方案 A：每月 500 元、提供 20 GB、客服週一至週五；方案 B：每月 650 元、提供 50 GB、客服每日。」不使用真實客戶資料、密碼或未公開合約。</p></div></li>
+  <li><div class="step-copy"><h3>描述可交付成果</h3><p>切到 Work，輸入：「根據下方兩個方案，做一份一頁繁體中文比較報告。包含價格、容量、客服、差異和未提供的資訊；不得補造條款。先給草稿供我審查，再交付檔案。驗收：所有數字要和原文相同，未知欄位標『未提供』。」再貼上練習資料。</p></div></li>
+  <li><div class="step-copy"><h3>中途引導並核對</h3><p>觀察 Work 的進度；如果它把「每日客服」解讀成「24 小時客服」，立刻指出資料只說每日、未說時段。完成後開啟報告，逐項比對 500／650 元、20／50 GB、服務日與未知欄位。若產生檔案，開啟檔案確認內容及版面，別只看聊天摘要。</p></div></li>
+</ol>
+<p>給 Work 的要求最好含<strong>成果、讀者、可用來源、限制、驗收方式與何時停下來給你審查</strong>。官方範例也是先指定資料與輸出，再要求標記缺乏證據的主張。<a href="https://learn.chatgpt.com/docs/get-started-with-work" target="_blank" rel="noopener noreferrer">官方：Work 的提示方式</a></p>
+<div id="sources"></div><h2>檔案與外掛：指定來源，不讓它猜</h2>
+<p>可直接附上檔案、放在專案來源，或在已安裝且已連線的情況下用 <code>@外掛名稱</code> 指向 Google Drive、郵件、行事曆等工具。安裝外掛不等於已連接帳號；能讀到什麼、能否寫入，取決於外掛設定、連線帳號及來源服務權限。第一次先用測試資料做唯讀查詢，核對它確實取到預期檔案及日期。對外寄信、更新資料庫或分享成果前，檢查收件者、範圍和內容。<a href="https://learn.chatgpt.com/docs/plugins" target="_blank" rel="noopener noreferrer">官方：Plugins</a></p>
+<p>若來源沒有連上，要求 Work 列出它實際讀到的檔案和未能取得的資料；不要讓它依記憶補完。處理商業資料前，先確認組織工作區政策、來源服務權限和資料分享對象。</p>
+<div id="files"></div><h2>審閱與修訂文件、表格、簡報和 PDF</h2>
+<p>指定格式、頁數或欄位、來源與檢查標準。桌面版可在右側預覽支援的文件、簡報、試算表和 PDF；點選內容提出局部修訂，例如「第 2 頁表格的單位改為新臺幣，其他頁保持原樣」。Web 版的預覽與標註能力可能不同，可下載後在相應軟體逐頁、逐表或逐張投影片檢查。<strong>「只改選取處」是修訂要求，不是無條件保證</strong>；再次對照整份成果和來源。<a href="https://learn.chatgpt.com/docs/artifacts-viewer" target="_blank" rel="noopener noreferrer">官方：Work with files</a></p>
+<p><strong>驗收清單：</strong>檔名及格式正確；內容沒有缺頁、空白表格或錯誤公式；金額與日期有來源；輸出可開啟；對外分享前做一次人工檢查。</p>
+<div id="where"></div><h2>分清本機、雲端和跨裝置接力</h2>
+<p>Web 上的 Work 在受管理雲端環境運作，不會自動讀你電腦上的資料夾或登入中的桌面瀏覽器。桌面版在符合方案與工作區設定時，可選用本機檔案、應用程式或瀏覽器；雲端與本機可用工具、權限及持續執行條件不同。送出前確認任務在哪裡跑、提供了哪些資料與外掛連線。需要本機資源的任務，電腦可能要保持上線；某些跨裝置接力需工作區啟用相應功能。<a href="https://learn.chatgpt.com/docs/use-chatgpt" target="_blank" rel="noopener noreferrer">官方：Cloud or local work</a>、<a href="https://learn.chatgpt.com/docs/get-started-with-work" target="_blank" rel="noopener noreferrer">官方：跨裝置接力</a></p>
+<div id="scheduled"></div><h2>進階選讀：把已驗證的流程排程</h2>
+<p>先在一般 Work 聊天把來源、成果格式與失敗時的處理方式測通，再設定每日、每週或事件觸發的排程任務。明確寫出時區、更新頻率、資料來源、何時通知你，以及哪些操作要停下等待審查。Web 排程無法直接使用你電腦的資料夾；桌面版如需本機檔案，電腦與 App 必須維持可用。第一次排程後，查看實際執行紀錄與產物，確認有資料更新再擴大使用。<a href="https://learn.chatgpt.com/docs/automations" target="_blank" rel="noopener noreferrer">官方：Scheduled tasks</a></p>
+<div id="limits"></div><h2>用量、限制與失敗時怎麼做</h2>
+<p>Work 與 Codex 共用相應的使用量機制；可選模型、點數、速度和額度依方案、工作區與推出進度而變。執行前看帳號的使用量畫面與<a href="https://learn.chatgpt.com/docs/pricing" target="_blank" rel="noopener noreferrer">官方價格與用量頁</a>，不要把範例估算當成固定可發送次數。若任務停在資料權限、網路或工具錯誤，先檢查來源是否存在、連線是否有效、執行環境是否能觸及資料；請 Work 明列未完成的項目，修正後再跑。外部操作與分享應由你審查最後結果。</p>
+        </article>
+        <nav class="chapter-pagination" aria-label="前後章節">
+          <a class="prev" data-chapter-slug="chatgpt-basics" href="chatgpt-basics.html">← <span>上一章<small>ChatGPT Chat：對話、搜尋與專案</small></span></a>
+          <a class="next" data-chapter-slug="introduction" href="introduction.html"><span>下一章<small>認識 Codex 與使用入口</small></span> →</a>
+        </nav>
+      </main>
+      <aside class="page-toc" aria-label="本頁目錄"><p class="eyebrow">本頁目錄</p><a href="#when">適用情境</a><a href="#request">第一次練習</a><a href="#sources">檔案與外掛</a><a href="#files">審閱成果</a><a href="#where">本機與雲端</a><a href="#scheduled">排程</a><a href="#limits">用量與失敗處理</a></aside>
+    </div>
+    <div id="search-backdrop" class="search-backdrop" role="presentation" hidden><section id="search-dialog" class="search-dialog" role="dialog" aria-modal="true" aria-label="搜尋教學"><div class="search-input-wrap"><span>⌕</span><input id="search-modal-input" type="search" aria-label="搜尋章節、摘要或內文" placeholder="搜尋功能或章節…" autocomplete="off" /><button id="search-close-btn" type="button" aria-label="關閉搜尋">關閉 ×</button></div><div id="search-modal-results" class="search-results"></div></section></div>
+    <div id="image-viewer-backdrop" class="image-viewer-backdrop" hidden><div id="image-viewer" class="image-viewer" role="dialog" aria-modal="true" aria-label="圖片檢視器"><header><strong id="image-viewer-title"></strong><div><button id="image-size-btn" type="button">原始尺寸檢視</button><button id="image-close-btn" type="button" aria-label="關閉圖片">關閉 ×</button></div></header><div id="image-viewer-stage" class="image-viewer-stage"><img id="image-viewer-img" src="" alt="" /></div><p id="image-viewer-hint">需要看清楚小字時，請點擊「原始尺寸檢視」。</p></div></div>
+    <div popover="hint" id="term-tooltip"><div class="term-tooltip-card"><div class="term-tooltip-header"><span class="term-tooltip-badge" id="term-tooltip-badge"></span><button type="button" class="term-tooltip-close" id="term-tooltip-close" aria-label="關閉名詞解釋">關閉 ×</button></div><strong class="term-tooltip-title" id="term-tooltip-title"></strong><div class="term-tooltip-analogy" id="term-tooltip-analogy"></div><p class="term-tooltip-usage" id="term-tooltip-usage"></p></div></div>
+  </div>
+  <script src="../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <title>ChatGPT Chat：對話、搜尋與專案｜Codex 實戰手冊</title>
+  <meta name="description" content="ChatGPT Chat 入門：提出問題、追問、查核來源、使用附件與專案，理解記憶、分享與資料控制的邊界。" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body data-page-type="chapter">
+  <div id="site-root" class="site">
+    <header class="topbar">
+      <a class="brand" href="../index.html"><span class="brand-mark">C</span><span>CODEX 實戰手冊</span></a>
+      <div class="top-actions">
+        <button id="search-open-btn" class="search-button" type="button">搜尋章節內容...</button>
+        <button id="theme-toggle-btn" class="theme-toggle" type="button" aria-label="切換深淺色主題" title="切換深淺色主題"><span class="theme-toggle-label">主題</span></button>
+        <button id="recording-toggle-btn" class="recording-toggle" type="button" aria-pressed="false"><span class="toggle-light"></span><span id="recording-toggle-text">進入閱讀模式</span></button>
+        <button id="mobile-nav-btn" class="mobile-nav-button" type="button" aria-expanded="false">目錄</button>
+      </div>
+    </header>
+    <div class="docs-shell">
+      <aside id="chapter-sidebar" class="chapter-sidebar" aria-label="課程章節">
+        <p class="eyebrow">閱讀目錄 · 共 12 章</p>
+        <nav>
+          <a class="chapter-link active" data-chapter-slug="chatgpt-basics" href="chatgpt-basics.html"><span>01</span>ChatGPT Chat：對話、搜尋與專案</a>
+          <a class="chapter-link" data-chapter-slug="work-basics" href="work-basics.html"><span>02</span>ChatGPT Work：委派、交付與驗收</a>
+          <a class="chapter-link" data-chapter-slug="introduction" href="introduction.html"><span>03</span>認識 Codex 與使用入口</a>
+          <a class="chapter-link" data-chapter-slug="workspace" href="workspace.html"><span>04</span>安裝、登入與建立第一個專案</a>
+          <a class="chapter-link" data-chapter-slug="permissions-and-control" href="permissions-and-control.html"><span>05</span>權限、核准與資訊安全</a>
+          <a class="chapter-link" data-chapter-slug="models-and-context" href="models-and-context.html"><span>06</span>選擇模型、查看用量與管理上下文</a>
+          <a class="chapter-link" data-chapter-slug="visual-feedback" href="visual-feedback.html"><span>07</span>圖片、視窗快照（Appshots）與網頁回饋</a>
+          <a class="chapter-link" data-chapter-slug="parallel-and-fork" href="parallel-and-fork.html"><span>08</span>聊天分支（Fork）與工作樹（Worktree）隔離</a>
+          <a class="chapter-link" data-chapter-slug="skills-and-tools" href="skills-and-tools.html"><span>09</span>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</a>
+          <a class="chapter-link" data-chapter-slug="instructions-and-editor" href="instructions-and-editor.html"><span>10</span>Codex 指示、AGENTS.md 與常用命令</a>
+          <a class="chapter-link" data-chapter-slug="plan-goal-schedule" href="plan-goal-schedule.html"><span>11</span>規劃（Plan）、目標（Goal）與排程任務</a>
+          <a class="chapter-link" data-chapter-slug="remote" href="remote.html"><span>12</span>手機遠端連線（Remote）與雲端任務（Cloud）</a>
+        </nav>
+        <div class="course-progress"><span>目前進度</span><strong>01 / 12</strong><i><b style="width: 8%"></b></i></div>
+      </aside>
+      <main class="article" id="lesson">
+        <div class="breadcrumb"><a href="../index.html">自學手冊</a> <span>/</span> 第 01 章 · Chat 入門</div>
+        <section class="hero-card"><div><p class="chapter-kicker">CHAPTER 01 · 初階</p><h1>ChatGPT Chat：對話、搜尋與專案</h1><p class="hero-copy">從一個問題開始，學會補充背景、查核來源與整理持續進行的工作。</p></div><div class="hero-orbit" aria-hidden="true"><span>01</span></div></section>
+        <div class="lesson-meta"><span>Web／桌面版</span><span>依 2026-10-25 官方文件查核</span><span>本章流程尚無實拍截圖</span></div>
+        <article class="mdx-content">
+<div id="choose"></div><h2>先確認你要用 Chat、Work 還是 Codex</h2>
+<p><strong>Chat</strong> 適合提問、討論、潤稿、摘要與短篇草稿。需要多步驟研究、交付文件或定期更新時，進入 <a href="work-basics.html">Work</a>；需要在程式專案中改檔、跑測試及看差異時，進入 <a href="introduction.html">Codex</a>。桌面版先選 ChatGPT，再於新對話上方選 Chat；Web 版依目前介面選 Chat。官方亦提醒不同模式可用的模型及工具不完全相同，請以自己的帳號畫面為準。<a href="https://learn.chatgpt.com/docs/use-chatgpt" target="_blank" rel="noopener noreferrer">官方：Use ChatGPT</a></p>
+<div id="first-chat"></div><h2>第一次練習：提問、追問與核對</h2>
+<ol class="operation-steps">
+  <li><div class="step-copy"><h3>給一個具體問題和讀者背景</h3><p>建立 Chat 對話，輸入：「我沒有程式背景。請用繁體中文、生活例子解釋什麼是 API；先給 100 字摘要，再列 3 個常見用途。」不用先背特殊提示詞格式。</p></div></li>
+  <li><div class="step-copy"><h3>用追問修正缺口</h3><p>看完後追問：「第二個例子我不懂；請換成訂餐情境，並指出哪個部分是使用者、程式和服務。」保留同一對話可讓 ChatGPT 參照前文，但若話題已換，開新對話更清楚。</p></div></li>
+  <li><div class="step-copy"><h3>自己檢查結果</h3><p>預期會得到符合背景的解釋與三個例子。檢查有無回答你指定的長度、用途及疑問；若回答涉及費率、規定或產品可用性，要求列來源並開啟原始頁核對日期與條件。不要因為語氣肯定就把內容視為事實。</p></div></li>
+</ol>
+<p>有效的要求通常說明<strong>目的、背景、輸出形式和如何判斷好壞</strong>。例如「幫我整理這份會議筆記，分成已決定、待確認、負責人；無法從筆記確認的項目寫『未確認』」。官方建議從粗略想法開始，逐步補資料與修正答案。<a href="https://learn.chatgpt.com/docs/use-chatgpt" target="_blank" rel="noopener noreferrer">官方：自然對話與結果查核</a></p>
+<div id="search"></div><h2>需要最新資訊時，使用搜尋並查來源</h2>
+<p>對近期發布、價格、法規、版本或開放地區，直接要求「請搜尋最新官方資料，附來源連結和查核日期，分開列出已確認與尚未確認」。若介面使用搜尋，回答可能顯示引用；逐一打開支援關鍵結論的來源，確認頁面內容、發佈時間及適用地區。外部網頁是待查證資料，不是能指揮 ChatGPT 的指令。搜尋是否可用受方案與工作區設定影響。<a href="https://learn.chatgpt.com/docs/web-search" target="_blank" rel="noopener noreferrer">官方：Web search</a></p>
+<p><strong>驗收練習：</strong>詢問一項你熟悉的現行產品功能，要求兩個官方來源。若回答沒有可開啟的來源、來源沒有支持該句，或兩頁互相矛盾，請它重新查核；必要時自行到官方網站確認。</p>
+<div id="files"></div><h2>附件、圖片與語音：先給可公開練習的資料</h2>
+<p>可以從輸入區附上文件、表格或圖片，指定你要摘要、擷取哪些欄位，以及不確定時怎麼標示。初次練習用自己建立的非敏感兩段文字：「A 案交期 3 天、成本 500 元；B 案交期 5 天、成本 350 元」，請 Chat 製作比較表，再對照原文檢查數字與單位。圖片可要求描述畫面與指出看不清之處；語音可用來討論或口述，再核對專有名詞與數字。檔案、圖片與語音的可用性、大小和介面依方案與裝置而異。<a href="https://learn.chatgpt.com/docs/use-chatgpt" target="_blank" rel="noopener noreferrer">官方：輸入與工具</a></p>
+<div id="projects"></div><h2>持續工作時建立專案，分清專案類型與記憶</h2>
+<p>同一主題會持續多天、反覆使用來源或要做多個成果時，建立 <strong>ChatGPT 專案</strong>，加入檔案、專案指示與相關對話；在專案內從不同對話分別處理「資料整理」與「寫作」。桌面版的 Projects 檢視也可能顯示連接電腦資料夾的<strong>本機專案</strong>。ChatGPT 專案本身不會自動取得你電腦資料夾；Codex CLI 與 IDE 另以工作目錄或 IDE 工作區決定檔案上下文。不要把同名「專案」視為所有工具都能讀到同一份資料。<a href="https://learn.chatgpt.com/docs/projects" target="_blank" rel="noopener noreferrer">官方：Projects and chats</a></p>
+<p>記憶、專案指示和對話紀錄是不同控制。要處理客戶或敏感資料時，先檢查目前專案的來源、分享成員及記憶設定；不要把「專案」當作唯一的資料隔離措施。先用測試資料確認回答只引用預期來源，再投入正式資料。</p>
+<div id="review"></div><h2>進階選讀：分享、資料控制與可靠性</h2>
+<p>分享對話或專案前，檢查對方能看到的聊天、附件和來源；複製分享連結前先開啟預覽。資料控制及記憶選項依個人帳號與組織工作區不同，先看目前設定及管理員政策。重要決策要核對姓名、日期、金額、引述與原始資料；若資料不足，要求明列假設和無法取得的來源。<a href="https://learn.chatgpt.com/docs/use-chatgpt" target="_blank" rel="noopener noreferrer">官方：Review the result</a>、<a href="https://learn.chatgpt.com/docs/projects" target="_blank" rel="noopener noreferrer">官方：專案與分享</a></p>
+        </article>
+        <nav class="chapter-pagination" aria-label="前後章節">
+          <a class="prev" href="../index.html">← <span>回到首頁<small>選擇學習路線</small></span></a>
+          <a class="next" data-chapter-slug="work-basics" href="work-basics.html"><span>下一章<small>ChatGPT Work：委派、交付與驗收</small></span> →</a>
+        </nav>
+      </main>
+      <aside class="page-toc" aria-label="本頁目錄"><p class="eyebrow">本頁目錄</p><a href="#choose">選擇模式</a><a href="#first-chat">第一次練習</a><a href="#search">搜尋與來源</a><a href="#files">附件、圖片與語音</a><a href="#projects">專案與記憶</a><a href="#review">分享與可靠性</a></aside>
+    </div>
+    <div id="search-backdrop" class="search-backdrop" role="presentation" hidden><section id="search-dialog" class="search-dialog" role="dialog" aria-modal="true" aria-label="搜尋教學"><div class="search-input-wrap"><span>⌕</span><input id="search-modal-input" type="search" aria-label="搜尋章節、摘要或內文" placeholder="搜尋功能或章節…" autocomplete="off" /><button id="search-close-btn" type="button" aria-label="關閉搜尋">關閉 ×</button></div><div id="search-modal-results" class="search-results"></div></section></div>
+    <div id="image-viewer-backdrop" class="image-viewer-backdrop" hidden><div id="image-viewer" class="image-viewer" role="dialog" aria-modal="true" aria-label="圖片檢視器"><header><strong id="image-viewer-title"></strong><div><button id="image-size-btn" type="button">原始尺寸檢視</button><button id="image-close-btn" type="button" aria-label="關閉圖片">關閉 ×</button></div></header><div id="image-viewer-stage" class="image-viewer-stage"><img id="image-viewer-img" src="" alt="" /></div><p id="image-viewer-hint">需要看清楚小字時，請點擊「原始尺寸檢視」。</p></div></div>
+    <div popover="hint" id="term-tooltip"><div class="term-tooltip-card"><div class="term-tooltip-header"><span class="term-tooltip-badge" id="term-tooltip-badge"></span><button type="button" class="term-tooltip-close" id="term-tooltip-close" aria-label="關閉名詞解釋">關閉 ×</button></div><strong class="term-tooltip-title" id="term-tooltip-title"></strong><div class="term-tooltip-analogy" id="term-tooltip-analogy"></div><p class="term-tooltip-usage" id="term-tooltip-usage"></p></div></div>
+  </div>
+  <script src="../assets/app.js"></script>
+</body>
+</html>

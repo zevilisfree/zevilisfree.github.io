@@ -10,7 +10,7 @@
     } catch (e) {}
   </script>
   <title>圖片、視窗快照（Appshots）與網頁回饋｜Codex 實戰手冊</title>
-  <meta name="description" content="用圖片、視窗快照（Appshots）、局部標註（Annotations）與網頁回饋說清楚修改位置。" />
+  <meta name="description" content="結合 Appshots、@Browser 樣式微調（Adjust）、CDP 除錯、WebMCP，以及 ChatGPT Work 母版套用與四大檔案局部標註。" />
   <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="../assets/styles.css" />
 </head>
@@ -34,61 +34,63 @@
 
     <div class="docs-shell">
       <aside id="chapter-sidebar" class="chapter-sidebar" aria-label="課程章節">
-        <p class="eyebrow">閱讀目錄 · 共 10 章</p>
+        <p class="eyebrow">閱讀目錄 · 共 12 章</p>
         <nav>
-          <a class="chapter-link" data-chapter-slug="introduction" href="introduction.html"><span>01</span>認識 Codex 與使用入口</a>
-          <a class="chapter-link" data-chapter-slug="workspace" href="workspace.html"><span>02</span>安裝、登入與建立第一個專案</a>
-          <a class="chapter-link" data-chapter-slug="permissions-and-control" href="permissions-and-control.html"><span>03</span>權限、核准與資訊安全</a>
-          <a class="chapter-link" data-chapter-slug="models-and-context" href="models-and-context.html"><span>04</span>選擇模型、查看用量與管理上下文</a>
-          <a class="chapter-link" data-chapter-slug="parallel-and-fork" href="parallel-and-fork.html"><span>05</span>聊天分支（Fork）與工作樹（Worktree）隔離</a>
-          <a class="chapter-link active" data-chapter-slug="visual-feedback" href="visual-feedback.html"><span>06</span>圖片、視窗快照（Appshots）與網頁回饋</a>
-          <a class="chapter-link" data-chapter-slug="skills-and-tools" href="skills-and-tools.html"><span>07</span>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</a>
-          <a class="chapter-link" data-chapter-slug="instructions-and-editor" href="instructions-and-editor.html"><span>08</span>Codex 指示、AGENTS.md 與常用命令</a>
-          <a class="chapter-link" data-chapter-slug="plan-goal-schedule" href="plan-goal-schedule.html"><span>09</span>規劃（Plan）、目標（Goal）與排程任務</a>
-          <a class="chapter-link" data-chapter-slug="remote" href="remote.html"><span>10</span>手機遠端連線（Remote）與雲端任務（Cloud）</a>
+          <a class="chapter-link" data-chapter-slug="chatgpt-basics" href="chatgpt-basics.html"><span>01</span>ChatGPT Chat：對話、搜尋與專案</a>
+          <a class="chapter-link" data-chapter-slug="work-basics" href="work-basics.html"><span>02</span>ChatGPT Work：委派、交付與驗收</a>
+          <a class="chapter-link" data-chapter-slug="introduction" href="introduction.html"><span>03</span>認識 Codex 與使用入口</a>
+          <a class="chapter-link" data-chapter-slug="workspace" href="workspace.html"><span>04</span>安裝、登入與建立第一個專案</a>
+          <a class="chapter-link" data-chapter-slug="permissions-and-control" href="permissions-and-control.html"><span>05</span>權限、核准與資訊安全</a>
+          <a class="chapter-link" data-chapter-slug="models-and-context" href="models-and-context.html"><span>06</span>選擇模型、查看用量與管理上下文</a>
+          <a class="chapter-link active" data-chapter-slug="visual-feedback" href="visual-feedback.html"><span>07</span>圖片、視窗快照（Appshots）與網頁回饋</a>
+          <a class="chapter-link" data-chapter-slug="parallel-and-fork" href="parallel-and-fork.html"><span>08</span>聊天分支（Fork）與工作樹（Worktree）隔離</a>
+          <a class="chapter-link" data-chapter-slug="skills-and-tools" href="skills-and-tools.html"><span>09</span>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</a>
+          <a class="chapter-link" data-chapter-slug="instructions-and-editor" href="instructions-and-editor.html"><span>10</span>Codex 指示、AGENTS.md 與常用命令</a>
+          <a class="chapter-link" data-chapter-slug="plan-goal-schedule" href="plan-goal-schedule.html"><span>11</span>規劃（Plan）、目標（Goal）與排程任務</a>
+          <a class="chapter-link" data-chapter-slug="remote" href="remote.html"><span>12</span>手機遠端連線（Remote）與雲端任務（Cloud）</a>
         </nav>
         <div class="course-progress">
           <span>目前進度</span>
-          <strong>06 / 10</strong>
-          <i><b style="width: 60%"></b></i>
+          <strong>07 / 12</strong>
+          <i><b style="width: 58%"></b></i>
         </div>
       </aside>
 
       <main class="article" id="lesson">
-        <div class="breadcrumb"><a href="../index.html">Codex Windows 教學</a> <span>/</span> 第 06 章</div>
+        <div class="breadcrumb"><a href="../index.html">Codex Windows 教學</a> <span>/</span> 第 7 章</div>
         <section class="hero-card">
           <div>
-            <p class="chapter-kicker">CHAPTER 06 · 約 4 分鐘</p>
+            <p class="chapter-kicker">CHAPTER 07 · 約 7 分鐘</p>
             <h1>圖片、視窗快照（Appshots）與網頁回饋</h1>
-            <p class="hero-copy">用圖片、視窗快照（Appshots）、局部標註（Annotations）與網頁回饋說清楚修改位置。</p>
+            <p class="hero-copy">結合 Appshots、@Browser 樣式微調（Adjust）、CDP 除錯、WebMCP，以及 ChatGPT Work 母版套用與四大檔案局部標註。</p>
           </div>
-          <div class="hero-orbit" aria-hidden="true"><span>06</span></div>
+          <div class="hero-orbit" aria-hidden="true"><span>07</span></div>
         </section>
         <div class="lesson-meta">
           <span>Windows 桌面版與跨端點</span>
-          <span>依 2026-10-16 文件查核</span>
+          <span>依 2026-10-24 文件查核</span>
           <span>點擊截圖可放大</span>
+          <span class="glossary-hint-pill">💡 專有名詞懸停可看白話解釋</span>
         </div>
         <article class="mdx-content">
 <div id="image"></div>
-<h2>生成圖片與加上標註</h2>
+<h2>生成圖片、多圖輸入與局部標註修正</h2>
 <p>可以直接在聊天中描述想要什麼圖片，也可以先上傳參考圖。尺寸、用途、風格以及必須保留的內容，儘量一次說清楚。</p>
-<p>圖片輸入與圖片生成是不同功能：你可以提供圖片供分析；生成或編輯圖片則依方案可用性與用量而定。<a href="https://learn.chatgpt.com/docs/pricing" target="_blank" rel="noopener noreferrer">官方定價頁</a>目前指出 Free 方案不提供 Codex 圖片生成。</p>
+<p><strong>圖片輸入（Image input）與圖片生成（Image generation）是兩項不同能力：</strong>任何方案都可提供圖片或設計稿供 Codex 分析；而在 Codex 內生成或編輯圖片則依方案可用性與配額而定（<a href="https://learn.chatgpt.com/docs/pricing" target="_blank" rel="noopener noreferrer">官方定價頁</a>目前指出 Free 與 Go 方案不提供 Codex 內建圖片生成）。</p>
 <ul>
-  <li><strong>附上圖片：</strong>在桌面版或 IDE 擴充功能中，拖曳圖片至輸入框時按住 <code>Shift</code>，或使用可見的附件入口，讓圖片成為聊天上下文；在 CLI 可使用 <code>codex -i screenshot.png</code>。<a href="https://learn.chatgpt.com/docs/image-inputs" target="_blank" rel="noopener noreferrer">官方圖片輸入說明</a>。</li>
-  <li><strong>多張參考圖編號法：</strong>同時上傳多張圖時，可在提示詞明確指定角色，例如：「圖 1 是要修改的產品圖，圖 2 是配色與光影參考，請保留圖 1 的主體構圖並套用圖 2 的風格」。</li>
+  <li><strong>桌面版、IDE 與 CLI 附加圖片：</strong>在桌面版或 IDE 擴充功能中，直接點擊附件入口，或拖曳圖片至輸入框時按住 <code>Shift</code> 讓圖片加入聊天上下文；在 Codex CLI 則可使用 <code>-i, --image &lt;path&gt;</code> 附加單張或多張圖片（例如 <code>codex -i mockup.png -i error.png "比對設計稿修復畫面"</code>，非互動模式 <code>codex exec -i</code> 同樣支援）。<a href="https://learn.chatgpt.com/docs/image-inputs" target="_blank" rel="noopener noreferrer">官方圖片輸入說明</a>。</li>
+  <li><strong>多張參考圖編號法：</strong>同時上傳多張圖時，可在提示詞明確指定每張圖的角色，例如：「圖 1 是要修改的產品首頁截圖，圖 2 是品牌配色與卡片陰影參考，請保留圖 1 的版面結構並套用圖 2 的視覺風格」。</li>
 </ul>
-<p>圖片產生後，點擊圖片開啟檢視器。需要針對局部區域修改時：</p>
+<p>圖片產生後，點擊圖片開啟「<strong>圖像</strong>」檢視器。需要針對局部區域修改時，不必整張重抽：</p>
 <ol>
-  <li>進入畫布檢視模式，選擇要修改的圖片。</li>
-  <li>使用留言或標註工具，點擊需要修改的位置。</li>
+  <li>點擊生成的圖片進入「<strong>圖像</strong>」檢視模式（左上角可切換圖像版本，右上角可調整縮放比例、下載或於外部程式開啟）。</li>
+  <li>使用圖片下方懸浮工具列的「<strong>標註</strong>」（手繪塗抹）或「<strong>留言</strong>」（局部框選加號）工具，圈選或點擊需要修改的位置（工具列亦直接提供「<strong>移除背景</strong>」、「<strong>擦除</strong>」與「<strong>調整大小</strong>」快捷功能）。</li>
   <li>寫清楚「要改成什麼」以及「哪些部分不要動」。</li>
   <li>檢查附上的圖片與標註內容，再依目前介面的提示送出修改要求。</li>
 </ol>
-<p>標註內容可以這樣寫：</p>
 <div class="command-block">
   <div class="command-title"><span></span>可以這樣說<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
-  <pre><code>把這行標題放大一點，保留目前的配色。不要改動其他文字與圖片位置。</code></pre>
+  <pre><code>把標註處的標題放大一點並改為深藍色，保留目前的背景構圖與其他文字位置。</code></pre>
 </div>
 
 <figure class="interface-figure" style="max-width:1100px">
@@ -96,21 +98,21 @@
     <img src="../images/tutorial/pick/繪圖1.png" alt="圖片生成中的聊天" loading="lazy" decoding="async" />
     <span class="image-expand" aria-hidden="true">↗</span>
   </button>
-  <figcaption><strong>圖片生成中的聊天</strong>提出圖片需求後，聊天會顯示生成進度；完成後再開啟成品檢查細節。</figcaption>
+  <figcaption><strong>圖片生成中的聊天</strong>提出圖片需求後，聊天會自動讀取 <code>imagegen</code> 技能並顯示生成進度；完成後再開啟成品檢查細節。</figcaption>
 </figure>
 <figure class="interface-figure" style="max-width:1100px">
   <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/繪圖2.png" data-screenshot-title="圖片檢視與編輯工具列" aria-label="圖片檢視與編輯工具列，放大檢視">
     <img src="../images/tutorial/pick/繪圖2.png" alt="圖片檢視與編輯工具列" loading="lazy" decoding="async" />
     <span class="image-expand" aria-hidden="true">↗</span>
   </button>
-  <figcaption><strong>圖片檢視與編輯工具列</strong>點開生成的圖片，可在檢視器查看工具列與後續編輯入口；提出修改時說清楚要改與要保留的部分。</figcaption>
+  <figcaption><strong>圖片檢視與編輯工具列</strong>點開生成的圖片，下方工具列提供「標註」、「留言」、「移除背景」、「擦除」與「調整大小」五大編輯入口；提出修改時說清楚要改與要保留的部分。</figcaption>
 </figure>
 <div id="appshots"></div>
-<h2>視窗快照（Appshots）：擷取畫面與可取得的文字</h2>
-<p>當你想讓 Codex 查看另一個軟體的報錯視窗、設定面板、設計稿或文件時，不必手動截圖再存檔上傳！在桌面版介面中，可直接點擊輸入框旁邊的快照按鈕選取目標視窗，即可一鍵拍下 <strong>Appshot（應用程式視窗快照）</strong>：</p>
+<h2>視窗快照（Appshots）：一鍵擷取畫面與捲動區外的文字層</h2>
+<p>當你想讓 ChatGPT Work 或 Codex 查看另一個軟體的報錯視窗、終端機輸出、設定面板、Figma 設計稿或文件時，不必手動截圖存檔再上傳！你可以從輸入框左下角「<strong><code>+</code></strong>」選單點選「<strong>附加〈目前開啟的應用程式名稱〉</strong>」，或直接按下「<strong>設定 → Appshots</strong>」中的<strong>快速鍵</strong>（預設為 <strong><code>Alt + Alt</code>，即同時按下鍵盤左右兩個 <code>Alt</code> 鍵</strong>），一鍵拍下最上層視窗的 <strong>Appshot（應用程式視窗快照）</strong>：</p>
 <ul>
-  <li><strong>同時擷取畫面與捲動區外的文字：</strong>Appshot 會拍下目前視窗的可見畫面；若該應用程式提供可讀取的文字，也可能附上畫面外的文字。部分應用程式只能提供截圖，送出前先查看附件內容。</li>
-  <li><strong>選擇發送目標：</strong>依「設定 → Appshots」的目前選項，快照可加入目前聊天或新聊天。發送前先檢查目的地與附帶內容。</li>
+  <li><strong>同時擷取像素畫面與視窗可讀文字層：</strong>Appshot 不僅會拍下目前視窗的可見像素畫面，若該應用程式支援無障礙文字讀取，<strong>還會一併提取視窗內（包含部分捲動到螢幕外）的可讀取文字層</strong>，讓你省去手動複製貼上長篇錯誤 Log 的麻煩。部分純圖形介面軟體只能提供像素截圖，送出前可先點擊附件確認內容。</li>
+  <li><strong>設定快速鍵、Appshot 目的地與播放音效：</strong>在「<strong>設定 → Appshots</strong>」中，可自訂「<strong>快速鍵</strong>」（預設：同時按下兩個 Alt 鍵）、「<strong>Appshot 目的地</strong>」（預設為「自動」，可選擇使用快速鍵時要送往目前對話或新對話）與「<strong>播放音效</strong>」。發送前請確認目標視窗沒有顯示未遮蔽的密碼或私密對話。</li>
 </ul>
 
 <figure class="interface-figure" style="max-width:1100px">
@@ -118,71 +120,87 @@
     <img src="../images/tutorial/pick/Appshots.png" alt="Appshots 設定" loading="lazy" decoding="async" />
     <span class="image-expand" aria-hidden="true">↗</span>
   </button>
-  <figcaption><strong>Appshots 設定</strong>設定頁可查看視窗快照的快捷鍵、送往目前或新聊天的選項與音效。使用前確認畫面沒有不打算分享的內容。</figcaption>
+  <figcaption><strong>Appshots 設定</strong>位置：設定 →（整合）→ Appshots。可設定「快速鍵（預設同時按下兩個 Alt 鍵）」、「Appshot 目的地（預設自動）」與「播放音效」。</figcaption>
 </figure>
 <div id="web"></div>
-<h2>網頁註解與開發者工具通訊協定（CDP）</h2>
-<p>當網頁在右側內建瀏覽器中開啟後，可以直接在頁面上加上註解，不必用長篇文字解釋「左上角第二塊」。</p>
+<h2>內建瀏覽器註解（Adjust）、開發者模式（CDP）與 Site Tools（WebMCP）</h2>
+<p>當前端網頁或本機開發伺服器（如 <code>localhost:3000</code>）在右側內建瀏覽器（<code>@Browser</code>）中開啟後，你可以直接在頁面上圈選元素、即時拉動樣式預覽，甚至授權讀取底層 DevTools 資訊，完全不必再用長篇文字苦苦描述「左上角第二顆按鈕往右移一點」（在「<strong>設定 → 瀏覽器</strong>」中，建議將「<strong>本機 URL 開啟目標</strong>」設為 <code>ChatGPT</code>，並確認「<strong>註解螢幕截圖</strong>」設為「一律包含」以輔助定位）。</p>
 <ol class="operation-steps">
-  <li><div class="step-copy"><h3>開啟頁面並進入註解模式</h3><p>點擊預覽連結；若目前介面提供網頁註解功能，依畫面提示進入註解模式。如果需要核對其他畫面狀態，請先把頁面切換到該狀態。</p></div></li>
-  <li><div class="step-copy"><h3>選取元素或區域</h3><p>點擊文字、按鈕等元素，或拖曳選取一塊區域。出現選取外框後，確認範圍沒有選得太大。</p></div></li>
-  <li><div class="step-copy"><h3>使用調整（Adjust）微調樣式並送出意見</h3><p>輸入具體的修改方式。需要更細部的樣式回饋時，可點開輸入框旁的「<strong>調整（Adjust）</strong>」選項，直接調整字型、間距、顏色等設定並即時預覽。儲存註解後，再要求 Codex 處理。</p></div></li>
+  <li><div class="step-copy"><h3>開啟頁面並進入註解模式（Annotate）</h3><p>點擊預覽網址在右側開啟內建瀏覽器，點選瀏覽器工具列的註解（Annotate）按鈕。若要檢查特定互動狀態（如展開下拉選單或彈跳視窗），請先把網頁操作到該狀態再進入註解。</p></div></li>
+  <li><div class="step-copy"><h3>選取 DOM 元素或拖曳框選區域</h3><p>直接點擊目標文字、按鈕或卡片元素，或拖曳選取一塊區域。出現選取外框後，確認鎖定範圍精準。</p></div></li>
+  <li><div class="step-copy"><h3>使用調整（Adjust）即時微調 CSS 樣式並轉寫回原始碼</h3><p>點開輸入框旁的「<strong>調整（Adjust）</strong>」面板，直接在畫面上拉動調整<strong>字型大小、字重、內外間距（Padding / Margin）、顏色與圓角</strong>並即時預覽效果。調整到滿意後儲存註解送出，Codex 就會直接把你調好的視覺數值精準寫回專案的 CSS 或 Tailwind 原始碼！</p></div></li>
 </ol>
-<p>例如：</p>
 <div class="command-block">
   <div class="command-title"><span></span>可以這樣說<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
-  <pre><code>請處理剛才的兩則註解，只調整標出的字型與間距，其他區域保持不變。</code></pre>
+  <pre><code>請處理剛才在內建瀏覽器標註的兩則 Adjust 樣式修改，直接更新對應元件的 CSS，其他區域保持不變。</code></pre>
 </div>
-<aside class="inline-note"><strong>進階除錯：開發者模式（Developer Mode）與 CDP</strong><div><p>若遇到複雜的前端錯誤或 API 請求問題，可至「設定 → 瀏覽器（Browser）」開啟 <strong>開發者模式（Developer mode / Enable full CDP access）</strong>。CDP 是 Chrome 開發者工具通訊協定（Chrome DevTools Protocol）；啟用後 Codex 可依權限讀取 Console 報錯、Network 請求、DOM 結構與效能資料。開啟前先確認網頁及登入資訊是否適合交由工具檢視。</p></div></aside>
+<aside class="inline-note"><strong>💡 前端除錯進階雙武：開發者模式（CDP）與 Site Tools（WebMCP）</strong><div>
+  <ul>
+    <li><strong>開發者模式（Developer Mode / Full CDP Access）：</strong>遇到「按下按鈕沒反應」或 API 請求失敗時，可至「設定 → 瀏覽器（Browser）」開啟 <strong>Developer mode（Enable full CDP access）</strong>。啟用 Chrome DevTools Protocol（CDP）後，Codex 可在你的授權下直接讀取瀏覽器的 <strong>Console 報錯堆疊、Network API 請求與回應 Payload、DOM 結構及效能數據</strong>，一次定位前後端根因（開啟前請確認分頁未包含敏感個人登入憑證）。</li>
+    <li><strong>Site Tools（WebMCP 網頁原生工具註冊）：</strong>根據 <a href="https://learn.chatgpt.com/docs/browser" target="_blank" rel="noopener noreferrer">官方瀏覽器文件</a>，支援 WebMCP 標準（<code>document.modelContext.registerTool</code>）的現代網頁應用程式，可直接向內建瀏覽器註冊結構化操作工具（並附帶 <code>readOnlyHint</code> 唯讀、<code>untrustedContentHint</code> 不可信內容、<code>consequentialHint</code> 重要副作用等安全標記）。你可從瀏覽器網址列旁的指示器檢視並授權，讓代理直接呼叫網站原生功能，而不必依賴螢幕座標盲點點擊。</li>
+  </ul>
+</div></aside>
 
 <div id="visualize"></div>
-<h2>互動視覺化（@Visualize）：把數據與概念變成圖表</h2>
-<p>當純文字或靜態圖片不足以表達複雜邏輯時，你可以在對話框輸入 <code>@Visualize</code>（從外掛選單選取 <strong>Visualize</strong>），請 Codex 直接在對話中生成<strong>可拖曳滑桿、可調整參數的互動式圖表、演算法模擬器或資料儀表板</strong>（若在團隊協作的 ChatGPT Space 頁面中，則可輸入 <code>/visualize</code> 直接嵌入頁面）。</p>
+<h2>互動視覺化（@Visualize 與 Space /visualize）</h2>
+<p>當純文字或靜態圖片不足以表達複雜公式、演算法狀態或商業預測模型時，你可以在對話框輸入 <code>@Visualize</code>（從外掛選單選取 <strong>Visualize</strong>），請 ChatGPT 或 Codex 直接在對話中生成<strong>可拖曳滑桿、可切換視角與即時試算參數的互動式圖表、架構模擬器或資料儀表板</strong>。</p>
+<p>若你正在團隊協作的 <strong>ChatGPT Space（Pages 共編頁面，詳見第 11 章）</strong> 撰寫規格書或分析報告，更可以直接在頁面內輸入斜線指令 <strong><code>/visualize</code> + 描述</strong>（例如：<code>/visualize 根據上方表格數據製作可調整轉換率與客單價的營收預測試算器</code>），將活的互動式小工具直接嵌入文件中供團隊成員操作驗證。</p>
 
 <div id="preview"></div>
-<h2>檔案預覽與局部標註（Annotations）</h2>
-<p>產生文件、圖片或網頁後，點擊回答裡的檔案卡片或連結，即可在右側開啟預覽器（Artifacts Viewer）。右上角的面板按鈕可以切換分割檢視、全螢幕或收起側邊欄。</p>
-<p>除了檢視網頁與圖片外，現在右側預覽器還全面支援對 <strong>Word 文件（Documents）、PowerPoint 簡報（Presentations）、Excel 試算表（Spreadsheets）、PDF 與 Markdown 程式碼</strong> 直接進行<strong>局部圈選標註（Annotations）</strong>！選取文件中的特定段落、表格或投影片區塊並留下修改意見，Codex 就會只針對圈選處精準修正，保留其餘版面與數據。</p>
-<p>檢查結果時，請先確認三件事：</p>
+<h2>ChatGPT Work 母版套用、檔案預覽器與四大檔案局部標註（Annotations）</h2>
+<p>桌面版可在右側預覽支援的文件、試算表、簡報與 PDF，並對部分格式加上局部標註；Web 版的預覽與修訂方式可能不同，應開啟或下載產物逐頁檢查。Codex CLI 會在本機路徑產出檔案，沒有同樣的視覺預覽介面。</p>
+<p>若你想在 <strong>ChatGPT Work</strong> 做出可審閱的商務檔案，可參考<a href="https://learn.chatgpt.com/docs/artifacts-viewer" target="_blank" rel="noopener noreferrer">官方 Work with files 流程</a>：</p>
 <ol>
-  <li>檔案確實已經儲存，且位置與檔名符合要求。</li>
-  <li>開啟後能正常顯示，而不只是看到「已完成」的文字回覆。</li>
-  <li>點擊右側差異檢視面板查看受影響的檔案 Diff，再決定是否接受。</li>
+  <li><strong>拒絕每次從零排版——上傳母版與範本（Master Templates &amp; <code>@Template-Creator</code>）：</strong>
+    <p>不要只用一句話叫 AI「幫我做一份好看的簡報」。實戰上請先附上公司標準配色的 <code>.pptx</code> 簡報母版、固定欄位格式的 <code>.xlsx</code> 財務模型，或標準合約排版的 <code>.docx</code> 範本（也可呼叫 <code>@Template-Creator</code> 將既有檔案封裝為可重複使用的標準母版），要求 Work：「<em>嚴格沿用這份簡報母版的版面配置、字型與色票，將本週專案數據填入對應頁次</em>」。</p>
+  </li>
+  <li><strong>用右側預覽器的「局部圈選標註（Annotations）」取代整份重做：</strong>
+    <p>在支援標註的預覽器中，圈選目標並描述想改的內容與應保留的範圍；修訂後仍須檢查整份檔案，確認其他段落沒有意外變更：</p>
+    <ul>
+      <li><strong>Word 文件與 PDF（Documents / PDF）：</strong>反白或圈選報告中的某一段落，留言「<em>核對這段數據的原始出處並改寫為條列式；其他章節請保持原樣</em>」。完成後仍須檢查整份文件與版面。</li>
+      <li><strong>PowerPoint 簡報（Presentations）：</strong>圈選第 4 張投影片上的某個圖表或文字框，留言「<em>將這張圓餅圖改為水平長條圖並放大數據標籤</em>」，不會影響其他投影片版面。</li>
+      <li><strong>Excel 試算表（Spreadsheets）：</strong>圈選特定儲存格範圍或樞紐分析表，要求檢查公式參照錯誤、補上條件式格式或依該區間新增視覺化圖表。</li>
+      <li><strong>HTML 網頁與 LaTeX（<code>.tex</code>）雙模式檢視：</strong>預覽器對 <code>.html</code> 支援「即時互動渲染畫面」與「原始碼（Source）」一鍵切換；對專業論文與技術文件常用的 <strong>LaTeX（<code>.tex</code>）</strong> 更支援「左側修改原始碼、右側即時編譯 PDF 預覽」的雙向檢視！</li>
+    </ul>
+  </li>
 </ol>
-<p>網頁只在本機執行時，預覽網址會是本機位址（如 <code>localhost</code> 或 <code>127.0.0.1</code>）。能在自己電腦上開啟，不代表已經公開上線。</p>
+<p>驗收檔案時，請依序確認三件事：① 檔案確實已儲存至預期路徑且檔名正確；② 在預覽器或本機軟體開啟後版面與公式正常，而非只看聊天文字說「已完成」；③ 點擊右側 Review 面板核對實際檔案 Diff。網頁只在本機執行時，預覽網址為 <code>localhost</code> 或 <code>127.0.0.1</code>，能在自己電腦開啟不代表已公開發布（若需託管並分享網站，請使用第 11 章介紹的 <strong>ChatGPT Sites</strong>）。</p>
 
 <div id="check"></div>
-<h2>修改後再看一遍</h2>
-<p>樣式預覽不等於檔案已經修改完成。等 Codex 處理完畢後，請重新整理頁面，檢查標註位置與相鄰區域：</p>
+<h2>修改後再看一遍：視覺與響應式驗收清單</h2>
+<p>在預覽器拉動樣式（Adjust）或留下標註（Annotations）後，等代理執行完畢，請重新整理預覽畫面並逐項檢查：</p>
 <ul>
-  <li><strong>圖片：</strong>檢查文字、數量、比例，確認有沒有連帶改動到原本已經滿意的部分。</li>
-  <li><strong>網頁：</strong>檢查修改後的一般狀態，再看看小螢幕響應式版面是否仍然完整。</li>
-  <li><strong>結果不符預期：</strong>保留原圖或上一版結果，指出具體差異，再繼續修改。</li>
+  <li><strong>圖片與簡報：</strong>檢查文字拼寫、數據標籤、元素數量與比例，確認有沒有連帶改動到原本已經滿意的區域。</li>
+  <li><strong>網頁與前端元件：</strong>檢查桌面寬度與手機窄螢幕（Responsive）版面是否完整、深淺色主題切換是否正常，並在開啟 CDP 時確認 Console 為零報錯。</li>
+  <li><strong>結果不符預期時：</strong>保留上一版結果（或透過 Git Review 面板 Revert 單一區塊），在預覽器重新精準框選差異處，再繼續微調。</li>
 </ul>
 <details class="source-list">
   <summary>官方文件與延伸閱讀</summary>
   <ul>
-    <li><a href="https://learn.chatgpt.com/docs/image-generation" target="_blank" rel="noopener noreferrer">圖片生成、編輯與拖曳輸入</a></li>
-    <li><a href="https://learn.chatgpt.com/docs/browser" target="_blank" rel="noopener noreferrer">內建瀏覽器、註解與 CDP 開發者模式</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/image-inputs" target="_blank" rel="noopener noreferrer">圖片輸入（Image inputs）與 CLI -i 參數</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/image-generation" target="_blank" rel="noopener noreferrer">圖片生成、編輯與局部標註</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/work-with-files" target="_blank" rel="noopener noreferrer">處理文件、簡報、試算表與母版範本（Work with files）</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/artifacts-viewer" target="_blank" rel="noopener noreferrer">檔案預覽器（Artifacts Viewer）、局部標註與 LaTeX 預覽</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/browser" target="_blank" rel="noopener noreferrer">內建瀏覽器、Adjust 樣式調整、CDP 開發者模式與 WebMCP (Site Tools)</a></li>
     <li><a href="https://learn.chatgpt.com/docs/features" target="_blank" rel="noopener noreferrer">功能總覽（Appshots 與 @Visualize）</a></li>
   </ul>
 </details>
         </article>
-        <nav class="chapter-pagination" aria-label="前後章節">
-          <a data-chapter-slug="parallel-and-fork" href="parallel-and-fork.html">← <span>上一章<small>聊天分支（Fork）與工作樹（Worktree）隔離</small></span></a>
-          <a class="next" data-chapter-slug="skills-and-tools" href="skills-and-tools.html"><span>下一章<small>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</small></span> →</a>
+                <nav class="chapter-pagination" aria-label="前後章節">
+          <a class="prev" data-chapter-slug="models-and-context" href="models-and-context.html">← <span>上一章<small>選擇模型、查看用量與管理上下文</small></span></a>
+          <a class="next" data-chapter-slug="parallel-and-fork" href="parallel-and-fork.html"><span>下一章<small>聊天分支（Fork）與工作樹（Worktree）隔離</small></span> →</a>
         </nav>
       </main>
 
       <aside class="page-toc" aria-label="本頁目錄">
         <p class="eyebrow">本章內容</p>
         <nav class="toc-links">
-          <a href="#image">生成圖片與加上標註</a>
-          <a href="#appshots">視窗快照（Appshots）</a>
-          <a href="#web">網頁註解與開發者工具（CDP）</a>
-          <a href="#visualize">@Visualize 互動式視覺化</a>
-          <a href="#preview">檔案預覽與局部標註</a>
-          <a href="#check">修改後再看一遍</a>
+          <a href="#image">圖片生成、多圖輸入與標註</a>
+          <a href="#appshots">視窗快照（Appshots）含文字層</a>
+          <a href="#web">瀏覽器 Adjust、CDP 與 WebMCP</a>
+          <a href="#visualize">@Visualize 與 Space 互動圖表</a>
+          <a href="#preview">Work 母版與四大檔案局部標註</a>
+          <a href="#check">視覺與響應式驗收清單</a>
         </nav>
         <div class="toc-note">
           <span>專注閱讀</span>
@@ -217,6 +235,19 @@
           <img id="image-viewer-img" src="" alt="" />
         </div>
         <p id="image-viewer-hint">保留完整介面；需要看清楚小字時，請點擊「原始尺寸檢視」。</p>
+      </div>
+    </div>
+
+    <!-- 專有名詞白話解釋懸停視窗 -->
+    <div popover="hint" id="term-tooltip">
+      <div class="term-tooltip-card">
+        <div class="term-tooltip-header">
+          <span class="term-tooltip-badge" id="term-tooltip-badge"></span>
+          <button type="button" class="term-tooltip-close" id="term-tooltip-close" aria-label="關閉名詞解釋">關閉 ×</button>
+        </div>
+        <strong class="term-tooltip-title" id="term-tooltip-title"></strong>
+        <div class="term-tooltip-analogy" id="term-tooltip-analogy"></div>
+        <p class="term-tooltip-usage" id="term-tooltip-usage"></p>
       </div>
     </div>
   </div>

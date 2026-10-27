@@ -10,7 +10,7 @@
     } catch (e) {}
   </script>
   <title>Codex 指示、AGENTS.md 與常用命令｜Codex 實戰手冊</title>
-  <meta name="description" content="區分個人 Codex 指示與專案 AGENTS.md，搭配整合開發環境（IDE）和常用命令建立工作流程。" />
+  <meta name="description" content="學會 IDE 深度整合、Code Review 三大工作流（含 GitHub @codex）、AGENTS.md 瘦身法、三層記憶架構與完整斜線指令表。" />
   <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="../assets/styles.css" />
 </head>
@@ -34,70 +34,88 @@
 
     <div class="docs-shell">
       <aside id="chapter-sidebar" class="chapter-sidebar" aria-label="課程章節">
-        <p class="eyebrow">閱讀目錄 · 共 10 章</p>
+        <p class="eyebrow">閱讀目錄 · 共 12 章</p>
         <nav>
-          <a class="chapter-link" data-chapter-slug="introduction" href="introduction.html"><span>01</span>認識 Codex 與使用入口</a>
-          <a class="chapter-link" data-chapter-slug="workspace" href="workspace.html"><span>02</span>安裝、登入與建立第一個專案</a>
-          <a class="chapter-link" data-chapter-slug="permissions-and-control" href="permissions-and-control.html"><span>03</span>權限、核准與資訊安全</a>
-          <a class="chapter-link" data-chapter-slug="models-and-context" href="models-and-context.html"><span>04</span>選擇模型、查看用量與管理上下文</a>
-          <a class="chapter-link" data-chapter-slug="parallel-and-fork" href="parallel-and-fork.html"><span>05</span>聊天分支（Fork）與工作樹（Worktree）隔離</a>
-          <a class="chapter-link" data-chapter-slug="visual-feedback" href="visual-feedback.html"><span>06</span>圖片、視窗快照（Appshots）與網頁回饋</a>
-          <a class="chapter-link" data-chapter-slug="skills-and-tools" href="skills-and-tools.html"><span>07</span>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</a>
-          <a class="chapter-link active" data-chapter-slug="instructions-and-editor" href="instructions-and-editor.html"><span>08</span>Codex 指示、AGENTS.md 與常用命令</a>
-          <a class="chapter-link" data-chapter-slug="plan-goal-schedule" href="plan-goal-schedule.html"><span>09</span>規劃（Plan）、目標（Goal）與排程任務</a>
-          <a class="chapter-link" data-chapter-slug="remote" href="remote.html"><span>10</span>手機遠端連線（Remote）與雲端任務（Cloud）</a>
+          <a class="chapter-link" data-chapter-slug="chatgpt-basics" href="chatgpt-basics.html"><span>01</span>ChatGPT Chat：對話、搜尋與專案</a>
+          <a class="chapter-link" data-chapter-slug="work-basics" href="work-basics.html"><span>02</span>ChatGPT Work：委派、交付與驗收</a>
+          <a class="chapter-link" data-chapter-slug="introduction" href="introduction.html"><span>03</span>認識 Codex 與使用入口</a>
+          <a class="chapter-link" data-chapter-slug="workspace" href="workspace.html"><span>04</span>安裝、登入與建立第一個專案</a>
+          <a class="chapter-link" data-chapter-slug="permissions-and-control" href="permissions-and-control.html"><span>05</span>權限、核准與資訊安全</a>
+          <a class="chapter-link" data-chapter-slug="models-and-context" href="models-and-context.html"><span>06</span>選擇模型、查看用量與管理上下文</a>
+          <a class="chapter-link" data-chapter-slug="visual-feedback" href="visual-feedback.html"><span>07</span>圖片、視窗快照（Appshots）與網頁回饋</a>
+          <a class="chapter-link" data-chapter-slug="parallel-and-fork" href="parallel-and-fork.html"><span>08</span>聊天分支（Fork）與工作樹（Worktree）隔離</a>
+          <a class="chapter-link" data-chapter-slug="skills-and-tools" href="skills-and-tools.html"><span>09</span>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</a>
+          <a class="chapter-link active" data-chapter-slug="instructions-and-editor" href="instructions-and-editor.html"><span>10</span>Codex 指示、AGENTS.md 與常用命令</a>
+          <a class="chapter-link" data-chapter-slug="plan-goal-schedule" href="plan-goal-schedule.html"><span>11</span>規劃（Plan）、目標（Goal）與排程任務</a>
+          <a class="chapter-link" data-chapter-slug="remote" href="remote.html"><span>12</span>手機遠端連線（Remote）與雲端任務（Cloud）</a>
         </nav>
         <div class="course-progress">
           <span>目前進度</span>
-          <strong>08 / 10</strong>
-          <i><b style="width: 80%"></b></i>
+          <strong>10 / 12</strong>
+          <i><b style="width: 83%"></b></i>
         </div>
       </aside>
 
       <main class="article" id="lesson">
-        <div class="breadcrumb"><a href="../index.html">Codex Windows 教學</a> <span>/</span> 第 08 章</div>
+        <div class="breadcrumb"><a href="../index.html">Codex Windows 教學</a> <span>/</span> 第 10 章</div>
         <section class="hero-card">
           <div>
-            <p class="chapter-kicker">CHAPTER 08 · 約 10 分鐘</p>
+            <p class="chapter-kicker">CHAPTER 10 · 約 12 分鐘</p>
             <h1>Codex 指示、AGENTS.md 與常用命令</h1>
-            <p class="hero-copy">學會檢查差異、寫清任務提示詞，並把個人化指示與專案 AGENTS.md 放在正確的位置。</p>
+            <p class="hero-copy">學會 IDE 深度整合、Code Review 三大工作流（含 GitHub @codex）、AGENTS.md 瘦身法、三層記憶架構與完整斜線指令表。</p>
           </div>
-          <div class="hero-orbit" aria-hidden="true"><span>08</span></div>
+          <div class="hero-orbit" aria-hidden="true"><span>10</span></div>
         </section>
         <div class="lesson-meta">
           <span>Windows 桌面版與跨端點</span>
-          <span>依 2026-10-17 文件查核</span>
+          <span>依 2026-10-24 文件查核</span>
           <span>點擊截圖可放大</span>
+          <span class="glossary-hint-pill">💡 專有名詞懸停可看白話解釋</span>
         </div>
         <article class="mdx-content">
 <div id="editor"></div>
-<h2>安裝與連接整合開發環境（IDE）</h2>
-<p>如果只使用 Codex 桌面版，不需要先學會寫程式的編輯器。當你需要自己檢視、修改檔案，或逐行檢查程式碼時，再安裝編輯器即可。</p>
+<h2>安裝與深度整合開發環境（IDE 擴充功能指南）</h2>
+<p>如果只使用 Codex 桌面版處理一般檔案，不需要先安裝程式碼編輯器。當你需要自己逐行檢視、修改程式碼或進行複雜除錯時，Codex 可直接嵌入你習慣的 IDE 中工作（詳見 <a href="https://learn.chatgpt.com/docs/codex/ide" target="_blank" rel="noopener noreferrer">官方 IDE 整合指南</a>）：</p>
 <ul>
-  <li><strong>選擇整合開發環境（IDE）：</strong>VS Code、Cursor 與 Windsurf 使用 Codex 擴充功能；Xcode 與 JetBrains IDE 則使用各自的原生整合入口。若桌面版找不到剛裝好的編輯器，請重啟桌面版再檢查專案的開啟方式。</li>
-  <li><strong>使用擴充功能：</strong>在 VS Code、Cursor 或 Windsurf 安裝／啟用 Codex 後，開啟 Codex 側邊欄並登入。需要使用編輯器目前開啟檔案或選取範圍時，再於輸入框確認 IDE 上下文已啟用；詳細入口依<a href="https://learn.chatgpt.com/docs/codex/ide" target="_blank" rel="noopener noreferrer">官方 IDE 指南</a>核對。</li>
-  <li><strong>Git 版本控制：</strong>用來記錄版本歷史與比對修改差異；但光裝好 Git 並不會自動替普通資料夾建立歷史，需在專案中初始化 Git 儲存庫（<code>git init</code>）。</li>
+  <li><strong>支援的五大 IDE 入口：</strong>
+    <ul>
+      <li><strong>VS Code、Cursor 與 Windsurf：</strong>於擴充功能市集安裝／啟用 Codex 擴充功能後，可從左側 Activity Bar 點擊圖示，或按下 <code>Ctrl + Shift + P</code>（macOS 為 <code>Cmd + Shift + P</code>）執行 <code>Codex: Open Codex Sidebar</code> 開啟側邊欄並登入 ChatGPT 帳號。</li>
+      <li><strong>JetBrains 系列 IDE（IntelliJ IDEA、PyCharm、WebStorm 等）與 Xcode：</strong>JetBrains 可於內建 AI Chat 選單選擇 Codex；Xcode 則可於內建 Coding Assistant 中選取 Codex 作為編碼代理。</li>
+    </ul>
+  </li>
+  <li><strong>自動同步活動檔案與選取範圍（<code>/ide-context</code>）：</strong>在 IDE 側邊欄對話時，Codex 預設會自動感知你目前開啟的<strong>活動檔案（Active file）</strong>以及滑鼠<strong>反白選取的程式碼行範圍（Selection）</strong>（可隨時透過輸入框開關或輸入 <code>/ide-context</code> 切換）；你也可以在輸入框輸入 <code>@</code> 模糊搜尋並引用其他檔案或近期對話。</li>
+  <li><strong>IDE 內模式切換與委派至雲端（Cloud Delegation）：</strong>在 IDE 側邊欄中，可直接切換 <strong><code>Agent</code>（預設工作區讀寫與執行）</strong>、<strong><code>Chat</code>（純架構討論與規劃）</strong> 或 <strong><code>Agent (Full Access)</code></strong>；遇到耗時的大型重構時，還可直接在 IDE 內把任務委派給 <strong>Codex Cloud</strong> 在背景雲端執行，完成後一鍵將 Diff 拉回本機編輯器審閱。</li>
+  <li><strong>Git 版本控制：</strong>用來記錄版本歷史與比對修改差異；但光裝好 Git 並不會自動替普通資料夾建立歷史，需在專案目錄中初始化 Git 儲存庫（<code>git init</code>）。</li>
 </ul>
 
 <div id="review"></div>
-<h2>Git 差異檢視（Review）：完成後逐檔核對</h2>
-<p>讓 Codex 改完檔案後，打開差異檢視（Review）面板，先確認「改了哪些檔案、每個檔案改了什麼」，再決定要不要繼續修改。這項功能需要專案位於 Git 儲存庫內；若目前只是一般資料夾，應用程式會提示建立儲存庫。Git 記錄的是檔案版本，光安裝 Git 還不會讓既有資料夾自動產生版本歷史。</p>
+<h2>Git 差異檢視與程式碼審查（Code Review 三大工作流）</h2>
+<p>根據 <a href="https://learn.chatgpt.com/docs/code-review" target="_blank" rel="noopener noreferrer">OpenAI 官方程式碼審查文件</a>，Codex 的程式碼審查涵蓋<strong>「本機人工 Diff 檢視」、「本機 <code>/review</code> 主動審查」與「雲端／GitHub PR 審查（含 Code Review 側邊欄外掛與 <code>@codex</code>）」</strong>三大工作流：</p>
 <figure class="interface-figure">
   <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/Git 差異檢視（Review）.png" data-screenshot-title="Git 差異檢視（Review）面板" aria-label="Git 差異檢視（Review）面板，放大檢視">
     <img src="../images/tutorial/pick/Git 差異檢視（Review）.png" alt="Codex 聊天中的查看變更按鈕，以及右側顯示最新輪次逐行差異的 Review 面板" loading="lazy" decoding="async" />
     <span class="image-expand" aria-hidden="true">↗</span>
   </button>
-  <figcaption><strong>Git 差異檢視（Review）</strong>這張實拍圖左側可見「查看變更」，右側以「最新輪次」顯示檔案與增刪行。點圖放大可看清楚程式碼；畫面中的專案名稱與檔案內容只是本次示例。</figcaption>
+  <figcaption><strong>Git 差異檢視（右側「<code>± 變更</code>」分頁）</strong>這張實拍圖左側聊天卡片可見「已編輯 14 個檔案」、「<code>復原 ↶</code>」與「<code>查看變更</code>」（選取文字亦會浮現「加入聊天」與「在側邊聊天中提問」），右側「<code>± 變更</code>」分頁則以「最新輪次」顯示檔案與增刪行。</figcaption>
 </figure>
+
+<h3>工作流 1：本機右側「變更（Review）」面板逐檔檢視與行內批註（Inline Comments）</h3>
 <ol>
-  <li><strong>開啟差異：</strong>在任務結果按「查看變更」，或開啟專案的差異檢視（Review）面板。先看檔案清單與增刪行數，再逐一展開檔案；不要只憑 Codex 的完成摘要判斷。</li>
-  <li><strong>選對範圍：</strong>想看 Codex 上一輪改了什麼，選「最新輪次（Last turn）」；想看儲存庫目前尚未暫存的改動，選「未暫存（Unstaged）」。面板也可切換「已暫存（Staged）」、「提交（Commit）」或「分支（Branch）」。面板預設顯示 Unstaged，而且儲存庫視圖可能含你自己或其他工具的改動，並非全由 Codex 產生。</li>
-  <li><strong>檢查與回饋：</strong>逐檔核對檔名、增刪內容與原本要求；有問題時把滑鼠移到對應變更行，按 <code>+</code> 留下行內意見，送出留言後再回聊天明確要求 Codex 處理。修正後重新查看差異與相關測試結果。</li>
+  <li><strong>開啟差異：</strong>在任務結果卡片（顯示「已編輯 N 個檔案」）按「<strong>查看變更</strong>」，或開啟專案右側的「<strong><code>± 變更</code></strong>」（差異檢視／Review）分頁面板。先看檔案清單與增刪行數，再逐一展開檔案；不要只憑 Codex 的完成摘要判斷。</li>
+  <li><strong>選對比較範圍：</strong>想看 Codex 上一輪改了什麼，選「<strong>最新輪次（Last turn）</strong>」；想看儲存庫目前尚未暫存的改動，選「<strong>未暫存（Unstaged，預設視圖）</strong>」。面板也可切換「<strong>已暫存（Staged）</strong>」、「<strong>提交（Commit）</strong>」或「<strong>分支（Branch）</strong>」。請注意：儲存庫視圖會反映整個 Git 工作樹的變更，可能包含你自己或其他工具的改動。</li>
+  <li><strong>行內批註（Inline Comment）精準修正：</strong>逐檔核對時，若發現某一行邏輯或命名不理想，把滑鼠移到該變更行按 <strong><code>+</code></strong> 留下行內意見；把多個檔案的行內意見都標註完後，再回聊天要求 Codex 一併處理，比用純文字描述「第幾行改什麼」精準十倍！聊天卡片上的「<strong><code>復原 ↶</code></strong>」可整批還原該輪修改，而右側面板中的「暫存（Stage）」可挑選要提交的區塊、「復原（Revert）」則會捨棄所選變更（點選前請確認範圍）。</li>
 </ol>
-<p>面板中的「暫存（Stage）」可選擇要納入下一次提交的區塊或檔案；「復原（Revert）」會捨棄所選變更，操作前先確認範圍和是否需要保留副本。需要 Codex 主動找問題時，在聊天輸入 <code>/review</code>，選擇「檢查未提交變更」或「對照基準分支」；它會回報值得檢查的發現，不會自行修改工作樹。<strong>Review 面板是你看差異的地方，<code>/review</code> 是請 Codex 做程式碼審查。</strong>審查建議仍要對照實際差異及測試判斷。詳見<a href="https://learn.chatgpt.com/docs/code-review" target="_blank" rel="noopener noreferrer">OpenAI 官方程式碼審查說明</a>。</p>
+
+<h3>工作流 2：在本機對話輸入 /review 請 AI 主動抓漏（三種目標）</h3>
+<p>在 Commit 或發 PR 之前，建議養成「<strong>先機器初審、再人工覆核</strong>」的雙重品管習慣：在對話框輸入 <strong><code>/review</code></strong>，可選擇三種審查目標：① <strong>未提交變更（Uncommitted changes）</strong>、② <strong>對照基準分支（Branch vs. Base branch）</strong>、③ <strong>單一提交（Single commit）</strong>。Codex 會以獨立審查員視角找出潛在 Bug、未處理的例外邊界或資安風險，並只回報發現而不會擅自修改你的工作樹。</p>
+
+<h3>工作流 3：Code Review 側邊欄面板（PR 收件匣）與 GitHub PR @codex 雲端審查</h3>
+<ul>
+  <li><strong>桌面版／網頁版「Code Review」專屬面板（Reviewer's Cockpit）：</strong>從最左側導覽列的 PR 審查圖示、左側「<strong>自訂 → 外掛程式</strong>」安裝 <strong>Code Review</strong> 或至「<strong>設定 → 程式設計 → 程式碼審查</strong>」設定並連結 GitHub 後，即可擁有專屬的 PR 審查收件匣（自動分類 <em>Assigned to me</em>、<em>Assigned to my team</em>、<em>Authored by me</em>）。點開任一 PR 即可查看 AI 變更摘要、相依 PR 堆疊（PR Stack）與 CI 狀態，並可先執行<strong>私人預審（Private Codex Review）</strong>，由你確認哪些意見有價值後再點擊發佈至 GitHub，避免機器人直接在團隊 PR 洗版！</li>
+  <li><strong>在 GitHub PR 直接呼叫 <code>@codex</code>：</strong>符合方案資格（Plus 以上）並啟用 GitHub 整合後，可在 GitHub Pull Request 留言 <strong><code>@codex review</code></strong> 觸發一般程式碼審查，或留言 <strong><code>@codex security review</code></strong>（適用於 Pro / Business / Enterprise / Edu）執行深度資安與威脅建模審查；也可在儲存庫設定開啟建立 PR 或每次 Push 時自動審查（會自動讀取儲存庫內的 <code>AGENTS.md</code> 審查規則）。</li>
+</ul>
 <h3>交付前用一則追問核對證據</h3>
 <div class="command-block"><div class="command-title"><span></span>可複製的核對提示<button type="button" class="copy-code-btn" aria-label="複製提示">複製</button></div><pre><code>請列出本次改動的檔案、每項要求的實際結果、執行過的測試與結果，以及尚未驗證的地方。再檢查差異與未追蹤檔案，指出任何不在我要求範圍內的修改、秘密或新增外部網址。</code></pre></div>
-<p>這段文字是教學建議，不是固定指令。Codex 的摘要只是查核線索；仍要親自查看 Review 面板、必要的畫面與測試結果。<a href="https://learn.chatgpt.com/docs/learn/best-practices" target="_blank" rel="noopener noreferrer">官方驗收建議</a></p>
 
 <div id="prompting"></div>
 <h2>一次性任務提示詞：四件事說清楚</h2>
@@ -106,113 +124,121 @@
 背景：請先查看設定頁、儲存流程與相關錯誤；從目前專案尋找檔案。
 限制：保留現有 API 格式，只修改必要檔案，不處理無關畫面。
 完成判準：重現原問題、確認修正後不再發生、執行相關測試；最後列出改動與尚未驗證項目。</code></pre></div>
-<p>這是寫法示範，檔名、測試與限制要按自己的專案改。簡單工作可只用一兩句；需求模糊、範圍大時，先用規劃（Plan）討論再實作。<a href="https://learn.chatgpt.com/docs/prompting" target="_blank" rel="noopener noreferrer">官方提示詞指南</a></p>
+<p>簡單工作可只用一兩句；需求模糊、範圍大時，先用規劃（<code>/plan</code>）或 <code>grill-me</code> 技能討論再實作。<a href="https://learn.chatgpt.com/docs/prompting" target="_blank" rel="noopener noreferrer">官方提示詞指南</a></p>
 
 <div id="custom"></div>
-<h2>個人化指示（Personal instructions）與輸入框預測</h2>
-<p>跨專案通用的工作偏好可在「設定 → 個人化」編輯。官方說明指出，Codex 會把所選電腦的個人指示儲存在全域 <code>AGENTS.md</code>；它與專案根目錄的 <code>AGENTS.md</code> 是不同作用範圍。若已有個人指示，先閱讀再整合，不要直接覆寫。介面欄位名稱與位置以目前版本為準。<a href="https://learn.chatgpt.com/docs/reference/settings" target="_blank" rel="noopener noreferrer">官方設定說明</a></p>
+<h2>個人化指示（Codex 指示）與輸入框預測（Tab）</h2>
+<p>跨專案通用的工作偏好可在「<strong>設定 → 個人化 → 自訂指示 → Codex 指示</strong>」編輯。如畫面說明所示，Codex 會直接編輯所選機器（如「<code>🖥 本機</code>」）上的全域 <code>~/.codex/AGENTS.md</code> 檔案；它與專案根目錄的 <code>AGENTS.md</code> 是不同作用範圍。若已有個人指示，先閱讀再整合，不要直接覆寫。<a href="https://learn.chatgpt.com/docs/reference/settings" target="_blank" rel="noopener noreferrer">官方設定說明</a></p>
 <div class="command-block">
-  <div class="command-title"><span></span>自訂指令範例<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
+  <div class="command-title"><span></span>個人化自訂指令範例<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
   <pre><code>- 以臺灣繁體中文回答；指令、檔名與 API 名稱保留英文。
 - 完成修改時，列出變更檔案、實際執行的檢查與未驗證項目。
 - 涉及對外發送、發布或改動他人資料時，先提出可審閱的內容與影響範圍。</code></pre>
 </div>
-<p>這是教學建議的範例，請按自己的工作方式修改。通用偏好應簡短、具體且長期有效；專案目錄、測試方法放專案規則，這次要做的檔案與結果留在當次聊天。文字指示不能代替沙盒或核准設定。<a href="https://learn.chatgpt.com/docs/customization/overview" target="_blank" rel="noopener noreferrer">官方自訂方式</a></p>
-<h3>寫好個人指示後，怎麼確認有用</h3>
-<ol><li>先寫三到五條<strong>每個專案都適用</strong>的偏好，使用具體可檢查的動詞，例如「列出執行過的測試」，不要只寫「回答好一點」。</li><li>儲存後開一則新聊天，用小任務觀察回答語言、格式與驗收回報是否符合；若專案另有 <code>AGENTS.md</code>，也一併檢查是否互相矛盾。</li><li>遇到反覆出錯再補一條規則；內容失效或變得太長時刪減。不要放入密碼、Token 或只適用於單次任務的資料。</li></ol>
-<p>這是依官方「保持指示簡短、只寫長期慣例、用實際任務驗證」整理的教學步驟。<a href="https://learn.chatgpt.com/docs/learn/best-practices" target="_blank" rel="noopener noreferrer">官方最佳實務</a>、<a href="https://learn.chatgpt.com/docs/agent-configuration/agents-md" target="_blank" rel="noopener noreferrer">官方 AGENTS.md 指南</a></p>
+<p>通用偏好應簡短、具體且長期有效；專案目錄與測試方法放專案規則，這次要做的檔案與結果留在當次聊天。文字指示不能代替沙盒或核准設定。<a href="https://learn.chatgpt.com/docs/customization/overview" target="_blank" rel="noopener noreferrer">官方自訂方式</a></p>
 <figure class="interface-figure" style="max-width:1100px">
-  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/codex指示.png" data-screenshot-title="個人化設定中的自訂指令" aria-label="個人化設定中的自訂指令，放大檢視">
-    <img src="../images/tutorial/pick/codex指示.png" alt="個人化設定中的自訂指令" loading="lazy" decoding="async" />
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/個人化.png" data-screenshot-title="設定 → 個人化（Codex 記憶與自訂指示）" aria-label="設定 → 個人化（Codex 記憶與自訂指示），放大檢視">
+    <img src="../images/tutorial/pick/個人化.png" alt="設定 → 個人化（Codex 記憶與自訂指示）" loading="lazy" decoding="async" />
     <span class="image-expand" aria-hidden="true">↗</span>
   </button>
-  <figcaption><strong>個人化設定中的自訂指令</strong>通用偏好寫在這裡，專案專屬要求則寫在專案檔案 AGENTS.md 中。</figcaption>
+  <figcaption><strong>第一步：開啟「設定 → 個人化」</strong>上方為「Codex 記憶」開關，中間「自訂指示」可點入「Codex 指示」，下方則有「寫作 → 參考我的寫作風格」。</figcaption>
+</figure>
+<figure class="interface-figure" style="max-width:1100px">
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/codex指示.png" data-screenshot-title="個人化設定中的「Codex 指示」" aria-label="個人化設定中的「Codex 指示」，放大檢視">
+    <img src="../images/tutorial/pick/codex指示.png" alt="個人化設定中的「Codex 指示」" loading="lazy" decoding="async" />
+    <span class="image-expand" aria-hidden="true">↗</span>
+  </button>
+  <figcaption><strong>第二步：編輯「Codex 指示」（全域 AGENTS.md）</strong>跨專案通用偏好寫在這裡並按右上角「儲存」；單一專案專屬要求則寫在專案設定或儲存庫內的 <code>AGENTS.md</code> 中。</figcaption>
 </figure>
 <aside class="inline-note"><strong>Composer Predictions：按 Tab 鍵一鍵帶入下一步預測</strong><div><p>當 Codex 完成一輪回覆後，輸入框會根據目前上下文自動淡色顯示預測你下一步想說的話（Composer Predictions）。如果預測符合你的想法，直接按 <code>Tab</code> 鍵即可轉為可編輯草稿，修改或直接送出（預測本身不會額外消耗你的方案額度）。</p></div></aside>
 
-<figure class="interface-figure" style="max-width:1100px">
-  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/個人化.png" data-screenshot-title="個人化設定" aria-label="個人化設定，放大檢視">
-    <img src="../images/tutorial/pick/個人化.png" alt="個人化設定" loading="lazy" decoding="async" />
-    <span class="image-expand" aria-hidden="true">↗</span>
-  </button>
-  <figcaption><strong>個人化設定</strong>在個人化頁檢查記憶與 Codex 指示等選項；修改後用新的聊天確認效果。</figcaption>
-</figure>
-<p>整理時可用三個問題判斷：<strong>每個專案都適用嗎？</strong>放個人指示；<strong>只在這個專案反覆適用嗎？</strong>放專案 <code>AGENTS.md</code>；<strong>只做這一次嗎？</strong>寫在當次訊息。修改前確認想影響的範圍。</p>
 <div id="agents"></div>
-<h2>專案裡的 AGENTS.md 階層規則</h2>
-<p><code>AGENTS.md</code> 用來記錄持續適用的專案慣例，例如目錄用途、建置與測試方式、修改限制及驗收方法。Codex 會讀取適用的指示檔；實際支援入口依使用的介面而異。在支援 <code>/init</code> 的 CLI 可產生骨架，也可在聊天中請 Codex 先檢查現有檔案，再協助擬稿：</p>
-<div class="command-block">
-  <div class="command-title"><span></span>可以這樣說<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
-  <pre><code>根據目前的目錄結構與已經確認的要求，產生一份簡潔的 AGENTS.md。
-寫清楚專案用途、目錄說明、修改範圍與檢查方法。
-不確定的地方請列出來讓我確認，不要把臨時討論當成長期規則。</code></pre>
-</div>
-<p>Codex 啟動時會依照以下<strong>由上而下的階層順序</strong>讀取並合併規則（越靠近當前工作目錄的優先權越高，預設合併上限為 <code>32 KiB</code>）：</p>
+<h2>專案裡的 AGENTS.md 階層規則、AGENTS.override.md 與 100 行瘦身實戰法</h2>
+<p><code>AGENTS.md</code> 用來記錄持續適用的專案工程慣例，例如建置與測試指令、目錄邊界、修改限制及 Code Review 檢查標準。你可以在對話框輸入 <strong><code>/init</code></strong> 自動掃描專案產生骨架，或請 Codex 先讀取現有檔案再協助擬稿。</p>
+<p>Codex 啟動工作階段時，會依照以下<strong>由上而下的階層順序</strong>探索並合併規則（越靠近當前工作目錄 <code>cwd</code> 的優先權越高，預設合併上限為 <code>32 KiB</code> / 32,768 bytes，可透過 <code>config.toml</code> 的 <code>project_doc_max_bytes</code> 調整）：</p>
 <ol>
-  <li><strong>全局規則（<code>~/.codex/AGENTS.md</code>）：</strong>套用到這台電腦上的所有專案。</li>
-  <li><strong>專案根目錄（<code>AGENTS.md</code>）：</strong>定義整個專案共用的目錄架構、建置測試指令與規範。</li>
-  <li><strong>子目錄規則與覆蓋檔（<code>AGENTS.override.md</code>）：</strong>子資料夾可放自己的 <code>AGENTS.md</code>；同一層若有覆蓋檔，Codex 會優先讀它。覆蓋檔是否進 Git 取決於儲存庫設定，檔名本身不會自動排除版控。</li>
+  <li><strong>全域規則（<code>~/.codex/AGENTS.md</code>）：</strong>套用到這台電腦上的所有專案（若同目錄存在 <code>~/.codex/AGENTS.override.md</code>，則會直接取代全域 <code>AGENTS.md</code>）。</li>
+  <li><strong>儲存庫根目錄（<code>AGENTS.md</code>）：</strong>定義整個專案共用的驗證指令（Test / Lint / Build）與全域權限邊界。若你的團隊原本已有其他名稱的規範檔（如 <code>CLAUDE.md</code> 或 <code>TEAM_GUIDE.md</code>），可在 <code>config.toml</code> 設定 <code>project_doc_fallback_filenames = ["CLAUDE.md", "TEAM_GUIDE.md"]</code> 作為找不到 <code>AGENTS.md</code> 時的自動備援檔名。</li>
+  <li><strong>子目錄規則與同層取代檔（<code>AGENTS.override.md</code>）：</strong>從根目錄往當前工作目錄（<code>cwd</code>）的每一層子資料夾（如 <code>apps/web/</code>、<code>services/api/</code>）都可放自己的 <code>AGENTS.md</code>。<strong>特別注意：若某一層目錄同時存在 <code>AGENTS.override.md</code> 與 <code>AGENTS.md</code>，Codex 在該層級會直接讀取 <code>AGENTS.override.md</code> 並「取代（忽略）」同層的 <code>AGENTS.md</code></strong>！這非常適合在重構高風險模組時，臨時放入不進 Git 的 <code>AGENTS.override.md</code> 強制鎖定唯讀或特殊限制，完成後再刪除。</li>
 </ol>
+
+<h3>💡 社群 × 官方驗證：AGENTS.md 高效率 100 行瘦身寫法</h3>
+<p>許多人常犯的錯誤是把好幾百行的 API 文件與風格指南全塞進根目錄 <code>AGENTS.md</code>，導致每一輪對話都白白消耗大量 Context Token 且稀釋模型注意力。最推薦的結構是<strong>「控制在 100 行內、驗證命令置頂、明確切分 Always / Ask First / Never 三層邊界」</strong>（複雜的長篇流程則抽離到第 9 章按需載入的 <code>.agents/skills/</code>）：</p>
 <div class="command-block">
-  <div class="command-title"><span></span>AGENTS.md 結構範例<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
-  <pre><code># 專案規範 (AGENTS.md)
+  <div class="command-title"><span></span>高效能 AGENTS.md 黃金範本（可直接複製修改）<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
+  <pre><code># 專案工程規範 (AGENTS.md)
 
-- 修改之前先閱讀相關檔案，不刪除或覆寫使用者既有內容。
-- 若有事實不確定時請明確標註，不自行補寫結論。
-- 完成後說明改了什麼、檢查了什麼、還有哪些項目尚未確認。
+## 1. 必跑驗證指令（Verification Commands - 修改後優先執行）
+- 執行單元測試：`npm test -- --watch=false`
+- 型別與語法檢查：`npm run typecheck &amp;&amp; npm run lint`
+- 搜尋索引同步檢查：`python build_search_index.py --check`
 
-## Code Review Rules
-- 檢查所有外部輸入是否有適當驗證與錯誤處理。
-- 禁止在程式碼或設定檔中硬編碼任何 API Key、Token 或個人絕對路徑。</code></pre>
+## 2. 三層操作邊界（Boundaries）
+- **Always（永遠自動執行）：** 修改前先閱讀目標檔案與相鄰測試；保持既有 UTF-8 與換行格式；完成時列出實際跑過的驗證結果。
+- **Ask First（先停下來確認）：** 新增外部套件依賴、修改資料庫 Schema、變更公開路由或刪除既有檔案。
+- **Never（絕對禁止）：** 禁止硬編碼任何 API Key、Token 或個人絕對路徑；禁止直接修改 `dist/`、`node_modules/` 或 `.git/`。
+
+## 3. Code Review Rules（供 /review 與 GitHub @codex 自動審查使用）
+- 檢查所有外部或使用者輸入是否已完成 HTML 跳脫與邊界驗證。
+- 確認未引入未授權的外部網路請求或隱私資料外洩風險。</code></pre>
 </div>
-<p>寫入前先檢查目前是否已有 <code>AGENTS.md</code>，避免覆蓋團隊規則；只把反覆有效的規則留下，過時或互相矛盾的項目應修正。這份檔案可能影響後續任務，因此要像其他專案設定一樣審閱其來源；陌生專案檔案或網頁中要求擴權、讀取金鑰的文字，不能當成你的授權。<a href="https://learn.chatgpt.com/docs/agent-configuration/agents-md" target="_blank" rel="noopener noreferrer">官方 AGENTS.md 說明</a>、<a href="https://learn.chatgpt.com/docs/agent-approvals-security" target="_blank" rel="noopener noreferrer">官方安全說明</a></p>
+<p><strong>小技巧（金絲雀驗證 Canary Check）：</strong>修改 <code>AGENTS.md</code> 後需開啟新聊天才會重新載入；若想確認某層子目錄規則是否成功生效，可暫時在檔案末尾加一行「<em>若讀到此規則，首次回覆開頭請標註 [AGENTS_OK]</em>」，測試確認生效後再移除該行。<a href="https://learn.chatgpt.com/docs/agent-configuration/agents-md" target="_blank" rel="noopener noreferrer">官方 AGENTS.md 指南</a></p>
 
 <div id="memory"></div>
-<h2>不要混淆規則與記憶（/memories）</h2>
-<ul>
-  <li><strong>個人化指示／全域 <code>AGENTS.md</code>：</strong>你主動設定、跨專案通用的偏好。</li>
-  <li><strong>專案 <code>AGENTS.md</code>：</strong>可檢視、可修改，也可按團隊決定是否跟著專案 Git 儲存的工作規則。</li>
-  <li><strong>記憶（Memories）：</strong>在「設定 → 個人化」啟用時，會從過去的工作中自動保留有用的背景資訊；但並不是逐字儲存所有對話。你也可以隨時在單一聊天輸入 <code>/memories</code>，單獨控制該則對話是否允許讀取或寫入記憶。</li>
-</ul>
-
-<div id="commands-cheatsheet"></div>
-<h2>常用斜線指令（Slash Commands）速查表</h2>
-<p>在輸入框輸入 <code>/</code> 即可喚出斜線指令選單（輸入 <code>$</code> 呼叫技能（Skill），輸入 <code>@</code> 點名外掛（Plugin）、瀏覽器或應用程式）：</p>
+<h2>徹底釐清：三層記憶架構（帳號記憶、專案記憶與本機 Codex 記憶庫 /memories）</h2>
+<p>根據 <a href="https://learn.chatgpt.com/docs/customization/memories" target="_blank" rel="noopener noreferrer">官方記憶文件</a>與專案指南，系統中的「記憶（Memories）」分為三個截然不同的層次，請依資料敏感度正確使用：</p>
 <div class="table-scroll" tabindex="0">
   <table>
-    <thead><tr><th>斜線指令</th><th>功能說明</th></tr></thead>
+    <thead><tr><th>記憶層次</th><th>運作範圍與儲存位置</th><th>隱私保護與控制方式</th></tr></thead>
     <tbody>
-      <tr><td><code>/plan</code> ／ <code>/goal</code></td><td>切換規劃（Plan）模式先討論做法；或使用目標（Goal）模式，圍繞完成條件持續推進。</td></tr>
-      <tr><td><code>/side</code></td><td>開啟臨時支線聊天（Side chat），在不打斷主任務的情況下提問或查進度。</td></tr>
-      <tr><td><code>/review</code></td><td>請 Codex 審查本機未提交變更或對照基準分支；使用步驟見<a href="#review">差異檢視（Review）</a>。</td></tr>
-      <tr><td><code>/init</code></td><td>掃描目前專案結構，自動產生 <code>AGENTS.md</code> 專案說明檔骨架。</td></tr>
-      <tr><td><code>/compact</code> ／ <code>/status</code></td><td>主動壓縮目前對話的上下文；或檢視對話 ID、Token 使用率與速率限制。</td></tr>
-      <tr><td><code>/model</code> ／ <code>/reasoning</code> ／ <code>/fast</code></td><td>選擇模型、推理強度或 Fast 速度模式；Fast 的實際用量倍率依方案與官方定價頁核對。</td></tr>
-      <tr><td><code>/fork</code> ／ <code>/worktree</code> ／ <code>/local</code></td><td>建立聊天分支（Fork），可選擇新的 Git 工作樹（Worktree）或在本機（Local）繼續。</td></tr>
-      <tr><td><code>/approve</code></td><td>從近期自動審查（Auto-review）拒絕紀錄選取特定動作重試一次；重試仍可能被拒絕。</td></tr>
-      <tr><td><code>/memories</code> ／ <code>/mcp</code> ／ <code>/ide-context</code></td><td>設定此聊天是否讀寫記憶；檢視模型上下文協定（MCP）伺服器；開關整合開發環境（IDE）共享上下文。</td></tr>
-      <tr><td><code>/project</code> ／ <code>/usage</code></td><td>替新聊天選擇專案；或在 ChatGPT 登入可用時開啟使用量與計費。</td></tr>
-      <tr><td><code>/cloud</code> ／ <code>/cloud-environment</code></td><td>在帳號有雲端權限時切換雲端執行，或選擇已發布的雲端環境。</td></tr>
-      <tr><td><code>/pin</code> ／ <code>/rename</code> ／ <code>/archive</code> ／ <code>/pet</code></td><td>釘選、重新命名、封存目前聊天；或喚出／隱藏桌面寵物（Codey）。</td></tr>
+      <tr><td><strong>1. ChatGPT 帳號級記憶與寫作風格</strong><br /><small>Account Memory</small></td><td>在 ChatGPT 個人化／記憶設定開啟時（桌面版「設定 → 個人化 → 寫作」亦提供「<strong>參考我的寫作風格</strong>」），跨日常對話記住你的長期偏好與撰寫風格。</td><td>可隨時在設定頁檢視、管理，或開啟不留紀錄的臨時對話（Temporary chat，<code>Ctrl + Shift + N</code>）。</td></tr>
+      <tr><td><strong>2. 專案來源與記憶設定</strong><br /><small>Project context</small></td><td>ChatGPT 專案可共用已加入的來源和專案指示；本機專案以授權資料夾為檔案上下文。Codex CLI 與 IDE 又依各自工作目錄或工作區運作。</td><td>逐一核對專案成員、可見來源、記憶和資料控制；不能把專案選項當成跨工具、跨工作區的絕對保密保證。</td></tr>
+      <tr><td><strong>3. 本機 Codex 記憶庫</strong><br /><small>Local Codex Memory (<code>/memories</code>)</small></td><td>於「<strong>設定 → 個人化 → Codex 記憶</strong>」選擇目標機器（如「<code>🖥 本機</code>」）並開啟「<strong>啟用 Codex 記憶</strong>」後，會在工作階段閒置且剩餘速率限制充足（<code>memories.min_rate_limit_remaining_percent</code>）時，從對話提煉工程重點並儲存在本機 <code>~/.codex/memories/</code>。</td><td><strong>自動遮蔽秘密與防外部污染：</strong>提煉時會<strong>自動掃描並遮罩（Redact）API Key 與秘密</strong>；若擔心外部網頁搜尋或 MCP 工具內容污染長期記憶，可在「設定 → 個人化 → Codex 記憶」<strong>關閉「允許從使用工具的對話中建立記憶」</strong>（對應 <code>config.toml</code> 的 <code>memories.disable_on_external_context = true</code>）或點擊「<strong>刪除 Codex 記憶</strong>」，亦可隨時在單一聊天輸入 <code>/memories</code> 單獨開關讀寫。</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div id="commands-cheatsheet"></div>
+<h2>完整斜線指令（Slash Commands）與前綴符號速查表</h2>
+<p>在輸入框輸入 <strong><code>/</code></strong> 即可喚出斜線指令選單；輸入 <strong><code>$</code></strong> 可點名呼叫技能（Skill）；輸入 <strong><code>@</code></strong> 可點名外掛程式（Plugin）、內建瀏覽器（<code>@Browser</code>）、外部瀏覽器（<code>@Edge</code> / <code>@Chrome</code>）、電腦操控（<code>@Computer</code>）或專案檔案：</p>
+<div class="table-scroll" tabindex="0">
+  <table>
+    <thead><tr><th>斜線指令</th><th>功能說明與適用場景</th></tr></thead>
+    <tbody>
+      <tr><td><code>/plan</code> ／ <code>/goal</code></td><td>切換規劃（Plan）模式先討論並鎖定做法；或啟用目標（Goal）模式圍繞驗收條件持續推進（支援 <code>pause</code> / <code>resume</code>）。</td></tr>
+      <tr><td><code>/side</code>（或 <code>Ctrl+Alt+S</code>）</td><td>開啟臨時支線／側邊聊天（Side chat，反白選取文字時亦可點「<strong>在側邊聊天中提問</strong>」），在不打斷主線任務、也不汙染主對話 Context 的情況下旁路提問或查進度。</td></tr>
+      <tr><td><code>/review</code></td><td>請 Codex 在本機審查「未提交變更」、「對照基準分支」或「單一 Commit」；詳見上方<a href="#review">三大審查工作流</a>。</td></tr>
+      <tr><td><code>/init</code></td><td>自動掃描目前專案目錄結構與設定，產生 <code>AGENTS.md</code> 專案規範檔骨架。</td></tr>
+      <tr><td><code>/compact</code> ／ <code>/recap</code> ／ <code>/status</code></td><td>主動壓縮目前對話的上下文；不壓縮歷史快速產生目前進度重點回顧（Recap）；或檢視對話 ID、Token 使用率與速率限制。</td></tr>
+      <tr><td><code>/model</code> ／ <code>/reasoning</code> ／ <code>/fast</code></td><td>切換模型（Astra / 6.1 Sol / 6.1 Terra / Luna）、調整 6 階推理強度（含 Max / Ultra，桌面版快捷鍵 <code>Ctrl+Shift+M</code>）或切換 Fast 速度模式（2x–2.5x 倍率）。</td></tr>
+      <tr><td><code>/permissions</code> ／ <code>/sandbox-add-read-dir</code></td><td>在對話中途切換權限模式（如要求核准、代我核准或唯讀）；或臨時授權沙盒讀取工作區外的特定絕對路徑。</td></tr>
+      <tr><td><code>/approve</code></td><td>從近期自動審查（Auto-review）拒絕紀錄中選取單筆動作重試一次（僅針對該次操作，不永久放寬權限）。</td></tr>
+      <tr><td><code>/fork</code> ／ <code>/worktree</code> ／ <code>/local</code></td><td>從當前對話建立分支至新對話（Fork），並選擇在新的隔離 Git 工作樹（Worktree）或本機目錄（Local）繼續。</td></tr>
+      <tr><td><code>/subagents</code> ／ <code>/hooks</code></td><td>檢視與管理平行子代理（Subagents，右側分頁顯示為「<strong>子智慧體</strong>」）；或檢視、審查並標記信任專案的生命週期掛鉤（Hooks，亦位於「<strong>設定 → 程式設計 → 掛勾</strong>」）。</td></tr>
+      <tr><td><code>/plugins</code> ／ <code>/skills</code> ／ <code>/mcp</code></td><td>開啟外掛程式目錄、管理已安裝技能（Skills），或檢視與啟停模型上下文協定（MCP）伺服器連線。</td></tr>
+      <tr><td><code>/memories</code> ／ <code>/ide-context</code></td><td>單獨設定此聊天是否允許讀寫本機記憶；或開關 IDE 擴充功能的活動檔案與選取範圍自動同步。</td></tr>
+      <tr><td><code>/project</code> ／ <code>/cd</code> ／ <code>/pwd</code></td><td>替新聊天選擇專案；在對話中切換或顯示當前會話的絕對工作目錄。</td></tr>
+      <tr><td><code>/cloud</code> ／ <code>/cloud-environment</code></td><td>在帳號具備雲端權限（Plus 以上）時切換雲端執行，或選擇已設定的雲端容器環境。</td></tr>
+      <tr><td><code>/export</code> ／ <code>/usage</code></td><td>將完整對話紀錄匯出為文字檔或複製至剪貼簿；開啟帳號剩餘用量與計費面板。</td></tr>
+      <tr><td><code>/pin</code> ／ <code>/rename</code> ／ <code>/archive</code> ／ <code>/pet</code></td><td>釘選、重新命名、封存目前聊天；或喚出／隱藏懸浮桌面寵物（Codey）。</td></tr>
     </tbody>
   </table>
 </div>
 <details class="source-list">
   <summary>官方文件與延伸閱讀</summary>
   <ul>
-    <li><a href="https://learn.chatgpt.com/docs/codex/ide" target="_blank" rel="noopener noreferrer">IDE 擴充功能與整合</a></li>
-    <li><a href="https://learn.chatgpt.com/docs/reference/settings" target="_blank" rel="noopener noreferrer">設定與自訂指令</a></li>
-    <li><a href="https://learn.chatgpt.com/docs/agent-configuration/agents-md" target="_blank" rel="noopener noreferrer">AGENTS.md 專案規範設定</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/codex/ide" target="_blank" rel="noopener noreferrer">IDE 擴充功能與整合指南（VS Code / Cursor / Windsurf / JetBrains / Xcode）</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/code-review" target="_blank" rel="noopener noreferrer">Git 差異檢視、/review、Code Review 外掛與 GitHub @codex</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/agent-configuration/agents-md" target="_blank" rel="noopener noreferrer">AGENTS.md 與 AGENTS.override.md 階層規範設定</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/customization/memories" target="_blank" rel="noopener noreferrer">記憶功能（Memories）、自動遮罩與外部工具污染防護</a></li>
     <li><a href="https://learn.chatgpt.com/docs/learn/best-practices" target="_blank" rel="noopener noreferrer">任務提示詞與驗收最佳實務</a></li>
     <li><a href="https://learn.chatgpt.com/docs/prompting" target="_blank" rel="noopener noreferrer">官方提示詞指南</a></li>
-    <li><a href="https://learn.chatgpt.com/docs/customization/memories" target="_blank" rel="noopener noreferrer">記憶功能（Memories）</a></li>
-    <li><a href="https://learn.chatgpt.com/docs/reference/commands" target="_blank" rel="noopener noreferrer">斜線指令與常用功能參考</a></li>
-    <li><a href="https://learn.chatgpt.com/docs/code-review" target="_blank" rel="noopener noreferrer">Git 差異檢視與程式碼審查</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/reference/commands" target="_blank" rel="noopener noreferrer">完整斜線指令與 CLI 命令參考</a></li>
   </ul>
 </details>
         </article>
-        <nav class="chapter-pagination" aria-label="前後章節">
-          <a data-chapter-slug="skills-and-tools" href="skills-and-tools.html">← <span>上一章<small>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</small></span></a>
+                <nav class="chapter-pagination" aria-label="前後章節">
+          <a class="prev" data-chapter-slug="skills-and-tools" href="skills-and-tools.html">← <span>上一章<small>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</small></span></a>
           <a class="next" data-chapter-slug="plan-goal-schedule" href="plan-goal-schedule.html"><span>下一章<small>規劃（Plan）、目標（Goal）與排程任務</small></span> →</a>
         </nav>
       </main>
@@ -220,13 +246,13 @@
       <aside class="page-toc" aria-label="本頁目錄">
         <p class="eyebrow">本章內容</p>
         <nav class="toc-links">
-          <a href="#editor">連接整合開發環境（IDE）</a>
-          <a href="#review">Git 差異檢視（Review）</a>
+          <a href="#editor">IDE 擴充功能深度整合</a>
+          <a href="#review">Code Review 三大工作流</a>
           <a href="#prompting">一次性任務提示詞</a>
-          <a href="#custom">自訂指令與輸入預測（Tab）</a>
-          <a href="#agents">AGENTS.md 階層規則</a>
-          <a href="#memory">不要混淆規則與記憶（/memories）</a>
-          <a href="#commands-cheatsheet">常用斜線指令速查表</a>
+          <a href="#custom">個人化指示與 Tab 預測</a>
+          <a href="#agents">AGENTS.md 階層與 100 行瘦身</a>
+          <a href="#memory">三層記憶架構（/memories）</a>
+          <a href="#commands-cheatsheet">完整斜線指令速查表</a>
         </nav>
         <div class="toc-note">
           <span>專注閱讀</span>
@@ -261,6 +287,19 @@
           <img id="image-viewer-img" src="" alt="" />
         </div>
         <p id="image-viewer-hint">保留完整介面；需要看清楚小字時，請點擊「原始尺寸檢視」。</p>
+      </div>
+    </div>
+
+    <!-- 專有名詞白話解釋懸停視窗 -->
+    <div popover="hint" id="term-tooltip">
+      <div class="term-tooltip-card">
+        <div class="term-tooltip-header">
+          <span class="term-tooltip-badge" id="term-tooltip-badge"></span>
+          <button type="button" class="term-tooltip-close" id="term-tooltip-close" aria-label="關閉名詞解釋">關閉 ×</button>
+        </div>
+        <strong class="term-tooltip-title" id="term-tooltip-title"></strong>
+        <div class="term-tooltip-analogy" id="term-tooltip-analogy"></div>
+        <p class="term-tooltip-usage" id="term-tooltip-usage"></p>
       </div>
     </div>
   </div>

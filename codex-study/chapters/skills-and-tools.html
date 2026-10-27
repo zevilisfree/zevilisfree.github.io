@@ -10,7 +10,7 @@
     } catch (e) {}
   </script>
   <title>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）｜Codex 實戰手冊</title>
-  <meta name="description" content="認識技能（Skill）、外掛（Plugin）、模型上下文協定（MCP）與電腦操控（Computer use）。" />
+  <meta name="description" content="完整解析 Plugins 統一架構、SKILL.md 規範、Hooks 生命週期防線、MCP 設定、Subagents 子代理分工與電腦操控。" />
   <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="../assets/styles.css" />
 </head>
@@ -34,198 +34,302 @@
 
     <div class="docs-shell">
       <aside id="chapter-sidebar" class="chapter-sidebar" aria-label="課程章節">
-        <p class="eyebrow">閱讀目錄 · 共 10 章</p>
+        <p class="eyebrow">閱讀目錄 · 共 12 章</p>
         <nav>
-          <a class="chapter-link" data-chapter-slug="introduction" href="introduction.html"><span>01</span>認識 Codex 與使用入口</a>
-          <a class="chapter-link" data-chapter-slug="workspace" href="workspace.html"><span>02</span>安裝、登入與建立第一個專案</a>
-          <a class="chapter-link" data-chapter-slug="permissions-and-control" href="permissions-and-control.html"><span>03</span>權限、核准與資訊安全</a>
-          <a class="chapter-link" data-chapter-slug="models-and-context" href="models-and-context.html"><span>04</span>選擇模型、查看用量與管理上下文</a>
-          <a class="chapter-link" data-chapter-slug="parallel-and-fork" href="parallel-and-fork.html"><span>05</span>聊天分支（Fork）與工作樹（Worktree）隔離</a>
-          <a class="chapter-link" data-chapter-slug="visual-feedback" href="visual-feedback.html"><span>06</span>圖片、視窗快照（Appshots）與網頁回饋</a>
-          <a class="chapter-link active" data-chapter-slug="skills-and-tools" href="skills-and-tools.html"><span>07</span>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</a>
-          <a class="chapter-link" data-chapter-slug="instructions-and-editor" href="instructions-and-editor.html"><span>08</span>Codex 指示、AGENTS.md 與常用命令</a>
-          <a class="chapter-link" data-chapter-slug="plan-goal-schedule" href="plan-goal-schedule.html"><span>09</span>規劃（Plan）、目標（Goal）與排程任務</a>
-          <a class="chapter-link" data-chapter-slug="remote" href="remote.html"><span>10</span>手機遠端連線（Remote）與雲端任務（Cloud）</a>
+          <a class="chapter-link" data-chapter-slug="chatgpt-basics" href="chatgpt-basics.html"><span>01</span>ChatGPT Chat：對話、搜尋與專案</a>
+          <a class="chapter-link" data-chapter-slug="work-basics" href="work-basics.html"><span>02</span>ChatGPT Work：委派、交付與驗收</a>
+          <a class="chapter-link" data-chapter-slug="introduction" href="introduction.html"><span>03</span>認識 Codex 與使用入口</a>
+          <a class="chapter-link" data-chapter-slug="workspace" href="workspace.html"><span>04</span>安裝、登入與建立第一個專案</a>
+          <a class="chapter-link" data-chapter-slug="permissions-and-control" href="permissions-and-control.html"><span>05</span>權限、核准與資訊安全</a>
+          <a class="chapter-link" data-chapter-slug="models-and-context" href="models-and-context.html"><span>06</span>選擇模型、查看用量與管理上下文</a>
+          <a class="chapter-link" data-chapter-slug="visual-feedback" href="visual-feedback.html"><span>07</span>圖片、視窗快照（Appshots）與網頁回饋</a>
+          <a class="chapter-link" data-chapter-slug="parallel-and-fork" href="parallel-and-fork.html"><span>08</span>聊天分支（Fork）與工作樹（Worktree）隔離</a>
+          <a class="chapter-link active" data-chapter-slug="skills-and-tools" href="skills-and-tools.html"><span>09</span>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</a>
+          <a class="chapter-link" data-chapter-slug="instructions-and-editor" href="instructions-and-editor.html"><span>10</span>Codex 指示、AGENTS.md 與常用命令</a>
+          <a class="chapter-link" data-chapter-slug="plan-goal-schedule" href="plan-goal-schedule.html"><span>11</span>規劃（Plan）、目標（Goal）與排程任務</a>
+          <a class="chapter-link" data-chapter-slug="remote" href="remote.html"><span>12</span>手機遠端連線（Remote）與雲端任務（Cloud）</a>
         </nav>
         <div class="course-progress">
           <span>目前進度</span>
-          <strong>07 / 10</strong>
-          <i><b style="width: 70%"></b></i>
+          <strong>09 / 12</strong>
+          <i><b style="width: 75%"></b></i>
         </div>
       </aside>
 
       <main class="article" id="lesson">
-        <div class="breadcrumb"><a href="../index.html">Codex Windows 教學</a> <span>/</span> 第 07 章</div>
+        <div class="breadcrumb"><a href="../index.html">Codex Windows 教學</a> <span>/</span> 第 9 章</div>
         <section class="hero-card">
           <div>
-            <p class="chapter-kicker">CHAPTER 07 · 約 5 分鐘</p>
+            <p class="chapter-kicker">CHAPTER 09 · 約 10 分鐘</p>
             <h1>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</h1>
-            <p class="hero-copy">認識技能（Skill）、外掛（Plugin）、模型上下文協定（MCP）與電腦操控（Computer use）。</p>
+            <p class="hero-copy">完整解析 Plugins 統一架構、SKILL.md 規範、Hooks 生命週期防線、MCP 設定、Subagents 子代理分工與電腦操控。</p>
           </div>
-          <div class="hero-orbit" aria-hidden="true"><span>07</span></div>
+          <div class="hero-orbit" aria-hidden="true"><span>09</span></div>
         </section>
         <div class="lesson-meta">
           <span>Windows 桌面版與跨端點</span>
-          <span>依 2026-10-16 文件查核</span>
+          <span>依 2026-10-24 文件查核</span>
           <span>點擊截圖可放大</span>
+          <span class="glossary-hint-pill">💡 專有名詞懸停可看白話解釋</span>
         </div>
         <article class="mdx-content">
 <div id="difference"></div>
-<h2>技能（Skill）、外掛（Plugin）、模型上下文協定（MCP）與事件掛鉤（Hooks）</h2>
-<p>先分清楚這四個擴充概念各自負責什麼：</p>
+<h2>五大擴充與分工概念：Skill、Plugin、MCP、Hooks 與 Subagents</h2>
+<p>在 2026 年 10 月的最新架構中，OpenAI 已將過去分散的「連接器（Connectors / Connected Apps）」統一整合進<strong>外掛程式（Plugins）</strong>生態系。先透過下表分清楚這五個核心擴充與分工概念各自負責什麼：</p>
 <div class="table-scroll" tabindex="0">
   <table>
-    <thead><tr><th>名稱</th><th>主要作用</th></tr></thead>
+    <thead><tr><th>名稱與呼叫入口</th><th>核心作用與觸發機制</th><th>設定檔或儲存位置</th></tr></thead>
     <tbody>
-      <tr><td><strong>技能（Skill）</strong></td><td>把一項工作的步驟、要求、範本與檢查方法整理成可重複使用的標準流程（透過 <code>$技能名稱</code> 呼叫）。</td></tr>
-      <tr><td><strong>外掛（Plugin）</strong></td><td>打包安裝一組完整能力，裡面可以包含技能（Skills）、MCP 連線、瀏覽器擴充功能與事件掛鉤（Hooks）。</td></tr>
-      <tr><td><strong>模型上下文協定（Model Context Protocol，MCP）</strong></td><td>讓 Codex 存取已授權的外部工具、資料庫與服務的連接協定（可輸入 <code>/mcp</code> 管理狀態）。</td></tr>
-      <tr><td><strong>事件掛鉤（Hooks）</strong></td><td>在 Codex 執行生命週期的特定時間點（例如任務開始前或完成後）自動觸發的本機腳本或檢查指令。</td></tr>
+      <tr><td><strong>技能（Skill）</strong><br /><small>輸入 <code>$技能名稱</code> 或 <code>/skills</code></small></td><td>將一項工作的標準步驟、提示範本、參考文件與輔助腳本封裝成可重複使用的套件。支援<strong>漸進式自動觸發（Implicit invocation）</strong>與手動點名呼叫。</td><td>桌面版左側「<strong>自訂 → 技能</strong>」；個人全域：<code>~/.agents/skills/&lt;name&gt;/SKILL.md</code>、專案：<code>.agents/skills/&lt;name&gt;/SKILL.md</code></td></tr>
+      <tr><td><strong>外掛程式（Plugin）</strong><br /><small>輸入 <code>@外掛名稱</code> 或 <code>/plugins</code></small></td><td>統一的打包安裝單位（涵蓋舊稱 Connectors / Apps）。一個外掛內可同時包含雲端服務連線（如 Google Drive、Gmail、Slack、GitHub）、多組 Skills、MCP 伺服器與 Hooks。</td><td>桌面版左側「<strong>自訂 → 外掛程式</strong>」（或「<strong>設定 → 外掛程式</strong>」），以及 CLI 輸入 <code>/plugins</code> 安裝與啟停。</td></tr>
+      <tr><td><strong>模型上下文協定（MCP）</strong><br /><small>輸入 <code>/mcp</code> 或 <code>codex mcp</code></small></td><td>開放標準協定，讓 Codex 安全連接本機工具（<code>stdio</code>）或遠端 API／資料庫伺服器（<code>streamable_http</code> + OAuth）。</td><td><code>~/.codex/config.toml</code> 或專案 <code>.codex/config.toml</code> 的 <code>[mcp_servers.&lt;name&gt;]</code></td></tr>
+      <tr><td><strong>事件掛鉤（Hooks，介面譯為「掛勾」）</strong><br /><small>輸入 <code>/hooks</code> 檢視與信任</small></td><td>在代理執行生命週期的 5 個關鍵節點（如執行指令前 <code>PreToolUse</code>、改檔後 <code>PostToolUse</code>）自動觸發的決定性腳本，可用於強制跑 Linter 或攔截危險指令。</td><td>桌面版「<strong>設定 → 程式設計 → 掛勾</strong>」；全域：<code>~/.codex/hooks.json</code>、專案：<code>.codex/hooks.json</code></td></tr>
+      <tr><td><strong>子代理（Subagents，介面亦譯為「子智慧體」）</strong><br /><small>輸入 <code>/subagents</code> 管理</small></td><td>由主代理派發、擁有<strong>獨立上下文視窗與獨立沙盒權限</strong>的分工代理（如唯讀研究員、安全審查員、測試修復員），只將精簡結論回傳主對話，避免塞爆主對話 Context。</td><td>於 <code>config.toml</code> 啟用 <code>multi_agent = true</code>，角色定義於 <code>~/.codex/agents/</code> 或 <code>.codex/agents/*.toml</code></td></tr>
     </tbody>
   </table>
 </div>
-<p>不必為了入門就先學會手動設定 MCP。只要既有外掛能完成任務，就先使用外掛提供的入口。</p>
+<p>初學者不必一開始就手動寫 JSON 或 TOML 設定檔。只要官方外掛目錄已提供現成入口，先從桌面版左側「<strong>自訂 → 外掛程式</strong>」一鍵安裝即可；當你需要為團隊打造自動化防線時，再參考下方的進階設定範例。</p>
 
 <div id="install"></div>
-<h2>安裝、呼叫與使用 ChatGPT 登入（Sign in with ChatGPT）</h2>
-<p>開啟左側「外掛」，先看目前帳號的外掛與技能分頁。外掛可連接服務或加入工具；技能（Skill）提供完成特定工作的步驟。先挑一項眼前任務需要的能力，用小任務確認可用，再決定是否新增其他項目。</p>
+<h2>安裝外掛程式（Plugins）、連接雲端辦公服務與使用 ChatGPT 登入</h2>
+<p>從最左側導覽列進入「<strong>自訂 → 外掛程式</strong>」或「<strong>技能</strong>」，先看目前帳號的「已安裝」清單與「公開／個人」分頁。外掛在 Chat、Work、Codex 的可用性及動作範圍可能不同；在要使用的模式中檢查是否顯示、是否完成帳號連線，以及外部服務授權。若 Work 可用 <code>@Google Drive</code> 等外掛，先從非敏感資料做唯讀練習。</p>
 <h3>依工作挑選入門工具</h3>
-<p>以下推薦與安裝步驟依 2026-10-18 官方文件核對；實際可用項目仍以目前帳號和工作區畫面為準。</p>
+<p>以下推薦與安裝步驟依 2026-10-24 官方文件核對；實際可用項目仍以目前帳號和工作區畫面為準：</p>
 <div class="table-scroll" tabindex="0">
   <table>
     <thead><tr><th>想完成的工作</th><th>可搜尋的名稱與類型</th><th>第一個練習</th></tr></thead>
     <tbody>
-      <tr><td>整理或製作本機檔案</td><td>Documents、PDF、Spreadsheets、Presentations（技能）</td><td>附上一份非敏感檔案，請 Codex 整理內容或產出檔案，再打開結果核對。</td></tr>
-      <tr><td>使用雲端文件</td><td>Google Drive（外掛）</td><td>連結帳號後，指定一份有權存取的文件，請 Codex 摘要並列出來源。</td></tr>
-      <tr><td>操作桌面軟體</td><td>Computer Use（外掛）</td><td>指定一個已開啟的視窗，先請 Codex 讀取畫面並描述目前狀態。</td></tr>
-      <tr><td>開發與程式碼檢查</td><td>GitHub、Codex Security（外掛，依需求選用）</td><td>指定一個已授權的儲存庫，查看 PR 或執行範圍明確的安全掃描。</td></tr>
-      <tr><td>重複自己的工作流程</td><td><code>$skill-creator</code>（建立技能）</td><td>把已經做過一次的每週摘要流程、輸入與檢查方式整理成技能。</td></tr>
+      <tr><td>整理或製作本機商務檔案</td><td>Documents、PDF、Spreadsheets、Presentations（內建技能）</td><td>附上一份非敏感報告或簡報母版，請 Work 整理內容並產出檔案，再用右側預覽器核對。</td></tr>
+      <tr><td>跨雲端文件、信件與通訊協作</td><td>Google Drive、Gmail、Google Calendar、Slack、Notion（外掛程式）</td><td>連結帳號後，用 <code>@Google Drive</code> 指定一份有權存取的文件，請 Work 摘要並列出引用來源。</td></tr>
+      <tr><td>操作桌面軟體與跨視窗自動化</td><td>Computer use（設定 → 整合 → Computer use）</td><td>指定一個已開啟的視窗，先請 Codex 讀取畫面並描述目前狀態。</td></tr>
+      <tr><td>程式碼審查、PR 收件匣與資安掃描</td><td>Code Review、GitHub、Codex Security（外掛程式，依需求選用）</td><td>安裝 Code Review 外掛釘選至左側邊欄，查看待審 PR 收件匣或執行範圍明確的安全掃描。</td></tr>
+      <tr><td>把重複提示詞封裝為標準流程</td><td><code>$skill-creator</code>（或於 ChatGPT 輸入 <code>@skill-creator</code>）</td><td>把已經手動驗證成功的每週摘要或測試流程，自動生成標準的 <code>SKILL.md</code>。</td></tr>
     </tbody>
   </table>
 </div>
-<p>不必為了這份清單把所有項目裝齊。程式開發以外的讀者，可以先從檔案技能或 Google Drive 開始。</p>
+<p>不必為了這份清單把所有項目裝齊。非工程背景的讀者，建議先從商務檔案技能與 Google Drive / Notion 外掛程式開始。</p>
 <figure class="interface-figure" style="max-width:1100px">
-  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/外掛程式.png" data-screenshot-title="外掛目錄" aria-label="外掛目錄，放大檢視">
-    <img src="../images/tutorial/pick/外掛程式.png" alt="外掛目錄" loading="lazy" decoding="async" />
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/外掛程式.png" data-screenshot-title="外掛程式目錄" aria-label="外掛程式目錄，放大檢視">
+    <img src="../images/tutorial/pick/外掛程式.png" alt="外掛程式目錄" loading="lazy" decoding="async" />
     <span class="image-expand" aria-hidden="true">↗</span>
   </button>
-  <figcaption><strong>外掛目錄</strong>先依實際需求挑選一項即可，不需要一次全部裝滿。</figcaption>
+  <figcaption><strong>外掛程式目錄（自訂 → 外掛程式）</strong>可切換「公開」或「個人」分頁、於右上角「搜尋外掛程式」或點擊「新增」；先依實際需求挑選一項即可。</figcaption>
 </figure>
-<h3>桌面版安裝與驗證</h3>
+<h3>桌面版與 CLI 安裝及驗證步驟</h3>
 <ol>
-  <li>在左側開啟「外掛」，搜尋需要的名稱，點開詳細資料，確認提供者、會讀取的資料及能執行的動作。</li>
-  <li>按安裝按鈕；若畫面顯示「啟用」，也確認外掛及所需技能已啟用。</li>
-  <li>需要使用外部服務時，依畫面連結帳號，逐項檢查要求的權限與資料範圍。</li>
-  <li>開啟新聊天，執行上表的小練習；核對實際輸出，確認使用的是預期檔案、帳號或視窗。</li>
+  <li>在左側進入「<strong>自訂 → 外掛程式</strong>」（或在 Codex CLI 輸入 <code>/plugins</code>），搜尋需要的名稱，點開詳細資料，確認提供者、會讀取的資料及能執行的動作。</li>
+  <li>按安裝按鈕；若畫面顯示「啟用」，也確認外掛程式及所需技能已啟用。</li>
+  <li>需要使用外部服務時，依畫面連結帳號（支援 <strong>使用 ChatGPT 登入 Sign in with ChatGPT</strong> 或 OAuth 授權），逐項檢查要求的權限與資料範圍（<strong>請記住：外掛程式安裝成功不等於外部帳號已連線</strong>）。</li>
+  <li>開啟新對話，在輸入框用 <code>@外掛名稱</code> 或 <code>$技能名稱</code> 明確點名，執行上表的小練習並核對實際輸出。</li>
 </ol>
-<p>使用 Codex CLI 時，可輸入 <code>/plugins</code> 開啟外掛目錄，安裝後開始新工作階段。技能可在技能分頁檢視或啟用；若要建立自己的技能，依下節使用 <code>$skill-creator</code>，完成後用另一份輸入測試。<a href="https://learn.chatgpt.com/docs/plugins" target="_blank" rel="noopener noreferrer">官方外掛安裝步驟</a> · <a href="https://learn.chatgpt.com/docs/skills-and-plugins" target="_blank" rel="noopener noreferrer">官方技能建立說明</a></p>
-<p>安裝之後，有些外掛（Plugin）還需要登入外部帳號（<strong>安裝成功不等於帳號已連線</strong>）。若服務提供「使用 ChatGPT 登入（Sign in with ChatGPT）」，可依畫面完成連結。呼叫時，可在輸入框用 <code>@外掛名稱</code> 或 <code>$技能名稱</code> 明確指定：</p>
-<aside class="inline-note"><strong>安裝與連線前看權限</strong><div><p>外掛（Plugin）、Apps／連接器與模型上下文協定（MCP）工具有各自的存取範圍；本機命令的沙盒與網路限制不會自動套到所有外部工具。安裝前檢查提供者、會讀取的資料、能執行的動作與外部服務；陌生專案的安裝／建置腳本也要先看入口。<a href="https://learn.chatgpt.com/docs/permissions" target="_blank" rel="noopener noreferrer">官方權限說明</a></p></div></aside>
+<aside class="inline-note"><strong>安裝與連線前看權限與資料訓練政策</strong><div><p>外掛程式（Plugins）、連接器與 MCP 工具有各自的存取範圍；本機命令的沙盒與斷網限制不會自動套到外部雲端工具。此外請留意：<strong>Business、Enterprise 與 Edu 方案透過外掛程式與連接器讀取的資料預設絕不用於訓練模型</strong>；而 Free、Go、Plus 與 Pro 個人方案則依你在「設定 → 資料控制」中的「<strong>協助改善所有人的模型體驗</strong>」開關而定。<a href="https://learn.chatgpt.com/docs/plugins" target="_blank" rel="noopener noreferrer">官方外掛與隱私說明</a> · <a href="https://learn.chatgpt.com/docs/permissions" target="_blank" rel="noopener noreferrer">官方權限說明</a></p></div></aside>
 <div class="command-block">
   <div class="command-title"><span></span>可以這樣說<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
   <pre><code>使用已安裝的文件技能，整理我附上的內容。保留原意，不要自行補充未經確認的資訊。</code></pre>
 </div>
-<p>如果系統提示工具無法使用，請依序檢查：目前帳號是否看得到該項目、是否已安裝並啟用、外部帳號是否已連結，以及是否已開始新聊天；需要連線的服務再檢查網路。</p>
-<aside class="tier-note"><div class="tier-note-header"><span class="tier-badge pro">工作區政策</span><strong>可安裝項目依帳號與管理設定而異</strong></div><div><p>個人帳號可從目前介面查看可用的外掛與技能；Business、Enterprise 與 Edu 工作區還可能由管理員限制第三方外掛和 MCP 伺服器，並提供內部目錄。不要只依方案名稱推定一定能安裝某項工具，應以目前帳號與工作區畫面為準。</p></div></aside>
+<aside class="tier-note"><div class="tier-note-header"><span class="tier-badge pro">工作區政策</span><strong>可安裝項目依帳號與管理設定而異</strong></div><div><p>個人帳號可從目前介面查看可用的外掛與技能；Business、Enterprise 與 Edu 工作區還可能由管理員限制第三方外掛和 MCP 伺服器，並提供內部專屬目錄（Private plugin registry）。</p></div></aside>
 
 <div id="community-skills"></div>
-<h2>第三方技能：初學者先看哪幾個？</h2>
-<p>以下是依 2026-10-18 兩個作者的公開倉庫所做的選用建議，屬第三方內容。先讀單項技能說明，確認它適合自己的任務，再決定是否安裝。</p>
+<h2>第三方技能：初學者與開發者先看哪幾個？</h2>
+<p>以下是依 2026-10 兩個作者的公開倉庫與社群實戰評價所做的選用建議，屬第三方內容。你可以先閱讀其設計理念（甚至直接用內建的 <code>$skill-creator</code> 為自己的專案打造類似技能），確認適合自己的任務再決定是否安裝：</p>
 <ul>
-  <li><strong>先釐清想法：</strong><a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md" target="_blank" rel="noopener noreferrer">Matt Pocock 的 <code>grill-me</code></a> 會透過連續提問，協助你把模糊的計畫或需求講清楚；不寫程式也能用。可先試：「我想做一個待辦清單，請先問我關鍵問題，確認功能與使用情境。」提問會比較密集，適合願意先花時間釐清方向的人。</li>
-  <li><strong>交接長任務：</strong><a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/handoff/SKILL.md" target="_blank" rel="noopener noreferrer">Matt Pocock 的 <code>handoff</code></a> 把目前對話整理成交接文件，讓下一次工作能接續。可試：「整理目前已確認的需求、完成事項與下一步，供新聊天接手。」此技能會將文件寫入作業系統的暫存目錄，使用前先確認儲存位置與內容。</li>
-  <li><strong>已有可重現的程式錯誤：</strong><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/diagnosing-bugs/SKILL.md" target="_blank" rel="noopener noreferrer"><code>diagnosing-bugs</code></a> 引導先建立能重現錯誤的檢查，再找原因與驗證修正。適合開始維護程式的讀者；尚無程式專案時可以先略過。</li>
-  <li><strong>開始寫程式、想避免不必要的複雜度：</strong><a href="https://github.com/DietrichGebert/ponytail/blob/main/skills/ponytail/SKILL.md" target="_blank" rel="noopener noreferrer">Ponytail</a> 會優先考慮既有程式、標準函式庫與最小可行修改。初學者可先用 <code>lite</code> 模式體驗；仍要檢查需求、測試、安全與可讀性，不能只看程式碼行數。</li>
+  <li><strong>動手前先拷問規格（<code>grill-me</code>）：</strong><a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md" target="_blank" rel="noopener noreferrer">Matt Pocock 的 <code>grill-me</code></a> 會在寫任何一行程式碼或文件前，先自主掃描專案現況，再針對模糊需求以「決策樹＋推薦選項」一輪一輪反問你，直到所有邊界條件毫無死角才產出實作計畫；不寫程式的商業規劃同樣極為好用。</li>
+  <li><strong>長任務跨對話完美交接（<code>handoff</code>）：</strong><a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/handoff/SKILL.md" target="_blank" rel="noopener noreferrer">Matt Pocock 的 <code>handoff</code></a> 會在長對話 Context 快滿或準備下班交接時，自動盤點目前 Git Diff、已確認需求、已完成事項與下一步指令，產生結構化交接文件供新聊天秒速接手（此技能預設會寫入系統暫存目錄，使用前先確認儲存位置與內容）。</li>
+  <li><strong>紅燈先行除錯法（<code>diagnosing-bugs</code>）：</strong><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/diagnosing-bugs/SKILL.md" target="_blank" rel="noopener noreferrer"><code>diagnosing-bugs</code></a> 嚴格規定「沒有建立可重現錯誤的自動化檢查指令（Red test），絕對不准進入修改程式碼階段（No Phase 2）」，徹底杜絕 AI 憑感覺盲目亂改。</li>
+  <li><strong>極簡標準庫優先（<code>Ponytail</code>）：</strong><a href="https://github.com/DietrichGebert/ponytail/blob/main/skills/ponytail/SKILL.md" target="_blank" rel="noopener noreferrer">Ponytail</a> 強調優先複用既有程式碼、標準函式庫與最小可行修改。初學者可先用 <code>lite</code> 模式體驗；完成後仍要檢查需求、測試、安全與可讀性。</li>
 </ul>
-<p><strong>安裝前先看範圍：</strong><a href="https://github.com/mattpocock/skills#installation-30-second-setup" target="_blank" rel="noopener noreferrer">Matt Pocock 的 Codex 安裝方式</a>會加入整組技能，並提供每個專案的設定流程；<a href="https://github.com/DietrichGebert/ponytail#install" target="_blank" rel="noopener noreferrer">Ponytail 的完整外掛</a>除技能外還包含生命週期 hooks。若選擇完整外掛，先檢查安裝內容；Ponytail 的 hooks 應在 <code>/hooks</code> 檢視實際命令後，再決定是否信任。安裝完成後開新聊天，用非敏感的小任務確認行為。<a href="https://learn.chatgpt.com/docs/hooks" target="_blank" rel="noopener noreferrer">Codex 官方 hooks 說明</a></p>
+<p><strong>安裝第三方倉庫前先看範圍：</strong><a href="https://github.com/mattpocock/skills#installation-30-second-setup" target="_blank" rel="noopener noreferrer">Matt Pocock 的安裝方式</a>會加入整組技能；而 <a href="https://github.com/DietrichGebert/ponytail#install" target="_blank" rel="noopener noreferrer">Ponytail 的完整外掛</a>除技能外還包含生命週期 hooks。若選擇含 hooks 的完整外掛，務必先在 <code>/hooks</code> 檢視實際執行的本機命令後，再決定是否標記為信任（Trusted）。<a href="https://learn.chatgpt.com/docs/hooks" target="_blank" rel="noopener noreferrer">Codex 官方 hooks 說明</a></p>
 
 <div id="create"></div>
-<h2>把流程做成技能（Skill）</h2>
-<p>建議先手動完成一遍，確認輸入內容、處理步驟與產出結果都沒問題，再把這個流程整理成技能。不要把一次碰巧成功的操作，直接當成穩定的標準流程。</p>
+<h2>把流程做成技能（Skill）：SKILL.md 目錄結構與漸進式載入</h2>
+<p>當你發現自己第 3 次輸入相似的長篇工作流要求，且已經手動跑通確認步驟穩定時，就可以呼叫內建的 <strong><code>$skill-creator</code></strong>（在 ChatGPT 對話中亦可輸入 <code>@skill-creator</code>）將它封裝成可重複使用的標準技能：</p>
 <div class="command-block">
-  <div class="command-title"><span></span>建立可重複使用的技能（Skill）<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
+  <div class="command-title"><span></span>用 $skill-creator 建立技能<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
   <pre><code>使用 $skill-creator，把我們剛才確認過的流程整理成一個可重複使用的技能。
 寫清楚需要哪些輸入、依什麼步驟處理、輸出格式與檢查方法。
 不要包含帳號、金鑰、個人路徑；遇到缺少資料或需要對外發送時，先停下來向我確認。</code></pre>
 </div>
-<p>產生後，開啟技能說明，重點檢查三件事：有沒有遺漏步驟、有沒有把只適用於這一次的細節寫死、有沒有超出你允許的操作範圍。接著再用一份新的輸入測試一次。</p>
 <figure class="interface-figure" style="max-width:1100px">
   <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/技能Skill.png" data-screenshot-title="技能列表" aria-label="技能列表，放大檢視">
     <img src="../images/tutorial/pick/技能Skill.png" alt="技能列表" loading="lazy" decoding="async" />
     <span class="image-expand" aria-hidden="true">↗</span>
   </button>
-  <figcaption><strong>技能列表</strong>在這裡檢視已安裝的技能，後續可依 $名稱 呼叫。</figcaption>
+  <figcaption><strong>技能列表（自訂 → 技能）</strong>在此檢視「已安裝」技能、切換「個人」與「系統」分頁或點擊右上角「新增」建立技能；後續可依 <code>$名稱</code> 點名呼叫，或讓系統依任務描述自動觸發。</figcaption>
 </figure>
-<p>個人技能可供多個專案共用；專案專用技能則應放在對應的專案中。儲存在哪個範圍，決定了它能在哪裡被讀取到。</p>
+
+<h3>進階選讀：SKILL.md 標準規範與漸進式載入（Progressive Disclosure）原理</h3>
+<p>根據 <a href="https://learn.chatgpt.com/docs/skills-and-plugins" target="_blank" rel="noopener noreferrer">官方 Skills 架構文件</a>，一個標準技能是一個獨立資料夾，個人跨專案共用技能放在 <code>~/.agents/skills/&lt;skill-name&gt;/</code>（或 <code>~/.codex/skills/</code>），專案專屬技能則放在儲存庫的 <code>.agents/skills/&lt;skill-name&gt;/</code>（或 <code>.codex/skills/</code>，可隨 Git 與團隊共享）。</p>
+<ul>
+  <li><strong>為什麼裝很多技能不會塞爆 Context？因為「漸進式載入」！</strong>Codex 啟動工作階段時，<strong>只會讀取每個技能 <code>SKILL.md</code> 最上方的 YAML frontmatter（<code>name</code> 與 <code>description</code>）</strong>；只有當你的任務需求符合某個技能的 <code>description</code>（隱式自動觸發），或你主動用 <code>$skill-name</code> 點名時，才會把完整的 <code>SKILL.md</code> 正文以及同目錄下的 <code>scripts/</code>、<code>references/</code>、<code>assets/</code> 載入上下文。</li>
+  <li><strong>撰寫 <code>SKILL.md</code> 的黃金法則：</strong>資料夾名稱必須與 YAML 中的 <code>name</code> 完全一致（僅限小寫英文字母、數字與連字號 <code>-</code>）；而 <code>description</code> 則是自動觸發的靈魂，必須同時寫清楚「<strong>這個技能做什麼</strong>」以及「<strong>在什麼關鍵字或情境下應該觸發／不該觸發</strong>」：</li>
+</ul>
+<div class="command-block">
+  <div class="command-title"><span></span>.agents/skills/pr-release-note/SKILL.md 標準結構範例<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
+  <pre><code>---
+name: pr-release-note
+description: 根據兩個 Git 分支或標籤之間的提交歷史與變更差異，產出繁體中文版更說明（Release Notes）。當使用者要求整理版本更新日誌、發布說明或變更摘要時觸發；不適用於單一未提交檔案的日常 Code Review。
+---
+
+# 版本發布說明產生流程
+
+1. 先執行唯讀指令 `git log &lt;base&gt;..&lt;head&gt; --oneline` 與 `git diff --stat &lt;base&gt;..&lt;head&gt;` 確認變更範圍。
+2. 將變更分類為：「新增功能」、「問題修正」、「安全性與權限調整」與「破壞性變更（Breaking Changes）」。
+3. 輸出至指定檔案前先展示草稿，絕不自動執行 git tag 或發布動作。</code></pre>
+</div>
+
+<div id="hooks-mcp-subagents"></div>
+<h2>進階工程自動化：Hooks 生命週期防線、MCP 設定與 Subagents 子代理分工</h2>
+<p>當你想讓 Codex 在大型專案中做到「改完檔案自動跑 Linter、危險指令自動攔截、跨系統查資料庫、平行派發多個子代理同時研究」，可善用以下三大進階機制：</p>
+
+<h3>1. 事件掛鉤（Hooks）：用 hooks.json 打造零遺漏的自動化品管</h3>
+<p>Hooks 允許你在全域 <code>~/.codex/hooks.json</code> 或專案 <code>&lt;repo&gt;/.codex/hooks.json</code> 設定本機檢查腳本（專案級 Hooks 首次載入或修改後，需在對話輸入 <code>/hooks</code> 檢視實際命令並標記為 <strong>Trusted</strong> 才會生效，防止惡意儲存庫自動執行腳本）。官方支援五大生命週期事件：</p>
+<ul>
+  <li><strong><code>SessionStart</code>：</strong>對話啟動、恢復或執行 <code>/compact</code> 壓縮後觸發；腳本的 <code>stdout</code> 輸出可自動注入對話作為額外環境背景（例如在 <code>/compact</code> 後自動重新注入核心架構摘要，防止壓縮失憶）。</li>
+  <li><strong><code>UserPromptSubmit</code>：</strong>使用者送出訊息前觸發，可用於檢查是否誤貼入機密格式。</li>
+  <li><strong><code>PreToolUse</code>：</strong>代理執行工具（如 <code>Bash</code> 指令）前觸發。<strong>若檢查腳本回傳退出碼 <code>exit 2</code> 並在 <code>stderr</code> 輸出原因，Codex 會直接硬性攔截該指令並把原因回饋給模型修正！</strong></li>
+  <li><strong><code>PostToolUse</code>：</strong>代理修改檔案或執行工具後觸發，最適合自動執行 Prettier、ESLint、Ruff 等程式碼格式化與靜態檢查。</li>
+  <li><strong><code>Stop</code>：</strong>代理準備結束當前輪次前觸發，可用於確認所有必跑測試皆已執行。</li>
+</ul>
+<div class="command-block">
+  <div class="command-title"><span></span>.codex/hooks.json 實戰設定範例（攔截危險指令 + 改檔後自動排版）<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
+  <pre><code>{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ./scripts/verify-safe-bash.mjs",
+            "timeout": 10,
+            "statusMessage": "正在檢查終端機指令安全性..."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx prettier --write .",
+            "timeout": 30,
+            "statusMessage": "正在自動執行 Prettier 排版..."
+          }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+</div>
+
+<h3>2. 模型上下文協定（MCP）：在 config.toml 或 CLI 連接開發工具</h3>
+<p>除了從桌面版外掛目錄安裝外，開發者也可透過 CLI 指令 <code>codex mcp add</code>、<code>codex mcp login</code>、<code>codex mcp list</code>，或直接在 <code>config.toml</code> 的 <code>[mcp_servers.&lt;name&gt;]</code> 掛載本機（<code>stdio</code>）或遠端（<code>streamable_http</code>）MCP 伺服器（對話中可隨時輸入 <code>/mcp</code> 查看狀態與啟停）：</p>
+<div class="command-block">
+  <div class="command-title"><span></span>config.toml 中的 MCP 伺服器設定範例<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
+  <pre><code># 1. 本機 stdio MCP 伺服器範例（如 Playwright 瀏覽器自動化測試）
+[mcp_servers.playwright]
+command = "npx"
+args = ["-y", "@playwright/mcp@latest"]
+
+# 2. 遠端 Streamable HTTP MCP 伺服器範例（使用 OAuth 驗證，不硬編碼 Token）
+[mcp_servers.linear]
+url = "https://mcp.linear.app/mcp"
+auth = "oauth"</code></pre>
+</div>
+
+<h3>3. 子代理（Subagents / Multi-agent，介面分頁譯為「子智慧體」）：平行拆解大型任務、保護主對話 Context</h3>
+<p>當主對話需要同時調查十幾個檔案、對比多份文件或執行耗時測試時，若全部在主對話裡進行，工具輸出很快就會塞滿上下文視窗。開啟 <strong>Multi-agent（子代理）</strong> 功能後，主代理可以派發多個擁有<strong>獨立上下文與獨立沙盒權限</strong>的子代理平行處理，最後只把精煉結論回傳給主對話（可在對話輸入 <code>/subagents</code>，或從右側「執行摘要 → 子代理」與「<strong>子智慧體</strong>」分頁查看執行中與已完成的子代理狀態）：</p>
+<div class="command-block">
+  <div class="command-title"><span></span>啟用子代理與自訂唯讀研究員角色（.codex/agents/researcher.toml）<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
+  <pre><code># Step 1：於 ~/.codex/config.toml 或 .codex/config.toml 啟用多代理功能
+[features]
+multi_agent = true
+
+# Step 2：新增 .codex/agents/researcher.toml 定義專屬唯讀子代理角色
+name = "researcher"
+description = "專門負責跨目錄搜尋、閱讀大型程式碼庫與整理架構摘要的唯讀研究子代理"
+model = "gpt-6-luna"
+model_reasoning_effort = "medium"
+sandbox_mode = "read-only"
+developer_instructions = """
+你只負責唯讀檢索與結構化整理，絕不修改任何檔案。
+回報時請列出確切檔案路徑、行號與關鍵結論，保持精簡以節省主代理上下文。
+"""</code></pre>
+</div>
 
 <div id="computer-use"></div>
-<div id="browser"></div>
-<h2>電腦操控（Computer use）</h2>
-<p>當任務需要操作你電腦中的軟體或瀏覽器時，先確認帳號所在地區支援，並依提示安裝電腦操控（Computer use）外掛，再到<strong>「設定 → Computer use」</strong>檢查允許的應用程式與瀏覽器。應用程式核准與檔案／命令沙盒是不同權限：</p>
+<h2>電腦操控（Computer use）與五大瀏覽器擴充功能</h2>
+<p>當任務需要操作你電腦中的桌面軟體或外部瀏覽器時，先確認帳號所在地區支援，並到<strong>「設定 →（整合）→ Computer use」</strong>檢查「<strong>控制</strong>」與「<strong>一律允許的應用</strong>」設定。請記住：<strong>GUI 應用程式核准與終端機檔案／命令沙盒是兩道獨立的權限邊界</strong>：</p>
 <figure class="interface-figure" style="max-width:1100px">
   <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/Computer use.png" data-screenshot-title="Computer use 中的應用程式與瀏覽器開關" aria-label="Computer use 中的應用程式與瀏覽器開關，放大檢視">
     <img src="../images/tutorial/pick/Computer use.png" alt="Computer use 中的應用程式與瀏覽器開關" loading="lazy" decoding="async" />
     <span class="image-expand" aria-hidden="true">↗</span>
   </button>
-  <figcaption><strong>電腦操控（Computer use）的應用程式與瀏覽器開關</strong>位置：設定 → Computer use。可分別開啟允許存取的瀏覽器與桌面應用程式。</figcaption>
+  <figcaption><strong>電腦操控（Computer use）設定</strong>位置：設定 → Computer use。在「控制」區可啟用「任何應用程式」控制權、安裝 Google Chrome / Microsoft Edge 瀏覽器擴充功能或啟用 Microsoft Excel 增益集；下方「一律允許的應用」則可檢視與管理已授權的應用程式。</figcaption>
 </figure>
 
-<h3>1. 連接瀏覽器</h3>
-<p>本次截圖顯示 Chrome 與 Edge 的設定入口；官方擴充功能另列 Brave、Opera、Vivaldi。依目前介面安裝對應擴充功能並核對網站權限。內建瀏覽器（@Browser）與你自己的瀏覽器是不同入口，登入狀態與存取權限也可能不同；請先確認指定的是哪一個分頁。</p>
-<p>連接後，可在聊天中指定已開啟的瀏覽器分頁做讀取或操作。每次都先確認分頁網址、登入狀態與預計操作的範圍。</p>
+<h3 id="browser">1. 連接外部瀏覽器與並排側邊欄對話（Side-by-side chat）</h3>
+<p>官方瀏覽器擴充功能支援五大 Chromium 核心瀏覽器：<strong>Google Chrome、Microsoft Edge、Brave、Opera 與 Vivaldi</strong>。安裝擴充功能後，除了能在桌面版聊天輸入 <code>@Chrome</code> 或 <code>@Edge</code> 指定已開啟的分頁做讀取、研究、摘要多個分頁或填表外，還支援在瀏覽器視窗內直接開啟 <strong>並排側邊欄對話（Side-by-side chat，支援 Chrome、Edge、Brave、Vivaldi）</strong>，在不離開當前網頁、也不搶奪你滑鼠焦點的情況下邊看網頁邊協作。</p>
+<p>內建瀏覽器（<code>@Browser</code>）與你日常使用的個人瀏覽器（如 <code>@Edge</code>）是不同入口，Cookie 登入狀態與存取權限也各自獨立；每次操作前請先確認指定的是哪一個分頁、登入身分以及預計執行的動作。</p>
 <div class="command-block">
   <div class="command-title"><span></span>可以這樣說<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
-  <pre><code>使用 @Edge 中我指定的這個分頁，讀取頁面並整理摘要。只做讀取，不要送出表單，也不要修改網頁裡的資料。</code></pre>
+  <pre><code>使用 @Edge 中我指定的這個分頁，讀取頁面並整理重點摘要。只做讀取，不要送出表單，也不要修改網頁裡的資料。</code></pre>
 </div>
-<aside class="inline-note"><strong>上傳前檢查</strong><div><p>如果網站要求上傳本機檔案，先核對檔案內容、目標網站及擴充功能權限，再決定是否允許。</p></div></aside>
+<aside class="inline-note"><strong>檔案上傳與跨網站權限檢查</strong><div><p>如果網站要求上傳本機檔案，或代理準備跨網站跳轉，請先核對檔案內容、目標網域及擴充功能權限，再決定是否允許。</p></div></aside>
 
 <figure class="interface-figure" style="max-width:1100px">
   <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/瀏覽器.png" data-screenshot-title="內建瀏覽器設定" aria-label="內建瀏覽器設定，放大檢視">
     <img src="../images/tutorial/pick/瀏覽器.png" alt="內建瀏覽器設定" loading="lazy" decoding="async" />
     <span class="image-expand" aria-hidden="true">↗</span>
   </button>
-  <figcaption><strong>內建瀏覽器設定</strong>瀏覽器設定用於管理網站存取與相關權限；內建瀏覽器和個人瀏覽器可能使用不同的登入狀態。</figcaption>
+  <figcaption><strong>內建瀏覽器設定（設定 → 瀏覽器）</strong>可設定「網頁 URL 和連結開啟位置」、「本機 URL 開啟目標（如 ChatGPT）」、「註解螢幕截圖（一律包含）」並管理瀏覽資料與密碼。</figcaption>
 </figure>
-<div id="computer"></div>
-<h3>2. Windows 桌面應用程式操控與安全白名單</h3>
-<p>電腦操控功能可以看見並操作你允許的應用程式介面。你可以在對話框輸入 <code>@Computer</code> 或 <code>@應用程式名稱</code> 指定目標軟體。在 Windows 上，原生軟體操控會使用目前的桌面並移動滑鼠游標；執行時請保持目標軟體可見，不要同時搶著操作滑鼠。</p>
-<p>首次存取應用程式時，依畫面檢查核准要求；「一律允許」會保留後續存取權限，僅在確有持續需要時使用。</p>
-<aside class="inline-note"><strong>先給最小權限範圍</strong><div><p>只開啟本次需要的應用程式或網站。處理敏感操作時請在旁確認；任務結束後，可隨時在設定裡撤銷不再需要的授權。</p></div></aside>
+<h3 id="computer">2. 桌面應用程式操控與安全隔離建議（Windows / macOS）</h3>
+<p>電腦操控功能可以看見並操作你允許的桌面軟體介面。你可以在對話框輸入 <code>@Computer</code> 或 <code>@應用程式名稱</code> 指定目標軟體：</p>
+<ul>
+  <li><strong>Windows 操作特性：</strong>原生軟體操控會直接使用目前的桌面並移動真實滑鼠游標；執行期間請保持目標軟體可見且螢幕未鎖定，不要同時搶著移動滑鼠。</li>
+  <li><strong>macOS 系統權限要求：</strong>若在 Mac 上使用，需先至「系統設定 → 隱私權與安全性」手動授權桌面版應用程式「<strong>螢幕錄製（Screen Recording）</strong>」與「<strong>輔助使用（Accessibility）</strong>」兩項權限。</li>
+  <li><strong>安全最佳實踐（最小權限與虛擬機器隔離）：</strong>由於 GUI 操控直接模擬人類點擊軟體介面（不受終端機檔案沙盒約束），只應開啟本次任務必要的單一軟體，處理敏感操作時請全程在旁監看；若需執行高風險或長時間無人看管的桌面自動化測試，官方建議在<strong>獨立的 Windows 虛擬機器（VM）或隔離環境</strong>中運行。任務結束後，可隨時到「<strong>設定 → Computer use</strong>」檢查「<strong>一律允許的應用</strong>」清單，或直接關閉「<strong>任何應用程式</strong>」總開關。</li>
+</ul>
 
 <div id="voice-and-pets"></div>
-<h2>語音對話（Voice）與桌面寵物（Pets）</h2>
-<p>聽寫會把口述內容轉成輸入框文字，讓你檢查後再送出；語音對話則是開啟通話與任務互動。兩者入口與可用性不同，既有 Codex 任務中的語音功能仍可能按帳號逐步推出。</p>
+<h2>語音對話（Voice）、聽寫與桌面寵物（Pets）</h2>
+<p>輸入框右下角同時提供「<strong>聽寫（Dictation，麥克風圖示，預設快捷鍵 <code>Ctrl + Space</code>）</strong>」與「<strong>語音對話（Voice，橘色音波圖示）</strong>」兩種語音入口：如「<strong>設定 → 聲音</strong>」所示，<strong>按住 <code>Ctrl + Space</code> 即可聽寫，或連按兩下啟用免持模式</strong>，把口述內容轉成輸入框文字草稿，讓你檢查專有名詞與路徑無誤後再送出；語音對話則是直接開啟即時雙向通話與任務互動。</p>
 <ul>
-  <li><strong>ChatGPT Voice 語音模式：</strong>在既有 Codex 任務中點擊語音圖示開啟語音對話，即可直接用口語討論進度、隨時打斷或即時引導，甚至用說的跨任務調度（例如：「幫我切換到正在跑測試的那個任務」）。</li>
-  <li><strong>桌面寵物（Pets，在對話框輸入 <code>/pet</code>）：</strong>讓虛擬寵物（如 Codey）或極簡控制列（Mini）懸浮在桌面最上層。即使主視窗收在背景，也能從寵物狀態（<code>Running</code> 執行中、<code>Needs input</code> 等待核准、<code>Ready</code> 已完成未讀、<code>Blocked</code> 發生錯誤）一眼掌握背景任務，並隨時點擊麥克風或輸入框快速發話。</li>
+  <li><strong>ChatGPT Voice 即時語音調度：</strong>在既有任務中點擊語音圖示，即可直接用口語討論進度、隨時打斷或即時引導，甚至用說的跨任務調度（例如：「幫我切換到正在跑測試的那個專案聊天」）。</li>
+  <li><strong>桌面寵物（Pets，在對話框輸入 <code>/pet</code> 或至「設定 → Mini 與寵物」）：</strong>讓虛擬寵物（如 Codey）或極簡控制列（Mini）懸浮在桌面最上層（亦可從左下角帳號選單點選「<strong>顯示寵物 <code>Alt+Win+P</code></strong>」）。即使主視窗收在背景，也能從寵物狀態（<code>Running</code> 執行中、<code>Needs input</code> 等待核准、<code>Ready</code> 已完成未讀、<code>Blocked</code> 發生錯誤）一眼掌握背景任務，並隨時點擊麥克風或輸入框快速發話。</li>
 </ul>
 <aside class="tier-note"><div class="tier-note-header"><span class="tier-badge pro">外接硬體選購說明</span><strong>Codex Micro 實體硬體鍵盤（非軟體訂閱內附功能）</strong></div><div><p>官方文件提到的 <strong>Codex Micro</strong> 為 Work Louder 推出的獨立實體外接控制器（具備 6 顆多色發光 Agent Keys 與旋鈕，可一鍵切換 6 個平行對話），屬於需要額外購買的硬體配件，一般 Free / Plus 使用者直接使用軟體內建的桌面寵物功能（輸入 <code>/pet</code>）即可獲得完整懸浮監看體驗。</p></div></aside>
 <figure class="interface-figure" style="max-width:1100px">
-  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/聲音及聽寫1.png" data-screenshot-title="聲音及聽寫設定" aria-label="聲音及聽寫設定，放大檢視">
-    <img src="../images/tutorial/pick/聲音及聽寫1.png" alt="聲音及聽寫設定" loading="lazy" decoding="async" />
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/聲音及聽寫1.png" data-screenshot-title="設定 → 聲音（語音對話與聽寫設定）" aria-label="設定 → 聲音（語音對話與聽寫設定），放大檢視">
+    <img src="../images/tutorial/pick/聲音及聽寫1.png" alt="設定 → 聲音（語音對話與聽寫設定）" loading="lazy" decoding="async" />
     <span class="image-expand" aria-hidden="true">↗</span>
   </button>
-  <figcaption><strong>聲音及聽寫設定</strong>可在設定頁查看語音與聽寫選項，以及近期錄音相關資訊；分享畫面前請先檢查逐字稿。</figcaption>
+  <figcaption><strong>設定 → 聲音（語音對話與聽寫設定）</strong>可設定麥克風、語言、語音對話聲音與快速鍵、聽寫快捷鍵（預設 <code>Ctrl+Space</code>），並檢視儲存在此裝置上的最近 20 段「近期錄音」；公開分享設定畫面前，請先確認下方近期錄音不包含敏感內容。</figcaption>
 </figure>
 <figure class="interface-figure" style="max-width:1100px">
   <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/聽寫.png" data-screenshot-title="輸入框聽寫" aria-label="輸入框聽寫，放大檢視">
     <img src="../images/tutorial/pick/聽寫.png" alt="輸入框聽寫" loading="lazy" decoding="async" />
     <span class="image-expand" aria-hidden="true">↗</span>
   </button>
-  <figcaption><strong>輸入框聽寫</strong>在輸入框選擇聽寫後先檢查辨識文字，尤其是路徑、檔名與專有名詞，再送出任務。</figcaption>
+  <figcaption><strong>輸入框聽寫（快捷鍵 <code>Ctrl+Space</code>）</strong>點擊輸入框右下角的麥克風圖示（或按 <code>Ctrl+Space</code>）開始聽寫，轉為文字草稿後請先檢查路徑、檔名與專有名詞，再點擊右側橘色箭頭送出。</figcaption>
 </figure>
 <details class="source-list">
   <summary>官方文件與延伸閱讀</summary>
   <ul>
-    <li><a href="https://learn.chatgpt.com/docs/skills-and-plugins" target="_blank" rel="noopener noreferrer">Skills 與 Plugins 架構</a></li>
-    <li><a href="https://learn.chatgpt.com/docs/plugins" target="_blank" rel="noopener noreferrer">外掛（Plugins）與 Sign in with ChatGPT</a></li>
-    <li><a href="https://learn.chatgpt.com/docs/computer-use" target="_blank" rel="noopener noreferrer">Computer use 官方指南</a></li>
-    <li><a href="https://learn.chatgpt.com/docs/chrome-extension" target="_blank" rel="noopener noreferrer">瀏覽器擴充功能（支援 5 大瀏覽器）</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/skills-and-plugins" target="_blank" rel="noopener noreferrer">Skills 與 Plugins 架構、SKILL.md 規範與漸進式載入</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/plugins" target="_blank" rel="noopener noreferrer">外掛（Plugins）、連接器整合與 Sign in with ChatGPT</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/hooks" target="_blank" rel="noopener noreferrer">事件掛鉤（Hooks）五大生命週期與 hooks.json 設定</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/mcp" target="_blank" rel="noopener noreferrer">模型上下文協定（MCP）設定與 CLI 管理</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/computer-use" target="_blank" rel="noopener noreferrer">電腦操控（Computer use）官方指南與安全建議</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/chrome-extension" target="_blank" rel="noopener noreferrer">瀏覽器擴充功能（支援 5 大瀏覽器與並排側邊欄對話）</a></li>
   </ul>
 </details>
         </article>
-        <nav class="chapter-pagination" aria-label="前後章節">
-          <a data-chapter-slug="visual-feedback" href="visual-feedback.html">← <span>上一章<small>圖片、視窗快照（Appshots）與網頁回饋</small></span></a>
+                <nav class="chapter-pagination" aria-label="前後章節">
+          <a class="prev" data-chapter-slug="parallel-and-fork" href="parallel-and-fork.html">← <span>上一章<small>聊天分支（Fork）與工作樹（Worktree）隔離</small></span></a>
           <a class="next" data-chapter-slug="instructions-and-editor" href="instructions-and-editor.html"><span>下一章<small>Codex 指示、AGENTS.md 與常用命令</small></span> →</a>
         </nav>
       </main>
@@ -233,12 +337,13 @@
       <aside class="page-toc" aria-label="本頁目錄">
         <p class="eyebrow">本章內容</p>
         <nav class="toc-links">
-          <a href="#difference">技能（Skill）、外掛（Plugin）與 MCP</a>
-          <a href="#install">推薦工具與安裝方式</a>
-          <a href="#community-skills">第三方技能選讀</a>
-          <a href="#create">製作技能（Skill）</a>
-          <a href="#computer-use">電腦操控（Computer use）</a>
-          <a href="#voice-and-pets">語音對話與桌面寵物（Pets）</a>
+          <a href="#difference">五大擴充與分工概念對照</a>
+          <a href="#install">外掛安裝與雲端連接器</a>
+          <a href="#community-skills">第三方高評價技能選讀</a>
+          <a href="#create">SKILL.md 結構與漸進式載入</a>
+          <a href="#hooks-mcp-subagents">Hooks、MCP 與 Subagents 子代理</a>
+          <a href="#computer-use">電腦操控與 5 大瀏覽器擴充</a>
+          <a href="#voice-and-pets">語音對話、聽寫與桌面寵物</a>
         </nav>
         <div class="toc-note">
           <span>專注閱讀</span>
@@ -273,6 +378,19 @@
           <img id="image-viewer-img" src="" alt="" />
         </div>
         <p id="image-viewer-hint">保留完整介面；需要看清楚小字時，請點擊「原始尺寸檢視」。</p>
+      </div>
+    </div>
+
+    <!-- 專有名詞白話解釋懸停視窗 -->
+    <div popover="hint" id="term-tooltip">
+      <div class="term-tooltip-card">
+        <div class="term-tooltip-header">
+          <span class="term-tooltip-badge" id="term-tooltip-badge"></span>
+          <button type="button" class="term-tooltip-close" id="term-tooltip-close" aria-label="關閉名詞解釋">關閉 ×</button>
+        </div>
+        <strong class="term-tooltip-title" id="term-tooltip-title"></strong>
+        <div class="term-tooltip-analogy" id="term-tooltip-analogy"></div>
+        <p class="term-tooltip-usage" id="term-tooltip-usage"></p>
       </div>
     </div>
   </div>

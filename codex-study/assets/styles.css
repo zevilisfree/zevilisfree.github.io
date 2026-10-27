@@ -1887,6 +1887,262 @@ th {
 }
 
 /* ==========================================================================
+   Beginner Technical Term Tooltips (Interest Invokers + Popover + Anchor Pos)
+   ========================================================================== */
+
+[interestfor] {
+  --interest-delay-start: 0.16s;
+  interest-delay-start: var(--interest-delay-start);
+  --interest-delay-end: 0.14s;
+  interest-delay-end: var(--interest-delay-end);
+}
+
+.term-tip {
+  font-style: normal;
+  cursor: help;
+  text-decoration: underline dashed var(--brand);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.24em;
+  border-radius: 0.25rem;
+  transition: background-color 0.15s ease, color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+button.term-tip {
+  display: inline;
+  padding: 0 0.1rem;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  text-align: inherit;
+}
+
+code.term-tip {
+  text-decoration: none;
+  border-bottom: 1.5px dashed var(--brand);
+}
+
+.term-tip:hover,
+.term-tip:focus-visible,
+[interestfor="term-tooltip"]:is(:interest-source, .interest-source) {
+  color: var(--brand-strong);
+  background: var(--brand-soft);
+  text-decoration-color: var(--brand-strong);
+  outline: none;
+}
+
+.term-tip:focus-visible {
+  box-shadow: 0 0 0 2px var(--brand);
+}
+
+button[interestfor="term-tooltip"]:is(:interest-source, .interest-source),
+[interestfor="term-tooltip"]:is(:interest-source, .interest-source) {
+  anchor-name: --term-active-anchor;
+}
+
+@supports (anchor-name: --my-anchor) {
+  [popover] {
+    inset: auto;
+    margin: unset;
+  }
+}
+
+#term-tooltip {
+  display: none;
+  position: fixed;
+  z-index: 420;
+  width: min(24.5rem, calc(100vw - 1.5rem));
+  max-width: calc(100vw - 1.5rem);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  overflow: visible;
+  position-anchor: --term-active-anchor;
+  top: anchor(bottom);
+  left: anchor(center);
+  position-try: flip-block;
+  position-try-fallbacks: flip-block, flip-inline;
+  container-type: anchored;
+  margin: unset;
+}
+
+[popover]:is(:popover-open, .\:popover-open),
+#term-tooltip:is(:interest-target, .interest-target) {
+  display: block;
+}
+
+.term-tooltip-card {
+  position: relative;
+  margin-block-start: 0.45rem;
+  padding: 0.95rem 1.05rem;
+  border: 1px solid var(--brand-glow);
+  border-radius: 0.9rem;
+  background: var(--surface-elevated);
+  color: var(--ink);
+  box-shadow: var(--shadow-lg);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  text-align: left;
+}
+
+@supports (container-type: anchored) {
+  .term-tooltip-card::before {
+    content: "▲";
+    position: absolute;
+    inset-block-start: -0.65rem;
+    inset-inline-start: 1.25rem;
+    color: var(--brand);
+    font-size: 0.7rem;
+    line-height: 1;
+    pointer-events: none;
+  }
+}
+
+@container anchored(fallback: flip-block) {
+  .term-tooltip-card {
+    margin-block-start: 0;
+    margin-block-end: 0.45rem;
+  }
+  .term-tooltip-card::before {
+    content: "▼";
+    inset-block-start: auto;
+    inset-block-end: -0.65rem;
+  }
+}
+
+#term-tooltip[data-flipped="true"] .term-tooltip-card {
+  margin-block-start: 0;
+  margin-block-end: 0.45rem;
+}
+
+.term-tooltip-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.term-tooltip-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: var(--brand-soft);
+  color: var(--brand-strong);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.term-tooltip-close {
+  padding: 0.1rem 0.4rem;
+  border: 1px solid var(--line);
+  border-radius: 0.35rem;
+  background: var(--surface);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.term-tooltip-close:hover {
+  color: var(--ink);
+  border-color: var(--brand);
+}
+
+.term-tooltip-title {
+  display: block;
+  margin: 0 0 0.55rem;
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.term-tooltip-analogy {
+  margin: 0 0 0.55rem;
+  padding: 0.55rem 0.7rem;
+  border-left: 3px solid var(--brand);
+  border-radius: 0 0.5rem 0.5rem 0;
+  background: var(--bg-subtle);
+  color: var(--ink);
+  font-size: 0.825rem;
+  line-height: 1.58;
+}
+
+.term-tooltip-analogy strong,
+.term-tooltip-usage strong {
+  color: var(--brand-strong);
+  font-weight: 700;
+}
+
+.term-tooltip-usage {
+  margin: 0;
+  color: var(--ink-secondary);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+}
+
+.search-glossary-card {
+  margin: 0.25rem 0.35rem 0.6rem;
+  padding: 0.8rem 0.95rem;
+  border: 1px solid var(--brand-glow);
+  border-left: 4px solid var(--brand);
+  border-radius: 0.75rem;
+  background: var(--brand-soft);
+}
+
+.search-glossary-card header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.search-glossary-card header span {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--brand-strong);
+}
+
+.search-glossary-card strong {
+  display: block;
+  font-size: 0.92rem;
+  color: var(--ink);
+  margin-bottom: 0.25rem;
+}
+
+.search-glossary-card p {
+  margin: 0.2rem 0 0;
+  color: var(--ink-secondary);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+}
+
+.glossary-hint-pill {
+  border-color: var(--brand-glow) !important;
+  color: var(--brand-strong) !important;
+  background: var(--brand-soft) !important;
+  font-weight: 600;
+}
+
+body.hide-term-tips .term-tip {
+  text-decoration: none;
+  border-bottom: 0;
+  cursor: inherit;
+}
+
+/* ==========================================================================
    Homepage — Hero, Bento Features, Curriculum & Principles
    ========================================================================== */
 
@@ -2283,6 +2539,26 @@ th {
   padding: 3.25rem 0 5.5rem;
 }
 
+.learning-path-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.learning-path {
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--surface);
+}
+
+.learning-path span { color: var(--brand); font: 700 0.75rem var(--font-mono); }
+.learning-path h3 { margin: 0.75rem 0; color: var(--ink); }
+.learning-path p, .learning-path-advanced { color: var(--muted); line-height: 1.7; }
+.learning-path a { color: var(--brand); font-weight: 700; }
+.learning-path-advanced { margin-top: 1.25rem; }
+.learning-path-advanced a { color: var(--brand); }
+
 .section-heading {
   margin-bottom: 2rem;
   display: grid;
@@ -2303,6 +2579,13 @@ th {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
+}
+
+.chapter-group-heading {
+  grid-column: 1 / -1;
+  margin: 1.25rem 0 0;
+  color: var(--ink);
+  font-size: 1.1rem;
 }
 
 .chapter-card {
@@ -2656,6 +2939,7 @@ th {
   .chapter-grid {
     grid-template-columns: 1fr;
   }
+  .learning-path-grid { grid-template-columns: 1fr; }
   .course-principles {
     padding: 1.875rem 1.5rem;
     grid-template-columns: 1fr;

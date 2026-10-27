@@ -10,7 +10,7 @@
     } catch (e) {}
   </script>
   <title>聊天分支（Fork）與工作樹（Worktree）隔離｜Codex 實戰手冊</title>
-  <meta name="description" content="區分新聊天、聊天分支（Fork）與工作樹（Worktree）隔離，再了解移交（Hand off）的時機。" />
+  <meta name="description" content="掌握 Fork + Worktree A/B 雙軌實作、environment.toml 初始化腳本、.worktreeinclude 與 Hand off 三種衝突處理模式。" />
   <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="../assets/styles.css" />
 </head>
@@ -34,115 +34,132 @@
 
     <div class="docs-shell">
       <aside id="chapter-sidebar" class="chapter-sidebar" aria-label="課程章節">
-        <p class="eyebrow">閱讀目錄 · 共 10 章</p>
+        <p class="eyebrow">閱讀目錄 · 共 12 章</p>
         <nav>
-          <a class="chapter-link" data-chapter-slug="introduction" href="introduction.html"><span>01</span>認識 Codex 與使用入口</a>
-          <a class="chapter-link" data-chapter-slug="workspace" href="workspace.html"><span>02</span>安裝、登入與建立第一個專案</a>
-          <a class="chapter-link" data-chapter-slug="permissions-and-control" href="permissions-and-control.html"><span>03</span>權限、核准與資訊安全</a>
-          <a class="chapter-link" data-chapter-slug="models-and-context" href="models-and-context.html"><span>04</span>選擇模型、查看用量與管理上下文</a>
-          <a class="chapter-link active" data-chapter-slug="parallel-and-fork" href="parallel-and-fork.html"><span>05</span>聊天分支（Fork）與工作樹（Worktree）隔離</a>
-          <a class="chapter-link" data-chapter-slug="visual-feedback" href="visual-feedback.html"><span>06</span>圖片、視窗快照（Appshots）與網頁回饋</a>
-          <a class="chapter-link" data-chapter-slug="skills-and-tools" href="skills-and-tools.html"><span>07</span>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</a>
-          <a class="chapter-link" data-chapter-slug="instructions-and-editor" href="instructions-and-editor.html"><span>08</span>Codex 指示、AGENTS.md 與常用命令</a>
-          <a class="chapter-link" data-chapter-slug="plan-goal-schedule" href="plan-goal-schedule.html"><span>09</span>規劃（Plan）、目標（Goal）與排程任務</a>
-          <a class="chapter-link" data-chapter-slug="remote" href="remote.html"><span>10</span>手機遠端連線（Remote）與雲端任務（Cloud）</a>
+          <a class="chapter-link" data-chapter-slug="chatgpt-basics" href="chatgpt-basics.html"><span>01</span>ChatGPT Chat：對話、搜尋與專案</a>
+          <a class="chapter-link" data-chapter-slug="work-basics" href="work-basics.html"><span>02</span>ChatGPT Work：委派、交付與驗收</a>
+          <a class="chapter-link" data-chapter-slug="introduction" href="introduction.html"><span>03</span>認識 Codex 與使用入口</a>
+          <a class="chapter-link" data-chapter-slug="workspace" href="workspace.html"><span>04</span>安裝、登入與建立第一個專案</a>
+          <a class="chapter-link" data-chapter-slug="permissions-and-control" href="permissions-and-control.html"><span>05</span>權限、核准與資訊安全</a>
+          <a class="chapter-link" data-chapter-slug="models-and-context" href="models-and-context.html"><span>06</span>選擇模型、查看用量與管理上下文</a>
+          <a class="chapter-link" data-chapter-slug="visual-feedback" href="visual-feedback.html"><span>07</span>圖片、視窗快照（Appshots）與網頁回饋</a>
+          <a class="chapter-link active" data-chapter-slug="parallel-and-fork" href="parallel-and-fork.html"><span>08</span>聊天分支（Fork）與工作樹（Worktree）隔離</a>
+          <a class="chapter-link" data-chapter-slug="skills-and-tools" href="skills-and-tools.html"><span>09</span>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</a>
+          <a class="chapter-link" data-chapter-slug="instructions-and-editor" href="instructions-and-editor.html"><span>10</span>Codex 指示、AGENTS.md 與常用命令</a>
+          <a class="chapter-link" data-chapter-slug="plan-goal-schedule" href="plan-goal-schedule.html"><span>11</span>規劃（Plan）、目標（Goal）與排程任務</a>
+          <a class="chapter-link" data-chapter-slug="remote" href="remote.html"><span>12</span>手機遠端連線（Remote）與雲端任務（Cloud）</a>
         </nav>
         <div class="course-progress">
           <span>目前進度</span>
-          <strong>05 / 10</strong>
-          <i><b style="width: 50%"></b></i>
+          <strong>08 / 12</strong>
+          <i><b style="width: 67%"></b></i>
         </div>
       </aside>
 
       <main class="article" id="lesson">
-        <div class="breadcrumb"><a href="../index.html">Codex Windows 教學</a> <span>/</span> 第 05 章</div>
+        <div class="breadcrumb"><a href="../index.html">Codex Windows 教學</a> <span>/</span> 第 8 章</div>
         <section class="hero-card">
           <div>
-            <p class="chapter-kicker">CHAPTER 05 · 約 3 分鐘</p>
+            <p class="chapter-kicker">CHAPTER 08 · 約 6 分鐘</p>
             <h1>聊天分支（Fork）與工作樹（Worktree）隔離</h1>
-            <p class="hero-copy">區分新聊天、聊天分支（Fork）與工作樹（Worktree）隔離，再了解移交（Hand off）的時機。</p>
+            <p class="hero-copy">掌握 Fork + Worktree A/B 雙軌實作、environment.toml 初始化腳本、.worktreeinclude 與 Hand off 三種衝突處理模式。</p>
           </div>
-          <div class="hero-orbit" aria-hidden="true"><span>05</span></div>
+          <div class="hero-orbit" aria-hidden="true"><span>08</span></div>
         </section>
         <div class="lesson-meta">
           <span>Windows 桌面版與跨端點</span>
-          <span>依 2026-10-16 文件查核</span>
+          <span>依 2026-10-24 文件查核</span>
           <span>點擊截圖可放大</span>
+          <span class="glossary-hint-pill">💡 專有名詞懸停可看白話解釋</span>
         </div>
         <article class="mdx-content">
 <div id="parallel"></div>
-<h2>什麼時候分開聊</h2>
+<h2>什麼時候開新對話、什麼時候建立分支（Fork）</h2>
 <p>一則聊天處理一個明確的結果。當出現兩個獨立方向時，可以開兩則聊天平行處理，不必把所有要求都塞進同一個對話裡。</p>
-<p>點擊頂部或側邊欄的<strong>「新增聊天」按鈕</strong>適合獨立的新任務；<strong>聊天分支（Fork，或在對話框輸入 <code>/fork</code>）</strong>則適合已經有一段討論，想從其中某個時間點換個方向繼續推進。</p>
+<p>點擊左上角側邊欄的<strong>「新對話」按鈕</strong>適合完全獨立的新任務；而<strong>分支至新對話（Fork，或在對話框輸入 <code>/fork</code>）</strong>則適合「已經討論並釐清了一段專案背景或規劃（<code>/plan</code>），想從這個時間點分出兩條路線各自推進」。</p>
 
 <div id="fork"></div>
-<h2>從某則訊息建立聊天分支（Fork，/fork）</h2>
+<h2>從某則訊息建立聊天分支（分支至新對話，/fork）與 A/B 雙軌對決技巧</h2>
 <ol class="operation-steps">
-  <li><div class="step-copy"><h3>找到希望保留的那段上下文</h3><p>回到一則已經完成的回答末尾，找到「分支到新聊天」按鈕（或在輸入框輸入 <code>/fork</code>）。選擇哪一則回答，就決定了從哪裡建立分支推進。</p></div></li>
-  <li><div class="step-copy"><h3>選擇分支的執行位置</h3><p>點擊後，依需求選擇「在此工作空間中建立分支（<code>/local</code>）」，或針對 Git 專案選擇「在新工作樹中建立分支（<code>/worktree</code>）」。</p></div></li>
-  <li><div class="step-copy"><h3>在新聊天中繼續</h3><p>開啟新出現的聊天，檢查保留下來的上下文，再發送新的要求。</p></div></li>
+  <li><div class="step-copy"><h3>找到希望保留的那段上下文</h3><p>回到一則已經完成的回答末尾，點擊下方的「<strong>⋯</strong>」更多動作按鈕並選擇「<strong>分支至新對話</strong>」（或在輸入框輸入 <code>/fork</code>）。選擇哪一則回答，就決定了從哪個時間點複製上下文推進。</p></div></li>
+  <li><div class="step-copy"><h3>選擇分支的執行環境（本機 Local vs. 新工作樹 Worktree）</h3><p>點擊後，依需求選擇「在此工作空間中建立分支（<code>/local</code>）」，或針對 Git 專案選擇「在新工作樹中建立分支（<code>/worktree</code>）」。</p></div></li>
+  <li><div class="step-copy"><h3>在新對話中繼續（或進行 A/B 方案平行對決）</h3><p>開啟新出現的聊天，檢查保留下來的上下文，再發送新的要求。</p></div></li>
 </ol>
 <figure class="interface-figure" style="max-width:1100px">
-  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/分支至新對話.png" data-screenshot-title="建立聊天分支時的兩種位置" aria-label="建立聊天分支時的兩種位置，放大檢視">
-    <img src="../images/tutorial/pick/分支至新對話.png" alt="建立聊天分支時的兩種位置" loading="lazy" decoding="async" />
+  <button class="screenshot-link" type="button" data-screenshot-src="../images/tutorial/pick/分支至新對話.png" data-screenshot-title="從回答末尾選單點選「分支至新對話」" aria-label="從回答末尾選單點選「分支至新對話」，放大檢視">
+    <img src="../images/tutorial/pick/分支至新對話.png" alt="已完成回答末尾點擊更多按鈕展開「分支至新對話」選單，右側分頁顯示子智慧體狀態" loading="lazy" decoding="async" />
     <span class="image-expand" aria-hidden="true">↗</span>
   </button>
-  <figcaption><strong>建立聊天分支時的兩種位置</strong>位置：已完成回答末尾的分支按鈕。點擊後，在彈跳視窗裡選擇建立位置。</figcaption>
+  <figcaption><strong>從回答末尾點擊「⋯」選擇「分支至新對話」</strong>位置：已完成回答末尾下方的更多動作選單（右側分頁同時可見「子智慧體」面板）。若處於 Git 專案中，後續可選擇在本機工作空間（Local）或新工作樹（Worktree）建立分支。</figcaption>
 </figure>
-<p>新聊天會保留分支點之前的對話上下文；分支點之後在原聊天新增的訊息，不會自動同步到新分支。</p>
-<p>所有對話都可以重新命名，包括一般新聊天、原聊天與分支聊天。可從聊天選單選擇「重新命名」，或在支援的版本使用 <code>/rename</code>；名稱寫清楚工作方向，之後會更容易找到。</p>
+<p>新聊天會保留分支點之前的對話上下文；分支點之後在原聊天新增的訊息，不會自動同步到新分支。所有對話都可以重新命名（從聊天選單選擇「重新命名」或輸入 <code>/rename</code>），建議將分支聊天命名為清楚的方案名稱（如「重構方案 A：Context API」與「重構方案 B：Zustand」）。</p>
+<aside class="inline-note"><strong>💡 實戰進階組合技：/plan → Fork 雙工作樹 A/B 方案平行對決</strong><div><p>當團隊或你自己對兩種技術做法猶豫不決時，千萬不要在同一個資料夾裡改了又拆。最佳實戰流程是：① 先在主對話用 <code>/plan</code> 讓 Codex 盤點現有程式碼並列出共通需求；② 在該則規劃回覆末尾按兩次 <strong>Fork</strong>，並都選擇「<strong>在新工作樹中建立分支（Worktree）</strong>」；③ 讓分支 A 與分支 B 同時在兩個完全隔離的 Git Worktree 中平行實作並跑測試；④ 對照兩邊 Review 面板的程式碼複雜度與測試結果，將勝出的那一個分支透過 <strong>移交（Hand off）</strong> 合併回本機主工作區！</p></div></aside>
 
 <div id="shared"></div>
-<h2>聊天獨立，檔案未必獨立（三種平行層次）</h2>
-<p><strong>聊天分支不等於 Git 分支。</strong>如果選擇「在此工作空間中建立分支」，兩則聊天仍會讀寫同一個本機資料夾。一邊修改檔案，另一邊就會讀到這些變動。為了避免衝突，你可以依情境選擇平行分工方式：</p>
+<h2>聊天獨立，檔案未必獨立（三種平行隔離層次）</h2>
+<p><strong>請特別注意：聊天分支（Chat Fork）不等於 Git 分支！</strong>如果在分支時選擇「在此工作空間中建立分支（Local）」，兩則聊天仍然會同時讀寫你電腦上的同一個資料夾。一邊修改檔案，另一邊就會讀到或覆蓋這些變動。為了避免平行工作時發生踩踏衝突，請依情境選擇三種隔離層次：</p>
 <ul>
-  <li><strong>同資料夾讀寫分工（Free / Plus 皆可用）：</strong>一則聊天只負責分析與規劃，另一則負責實際修改；或兩則分別處理不同檔案並事先界定範圍。</li>
-  <li><strong>本機 Git 工作樹（Worktree）隔離（<code>/worktree</code>，Free / Plus 皆可用）：</strong>讓不同聊天在各自獨立的 Git 工作樹副本中平行修改程式碼，彼此互不覆蓋，完成後再檢視與合併。</li>
-  <li><strong>Codex 雲端任務（Cloud）平行沙盒：</strong>若帳號已開放雲端入口，且專案已連結支援的儲存庫，可在獨立雲端環境執行任務；實際方案權益、資源與可用性以目前帳號及<a href="https://learn.chatgpt.com/docs/pricing" target="_blank" rel="noopener noreferrer">官方方案頁</a>為準。</li>
+  <li><strong>層次 1：同資料夾讀寫分工（Local，Free / Plus 皆可用）：</strong>一則聊天只負責唯讀分析與查文件（或使用 <code>/side</code> 支線聊天），另一則負責實際修改；若兩則都要改檔案，必須事先嚴格界定各自負責的子目錄。</li>
+  <li><strong>層次 2：本機 Git 工作樹隔離（Worktree，<code>/worktree</code>，Free / Plus 皆內建）：</strong>Codex 會在 <code>$CODEX_HOME/worktrees</code> 下建立獨立的 Git 工作樹副本（可選擇起始分支 Starting branch，並自動帶入未暫存變更）。不同聊天在各自的 Worktree 目錄中平行改 Code、跑測試，彼此 100% 互不覆蓋。</li>
+  <li><strong>層次 3：Codex 雲端任務平行沙盒（Cloud，Plus 以上可用）：</strong>針對已連結 GitHub 的儲存庫，輸入 <code>/cloud</code> 將任務丟上 OpenAI 託管的雲端隔離容器執行，不佔用本機 CPU 與磁碟，關機也能繼續跑。</li>
 </ul>
-<aside class="tier-note"><div class="tier-note-header"><span class="tier-badge pro">雲端環境</span><strong>依帳號目前顯示的資源選擇</strong></div><div><p>雲端任務的可用性與資源規格可能依方案、工作區及設定不同。建立前查看當前畫面，不以舊截圖推定固定記憶體容量。</p></div></aside>
+<aside class="tier-note"><div class="tier-note-header"><span class="tier-badge pro">雲端環境</span><strong>依帳號目前顯示的資源選擇</strong></div><div><p>雲端任務的可用性與資源規格依方案、工作區及設定不同。建立前查看當前畫面，不以舊截圖推定固定記憶體容量。</p></div></aside>
 
 <div id="handoff"></div>
-<h2>工作樹（Worktree）移交（Hand off）與 .worktreeinclude</h2>
-<p>在桌面版使用本機 Git 工作樹（Worktree）平行開發時（Free 與 Plus 皆內建支援），有兩項進階功能：</p>
+<h2>工作樹（Worktree）初始化腳本、.worktreeinclude 與移交（Hand off）三種衝突處理</h2>
+<p>在桌面版使用本機 Git 工作樹（Worktree）平行開發時，有三個決定成敗的關鍵細節（詳見 <a href="https://learn.chatgpt.com/docs/environments/git-worktrees" target="_blank" rel="noopener noreferrer">官方 Git Worktrees 指南</a>）：</p>
 <ol>
-  <li><strong>在本機（Local）與工作樹（Worktree）間移交（Hand off）：</strong>
+  <li><strong>設定本機環境初始化腳本（Setup Script / <code>environment.toml</code>），解決新工作樹缺套件問題：</strong>
+    <p>新建立的 Git Worktree 只包含受 Git 版本控制的原始碼，預設不會有 <code>node_modules/</code>、Python 虛擬環境或編譯快取，常導致代理一進 Worktree 跑測試就報錯。你可以在專案的本機環境設定中配置 <strong>Setup Script</strong>（或寫入儲存庫的 <code>.codex/environments/environment.toml</code>，支援針對 Windows、macOS、Linux 分別定義安裝指令），讓 Codex 每次建立新 Worktree 時自動執行 <code>pnpm install</code> 或環境初始化。</p>
+  </li>
+  <li><strong>用 <code>.worktreeinclude</code> 自動複製被 <code>.gitignore</code> 忽略的非敏感本機設定檔：</strong>
+    <p>已被 <code>.gitignore</code> 忽略的本機開發設定檔預設不會進入新工作樹。若測試必須使用某個非敏感的本地設定檔，可在專案根目錄建立 <code>.worktreeinclude</code>（支援與 <code>.gitignore</code> 相同的 glob 萬用字元語法），Codex 建立新 Worktree 時就會自動將匹配檔案複製過去。<strong>資安鐵則：切勿將含有真實生產環境金鑰、Token 或客戶個資的檔案公開貼入教學或版本控制中。</strong></p>
+  </li>
+  <li><strong>在本機（Local）與工作樹（Worktree）間移交（Hand off）與三種衝突解決策略：</strong>
     <ul>
       <li>點擊聊天標題列的「<strong>在此建立分支（Create branch here）</strong>」，可將處於 Detached HEAD 狀態的工作樹轉為正式 Git 分支並直接 Commit / Push。</li>
-      <li>想在自己習慣的本機 IDE 或開發伺服器測試工作樹（Worktree）的成果時，點擊標題列的「<strong>移交（Hand off）</strong>」並選擇 <code>Local</code>。反之，本機做到一半也可使用移交（Hand off）切到背景工作樹（Worktree）繼續；操作後核對實際工作目錄與檔案差異。</li>
+      <li>當你想把 Worktree 的成果帶回本機 IDE 實測（<strong>Hand off to Local</strong>），或把本機做到一半的工作移交到背景工作樹（<strong>Hand off to Worktree</strong>）時，若系統偵測到<strong>本機與工作樹雙邊都有未提交變更或檔案衝突</strong>，會提供三種狀態轉移模式供你選擇：
+        <ul>
+          <li><strong><code>Apply</code>（套用差異修補）：</strong>將來源端的變更以 Patch 方式套用到目標端，適合兩邊修改不同區塊、希望融合變更時使用。</li>
+          <li><strong><code>Overwrite</code>（強制覆寫目標）：</strong>直接以來源端的完整狀態覆蓋目標端工作目錄。<strong>注意：目標端未提交的獨立修改會被覆蓋，點選前務必確認！</strong></li>
+          <li><strong><code>Keep both</code>（保留雙邊版本）：</strong>同時保留兩邊的變更或衝突標記，讓你後續手動檢視與合併，是最安全的保底選項。</li>
+        </ul>
+      </li>
     </ul>
-  </li>
-  <li><strong>需要時用 <code>.worktreeinclude</code> 複製本機檔：</strong>
-    <p>Git 未追蹤的本機檔案預設不會進入新工作樹（Worktree）。若測試必須使用某個非敏感設定檔，可先確認內容與目的，再在專案根目錄的 <code>.worktreeinclude</code> 列出相對路徑。不要把真實金鑰、Token 或生產資料列入教學範例；這些資料應走專案核准的秘密管理方式。</p>
   </li>
 </ol>
 <div class="command-block">
-  <div class="command-title"><span></span>.worktreeinclude<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
-  <pre><code># .worktreeinclude 範例（每行一個相對於專案根目錄的路徑）
-config/local-example.json</code></pre>
+  <div class="command-title"><span></span>.worktreeinclude 與 .codex/environments/environment.toml 範例<button type="button" class="copy-code-btn" aria-label="複製指令">複製</button></div>
+  <pre><code># 1. 根目錄 .worktreeinclude 範例（列出已被 .gitignore 忽略、但需自動複製進新 Worktree 的非敏感檔）
+config/local-dev-example.json
+.env.test.local
+
+# 2. .codex/environments/environment.toml 範例（建立新 Worktree 時自動安裝依賴）
+[setup]
+script = "npm ci"</code></pre>
 </div>
-<aside class="inline-note"><strong>工作樹（Worktree）快照（Snapshot）與永久工作樹</strong><div><p>Codex 預設在 <code>$CODEX_HOME/worktrees</code> 保留最近 <strong>15 個</strong>受管工作樹（可於「設定 → Worktrees」調整）。當聊天封存或超過上限時，系統會先儲存一份<strong>快照（Snapshot）</strong>再清理空間，日後重新打開聊天可一鍵還原；若需要長期保留且供多則聊天共用的環境，可從專案選單建立「<strong>永久工作樹（Permanent worktree）</strong>」。</p></div></aside>
+<aside class="inline-note"><strong>工作樹（Worktree）自動快照（Snapshot）與永久工作樹（Permanent worktree）</strong><div><p>Codex 預設在 <code>$CODEX_HOME/worktrees</code> 保留最近 <strong>15 個</strong>受管工作樹（可於「設定 → Worktrees」調整上限）。當聊天被封存或超過數量上限時，系統會先自動儲存一份<strong>快照（Snapshot）</strong>再清理磁碟空間，日後重新打開該則聊天即可一鍵還原；若你需要一個長期保留、不被自動清理且可供多則聊天共用的隔離目錄，可從專案選單建立「<strong>永久工作樹（Permanent worktree）</strong>」。</p></div></aside>
 <details class="source-list">
   <summary>官方文件與延伸閱讀</summary>
   <ul>
-    <li><a href="https://learn.chatgpt.com/docs/projects" target="_blank" rel="noopener noreferrer">專案與聊天分支</a></li>
-    <li><a href="https://learn.chatgpt.com/docs/environments/git-worktrees" target="_blank" rel="noopener noreferrer">Git 工作樹（Worktrees）完整指南</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/projects" target="_blank" rel="noopener noreferrer">專案與聊天分支（Forking chats）</a></li>
+    <li><a href="https://learn.chatgpt.com/docs/environments/git-worktrees" target="_blank" rel="noopener noreferrer">Git 工作樹（Worktrees）、Setup Script、.worktreeinclude 與 Hand off 完整指南</a></li>
   </ul>
 </details>
         </article>
-        <nav class="chapter-pagination" aria-label="前後章節">
-          <a data-chapter-slug="models-and-context" href="models-and-context.html">← <span>上一章<small>選擇模型、查看用量與管理上下文</small></span></a>
-          <a class="next" data-chapter-slug="visual-feedback" href="visual-feedback.html"><span>下一章<small>圖片、視窗快照（Appshots）與網頁回饋</small></span> →</a>
+                <nav class="chapter-pagination" aria-label="前後章節">
+          <a class="prev" data-chapter-slug="visual-feedback" href="visual-feedback.html">← <span>上一章<small>圖片、視窗快照（Appshots）與網頁回饋</small></span></a>
+          <a class="next" data-chapter-slug="skills-and-tools" href="skills-and-tools.html"><span>下一章<small>技能（Skill）、外掛（Plugin）與電腦操控（Computer use）</small></span> →</a>
         </nav>
       </main>
 
       <aside class="page-toc" aria-label="本頁目錄">
         <p class="eyebrow">本章內容</p>
         <nav class="toc-links">
-          <a href="#parallel">什麼時候分開聊</a>
-          <a href="#fork">建立聊天分支（Fork）</a>
-          <a href="#shared">聊天獨立，檔案未必獨立</a>
-          <a href="#handoff">工作樹（Worktree）移交（Hand off）</a>
+          <a href="#parallel">新聊天 vs. 分支（Fork）</a>
+          <a href="#fork">建立分支與 A/B 雙軌對決</a>
+          <a href="#shared">三種平行隔離層次</a>
+          <a href="#handoff">Worktree 腳本與 Hand off 三模式</a>
         </nav>
         <div class="toc-note">
           <span>專注閱讀</span>
@@ -177,6 +194,19 @@ config/local-example.json</code></pre>
           <img id="image-viewer-img" src="" alt="" />
         </div>
         <p id="image-viewer-hint">保留完整介面；需要看清楚小字時，請點擊「原始尺寸檢視」。</p>
+      </div>
+    </div>
+
+    <!-- 專有名詞白話解釋懸停視窗 -->
+    <div popover="hint" id="term-tooltip">
+      <div class="term-tooltip-card">
+        <div class="term-tooltip-header">
+          <span class="term-tooltip-badge" id="term-tooltip-badge"></span>
+          <button type="button" class="term-tooltip-close" id="term-tooltip-close" aria-label="關閉名詞解釋">關閉 ×</button>
+        </div>
+        <strong class="term-tooltip-title" id="term-tooltip-title"></strong>
+        <div class="term-tooltip-analogy" id="term-tooltip-analogy"></div>
+        <p class="term-tooltip-usage" id="term-tooltip-usage"></p>
       </div>
     </div>
   </div>
